@@ -1,0 +1,12 @@
+*{
+    padding:0;
+    margin:0;
+}
+#title_logo{
+    /* dimensions */
+    max-height:50px;
+    max-width: auto;
+
+    /* margin-padding */
+    margin:20px;
+}
