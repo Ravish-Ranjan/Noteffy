@@ -107,7 +107,7 @@
                     $j = $i+1;
                     $x = rand(0,2);
                     $y = rand(0,2);
-                    echo "<div class = \"divi\" id=\"ok\" style=\"background-image:url($note[$x]);\">
+                    echo "<div class = \"divi\" style=\"background-image:url($note[$x]);\">
                         <div class=\"des\">
                             <label>$j.Task</label>
                             <img src=$pin[$y] height=\"55\" width=\"55\">
