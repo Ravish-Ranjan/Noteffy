@@ -135,7 +135,7 @@
                     $content = $storage['Users'][$user]['Notes'][$i]['Content'];
                     $visible = substr($content,0,25);
                     echo <<<_END
-                        <a href="/Notefyy/HTML/index.html"><div class = "divi" style="background-image:url($note[$x]);overflow:hidden">
+                        <a href="/noteffy/HTML/index.html"><div class = "divi" style="background-image:url($note[$x]);overflow:hidden">
                         <div class="des">
                         <label>$j.$title</label>
                         <img src=$pin[$y] height="55" width="55">
