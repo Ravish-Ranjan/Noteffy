@@ -108,23 +108,31 @@
                 $storage = file_get_contents("storage.json") or die("Could Not open the file");
                 $storage = json_decode($storage,True);
                 if(isset($_POST['Title'])!=null && isset($_POST['Note']) && isset($_POST['Date'])!=null && isset($_POST['Time'])!=null){
-                    if($storage['User_Name']==="Gaurang Tyagi"){
-                        $temp = count($storage['Notes']);
-                        $storage['Notes'][$temp]['Title'] = $_POST['Title'];
-                        $storage['Notes'][$temp]['Time'] = $_POST['Time'];
-                        $storage['Notes'][$temp]['Date'] = $_POST['Date'];
-                        $storage['Notes'][$temp]['Content'] = $_POST['Note'];
+                    $User_count = count($storage['Users']);
+                    $user = -1;
+                    for($i=0;$i<$User_count;$i++){
+                        if($storage['Users'][$i]['User_Name']=="Kavita Tyagi"){
+                            $Note_count = count($storage['Users'][$i]['Notes']);
+                            $storage['Users'][$i]['Notes'][$Note_count]['Title'] = $_POST['Title'];
+                            $storage['Users'][$i]['Notes'][$Note_count]['Time'] = $_POST['Time'];
+                            $storage['Users'][$i]['Notes'][$Note_count]['Date'] = $_POST['Date'];
+                            $storage['Users'][$i]['Notes'][$Note_count]['Content'] = $_POST['Note'];
+                            $user = $i;
+                            break;
+                        }
                     }
+                    if($user===-1)
+                        die("User not found");
                 }
-                $count = count($storage['Notes']);
+                $count = count($storage['Users'][$user]['Notes']);
                 $pin = array("/noteffy/media/pinred.png","/noteffy/media/pinyellow.png","/noteffy/media/pingreen.png");
                 $note = array("/noteffy/media/note1.png","/noteffy/media/note2.png","/noteffy/media/note3.png");
                 for ($i=0; $i < $count; $i++){ 
                     $j = $i+1;
                     $x = rand(0,2);
                     $y = rand(0,2);
-                    $title = $storage['Notes'][$i]['Title'];
-                    $content = $storage['Notes'][$i]['Content'];
+                    $title = $storage['Users'][$user]['Notes'][$i]['Title'];
+                    $content = $storage['Users'][$user]['Notes'][$i]['Content'];
                     $visible = substr($content,0,25);
                     echo <<<_END
                         <a href="/Notefyy/HTML/index.html"><div class = "divi" style="background-image:url($note[$x]);overflow:hidden">
