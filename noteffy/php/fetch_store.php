@@ -39,7 +39,7 @@
 </html>
 <?php
     echo <<<_END
-    <form action='scatter.php' method='POST'>
+    <form action='main.php' method='POST'>
         <span id='Form_Caption'>ADD A NOTE</span>
             <label for="Date">Date</label>
             <input type="date" value='2023-07-16' name='Date' id='Date'>
