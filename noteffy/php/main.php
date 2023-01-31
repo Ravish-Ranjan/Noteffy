@@ -107,27 +107,38 @@
         </script>
     </head>
     <body onload="pos()">
-        <div class="top" style="height:10%;width:100%;"></div>
+        <div class="top" style="height:10%;width:100%;"><a href="signUp.php"><h1>SIGN UP</h1></a></div>
         <div class="main" style="height:90%;width:100%;">
             <div class="scat" style="height:100%;width:90%;">
                 <?php
+                function signUp(&$jsonData){
+                    if(isset($_POST['User_Name']) && isset($_POST['Password']) && isset($_POST['Password1']) && isset($_POST['Email'])){
+                        if($_POST['Password']!==$_POST['Password1']){
+                            echo "<script>window.location.href = 'signUp.php</script>";
+                        }
+                        else{
+                            $users_count = count($jsonData['Users']);
+                            $jsonData['Users'][$users_count]['User_Name'] = $_POST['User_Name'];
+                            $jsonData['Users'][$users_count]['Password'] = $_POST['Password'];
+                            $jsonData['Users'][$users_count]['Email'] = $_POST['Email'];
+                        }
+                    }
+                }
                 function fetch_store(&$jsonData){
                     $user = -1;
+                    $User_count = count($jsonData['Users']);
+                    for($i=0;$i<$User_count;$i++){
+                        if($jsonData['Users'][$i]['User_Name']=="Shivang Shukla")
+                            $user = $i;
+                    }
+                    if($user===-1)
+                        die("User not found");
                     if(isset($_POST['Title'])!=null && isset($_POST['Note']) && isset($_POST['Date'])!=null && isset($_POST['Time'])!=null){
-                        $User_count = count($jsonData['Users']);
-                        for($i=0;$i<$User_count;$i++){
-                            if($jsonData['Users'][$i]['User_Name']=="Gaurang Tyagi"){
-                                $Note_count = count($jsonData['Users'][$i]['Notes']);
-                                $jsonData['Users'][$i]['Notes'][$Note_count]['Title'] = $_POST['Title'];
-                                $jsonData['Users'][$i]['Notes'][$Note_count]['Time'] = $_POST['Time'];
-                                $jsonData['Users'][$i]['Notes'][$Note_count]['Date'] = $_POST['Date'];
-                                $jsonData['Users'][$i]['Notes'][$Note_count]['Content'] = $_POST['Note'];
-                                $user = $i;
-                                break;
-                            }
-                        }
-                        if($user===-1)
-                            die("User not found");
+                        $Note_count = count($jsonData['Users'][$user]['Notes']);
+                        $jsonData['Users'][$user]['Notes'][$Note_count]['Title'] = $_POST['Title'];
+                        $jsonData['Users'][$user]['Notes'][$Note_count]['Time'] = $_POST['Time'];
+                        $jsonData['Users'][$user]['Notes'][$Note_count]['Date'] = $_POST['Date'];
+                        $jsonData['Users'][$user]['Notes'][$Note_count]['Content'] = $_POST['Note'];
                     }
                     return $user;
                 }
@@ -156,9 +167,8 @@
                 }
                 $storage = file_get_contents("storage.json") or die("Could Not open the file");
                 $storage = json_decode($storage,True);
+                signUp($storage);
                 $user = fetch_store($storage);
-                if($user===-1)
-                    $user = 0;
                 
                 display($storage,$user);
                 $storage = json_encode($storage);

@@ -1,1 +1,22 @@
-{"Users":[{"User_Name":"Gaurang Tyagi","Password":null,"Email":null,"Notes":[{"Title":"Sample Note","Time":"12:12","Date":"2023-07-16","Content":"This is a sample note"},{"Title":"Sample Note","Time":"12:12","Date":"2023-07-16","Content":"This is a sample note"},{"Title":"Sample Note","Time":"12:12","Date":"2023-07-16","Content":"This is a sample note"}],"To-Do-List":[]},{"User_Name":"Kavita Tyagi","Password":null,"Email":null,"Notes":[{"Title":"Sample Note","Time":"12:12","Date":"2023-07-16","Content":"This is a sample note"},{"Title":"Sample Note","Time":"12:12","Date":"2023-07-16","Content":"This is a sample note"}],"To-Do-List":[]}]}
+{
+    "Users": [
+        {
+            "User_Name": "Shivang Shukla",
+            "Password": "12345678",
+            "Email": "shivangshukla4110@rla.du.ac.in",
+            "Notes": [
+                {
+                    "Title": "sdfkjladfs",
+                    "Time": "12:12",
+                    "Date": "2023-07-16",
+                    "Content": "sdfjasdfl"
+                }
+            ]
+        },
+        {
+            "User_Name": "Gaurang Tyagi",
+            "Password": "12345678",
+            "Email": "gaurangtyagi7@gmail.com"
+        }
+    ]
+}
