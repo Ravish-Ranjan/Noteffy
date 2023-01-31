@@ -5,7 +5,7 @@
         <style>
             @font-face {
                 font-family: Minecraftia;
-                src: url('../media/Minecraft.ttf');
+                src: url("../media/Minecraft.tff");
             }
             a{
                 text-decoration:none;
@@ -81,6 +81,12 @@
                 width:100%;
                 max-height:8vh;
             }
+            #btn{
+                height:40px;
+                width:auto;
+                background-color:lime;
+                box-shadow:-2px 2px 5px black;
+            }
         </style>
         <script>
             function getRandomArbitrary(min, max) {
@@ -105,54 +111,64 @@
         <div class="main" style="height:90%;width:100%;">
             <div class="scat" style="height:100%;width:90%;">
                 <?php
+                function fetch_store(&$jsonData){
+                    $user = -1;
+                    if(isset($_POST['Title'])!=null && isset($_POST['Note']) && isset($_POST['Date'])!=null && isset($_POST['Time'])!=null){
+                        $User_count = count($jsonData['Users']);
+                        for($i=0;$i<$User_count;$i++){
+                            if($jsonData['Users'][$i]['User_Name']=="Gaurang Tyagi"){
+                                $Note_count = count($jsonData['Users'][$i]['Notes']);
+                                $jsonData['Users'][$i]['Notes'][$Note_count]['Title'] = $_POST['Title'];
+                                $jsonData['Users'][$i]['Notes'][$Note_count]['Time'] = $_POST['Time'];
+                                $jsonData['Users'][$i]['Notes'][$Note_count]['Date'] = $_POST['Date'];
+                                $jsonData['Users'][$i]['Notes'][$Note_count]['Content'] = $_POST['Note'];
+                                $user = $i;
+                                break;
+                            }
+                        }
+                        if($user===-1)
+                            die("User not found");
+                    }
+                    return $user;
+                }
+                function display($jsonData,$user){
+                    $count = count($jsonData['Users'][$user]['Notes']);
+                    $pin = array("../media/pinred.png","../media/pinyellow.png","../media/pingreen.png");
+                    $note = array("../media/note1.png","../media/note2.png","../media/note3.png");
+                    for ($i=0; $i < $count; $i++){
+                        $item = $jsonData['Users'][$user]['Notes'][$i]; 
+                        $j = $i+1;
+                        $x = rand(0,2);
+                        $y = rand(0,2);;
+                        $title = $item['Title'];
+                        $content = $item['Content'];
+                        $visible = substr($content,0,25);
+                        echo <<<_END
+                            <a href="..HTML/index.html"><div class = "divi" style="background-image:url($note[$x]);overflow:hidden">
+                            <div class="des">
+                            <label>$j.$title</label>
+                            <img src=$pin[$y] height="55" width="55">
+                            </div>
+                            <p>$visible</p>
+                            </div></a>;
+                        _END;
+                    }
+                }
                 $storage = file_get_contents("storage.json") or die("Could Not open the file");
                 $storage = json_decode($storage,True);
-                $user = -1;
-                if(isset($_POST['Title'])!=null && isset($_POST['Note']) && isset($_POST['Date'])!=null && isset($_POST['Time'])!=null){
-                    $User_count = count($storage['Users']);
-                    for($i=0;$i<$User_count;$i++){
-                        if($storage['Users'][$i]['User_Name']=="Kavita Tyagi"){
-                            $Note_count = count($storage['Users'][$i]['Notes']);
-                            $storage['Users'][$i]['Notes'][$Note_count]['Title'] = $_POST['Title'];
-                            $storage['Users'][$i]['Notes'][$Note_count]['Time'] = $_POST['Time'];
-                            $storage['Users'][$i]['Notes'][$Note_count]['Date'] = $_POST['Date'];
-                            $storage['Users'][$i]['Notes'][$Note_count]['Content'] = $_POST['Note'];
-                            $user = $i;
-                            break;
-                        }
-                    }
-                    echo $user;
-                    if($user===-1)
-                        die("User not found");
-                }
-                $count = count($storage['Users'][0]['Notes']);
-                $pin = array("../media/pinred.png","../media/pinyellow.png","../media/pingreen.png");
-                $note = array("../media/note1.png","../media/note2.png","../media/note3.png");
-                for ($i=0; $i < $count; $i++){ 
-                    $item = $storage['Users'][0]['Notes'][$i];
-                    $j = $i+1;
-                    $x = $pin[$item['Priority']-1];
-                    $y = $note[$item['Priority']-1];
-                    $title = $item['Title'];
-                    $content = $item['Content'];
-                    $visible = substr($content,0,25);
-                    echo <<<_END
-                        <a href="../HTML/index.html"><div class = "divi" style="background-image:url($y);overflow:hidden">
-                        <div class="des">
-                        <label>$j.$title</label>
-                        <img src=$x height="55" width="55">
-                        </div>
-                        <p>$visible</p>
-                        </div></a>;
-                    _END;
-                }
+                $user = fetch_store($storage);
+                if($user===-1)
+                    $user = 0;
+                
+                display($storage,$user);
                 $storage = json_encode($storage);
                 file_put_contents("storage.json",$storage);
                 ?>
             </div>
             <div class="menu"style="height:90%;width:10%;">
-                <a href="../php/fetch_store.php"><h1>Compose</h1></a>
+                <button id="btn" onclick="redirect()">Compose</button>
             </div>
         </div>
     </body>
+    <script src="../Script/script1.js"></script>
 </html>
