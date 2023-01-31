@@ -121,6 +121,7 @@
                             $jsonData['Users'][$users_count]['User_Name'] = $_POST['User_Name'];
                             $jsonData['Users'][$users_count]['Password'] = $_POST['Password'];
                             $jsonData['Users'][$users_count]['Email'] = $_POST['Email'];
+                            $jsonData['Users'][$users_count]['Notes'] = array();
                         }
                     }
                 }
@@ -128,7 +129,7 @@
                     $user = -1;
                     $User_count = count($jsonData['Users']);
                     for($i=0;$i<$User_count;$i++){
-                        if($jsonData['Users'][$i]['User_Name']=="Shivang Shukla")
+                        if($jsonData['Users'][$i]['User_Name']=="Gaurang Tyagi")
                             $user = $i;
                     }
                     if($user===-1)
