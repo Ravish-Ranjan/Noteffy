@@ -1,3 +1,3 @@
 function redirect(){
-    window.location.href = "../php/fetch_store.php";
+    window.location.href = "../php/compose.php";
 }

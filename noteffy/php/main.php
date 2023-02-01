@@ -23,7 +23,7 @@
                 display:flex;
                 flex-direction:column;
                 margin:2%;
-                justify-content:;
+                /* justify-content:; */
             }
             /* *{outline:0.2vw solid green;} */
             .divi{
@@ -37,9 +37,9 @@
                 display:grid;
                 position:relative;
             }
-            .divi p{
-                /* width:5vw; */
-            }
+            /* .divi p{
+                width:5vw;
+            } */
             .divi>.des>label{
                 font-family:Minecraftia;
                 font-size:1.5vw;
@@ -67,7 +67,7 @@
                 .scat{grid-template-columns: repeat(3,1fr);}
                 .divi{width:17vw;}
                 .divi>.des>label{font-size:3vw;}
-                .divi>p{overflow:none; font-size:;}
+                .divi>p{overflow:none; /*font-size:;*/} 
             }
             @media screen and (max-width:719px) {
                 .scat{grid-template-columns: repeat(2,1fr);}
@@ -77,7 +77,7 @@
             }
             .des{
                 display:flex;
-                justify-content:;
+                /* justify-content:; */
                 width:100%;
                 max-height:8vh;
             }
@@ -155,15 +155,14 @@
                         $title = $item['Title'];
                         $content = $item['Content'];
                         $visible = substr($content,0,25);
-                        echo <<<_END
-                            <a href="..HTML/index.html"><div class = "divi" style="background-image:url($note[$x]);overflow:hidden">
-                            <div class="des">
+                        echo "
+                            <div class = \"divi\" style=\"background-image:url($note[$x]);overflow:hidden\">
+                            <div class=\"des\">
                             <label>$j.$title</label>
-                            <img src=$pin[$y] height="55" width="55">
+                            <img src=$pin[$y] height=\"55\" width=\"55\">
                             </div>
                             <p>$visible</p>
-                            </div></a>;
-                        _END;
+                            </div>";
                     }
                 }
                 $storage = file_get_contents("storage.json") or die("Could Not open the file");
@@ -177,9 +176,9 @@
                 ?>
             </div>
             <div class="menu"style="height:90%;width:10%;">
-                <button id="btn" onclick="redirect()">Compose</button>
+                <a id="btn" href="../php/compose.php">Compose</a>
             </div>
         </div>
     </body>
-    <script src="../Script/script1.js"></script>
+    <!-- <script src="../Script/script1.js"></script> -->
 </html>
