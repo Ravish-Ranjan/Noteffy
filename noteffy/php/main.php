@@ -180,5 +180,9 @@
             </div>
         </div>
     </body>
-    <!-- <script src="../Script/script1.js"></script> -->
+    <script>
+        if(window.history.replacestate){
+            window.history.replacestate(null,null,location.href);
+        }
+    </script>
 </html>
