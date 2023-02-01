@@ -7,10 +7,6 @@
                 font-family: Minecraftia;
                 src: url("../media/Minecraft.tff");
             }
-            a{
-                text-decoration:none;
-                color:black;
-            }
             body{
                 display:flex;
                 flex-direction:column;
@@ -86,6 +82,8 @@
                 width:auto;
                 background-color:lime;
                 box-shadow:-2px 2px 5px black;
+                text-decoration:none;
+                color:black;
             }
         </style>
         <script>
