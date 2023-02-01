@@ -7,6 +7,10 @@
                 font-family: Minecraftia;
                 src: url("../media/Minecraft.ttf");
             }
+            a{
+                font-size:2vw;
+            }
+
             body{
                 display:flex;
                 flex-direction:column;
@@ -25,29 +29,29 @@
             }
             /* *{outline:0.2vw solid green;} */
             .divi{
-                height:26vh;
+                height:34vh;
                 width:11vw;
                 padding:0 5% 5% 5%;
                 margin:5%;
                 filter:drop-shadow(5px 5px 10px rgba(0,0,0,0.5));
                 background-repeat:no-repeat;
                 background-size:contain;
-                display:grid;
+                display:flex;
+                flex-direction:column;
+                justfy-content:start;
                 position:relative;
-            }
-            .divi p{
-                /* width:5vw; */
             }
             .divi>.des>label{
                 font-family:Minecraftia;
-                font-size:1.5vw;
+                font-size:2vw;
                 margin:auto;
                 width:max-content;
             }
             .divi>p{
-                font-size:20;
+                font-size:2vw;
                 white-space:nowrap;
                 overflow:hidden;
+                height:max-content;
                 text-overflow:ellipsis;
             }
             .scat{
@@ -55,7 +59,9 @@
                 overflow-y:scroll;
                 display:grid;
                 background-image:url("../media/wood.jpg");
+                /* background-repeat:no-repeat; */
                 background-size:contain;
+                box-shadow:20px 20px 40px rgba(0,0,0,0.5) inset;
             }
             @media screen and (min-width:1024px) {
                 .scat{grid-template-columns: repeat(4,1fr);}
@@ -63,7 +69,7 @@
             }
             @media screen and (min-width:720px) and (max-width:1023px) {
                 .scat{grid-template-columns: repeat(3,1fr);}
-                .divi{width:17vw;}
+                .divi{width:15vw;}
                 .divi>.des>label{font-size:3vw;}
                 .divi>p{overflow:none; font-size:;}
             }
@@ -74,12 +80,8 @@
                 .divi>p{overflow:none;}
             }
             @keyframes fade{
-                from{
-                    opacity:0;
-                }
-                to{
-                    opacity:1;
-                }
+                from{opacity:0;}
+                to{opacity:1;}
             }
             .des{
                 display:flex;
@@ -87,25 +89,39 @@
                 width:100%;
                 max-height:8vh;
             }
-            #btn1{
-                height:40px;
-                width:auto;
-                background-color:lime;
-                box-shadow:-2px 2px 5px black;
-                text-decoration:none;
-                color:black;
+            .menu{
+                height:7%;
+                padding:1.5rem;
+                position:fixed;
+                bottom: 20;
+                border-radius:1em;
+                right: 20;
+                width: 12%;
+                background-color:rgba(255,255,255,1);
+                border: 3px solid #73AD21;
+                
+            }
+            .menu>a{
+                display:flex;
+                /* flex-direction:column; */
+                justify-content:center;
+                align-item:center;
             }
             /* Compose form */
+            input[type="date"],input[type="time"],input[type="submit"]{
+                font-size:20;
+            }
             form{
                 animation:fade 0.4s ease-in-out;
-                position:absolute;top:5%;left:10%;
-                display:grid;height:60%;width:60%;
-                z-index:4;background:rgba(0,0,0,0.4);font-size:1em;
-                border-radius:2em;border: 2px solid black;
+                position:absolute;top:2%;right:5%;
+                display:grid;/* height:60%; */
+                width:40%;z-index:4;background:rgba(0,0,0,0.4);
+                font-size:2vw;border-radius:1em;
+                border: 2px solid black;
                 grid-template-rows : repeat(8,1fr);
                 grid-template-columns:repeat(1,1fr);
                 row-gap:4px;color:white;
-                margin-top:25vh;padding-left,padding-top:3%;
+                margin-top:15vh;padding-top:3%;
                 font-family:"Times New Roman";
             }
             #Form_Caption{
@@ -120,15 +136,6 @@
                 background-color:rgba(255,0,0,0.8);
                 transition-timing-function:ease-in-out;
             }
-            #btn{
-                width:20vw;
-                height:2em;
-                justify-self:center;
-                background-color:lime;
-                border:1px solid lime;
-                box-shadow:-2px 2px 4px black;
-                margin-bottom:10px;
-            }
         </style>
         <script>
             function getRandomArbitrary(min, max) {
@@ -138,7 +145,7 @@
                 var count = $(".divi").length;
                 for (let i = 0; i < count; i++){
                     var styles ={
-                        "top":getRandomArbitrary(160,0),
+                        "top":getRandomArbitrary(40,0),
                         "right":getRandomArbitrary(-90,0),
                         "rotate":getRandomArbitrary(-13,13)+"deg"
                     };
@@ -155,7 +162,7 @@
                 noteform.setAttribute("action","main.php");noteform.setAttribute("method","POST");
                 noteform.setAttribute("onsubmit","return checkEmpty(this)");
                 noteform.innerHTML = "<span id='Form_Caption'>ADD A NOTE</span>\
-                <button id = 'close' onclick = \"closeF()\">x</button>\
+                <button id = 'close' style=\"font-size:2vw;\" onclick = \"closeF()\">x</button>\
                 <label for='Date'>Date</label>\
                 <input type='date' value='2023-07-16' name='Date' id='Date'>\
                 <label for='Time'>Time</label>\
@@ -163,7 +170,7 @@
                 <label for='Title'>Title</label>\
                 <input type='text' name='Title' id='Title' placeholder='Title'>\
                 <label for='Note'>Content</label>\
-                <textarea style='resize:none;' name='Note' id='Note' rows=20 cols=10></textarea>\
+                <textarea style='resize:none;' name='Note' id='Note' rows=10 cols=10></textarea>\
                 <input type='submit' value='save' id='btn'>"
                 document.querySelector("body").appendChild(noteform);
                 document.querySelector("#btn1").toggleAttribute("onclick","");
@@ -187,9 +194,11 @@
         </script>
     </head>
     <body onload="pos()">
-        <div class="top" style="height:10%;width:100%;"><a href="signUp.php"><h1>SIGN UP</h1></a></div>
-        <div class="main" style="height:90%;width:100%;">
-            <div class="scat" style="height:100%;width:90%;">
+        <div class="top" style="height:15%;width:100%;">
+            <a href="signUp.php">SIGN UP</a>
+        </div>
+        <div class="main" style="height:85%;width:100%;">
+            <div class="scat" style="height:100%;width:100%;">
                 <?php
                 function signUp(&$jsonData){
                     if(isset($_POST['User_Name']) && isset($_POST['Password']) && isset($_POST['Password1']) && isset($_POST['Email'])){
@@ -209,7 +218,7 @@
                     $user = -1;
                     $User_count = count($jsonData['Users']);
                     for($i=0;$i<$User_count;$i++){
-                        if($jsonData['Users'][$i]['User_Name']=="rishim")
+                        if($jsonData['Users'][$i]['User_Name']=="_ravishranjan_")
                             $user = $i;
                     }
                     if($user===-1)
@@ -232,13 +241,13 @@
                         $j = $i+1;
                         $x = rand(0,2);
                         $y = rand(0,2);;
-                        $title = $item['Title'];
+                        $title = substr($item['Title'],10);
                         $content = $item['Content'];
                         $visible = substr($content,0,25);
                         echo "
                             <div class=\"divi\" style=\"background-image:url($note[$x]);overflow:hidden\">
-                            <div class=\"des\">
-                            <label>$j.$title</label>
+                            <div class=\"des\"hidden>
+                            <label style=\"overflow:;\">$j.$title</label>
                             <img src=$pin[$y] height=\"55\" width=\"55\">
                             </div>
                             <p>$visible</p>
@@ -255,9 +264,19 @@
                 file_put_contents("storage.json",$storage);
                 ?>
             </div>
-            <div class="menu"style="height:90%;width:10%;">
-                <a id="btn1" onclick = "compose()">Compose</a>
-            </div>
+        </div>
+        <div class="menu">
+            <a id="btn1" onclick = "compose()">
+            <!-- <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+            <lord-icon
+                src="https://cdn.lordicon.com/wloilxuq.json"
+                trigger="loop"
+                delay="2000"
+                colors="primary:#121331,secondary:#66d7ee"
+                style="width:70px;height:70px">
+            </lord-icon> -->
+            <label style="font-size:37;">Compose</label>
+            </a>
         </div>
     </body>
     <script >
