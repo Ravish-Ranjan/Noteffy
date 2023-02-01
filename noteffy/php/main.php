@@ -262,13 +262,5 @@
             </div>
         </div>
     </body>
-<<<<<<< HEAD
-    <script>
-        if(window.history.replacestate){
-            window.history.replacestate(null,null,location.href);
-        }
-    </script>
-=======
     <script src="../Script/script1.js"></script>
->>>>>>> c5c7020202f39c5af2267e45fdda2c32701600b5
 </html>
