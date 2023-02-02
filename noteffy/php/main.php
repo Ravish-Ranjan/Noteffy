@@ -118,7 +118,7 @@
                 width:40%;z-index:4;background:rgba(0,0,0,0.4);
                 font-size:2vw;border-radius:1em;
                 border: 2px solid black;
-                grid-template-rows : repeat(8,1fr);
+                grid-template-rows : repeat(6,1fr);
                 grid-template-columns:repeat(1,1fr);
                 row-gap:4px;color:white;
                 margin-top:15vh;padding-top:3%;
@@ -165,8 +165,6 @@
                 <button id = 'close' style=\"font-size:2vw;\" onclick = \"closeF()\">x</button>\
                 <label for='Date'>Date</label>\
                 <input type='date' value='2023-07-16' name='Date' id='Date'>\
-                <label for='Time'>Time</label>\
-                <input type = 'time' value='12:12'  id='Time' name='Time'>\
                 <label for='Title'>Title</label>\
                 <input type='text' name='Title' id='Title' placeholder='Title'>\
                 <label for='Note'>Content</label>\
@@ -223,10 +221,10 @@
                     }
                     if($user===-1)
                         die("User not found");
-                    if(isset($_POST['Title'])!=null && isset($_POST['Note']) && isset($_POST['Date'])!=null && isset($_POST['Time'])!=null){
+                    if(isset($_POST['Title']) && isset($_POST['Note']) && isset($_POST['Date'])){
                         $Note_count = count($jsonData['Users'][$user]['Notes']);
                         $jsonData['Users'][$user]['Notes'][$Note_count]['Title'] = $_POST['Title'];
-                        $jsonData['Users'][$user]['Notes'][$Note_count]['Time'] = $_POST['Time'];
+                        // $jsonData['Users'][$user]['Notes'][$Note_count]['Time'] = $_POST['Time'];
                         $jsonData['Users'][$user]['Notes'][$Note_count]['Date'] = $_POST['Date'];
                         $jsonData['Users'][$user]['Notes'][$Note_count]['Content'] = $_POST['Note'];
                     }
@@ -240,8 +238,8 @@
                         $item = $jsonData['Users'][$user]['Notes'][$i]; 
                         $j = $i+1;
                         $x = rand(0,2);
-                        $y = rand(0,2);;
-                        $title = substr($item['Title'],10);
+                        $y = rand(0,2);
+                        $title = substr(explode(' ',$item['Title'])[0],0,10);
                         $content = $item['Content'];
                         $visible = substr($content,0,25);
                         echo "
