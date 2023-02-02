@@ -1,5 +1,6 @@
 <html>
     <head>
+        <link rel="stylesheet" href="../Stylesheets/message.css">
         <title>Main Page</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <style>
