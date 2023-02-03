@@ -18,11 +18,25 @@
         
     </head>
     <body onload="pos()">
-        <div class="top" style="height:15%;width:100%;">
-            <a href="signUp.php">SIGN UP</a>
+        <div class="top">
+            <a href="signUp.php" style="margin:0 2% 0 2%;">
+            <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+            <lord-icon
+                src="https://cdn.lordicon.com/dxjqoygy.json"
+                trigger="loop"
+                delay="2000"
+                stroke="150"
+                style="width:50px;height:50px">
+            </lord-icon>
+                SIGN UP
+            </a>
         </div>
-        <div class="main" style="height:85%;width:100%;">
-            <div class="scat" style="height:100%;width:100%;">
+        <div class="tab">
+            <button class="tbs" onclick="openTab(event, 'Notes')">Notes</button>
+            <button class="tbs" onclick="openTab(event, 'Tasks')">Tasks</button>
+        </div>
+        <div class="main" id="Notes">
+            <div class="scat">
                 <?php
                 function signUp(&$jsonData){
                     if(isset($_POST['User_Name']) && isset($_POST['Password']) && isset($_POST['Password1']) && isset($_POST['Email'])){
@@ -61,23 +75,21 @@
                 }
                 function display($jsonData,$user){
                     $count = count($jsonData['Users'][$user]['Notes']);
-                    $pin = array("../media/pinred.png","../media/pinyellow.png","../media/pingreen.png");
-                    $note = array("../media/note1.png","../media/note2.png","../media/note3.png");
                     for ($i=0; $i < $count; $i++){
                         $item = $jsonData['Users'][$user]['Notes'][$i]; 
                         $j = $i+1;
-                        $x = rand(0,2);
-                        $y = rand(0,2);
-                        $title = substr(explode(' ',$item['Title'])[0],0,10);
+                        $noteimg = "../media/note".rand(1,3).".png";
+                        $pinimg = "../media/pin".rand(1,3).".png";
+                        $title = substr(explode(' ',$item['Title'])[0],0,8);
                         $content = $item['Content'];
                         $visible = substr($content,0,25);
                         echo "
-                            <div class=\"divi\" style=\"background-image:url($note[$x]);overflow:hidden\">
-                            <div class=\"des\"hidden>
-                            <label style=\"overflow:;\">$j.$title</label>
-                            <img src=$pin[$y] height=\"55\" width=\"55\">
-                            </div>
-                            <p>$visible</p>
+                            <div class=\"divi\" style=\"background-image:url($noteimg);\">
+                                <div class=\"des\">
+                                    <label>$j.$title</label>
+                                    <img src=$pinimg>
+                                </div>
+                                <p>$visible</p>
                             </div>";
                     }
                 }
@@ -91,20 +103,60 @@
                 file_put_contents("../data/storage.json",$storage);
                 ?>
             </div>
+            <div class="menu">
+                <a id="btn1" onclick = "compose()">
+                    <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+                    <lord-icon
+                    src="https://cdn.lordicon.com/wloilxuq.json"
+                    trigger="loop"
+                    delay="2000"
+                    stroke="100"
+                    colors="primary:#121331,secondary:#66d7ee"
+                    style="rotate:40deg;width:70px;height:70px">
+                    </lord-icon>
+                    <label style="font-size:30;">Compose</label>
+                </a>
+            </div>
         </div>
-        <div class="menu">
-            <a id="btn1" onclick = "compose()">
-            <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
-            <lord-icon
-                src="https://cdn.lordicon.com/wloilxuq.json"
-                trigger="loop"
-                delay="2000"
-                stroke="100"
-                colors="primary:#121331,secondary:#66d7ee"
-                style="rotate:40deg;width:70px;height:70px">
-            </lord-icon>
-            <label style="font-size:30;">Compose</label>
-            </a>
+        <div class="main" id="Tasks" >
+            <div class="scat" style="background-image:url('../media/wood2.jpg');">
+                <?php
+                function display_task($jsonData,$user){
+                    $count = count($jsonData['Users'][$user]['Notes']);
+                    for ($i=0; $i < $count; $i++){
+                        $item = $jsonData['Users'][$user]['Notes'][$i]; 
+                        $j = $i+1;
+                        $noteimg = "../media/note".rand(1,3).".png";
+                        $pinimg = "../media/pin".rand(1,3).".png";
+                        $title = substr(explode(' ',$item['Title'])[0],0,8);
+                        $content = $item['Content'];
+                        $visible = substr($content,0,25);
+                        echo "
+                            <div class=\"divi\" style=\"background-image:url($noteimg);\">
+                                <div class=\"des\">
+                                    <label>$j.$title</label>
+                                    <img src=$pinimg>
+                                </div>
+                                <p>$visible</p>
+                            </div>";
+                    }
+                }
+                ?>
+            </div>
+            <div class="menu">
+                <a id="btn1" onclick = "">
+                    <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+                    <lord-icon
+                    src="https://cdn.lordicon.com/wloilxuq.json"
+                    trigger="loop"
+                    delay="2000"
+                    stroke="100"
+                    colors="primary:#121331,secondary:#66d7ee"
+                    style="rotate:40deg;width:70px;height:70px">
+                    </lord-icon>
+                    <label style="font-size:30;">Compose</label>
+                </a>
+            </div>
         </div>
     </body>
 </html>

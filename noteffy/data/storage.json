@@ -1,1 +1,35 @@
-{"Users":[{"User_Name":"Shivang Shukla","Password":"12345678","Email":"shivangshukla4110@rla.du.ac.in","Notes":[{"Title":"sdfkjladfs","Time":"12:12","Date":"2023-07-16","Content":"sdfjasdfl"}]},{"User_Name":"Gaurang Tyagi","Password":"12345678","Email":"gaurangtyagi7@gmail.com","Notes":[]},{"User_Name":"_ravishranjan_","Password":"ravishranjan","Email":"ravishranjan2003@gmail.com","Notes":[]},{"User_Name":"_ravishranjan_","Password":"ravishranjan","Email":"ravishranjan2003@gmail.com","Notes":[{"Title":"Organising ","Date":"2023-07-16","Content":"The data"},{"Title":"sample text","Date":"2023-07-16","Content":"This is a sample text"},{"Title":"Sample Title","Date":"2023-07-16","Content":"This is another sample text"},{"Title":"Last","Date":"2023-07-16","Content":"Last"}]}]}
+{
+  "Users": [
+    {
+      "User_Name": "Shivang Shukla",
+      "Password": "12345678",
+      "Email": "shivangshukla4110@rla.du.ac.in",
+      "Notes": [
+        {
+          "Title": "sdfkjladfs",
+          "Time": "12:12",
+          "Date": "2023-07-16",
+          "Content": "sdfjasdfl"
+        }
+      ]
+    },
+    {
+      "User_Name": "Gaurang Tyagi",
+      "Password": "12345678",
+      "Email": "gaurangtyagi7@gmail.com",
+      "Notes": []
+    },
+    {
+      "User_Name": "_ravishranjan_",
+      "Password": "ravishranjan",
+      "Email": "ravishranjan2003@gmail.com",
+      "Notes": []
+    },
+    {
+      "User_Name": "_ravishranjan_",
+      "Password": "ravishranjan",
+      "Email": "ravishranjan2003@gmail.com",
+      "Notes": []
+    }
+  ]
+}

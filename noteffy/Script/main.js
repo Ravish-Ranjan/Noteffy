@@ -6,6 +6,7 @@ function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
 }
 function pos() {
+    openTab(event, 'Notes')
     var count = $(".divi").length;
     for (let i = 0; i < count; i++){
         var styles ={
@@ -17,3 +18,19 @@ function pos() {
         Object.assign(obj[i].style,styles);
     }
 }
+function openTab(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("main");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+  
+    tablinks = document.getElementsByClassName("tbs");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+  
+    // Show the current tab, and add an "active" class to the link that opened the tab
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
