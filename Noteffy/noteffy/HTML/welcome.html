@@ -3,14 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="media/logo5mix.png">
+        <link rel="icon" href="../media/logo5mix.png">
         <title>Welcome - Noteffy</title>
         <script>
             function transitionFunction(){
                 if(document.getElementById('toggle-checkbox').checked){ 
                     document.getElementById("title-heading").innerHTML="Sign up";
-                    document.getElementById("sign-in-bg").style.backgroundImage = "url(media/bg2.png)";
-                    document.getElementById("mascot-1").src="media/goldmascot1.png";
+                    document.getElementById("sign-in-bg").style.backgroundImage = "url(../media/bg2.png)";
+                    document.getElementById("mascot-1").src="../media/goldmascot1.png";
                     document.getElementById("mascot-1").style.animation = 'none';
                     document.getElementById("mascot-1").offsetHeight; 
                     document.getElementById("mascot-1").style.animation = null;
@@ -19,8 +19,8 @@
                 } 
                 else{
                     document.getElementById("title-heading").innerHTML="Sign in";
-                    document.getElementById("sign-in-bg").style.backgroundImage = "url(media/bg1.png)";
-                    document.getElementById("mascot-1").src="media/goldbody2.png";
+                    document.getElementById("sign-in-bg").style.backgroundImage = "url(../media/bg1.png)";
+                    document.getElementById("mascot-1").src="../media/goldbody2.png";
                     document.getElementById("mascot-1").style.animation = 'none';
                     document.getElementById("mascot-1").offsetHeight; 
                     document.getElementById("mascot-1").style.animation = null;
@@ -36,11 +36,11 @@
             }
             @font-face{
                 font-family: codec-extrabold;
-                src: url('media/Codec-Cold-Heavy-trial.ttf');
+                src: url('../media/Codec-Cold-Heavy-trial.ttf');
             }
             @font-face{
                 font-family: codec;
-                src: url('media/Codec-Cold-Regular-trial.ttf');
+                src: url('../media/Codec-Cold-Regular-trial.ttf');
             }
             @keyframes mascotmove{
                 0%   {transform: translateX(0vw);opacity: 0;}
@@ -50,7 +50,7 @@
                 
             }
             #sign-in-bg{
-                background-image: url('media/bg1.png');
+                background-image: url('../media/bg1.png');
                 background-repeat: no-repeat;
                 width: 100vw;
                 height: 100vh;
@@ -248,9 +248,9 @@
         </style>
     </head>
     <body>
-        <a href="#"><img src="media/noteffytitle.png" id="noteffy-title"></a>
+        <a href="#"><img src="../media/noteffytitle.png" id="noteffy-title"></a>
         <div id="sign-in-bg">
-            <img src="media/goldbody2.png" id="mascot-1">
+            <img src="../media/goldbody2.png" id="mascot-1">
             <div class="box-container">
                 <div class="white-box">
                     <div class="sign-and-toggle-container"> 
@@ -281,8 +281,8 @@
                                         <p id="cont-text">or continue with</p>
                                     </div>
                                     <div class="logos">
-                                        <img src="media/googlelogo.png" id="google">
-                                        <img src="media/mobilelogo.png" id="mobile">
+                                        <img src="../media/googlelogo.png" id="google">
+                                        <img src="../media/mobilelogo.png" id="mobile">
                                     </div>
                                 </div>
                             </form>
@@ -311,8 +311,8 @@
                                         <p id="cont-text">or continue with</p>
                                     </div>
                                     <div class="logos">
-                                        <img src="media/googlelogo.png" id="google">
-                                        <img src="media/mobilelogo.png" id="mobile">
+                                        <img src="../media/googlelogo.png" id="google">
+                                        <img src="../media/mobilelogo.png" id="mobile">
                                     </div>
                                 </div>
                             </form>
