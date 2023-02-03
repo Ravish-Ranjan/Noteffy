@@ -1,0 +1,105 @@
+@font-face {
+    font-family: Minecraftia;
+    src: url("../media/Minecraft.ttf");
+}
+a{
+    font-size:2vw;
+}
+
+body{
+    display:flex;
+    flex-direction:column;
+    height:100%;
+    width:100%;
+}
+.main{
+    display:flex;
+    flex-direction:row;
+}
+.menu{
+    display:flex;
+    flex-direction:column;
+    margin:2%;
+}
+/* *{outline:0.2vw solid green;} */
+.divi{
+    height:34vh;
+    width:11vw;
+    padding:0 5% 5% 5%;
+    margin:5%;
+    filter:drop-shadow(5px 5px 10px rgba(0,0,0,0.5));
+    background-repeat:no-repeat;
+    background-size:contain;
+    display:flex;
+    flex-direction:column;
+    justify-content:start;
+    position:relative;
+}
+.divi>.des>label{
+    font-family:Minecraftia;
+    font-size:2vw;
+    margin:auto;
+    width:max-content;
+}
+.divi>p{
+    font-size:2vw;
+    white-space:nowrap;
+    overflow:hidden;
+    height:max-content;
+    text-overflow:ellipsis;
+}
+.scat{
+    grid-template-columns: repeat(4,1fr);
+    overflow-y:scroll;
+    display:grid;
+    background-image:url("../media/wood.jpg");
+    /* background-repeat:no-repeat; */
+    background-size:contain;
+    box-shadow:20px 20px 40px rgba(0,0,0,0.5) inset;
+}
+@media screen and (min-width:1024px) {
+    .scat{grid-template-columns: repeat(4,1fr);}
+    .divi{width:11vw;}
+}
+@media screen and (min-width:720px) and (max-width:1023px) {
+    .scat{grid-template-columns: repeat(3,1fr);}
+    .divi{width:15vw;}
+    .divi>.des>label{font-size:3vw;}
+    .divi>p{overflow:none;}
+}
+@media screen and (max-width:719px) {
+    .scat{grid-template-columns: repeat(2,1fr);}
+    .divi>.des>label{font-size:3vw;}
+    .divi{width:22vw;}
+    .divi>p{overflow:none;}
+}
+@keyframes fade{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+.des{
+    display:flex;
+    width:100%;
+    max-height:8vh;
+}
+.menu{
+    height:7%;
+    padding:1.5rem;
+    position:fixed;
+    bottom: 20;
+    border-radius:3rem;
+    right: 20;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width: 12%;
+    background-color:rgba(255,255,255,1);
+    border: 3px solid #73AD21;
+    
+}
+.menu>a{
+    display:flex;
+    /* flex-direction:column; */
+    justify-content:center;
+    align-items:center;
+}

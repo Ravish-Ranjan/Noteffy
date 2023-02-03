@@ -1,0 +1,36 @@
+input[type="date"],input[type="time"],input[type="submit"]{
+    font-size:20;
+}
+form{
+    animation:fade 0.4s ease-in-out;
+    position:absolute;top:2%;right:5%;
+    display:grid;/* height:60%; */
+    width:40%;z-index:4;background:rgba(0,0,0,0.4);
+    font-size:2vw;border-radius:1em;
+    border: 2px solid black;
+    grid-template-rows : repeat(6,1fr);
+    grid-template-columns:repeat(1,1fr);
+    row-gap:4px;color:white;
+    margin-top:15vh;padding-top:3%;
+    font-family:"Times New Roman";
+}
+#Form_Caption{
+    justify-self:center;
+}
+#close{
+    position:absolute;top:-20px;left:-15px;height:50px;width:50px;border-radius:50%;
+    background-color:rgba(255,0,0,0.5);content:'x';color:white;
+    transition: background-color 0.2s;
+}
+#close:hover{
+    background-color:rgba(255,0,0,0.8);
+    transition-timing-function:ease-in-out;
+}
+.scat::webkit-scrollbar,.scat::ms-scrollbar{
+    width:10;
+    background:#23272e;
+}
+.scat::webkit-scollbar-thumb,.scat::ms-scrollbar-thumb{
+    background:#23272e;
+
+}
