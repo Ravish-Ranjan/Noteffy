@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="../media/logo5mix.png">
+        <title>Welcome - Noteffy</title>
+        <script>
+            function transitionFunction(){
+                if(document.getElementById('toggle-checkbox').checked){ 
+                    document.getElementById("title-heading").innerHTML="Sign up";
+                    document.getElementById("sign-in-bg").style.backgroundImage = "url(../media/bg2.png)";
+                    document.getElementById("mascot-1").src="../media/goldmascot1.png";
+                    document.getElementById("mascot-1").style.animation = 'none';
+                    document.getElementById("mascot-1").offsetHeight; 
+                    document.getElementById("mascot-1").style.animation = null;
+                    document.getElementById("form-container1").style.display = "none";
+                    document.getElementById("form-container2").style.display = "block";
+                } 
+                else{
+                    document.getElementById("title-heading").innerHTML="Sign in";
+                    document.getElementById("sign-in-bg").style.backgroundImage = "url(../media/bg1.png)";
+                    document.getElementById("mascot-1").src="../media/goldbody2.png";
+                    document.getElementById("mascot-1").style.animation = 'none';
+                    document.getElementById("mascot-1").offsetHeight; 
+                    document.getElementById("mascot-1").style.animation = null;
+                    document.getElementById("form-container1").style.display = "block";
+                    document.getElementById("form-container2").style.display = "none";
+                }      
+            }
+        </script>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            @font-face{
+                font-family: codec-extrabold;
+                src: url('../media/Codec-Cold-Heavy-trial.ttf');
+            }
+            @font-face{
+                font-family: codec;
+                src: url('../media/Codec-Cold-Regular-trial.ttf');
+            }
+            @keyframes mascotmove{
+                0%   {transform: translateX(0vw);opacity: 0;}
+                100% {transform: translateX(2.19vw);opacity: 1;}
+            }
+            @media(max-width: 640px){
+                
+            }
+            #sign-in-bg{
+                background-image: url('../media/bg1.png');
+                background-repeat: no-repeat;
+                width: 100vw;
+                height: 100vh;
+            }
+            #noteffy-title{
+                width:  10.61vw;
+                height: 4.02vw;
+                padding-top: 1.46vw;
+                padding-left: 1.46vw;
+                position: absolute;
+            }
+            #mascot-1{
+                width: 40.26vw;
+                height: 35.13vw;
+                padding-left:  5.12vw;
+                padding-top: 6.58vw;
+                animation: mascotmove 0.9s;
+                animation-fill-mode: forwards;
+            }
+            .box-container{
+                position: absolute;
+                display: inline;
+                padding-top: 1.83vw;
+            }
+            .white-box{
+                width: 51.97vw;
+                height: 44.65vw;
+                float: right;
+                padding-right: 0.73vw;
+                background-color: #fff;
+                border-radius: 7.32vw;
+                position: absolute;
+                display: block;
+            }
+            #title-heading{
+                font-family: codec-extrabold;
+                font-size: 3.66vw;
+                padding-top: 5.49vw;
+                padding-left: 4.02vw;
+            }
+            #form-1{
+                padding-left: 5.71vw;
+                padding-top: 2.19vw;
+            }
+            #form-2{
+                padding-left: 5.71vw;
+                padding-top: 1.46vw;
+            }
+            input, label{
+                display: block;
+            }
+            label{
+                font-family: codec-extrabold;
+            }
+            input{
+                border: 1px solid #b8b8b8;
+                width: 24.89vw;
+                height: 2.92vw;
+                padding-left: 0.73vw;
+                border-radius: 2.19vw;
+                margin-top: 0.73vw;
+                font-family: codec-extrabold;
+                margin-left: -1.09vw;
+            }
+            #form2-input{
+                border: 1px solid #b8b8b8;
+                width: 24.15vw;
+                height: 2.19vw;
+                padding-left: 0.73vw;
+                border-radius: 2.19vw;
+                margin-top: 0.36vw;
+                font-family: codec-extrabold;
+                margin-left: -1.09vw;
+            }
+            #log-bbt{
+                text-decoration: none;
+                font-family: codec-extrabold;
+                border-radius: 1.46vw;
+                background-color: #1c1c1c;
+                width: 7.32vw;
+                height: 3.29vw;
+                text-align: center;
+                color: #ffffff;
+                border: none;
+            }
+            #log-bbt:hover{
+                background-color: grey;
+                color: #000000;
+                transition: 0.3s;
+                cursor: pointer;
+            }
+            .end-container{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                column-gap: 0.73vw;
+                padding-top: 7.32vw;
+                padding-left: 7.32vw;
+            }
+            .end-container2{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                column-gap: 0.73vw;
+                padding-top: 0.73vw;
+                padding-left: 5.85vw;
+            }
+            #google{
+                width: 2.92vw;
+                height: 2.92vw;
+                float: left;
+                margin-top: -0.95vw;
+            }
+            #mobile{
+                width: 2.92vw;
+                height: 2.92vw;
+                float: left;
+                padding-left: 0.58vw;
+                margin-top: -0.95vw;
+            }
+            #cont-text{
+                font-size: 1.09vw;
+                font-family: codec;
+                color: grey;
+                float: right;
+            }
+            .switch {
+                position: absolute;
+                display: inline-block;
+                width: 3.66vw;
+                height: 1.75vw;
+                margin-left: 1.46vw;
+            }
+            .switch input { 
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+            .slider{
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #fff;
+                -webkit-transition: 0.4s;
+                transition: 0.4s;
+                border: 1px solid #1c1c1c;
+            }
+            .slider:hover{
+                box-shadow: 0 0 10px 2px #00ff15;
+            }
+            .slider:before{
+                position: absolute;
+                content: "";
+                height: 1.09vw;
+                width: 1.09vw;
+                left: 0.29vw;
+                bottom: 0.29vw;
+                background-color: #00ff15;
+                -webkit-transition: 0.4s;
+                transition: 0.4s;
+            }
+            input:checked + .slider{
+                background-color: #fff;
+            }
+            input:focus + .slider{
+                box-shadow: 0 0 1px #00ff15;
+            }
+            input:checked + .slider:before{
+                transform: translateX(1.68vw);
+            }           
+            .slider.round{
+                border-radius: 3.22vw;
+            }
+            .slider.round:before{
+                border-radius: 50%;
+            }
+            .sign-container{
+                display: inline-block;
+            }
+            .sign-container1{
+                display: inline-block;
+                padding-top: 35%;
+            }
+            .sign-and-toggle-container{
+                display: flex;
+                justify-content: space-evenly;
+                flex-direction: row;
+                margin: 0;
+                width: 18.66vw;
+            }
+            #form-container2{
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <a href="#"><img src="../media/noteffytitle.png" id="noteffy-title"></a>
+        <div id="sign-in-bg">
+            <img src="../media/goldbody2.png" id="mascot-1">
+            <div class="box-container">
+                <div class="white-box">
+                    <div class="sign-and-toggle-container"> 
+                        <div class="sign-container">   
+                            <p id="title-heading">Sign in</p>
+                        </div>
+                        <div class="sign-container1">  
+                            <label class="switch">
+                                <input type="checkbox" onclick="transitionFunction()" id="toggle-checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="forms">
+                        <div id="form-container1">
+                            <form method="post" id="form-1" action="#">
+                                <label>Email address</label>
+                                <input placeholder="Enter" type="text" required>
+                                <br>
+                                <br>
+                                <label>Password</label>
+                                <input placeholder="Enter" type="password" required>
+                                <br>
+                                <br>
+                                <button id="log-bbt" type="submit" form="form-1" value="Submit">LOG IN</button>
+                                <div class="end-container">
+                                    <div class="continue-text">
+                                        <p id="cont-text">or continue with</p>
+                                    </div>
+                                    <div class="logos">
+                                        <img src="../media/googlelogo.png" id="google">
+                                        <img src="../media/mobilelogo.png" id="mobile">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="form-container2">
+                            <form method="post" id="form-2" action="#">
+                                <label>Enter Email</label>
+                                <input id="form2-input" placeholder="Enter" type="text" required>
+                                <br>
+                                <br>
+                                <label>Enter Username</label>
+                                <input id="form2-input" placeholder="Enter" type="text" required>
+                                <br>
+                                <br>
+                                <label>Create Password</label>
+                                <input id="form2-input" placeholder="Enter" type="password" required>
+                                <br>
+                                <br>
+                                <label>Confirm Password</label>
+                                <input id="form2-input" placeholder="Enter" type="password" required>
+                                <br>
+                                <br>
+                                <button id="log-bbt" type="submit" form="form-1" value="Submit">SIGN UP</button>
+                                <div class="end-container2">
+                                    <div class="continue-text">
+                                        <p id="cont-text">or continue with</p>
+                                    </div>
+                                    <div class="logos">
+                                        <img src="../media/googlelogo.png" id="google">
+                                        <img src="../media/mobilelogo.png" id="mobile">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

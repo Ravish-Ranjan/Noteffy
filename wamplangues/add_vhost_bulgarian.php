@@ -1,0 +1,45 @@
+<?php
+//3.1.1 - NotwwwDir
+//3.1.3 - VirtualHostPortNone
+//3.1.4 - txtTLDdev
+//3.1.9 - VirtualHostName modified - Accept diacritical characters (IDN)
+$langues = array(
+	'langue' => 'Български',
+	'locale' => 'България',
+	'addVirtual' => 'Добавяне на виртуален хост',
+	'backHome' => 'Kъм началната страница',
+	'VirtualSubMenuOn' => '<code>Подменюто VirtualHost</code> в контекстното меню <code>Настройки на Wamp</code> трябва да бъде включено. След това презареди тази страница.',
+	'UncommentInclude' => 'Разкоментирай <small>(изтрий знака #)</small> следния ред: <code>#Include conf/extra/httpd-vhosts.conf</code><br>във файла %s.',
+	'FileNotExists' => 'Файлът <code>%s</code> не съществува.',
+	'txtTLDdev' => 'Името на сървъра %s използва TLD %s, който е монополизиран от браузърите. Използвай друг TLD (например .test).',
+	'FileNotWritable' => 'Във файла <code>%s</code> не може да се пише.',
+	'DirNotExists' => '<code>%s</code> не съществува или не е директория.',
+	'NotwwwDir' => 'Папката <code>%s</code> е запазена за localhost. Използвай различна папка.',
+	'NotCleaned' => 'Файлът <code>%s</code> не е изчистен.<br>В него са останали виртуални хостове от рода на: dummy-host.example.com.',
+	'NoVirtualHost' => 'В <code>%s</code> не е дефиниран виртуален хост.<br>Необходим е поне един виртуален хост за localhost.',
+	'NoFirst' => 'Първият виртуален хост във файла <code>%s</code> трябва да бъде <code>localhost</code>.',
+	'ServerNameInvalid' => 'Името на сървъра <code>%s</code> е невалидно.',
+	'LocalIpInvalid' => 'Локалното IP <code>%s</code> е невалидно.',
+	'VirtualHostName' => 'Име на <code>виртуалния хост</code>. Не са позволени диакритични знаци (напр. ѝ), интервали и долни черти (_). ',
+	'VirtualHostFolder' => 'Пълният абсолютен <code>път</code> до <code>папката</code> на виртуалния хост. <i>Примери: C:/wamp64/www/projet/ или E:/www/site1/</i> ',
+	'VirtualHostIP' => '<code class="option">Ако</code> искаш да използваш вируален хост с IP: <code class="option">локално IP</code> 127.x.y.z ',
+	'VirtualHostPort' => '<code class="option">Ако</code> искаш да използваш различен порт за слушане от <code class="option">приеманите по подразбиране портове</code> %s',
+	'VirtualHostPortNone' => 'Ако искаш да използваш различен от стандартния порт за слушане, трябва да добавиш порт за слушане на Apache от "Инструменти", като кликнеш с десен бутон върху иконката. ',
+	'VirtualAlreadyExist' => 'Името на сървъра <code>%s</code> вече съществува',
+	'VirtualIpAlreadyUsed' => 'Локалното IP <code>%s</code> вече съществува.',
+	'VirtualPortNotExist' => 'Портът <code>%s</code> не е порт за слушане на Apache.',
+	'VirtualPortExist' => 'Портът <code>%s</code> е порт за слушане по подразбиране за Apache и не може да се споменава.',
+	'VirtualHostExists' => 'Съществуващи виртуални хостове:',
+	'Start' => 'Създай виртуалния хост (ще отнеме известно време...)',
+	'GreenErrors' => 'Оцветените в зелено грешки могат да бъдат поправени автоматично.',
+	'Correct' => 'Започни автоматичното поправяне на оцветените в зелено грешки',
+	'NoModify' => 'Файлът <code>httpd-vhosts.conf</code> или <code>hosts</code> не може да бъде променен.',
+	'VirtualCreated' => 'Файловете са променени. Виртуалният хост <code>%s</code> е създаден.',
+	'CommandMessage' => 'Съобщения от конзолата за обновяване на DNS:',
+	'However' => 'Можеш да добавиш друг виртуален хост, като кликнеш върху "Добавяне на виртуален хост".<br>За да бъдат запомнени тези нови виртуални хостове от Apache, трябва да кликнеш върху<br><code>Рестартирай DNS</code><br>, след като кликнеш с десния бутон на мишката върху иконата на WampManager. <i>(За съжаление това не може да стане автоматично.)</i>',
+	'suppForm' => 'Изтриване на виртуален хост',
+	'suppVhost' => 'Изтрий избраните виртуални хостове',
+	'Required' => 'Задължително',
+	'Optional' => 'По желание',
+	);
+?>

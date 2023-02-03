@@ -1,0 +1,126 @@
+/******         Pop-up box when hovering over a link        ******/
+a.popup {font-style:none;color:#666;text-decoration:none;font-size:0.92em;}
+a:active.popup {border-bottom:0px;} /* Essential for IE          */
+a:hover.popup, a:focus.popup {
+               border-bottom:0px;   /* Essential for IE          */
+               cursor:help;text-decoration:none;
+              }
+a.popup span {display:none;} /* Invisible text between SPAN tags */
+a:hover.popup span, a:focus.popup span {
+	display:block;
+	position:absolute;
+	width:95%;height:auto;top:auto;left:10px;overflow:visible;
+	border: 1px solid #999;
+	border-radius: 8px 8px 8px 8px;
+	-moz-border-radius: 8px 8px 8px 8px;
+	-webkit-border-radius: 8px 8px 8px 8px;
+	background-color:#fff;
+	white-space:pre-wrap;
+	overflow-x:auto;
+	font-family: Consolas, Lucida Console, Courier New, monospace;
+	line-height:100%;font-size:1.3em !important;color:black;
+	padding:0.5em;margin-top:1.5em;text-align:center;
+	font-weight:500;font-style:normal;text-decoration:none;
+	z-index:100;
+}
+/*------------------------------------------------------------------*/
+
+/************* Dialogue modal *************/
+.modalOto,.modalOtoArial {
+	position: fixed;
+	overflow:auto;
+	font-family: Lucida Console, Consolas, Courier New, monospace;
+	line-height:100%;font-size:1.2em !important;color:black;
+	padding:0.5em;margin-top:1.5em;text-align:left;
+	font-weight:500;font-style:normal;text-decoration:none;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 99999;
+	opacity:0;
+	pointer-events: none;
+}
+.modalOtoArial {
+	font-family: Tahoma, Arial, Helvetica, Lucida sans, sans-serif;
+	line-height:110%;
+	font-size:1.1em !important;
+}
+
+.modalOto:target,.modalOtoArial:target {
+	opacity:1;
+	pointer-events: auto;
+}
+
+.modalOto > div,.modalOtoArial > div {
+  max-width:90%;
+	width: max-content;
+	width: intrinsic;           /* Safari/WebKit */
+  width: -moz-max-content;    /* Firefox/Gecko */
+  width: -webkit-max-content; /* Chrome */
+	position: relative;
+	margin: 10% auto;
+	padding: 0 5px 5px 5px;
+	border:1px solid #888;
+	background: #fff;
+	overflow:hidden;
+	overflow-x: hidden;
+	overflow-y: auto;
+	overflow : -moz-scrollbars-vertical;
+	-webkit-hyphens: manual;
+  -ms-hyphens: manual;
+  hyphens: manual;
+	overflow-wrap: break-word;
+}
+.modalOtoBar {
+	width:109%;
+	border-bottom:1px solid #888;
+	background: #ddd;
+	font-family: Lucida Console, Consolas, Courier New, monospace;
+	line-height:100%;font-size:1.2em !important;color:black;
+	margin:0 0 5px -5px;
+	line-height: 15px;
+}
+.closeOto {
+	background: #ddd;
+	color: #00f;
+	line-height: 15px;
+	position: absolute;
+	right: 2px;
+	top: 0;
+	width: 15px;
+	text-align: center;
+	text-decoration: none;
+	font-weight: bold;
+	vertical-align:middle;
+}
+.closeOto:hover{background: #fff; }
+
+.js-copy,.js-copya,.js-copyb,.js-copyc,.js-copyd,.js-copye {
+  background:#ddd;
+  color: #00f;
+  padding:0 3px;
+  border: 0;
+  font-size:70%;
+  text-decoration:none;
+  vertical-align:middle;
+}
+.js-copy:hover,.js-copya:hover,.js-copyb:hover,.js-copyc:hover,.js-copyd:hover,.js-copya:hover{background: #fff;}
+
+code {font-size:110%;}
+/*---------------------------------------------------*/
+
+@media screen and (max-width: 750px) {
+
+    dt {
+    	text-align: left;
+    	width: 100%;
+    	clear: left;
+        margin: 2% 0 0 0;
+    }
+
+    dd {
+    	margin: 0;
+    	padding: 0.5% 1.5% 1% 1.5%;
+    }
+}
