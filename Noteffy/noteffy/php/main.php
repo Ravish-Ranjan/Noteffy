@@ -20,7 +20,7 @@
     <body onload="pos()">
         <div class="top">
             <img src="../media/noteffytitle.png" id="logo">
-            <a href="signUp.php" id="prof" style="margin:0 2% 0 2%;">
+            <a href="../HTML/signUp.html" id="prof" style="margin:0 2% 0 2%;">
             <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
             <lord-icon
                 src="https://cdn.lordicon.com/dxjqoygy.json"
