@@ -20,9 +20,10 @@
     <body onload="pos()">
         <div class="top">
             <img src="../media/noteffytitle.png" id="logo">
-            <a href="../HTML/signUp.html" id="prof" style="margin:0 2% 0 2%;">
-            <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
-            <lord-icon
+            <div id="prof">
+                <a href="../HTML/signUp.html" id="prof" style="margin:0 2% 0 2%;">
+                <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+                <lord-icon
                 src="https://cdn.lordicon.com/dxjqoygy.json"
                 trigger="loop"
                 delay="2000"
@@ -30,8 +31,19 @@
                 colors="primary:#121331,secondary:#38d8ba"
                 style="width:50px;height:50px">
             </lord-icon>
-                SIGN UP
-            </a>
+            <?php
+            $storage = file_get_contents("../data/storage.json") or die("Could Not open the file");
+            $storage = json_decode($storage,True);
+            if(getUser($storage)==" "){
+                echo "<p>Sign Up</p>";
+            }
+            else{
+                 echo "<p>".getUser($storage)."</p>" ;
+            }
+            ?>
+                </a>
+
+            </div>
         </div>
         <div class="tab">
             <button class="tbs" onclick="openTab(event, 'Notes')">Notes</button>
@@ -53,23 +65,31 @@
                             $jsonData['Users'][$users_count]['Password'] = $_POST['Password'];
                             $jsonData['Users'][$users_count]['Email'] = $_POST['Email'];
                             $jsonData['Users'][$users_count]['Notes'] = array();
-                            echo "<script>message('Successfull Logged in','message_success')</script>";
+                            setcookie("user",$_POST['User_Name'],time()+(24*60*60),"/");
+                            echo "<script>message('Successfull Logged in','message_success'); window.location.href = window.location.href</script>";
                         }
                     }
+                }
+                function getUser($jsonData){
+                    if(isset($_COOKIE["user"])){
+                        return $_COOKIE["user"];
+                    }
+                    else
+                        return " "; 
                 }
                 function fetch_store(&$jsonData){
                     $user = -1;
                     $User_count = count($jsonData['Users']);
+                    $userName = getUser($jsonData);
                     for($i=0;$i<$User_count;$i++){
-                        if($jsonData['Users'][$i]['User_Name']=="_ravishranjan_")
+                        if($jsonData['Users'][$i]['User_Name']==$userName)
                             $user = $i;
-                    }
+                        }
                     if($user===-1)
-                        die("User not found");
+                        die(" User not found");
                     if(isset($_POST['Title']) && isset($_POST['Note']) && isset($_POST['Date'])){
                         $Note_count = count($jsonData['Users'][$user]['Notes']);
                         $jsonData['Users'][$user]['Notes'][$Note_count]['Title'] = $_POST['Title'];
-                        // $jsonData['Users'][$user]['Notes'][$Note_count]['Time'] = $_POST['Time'];
                         $jsonData['Users'][$user]['Notes'][$Note_count]['Date'] = $_POST['Date'];
                         $jsonData['Users'][$user]['Notes'][$Note_count]['Content'] = $_POST['Note'];
                     }
@@ -95,14 +115,14 @@
                             </div>";
                     }
                 }
-                $storage = file_get_contents("../data/storage.json") or die("Could Not open the file");
-                $storage = json_decode($storage,True);
                 signUp($storage);
-                $user = fetch_store($storage);
-                
-                display($storage,$user);
                 $storage = json_encode($storage);
                 file_put_contents("../data/storage.json",$storage);
+
+                $storage = file_get_contents("../data/storage.json") or die("Could Not open file");
+                $storage = json_decode($storage,true);
+                $user = fetch_store($storage);
+                display($storage,$user);
                 ?>
             </div>
             <div class="menu">
