@@ -66,7 +66,7 @@
                             $jsonData['Users'][$users_count]['Email'] = $_POST['Email'];
                             $jsonData['Users'][$users_count]['Notes'] = array();
                             setcookie("user",$_POST['User_Name'],time()+(24*60*60),"/");
-                            echo "<script>message('Successfull Logged in','message_success'); window.location.href = window.location.href</script>";
+                            return ;
                         }
                     }
                 }
@@ -78,9 +78,6 @@
                                 setcookie("user",$jsonData["Users"][$i]["User_Name"]);
                                 echo "<script>window.location.href = window.location.href</script>";
                                 return ;
-                            }
-                            else{
-                                die("User not found");
                             }
                         }
 
