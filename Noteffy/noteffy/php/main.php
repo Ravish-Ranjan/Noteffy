@@ -70,6 +70,20 @@
                         }
                     }
                 }
+                function signIn($jsonData){
+                    if(isset($_POST['User_Name_']) && isset($_POST['Password_'])  && isset($_POST['Email_'])){
+                        $users_count = count($jsonData["Users"]);
+                        echo $users_count;
+                        for($i=0;$i<$users_count;$i++){
+                            if($jsonData["Users"][$i]["User_Name"] == $_POST['User_Name_']){
+                                setcookie("user",$jsonData["Users"][$i]["User_Name"]);
+                                echo "<script>window.location.href = window.location.href</script>";
+                                return ;
+                            }
+                        }
+
+                    }
+                }
                 function getUser($jsonData){
                     if(isset($_COOKIE["user"])){
                         return $_COOKIE["user"];
@@ -115,6 +129,7 @@
                             </div>";
                     }
                 }
+                signIn($storage);
                 signUp($storage);
                 $storage = json_encode($storage);
                 file_put_contents("../data/storage.json",$storage);
