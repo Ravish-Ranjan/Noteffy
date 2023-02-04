@@ -73,12 +73,14 @@
                 function signIn($jsonData){
                     if(isset($_POST['User_Name_']) && isset($_POST['Password_'])  && isset($_POST['Email_'])){
                         $users_count = count($jsonData["Users"]);
-                        echo $users_count;
                         for($i=0;$i<$users_count;$i++){
-                            if($jsonData["Users"][$i]["User_Name"] == $_POST['User_Name_']){
+                            if($jsonData["Users"][$i]["User_Name"] == $_POST['User_Name_'] && $jsonData["Users"][$i]["Password"]==$_POST["Password_"]){
                                 setcookie("user",$jsonData["Users"][$i]["User_Name"]);
                                 echo "<script>window.location.href = window.location.href</script>";
                                 return ;
+                            }
+                            else{
+                                die("User not found");
                             }
                         }
 
