@@ -140,6 +140,8 @@
                 $storage = json_decode($storage,true);
                 $user = fetch_store($storage);
                 display($storage,$user);
+                $storage = json_encode($storage);
+                $storage = file_put_contents("../data/storage.json",$storage);
                 ?>
             </div>
             <div class="menu">
