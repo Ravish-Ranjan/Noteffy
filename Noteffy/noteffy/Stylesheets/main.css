@@ -221,3 +221,12 @@ body{
     font-weight: bold;
     text-shadow: 3px 3px #777;
 }
+#log{
+    font-family: codec-extrabold;
+    
+}
+#logout{
+    text-decoration: none;color:red;
+    font-family:codec-extrabold;
+    height:auto;width:80%;
+}

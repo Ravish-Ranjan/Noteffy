@@ -3,6 +3,7 @@ function closeF(){
     document.querySelector("#btn1").setAttribute("onclick","compose()");
 }
 function compose(){  
+    console.log(123);
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); 

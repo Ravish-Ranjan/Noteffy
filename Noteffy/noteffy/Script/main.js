@@ -2,6 +2,9 @@ if ( window.history.replaceState ) {
     window.history.replaceState( null, null, window.location.href );
 }
 
+function clearCookies(){
+    document.cookie = "user=;";
+}
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
 }
