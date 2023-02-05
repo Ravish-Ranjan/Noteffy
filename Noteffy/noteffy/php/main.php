@@ -79,9 +79,6 @@
                                 echo "<script>window.location.href = window.location.href</script>";
                                 return ;
                             }
-                            else{
-                                die("User not found");
-                            }
                         }
 
                     }
