@@ -30,6 +30,18 @@
                     "Content": "This is sample text"
                 }
             ]
+        },
+        {
+            "User_Name": "risihita",
+            "Password": "WHNi+8dhCXee\/rrLrHmL2A==",
+            "Email": "rishi123",
+            "Notes": [
+                {
+                    "Title": "Monta",
+                    "Date": "2023-02-06",
+                    "Content": "Faith you are driving me away"
+                }
+            ]
         }
     ]
 }

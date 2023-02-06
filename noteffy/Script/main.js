@@ -3,7 +3,15 @@ if ( window.history.replaceState ) {
 }
 
 function clearCookies(){
-    document.cookie = "user=;";
+        const cookies = document.cookie.split(";");
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i];
+            const namePos = cookie.indexOf("=");
+            const name = namePos > -1 ?cookie.substr(0, namePos):cookie;
+            if(name=='user'){
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+            }
+        }
 }
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;

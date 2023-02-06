@@ -28,11 +28,11 @@
                         $storage = file_get_contents("../data/storage.aes") or die("Could Not open the file");
                         $storage = decrypt_data($storage);
                         $storage = json_decode($storage,True);
-                        if(getUser($storage)==" "){
+                        if(getUser()==" "){
                             echo "<p>Sign Up</p>";
                         }
                         else{
-                             echo "<p>".getUser($storage)."<br>
+                             echo "<p>".getUser()."<br>
                              <a href = '../html/signUp.html' id = 'logout' onclick = 'clearCookies()'>Log Out</a></p>" ;
                         }
                     ?>
@@ -47,27 +47,25 @@
             <div class="scat">
                 <?php
                 function signUp(&$jsonData){
-                    echo 123;
-                    count($jsonData['Users']);
                     if(isset($_POST['Username']) && isset($_POST['Password']) && isset($_POST['Password1']) && isset($_POST['Email'])){
                         if($_POST['Password']!==$_POST['Password1']){
-                            // echo 1234124;
                             echo "<script>
-                                message('Sign Up failed','message_failure');
+                            message('Sign Up failed','message_failure');
                             </script>";
                         }
-                        else{
-                            // echo "WHy whyw y";
+                        else if($_POST['Password']===$_POST['Password1']){
                             $users_count = count($jsonData['Users']);
-                            echo $users_count;
-                            str_pad($_POST["Username"],32,' ',STR_PAD_RIGHT);
+                            str_pad($_POST["Username"],32,'#',STR_PAD_RIGHT);
                             $jsonData['Users'][$users_count]['User_Name'] = $_POST['Username'];
-                            $jsonData['Users'][$users_count]['Password'] = encrypt_data($_POST['Password'],str_pad($_POST["Username"],32,' ',STR_PAD_RIGHT));
+                            $jsonData['Users'][$users_count]['Password'] = encrypt_data($_POST['Password'],str_pad($_POST["Username"],32,'#',STR_PAD_RIGHT));
                             $jsonData['Users'][$users_count]['Email'] = $_POST['Email'];
                             $jsonData['Users'][$users_count]['Notes'] = array();
-                            setcookie("user",$_POST['User_Name'],time()+(24*60*60),"/");
-                            echo $jsonData['Users'][$users_count];
-                            echo "<script>message('Successfull Logged in','message_success'); window.location.href = window.location.href</script>";
+                            
+                            if(isset($_COOKIE["user"])){
+                                echo "<script>clearCookies();</script>";
+                            }
+                            setcookie("user",$_POST['Username'],time()+(24*60*60),"/");
+                            // echo "<script>message('Successfully Logged in','message_success'); window.location.href = window.location.href</script>";
                         }
                     }
                 }
@@ -90,7 +88,7 @@
                     }
 
                 }
-                function getUser(&$jsonData){
+                function getUser(){
                     if(isset($_COOKIE["user"])){
                         return $_COOKIE["user"];
                     }
@@ -101,13 +99,16 @@
                     $user = -1;
                     $User_count = count($jsonData['Users']);
                     $userName = getUser($jsonData);
+                    //Do not disturb until later
+                    echo 'User name: '.$userName;
                     // $userName = "_ravishranjan_";
+                    if($userName==" "){
+                        echo '<script>window.location.href="../html/signUp.html";</script>';
+                        return -1;
+                    }
                     for($i=0;$i<$User_count;$i++){
                         if($jsonData['Users'][$i]['User_Name']==$userName)
-                            $user = $i;
-                        }
-                    if($user==-1){
-                        die(" User not found");
+                          $user = $i;
                     }
                     if(isset($_POST['Title']) && isset($_POST['Note']) && isset($_POST['Date'])){
                         $Note_count = count($jsonData['Users'][$user]['Notes']);
@@ -137,12 +138,12 @@
                             </div>";
                     }
                 }
-                // signUp($storage);
+                signUp($storage);
                 signIn($storage);
                 $m = fetch_store($storage);
                 $storage = json_encode($storage);
                 $storage = encrypt_data($storage);
-                file_put_contents("../data/storage.aes",$storage);
+                file_put_contents("../data/storage.aes",$storage) or die("Failed to encode");
 
                 // $user = 0;
                 $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");

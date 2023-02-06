@@ -1,6 +1,7 @@
 <?php
 $opts = 0;$type = 'aes-256-cbc';
 $iv = 'Noteffy-12345678';$dbkey = '7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+';
+
 function encrypt_data(&$data,$key1 = ""){
     global $type,$iv,$opts;
     if($key1==""){
