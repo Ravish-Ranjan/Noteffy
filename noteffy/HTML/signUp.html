@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- favicon -->
+        <link rel="icon" href="../media/logo5mix.png">
+
+        <!-- stylesheets -->
+        <link rel="stylesheet" href="../Stylesheets/signUp.css">
+
+        <!-- scripts -->
+        <script src="../Script/signUp.js"></script>
+
+        <title>Welcome - Noteffy</title>
+    </head>
+    <body>
+        <a href="#"><img src="../media/noteffytitle.png" id="noteffy-title"></a>
+        <div id="sign-in-bg">
+            <img src="../media/goldbody2.png" id="mascot-1">
+            <div class="box-container">
+                <div class="white-box">
+                    <div class="sign-and-toggle-container"> 
+                        <div class="sign-container">   
+                            <p id="title-heading">Sign in</p>
+                        </div>
+                        <div class="sign-container1">  
+                            <label class="switch">
+                                <input type="checkbox" onclick="transitionFunction()" id="toggle-checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="forms">
+                        <div id="form-container1">
+                            <form method="post" id="form-1" action="../php/main.php">
+                                <label>Enter Username\Password</label>
+                                <input id="form2-input" placeholder="Enter" type="text"  name="User_Name_" required>
+                                <br>
+                                <br>
+                                <label>Password</label>
+                                <input placeholder="Enter" type="password" name="Password_" required>
+                                <br>
+                                <br>
+                                <button id="log-bbt" type="submit" form="form-1" value="Submit">LOG IN</button>
+                                <div class="end-container">
+                                    <div class="continue-text">
+                                        <p id="cont-text">or continue with</p>
+                                    </div>
+                                    <div class="logos">
+                                        <img src="../media/googlelogo.png" id="google">
+                                        <img src="../media/mobilelogo.png" id="mobile">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="form-container2">
+                            <form method="post" id="form-2" action="../php/main.php">
+                                <label>Enter Email</label>
+                                <input id="form2-input" placeholder="Enter" type="text" name="Email" required>
+                                <br>
+                                <br>
+                                <label>Enter Username</label>
+                                <input id="form2-input" placeholder="Enter" type="text" name="Username" required>
+                                <br>
+                                <br>
+                                <label>Create Password</label>
+                                <input id="form2-input" placeholder="Enter" type="password" name="Password" required>
+                                <br>
+                                <br>
+                                <label>Confirm Password</label>
+                                <input id="form2-input" placeholder="Enter" type="password" name="Password1" required>
+                                <br>
+                                <br>
+                                <button id="log-bbt" type="submit" form="form-2" value="Submit">SIGN UP</button>
+                                <div class="end-container2">
+                                    <div class="continue-text">
+                                        <p id="cont-text">or continue with</p>
+                                    </div>
+                                    <div class="logos">
+                                        <img src="../media/googlelogo.png" id="google">
+                                        <img src="../media/mobilelogo.png" id="mobile">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
