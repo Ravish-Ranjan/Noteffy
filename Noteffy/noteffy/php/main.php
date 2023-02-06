@@ -12,9 +12,9 @@
 
         <!-- scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-        <script src="../script/compose.js"></script>
-        <script src="../script/main.js"></script>
-        <script src="../script/message.js"></script>
+        <script src="../Script/compose.js"></script>
+        <script src="../Script/main.js"></script>
+        <script src="../Script/message.js"></script>
         
     </head>
     <body onload="pos()">
@@ -22,30 +22,21 @@
             <img src="../media/noteffytitle.png" id="logo">
             <div id="prof">
                 <a href="../HTML/signUp.html" id="prof" style="margin:0 2% 0 2%;">
-                <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
-                <lord-icon
-                src="https://cdn.lordicon.com/dxjqoygy.json"
-                trigger="loop"
-                delay="2000"
-                stroke="150"
-                colors="primary:#121331,secondary:#38d8ba"
-                style="width:50px;height:50px">
-            </lord-icon>
-            <?php
-            include("hash.php");
-            $storage = file_get_contents("../data/storage.aes") or die("Could Not open the file");
-            $storage = decrypt_data($storage);
-            $storage = json_decode($storage,True);
-            if(getUser($storage)==" "){
-                echo "<p>Sign Up</p>";
-            }
-            else{
-                 echo "<p>".getUser($storage)."<br>
-                 <a href = '../html/signUp.html' id = 'logout' onclick = 'clearCookies()'>Log Out</a></p>" ;
-            }
-            ?>
+                    <img src="..\media\goldbody2.png" alt="prof" height="75" >
+                    <?php
+                        include("hash.php");
+                        $storage = file_get_contents("../data/storage.aes") or die("Could Not open the file");
+                        $storage = decrypt_data($storage);
+                        $storage = json_decode($storage,True);
+                        if(getUser($storage)==" "){
+                            echo "<p>Sign Up</p>";
+                        }
+                        else{
+                             echo "<p>".getUser($storage)."<br>
+                             <a href = '../html/signUp.html' id = 'logout' onclick = 'clearCookies()'>Log Out</a></p>" ;
+                        }
+                    ?>
                 </a>
-
             </div>
         </div>
         <div class="tab">
@@ -55,19 +46,18 @@
         <div class="main" id="Notes">
             <div class="scat">
                 <?php
-                
                 function signUp(&$jsonData){
                     echo 123;
                     count($jsonData['Users']);
                     if(isset($_POST['Username']) && isset($_POST['Password']) && isset($_POST['Password1']) && isset($_POST['Email'])){
                         if($_POST['Password']!==$_POST['Password1']){
-                            echo 1234124;
+                            // echo 1234124;
                             echo "<script>
                                 message('Sign Up failed','message_failure');
                             </script>";
                         }
                         else{
-                            echo "WHy whyw y";
+                            // echo "WHy whyw y";
                             $users_count = count($jsonData['Users']);
                             echo $users_count;
                             str_pad($_POST["Username"],32,' ',STR_PAD_RIGHT);
@@ -116,8 +106,7 @@
                         if($jsonData['Users'][$i]['User_Name']==$userName)
                             $user = $i;
                         }
-                    if($user==-1)
-                    {
+                    if($user==-1){
                         die(" User not found");
                     }
                     if(isset($_POST['Title']) && isset($_POST['Note']) && isset($_POST['Date'])){
@@ -150,7 +139,6 @@
                 }
                 // signUp($storage);
                 signIn($storage);
-                
                 $m = fetch_store($storage);
                 $storage = json_encode($storage);
                 $storage = encrypt_data($storage);
@@ -164,17 +152,8 @@
                 display($storage,$user);
                 ?>
             </div>
-            <div class="menu">
-                <a id="btn1" onclick = "compose()">
-                    <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
-                    <lord-icon
-                    src="https://cdn.lordicon.com/wloilxuq.json"
-                    trigger="loop"
-                    delay="2000"
-                    stroke="100"
-                    colors="primary:#121331,secondary:#66d7ee"
-                    style="rotate:40deg;width:70px;height:70px">
-                    </lord-icon>
+            <div class="menu" id="comp1" onclick = "compose()">
+                <a id="btn1" style="background-color:yellow;">
                     <label style="font-size:30;">Compose</label>
                 </a>
             </div>
@@ -205,17 +184,8 @@
                 ?>
                 </div>
             </div>
-            <div class="menu">
-                <a id="btn1" onclick = "">
-                    <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
-                    <lord-icon
-                    src="https://cdn.lordicon.com/wloilxuq.json"
-                    trigger="loop"
-                    delay="2000"
-                    stroke="100"
-                    colors="primary:#121331,secondary:#66d7ee"
-                    style="rotate:40deg;width:70px;height:70px">
-                    </lord-icon>
+            <div class="menu" id="comp2" onclick = "testblank()">
+                <a id="btn1" style="background-color:teal;">
                     <label style="font-size:30;">Compose</label>
                 </a>
             </div>

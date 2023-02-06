@@ -9,7 +9,7 @@ function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
 }
 function pos() {
-    openTab(event, 'Notes')
+    openTab(event, 'Notes');
     var count = $(".divi").length;
     for (let i = 0; i < count; i++){
         var styles ={
@@ -19,6 +19,16 @@ function pos() {
         };
         var obj = document.getElementsByClassName("divi");
         Object.assign(obj[i].style,styles);
+    }
+}
+function disbl(){
+    if (document.getElementById("Notes").style.display == "block") {
+        document.getElementById("comp1").style.display = "block";
+        document.getElementById("comp2").style.display = "none";
+    }
+    else{
+        document.getElementById("comp2").style.display = "block";
+        document.getElementById("comp1").style.display = "none";
     }
 }
 function openTab(evt, cityName) {
@@ -33,6 +43,7 @@ function openTab(evt, cityName) {
     }
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
+    // if
     const bg = ["url(\"../media/bg1.png\")","url(\"../media/bg2.png\")"];
     console.log(document.body.style.backgroundImage);
     if (document.body.style.backgroundImage == bg[0]){
@@ -41,4 +52,5 @@ function openTab(evt, cityName) {
     else{
         document.body.style.backgroundImage = bg[0];
     }
-  }
+    disbl()
+}
