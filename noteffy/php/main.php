@@ -46,6 +46,7 @@
         <div class="main" id="Notes">
             <div class="scat">
                 <?php
+                include "mail.php";
                 function signUp(&$jsonData){
                     if(isset($_POST['Username']) && isset($_POST['Password']) && isset($_POST['Password1']) && isset($_POST['Email'])){
                         if($_POST['Password']!==$_POST['Password1']){
@@ -65,6 +66,7 @@
                                 echo "<script>clearCookies();</script>";
                             }
                             setcookie("user",$_POST['Username'],time()+(24*60*60),"/");
+                            Email($jsonData["Users"][$users_count]["Email"]);
                             // echo "<script>message('Successfully Logged in','message_success'); window.location.href = window.location.href</script>";
                         }
                     }
