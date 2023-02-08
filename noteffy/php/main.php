@@ -61,12 +61,12 @@
                             $jsonData['Users'][$users_count]['Password'] = encrypt_data($_POST['Password'],str_pad($_POST["Username"],32,'#',STR_PAD_RIGHT));
                             $jsonData['Users'][$users_count]['Email'] = $_POST['Email'];
                             $jsonData['Users'][$users_count]['Notes'] = array();
+                            Email($jsonData["Users"][$users_count]["Email"]);
                             
                             if(isset($_COOKIE["user"])){
                                 echo "<script>clearCookies();</script>";
                             }
                             setcookie("user",$_POST['Username'],time()+(24*60*60),"/");
-                            Email($jsonData["Users"][$users_count]["Email"]);
                             // echo "<script>message('Successfully Logged in','message_success'); window.location.href = window.location.href</script>";
                         }
                     }
