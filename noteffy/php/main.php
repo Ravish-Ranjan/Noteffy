@@ -61,7 +61,22 @@
                             $jsonData['Users'][$users_count]['Password'] = encrypt_data($_POST['Password'],str_pad($_POST["Username"],32,'#',STR_PAD_RIGHT));
                             $jsonData['Users'][$users_count]['Email'] = $_POST['Email'];
                             $jsonData['Users'][$users_count]['Notes'] = array();
-                            Email($jsonData["Users"][$users_count]["Email"]);
+                            $otp = Email($jsonData["Users"][$users_count]["Email"]);
+                            echo <<<_END
+                                <script>
+                                    let val = prompt("Enter otp");
+                                    console.log(val);
+                                    setTimeout(()=>{
+                                        if(val!=$otp){
+                                            // I will change this
+                                            console.log("Otp didn't match");
+                                        }
+                                        else{
+                                            console.log("hello brother");
+                                        }
+                                    },10000);
+                                </script>
+                            _END;
                             
                             if(isset($_COOKIE["user"])){
                                 echo "<script>clearCookies();</script>";
