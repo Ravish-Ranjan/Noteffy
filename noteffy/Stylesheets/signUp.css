@@ -83,7 +83,7 @@ input{
     font-family: codec-extrabold;
     margin-left: -1.09vw;
 }
-#form2-input{
+.form2-input{
     border: 1px solid #b8b8b8;
     width: 24.15vw;
     height: 2.19vw;

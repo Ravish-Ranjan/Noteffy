@@ -1,5 +1,4 @@
 function message(msg,type){
-    console.log("hello world");
     let container = document.createElement("div");
     container.className = type;
     let content = document.createElement("div");
@@ -11,6 +10,6 @@ function message(msg,type){
     setTimeout(()=>{
         console.log("hello");
         container.remove();
-    },1000);
+    },3000);
     return;
 }

@@ -9,13 +9,15 @@
 
         <!-- stylesheets -->
         <link rel="stylesheet" href="../Stylesheets/signUp.css">
+        <link rel="stylesheet" href="../Stylesheets/message.css">
 
         <!-- scripts -->
+        <script src="../Script/message.js"></script>
         <script src="../Script/signUp.js"></script>
 
         <title>Welcome - Noteffy</title>
     </head>
-    <body>
+    <body onload = "config()">
         <a href="#"><img src="../media/noteffytitle.png" id="noteffy-title"></a>
         <div id="sign-in-bg">
             <img src="../media/goldbody2.png" id="mascot-1">
@@ -36,7 +38,7 @@
                         <div id="form-container1">
                             <form method="post" id="form-1" action="../php/main.php">
                                 <label>Enter Username\Password</label>
-                                <input id="form2-input" placeholder="Enter" type="text"  name="User_Name_" required>
+                                <input class="form1-input" placeholder="Enter" type="text"  name="User_Name_" required>
                                 <br>
                                 <br>
                                 <label>Password</label>
@@ -58,19 +60,19 @@
                         <div id="form-container2">
                             <form method="post" id="form-2" action="../php/main.php">
                                 <label>Enter Email</label>
-                                <input id="form2-input" placeholder="Enter" type="text" name="Email" required>
+                                <input class="form2-input" placeholder="Enter" type="text" name="Email" required>
                                 <br>
                                 <br>
                                 <label>Enter Username</label>
-                                <input id="form2-input" placeholder="Enter" type="text" name="Username" required>
+                                <input class="form2-input" placeholder="Enter" type="text" name="Username" required>
                                 <br>
                                 <br>
                                 <label>Create Password</label>
-                                <input id="form2-input" placeholder="Enter" type="password" name="Password" required>
+                                <input class="form2-input" placeholder="Enter" type="password" name="Password" required>
                                 <br>
                                 <br>
                                 <label>Confirm Password</label>
-                                <input id="form2-input" placeholder="Enter" type="password" name="Password1" required>
+                                <input class="form2-input" placeholder="Enter" type="password" name="Password1" required>
                                 <br>
                                 <br>
                                 <button id="log-bbt" type="submit" form="form-2" value="Submit">SIGN UP</button>

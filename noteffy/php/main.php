@@ -61,20 +61,16 @@
                             $jsonData['Users'][$users_count]['Password'] = encrypt_data($_POST['Password'],str_pad($_POST["Username"],32,'#',STR_PAD_RIGHT));
                             $jsonData['Users'][$users_count]['Email'] = $_POST['Email'];
                             $jsonData['Users'][$users_count]['Notes'] = array();
-                            $otp = Email($jsonData["Users"][$users_count]["Email"]);
+                            $email = $jsonData["Users"][$users_count]["Email"];
+                            $otp = Email($email);
                             echo <<<_END
                                 <script>
+                                    //Insert Some loading screen here
                                     let val = prompt("Enter otp");
-                                    console.log(val);
-                                    setTimeout(()=>{
-                                        if(val!=$otp){
-                                            // I will change this
-                                            console.log("Otp didn't match");
-                                        }
-                                        else{
-                                            console.log("hello brother");
-                                        }
-                                    },10000);
+                                    if(val!=$otp){
+                                         // Changed
+                                        window.location.href = '../html/signUp.html?err=iotp&activity=signup&mail=$email';
+                                    }
                                 </script>
                             _END;
                             
@@ -89,22 +85,26 @@
                 function signIn(&$jsonData){
                     if(isset($_POST['User_Name_']) && isset($_POST['Password_'])){
                         $users_count = count($jsonData["Users"]);
-                        echo $users_count;
+                        $errc = "uid";$name = "";
                         for($i = 0;$i < $users_count;$i++){
                             // echo $i.'<br>';
-                            if($jsonData["Users"][$i]["User_Name"] === $_POST['User_Name_'] && $jsonData["Users"][$i]["Password"]===encrypt_data($_POST["Password_"],str_pad($_POST["User_Name_"],32,'#',STR_PAD_RIGHT))){
-                                echo $jsonData["Users"][$i]["Password"].':'.encrypt_data($_POST["Password_"],str_pad($_POST["User_Name_"],32,'#',STR_PAD_RIGHT));
-                                setcookie("user",$jsonData["Users"][$i]["User_Name"]);
-                                echo "<script>window.location.href = window.location.href</script>";
-                                return ;
-                            }
-                            else{
-                                // die("User not found");
+                            if($jsonData["Users"][$i]["User_Name"] === $_POST['User_Name_']){
+                                if($jsonData["Users"][$i]["Password"]===encrypt_data($_POST["Password_"],str_pad($_POST["User_Name_"],32,'#',STR_PAD_RIGHT))){
+                                    setcookie("user",$jsonData["Users"][$i]["User_Name"]);
+                                    echo "<script>window.location.href = window.location.href</script>";
+                                    return ;
+                                }
+                                else{
+                                    $name = $jsonData["Users"][$i]["User_Name"];
+                                    $errc = "upwd";
+                                }
                             }
                         }
+                        echo '<script>window.location.href="../html/signUp.html?err='.$errc.'&name='.$name.'&activity='.($errc=='uid'?"signup":"signin").'";</script>';
+                        return;
+                        
+                        }
                     }
-
-                }
                 function getUser(){
                     if(isset($_COOKIE["user"])){
                         return $_COOKIE["user"];
@@ -117,12 +117,8 @@
                     $User_count = count($jsonData['Users']);
                     $userName = getUser($jsonData);
                     //Do not disturb until later
-                    echo 'User name: '.$userName;
-                    // $userName = "_ravishranjan_";
-                    if($userName==" "){
-                        echo '<script>window.location.href="../html/signUp.html";</script>';
-                        return -1;
-                    }
+                    echo ' ';
+                    
                     for($i=0;$i<$User_count;$i++){
                         if($jsonData['Users'][$i]['User_Name']==$userName)
                           $user = $i;

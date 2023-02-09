@@ -20,3 +20,38 @@ function transitionFunction(){
         document.getElementById("form-container2").style.display = "none";
     }      
 }
+
+function config(){
+    const queries = new URLSearchParams(window.location.search);
+    let code = queries.get("err"),act = queries.get("activity");
+    //For error messages
+    switch(code){
+    case('uid'):
+        message("Username does not exist","error");break;
+    case 'upwd':
+        message("The password entered was incorrect","error");break;
+    case 'invm':
+        message("The mail you used was invalid","error");break;
+    case 'iotp':
+        message("The OTP you entered was incorrect","error");break;
+    default:
+        break;
+    }
+
+    //For directing signup/signin
+    if(act=='signup'){
+        //Subject to change if styling changes
+        document.getElementById('toggle-checkbox').checked = true;
+        transitionFunction();
+    }
+    else{}
+
+    //For caching correct data
+    if(queries.get("mail")){
+        document.querySelectorAll(".form2-input")[0].value = queries.get("mail");
+    }
+    if(queries.get("name")){
+        document.querySelectorAll(".form1-input")[0].value = queries.get("name");
+    }
+    
+}

@@ -24,13 +24,13 @@
          ";
         $headers = "MIME-Version: 1.0"."\r\n";
         $headers.= "Content-type:text/html;charset=UTF-8"."\r\n";
-        $headers.= "From: noteffy.email@gmail.com" . "\r\n"."CC:gaurangtyagi7@gmail.com"."\r\n";
+        $headers.= "From: noteffy.email@gmail.com" . "\r\n"."CC:"."\r\n";
         $result = mail($to,$subject,$txt,$headers);
         if($result){
           return $otp;
         }
         else{
-          die("Error");
+          echo "<script>window.location.href = '../html/signUp.html?errc=invm&activity=signup'</script>";
         }
     }
 ?>
