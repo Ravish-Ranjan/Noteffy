@@ -53,7 +53,6 @@ function openTab(evt, cityName) {
     evt.currentTarget.className += " active";
     // if
     const bg = ["url(\"../media/bg1.png\")","url(\"../media/bg2.png\")"];
-    console.log(document.body.style.backgroundImage);
     if (document.body.style.backgroundImage == bg[0]){
         document.body.style.backgroundImage = bg[1];
     }

@@ -8,7 +8,6 @@ function message(msg,type){
     document.body.insertBefore(container,document.body.firstChild);
     container.appendChild(content);
     setTimeout(()=>{
-        console.log("hello");
         container.remove();
     },3000);
     return;

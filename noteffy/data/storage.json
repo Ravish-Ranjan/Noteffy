@@ -51,13 +51,16 @@
                     "Date": "2023-02-06",
                     "Content": "Faith you are driving me away"
                 }
+            ],
+            "To-do" : [
+                {
+                    "Title" : "",
+                    "Date" : "",
+                    "Time" : "",
+                    "Priority" : 1,
+                    "Tasks" : []
+                }
             ]
-        },
-        {
-            "User_Name": "Hitman",
-            "Password": "wGreTnVCvndPl8GlprwGuA==",
-            "Email": "gaurangtyagi7@gmail.com",
-            "Notes": []
         }
     ]
 }

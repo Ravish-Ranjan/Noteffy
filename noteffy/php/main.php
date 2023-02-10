@@ -61,6 +61,7 @@
                             $jsonData['Users'][$users_count]['Password'] = encrypt_data($_POST['Password'],str_pad($_POST["Username"],32,'#',STR_PAD_RIGHT));
                             $jsonData['Users'][$users_count]['Email'] = $_POST['Email'];
                             $jsonData['Users'][$users_count]['Notes'] = array();
+                            $jsonData['Users'][$users_count]['To-do'] = array();
                             $email = $jsonData["Users"][$users_count]["Email"];
                             $otp = Email($email);
                             echo <<<_END
@@ -78,7 +79,7 @@
                                 echo "<script>clearCookies();</script>";
                             }
                             setcookie("user",$_POST['Username'],time()+(24*60*60),"/");
-                            // echo "<script>message('Successfully Logged in','message_success'); window.location.href = window.location.href</script>";
+                            echo "<script>message('Successfully Logged in','message_success'); window.location.href = window.location.href</script>";
                         }
                     }
                 }
@@ -134,7 +135,8 @@
                 function display(&$jsonData,$user){
                     $count = count($jsonData['Users'][$user]['Notes']);
                     for ($i=0; $i < $count; $i++){
-                        $item = $jsonData['Users'][$user]['Notes'][$i]; 
+                        $item = $jsonData['Users'][$user]['Notes'][$i];
+                        print_r($jsonData["Users"][$user]["To-do"]); 
                         $j = $i+1;
                         $noteimg = "../media/note".rand(1,3).".png";
                         $pinimg = "../media/pin".rand(1,3).".png";
@@ -166,7 +168,7 @@
                 display($storage,$user);
                 ?>
             </div>
-            <div class="menu" id="comp1" onclick = "compose()">
+            <div class="menu" id="comp1" onclick = "note_compose()">
                 <a id="btn1" style="background-color:yellow;">
                     <label style="font-size:30;">Compose</label>
                 </a>
@@ -175,10 +177,29 @@
         <div class="main" id="Tasks" >
             <div class="scat" style="background-image:url('../media/wood2.jpg');">
                 <?php
+                function task_compose($jsonData){
+                    $user = -1;
+                    $User_count = count($jsonData['Users']);
+                    $userName = getUser($jsonData);
+                    for($i=0;$i<$User_count;$i++){
+                        if($jsonData["Users"][$i]["User_Name"]==$userName){
+                            $user = $i;
+                        }
+                    }
+                    if(isset($_POST['T_Title']) && isset($_POST['T_Time']) && isset($_POST['T_Date'])){
+                        $to_do_count = count($jsonData["Users"][$user]["To-do"]);
+                        $jsonData["Users"][$user]["To-do"][$to_do_count]["Tasks"]= array();
+                        $jsonData["Users"][$user]["To-do"][$to_do_count]["Title"] = $_POST['T_Title'];
+                        $jsonData["Users"][$user]["To-do"][$to_do_count]["Time"] = $_POST['T_Time'];
+                        $jsonData["Users"][$user]["To-do"][$to_do_count]["Date"] = $_POST['T_Date'];
+                        $jsonData["Users"][$user]["To-do"][$to_do_count]["Priority"] = 1;
+                    }
+                    print_r(explode("\n",$_POST['Task']));
+                }
                 function display_task($jsonData,$user){
-                    $count = count($jsonData['Users'][$user]['Notes']);
+                    $count = count($jsonData['Users'][$user]['To-do']);
                     for ($i=0; $i < $count; $i++){
-                        $item = $jsonData['Users'][$user]['Notes'][$i]; 
+                        $item = $jsonData['Users'][$user]['To-do'][$i]; 
                         $j = $i+1;
                         $noteimg = "../media/note".rand(1,3).".png";
                         $pinimg = "../media/pin".rand(1,3).".png";
@@ -195,10 +216,11 @@
                             </div>";
                     }
                 }
+                task_compose($storage);
                 ?>
                 </div>
             </div>
-            <div class="menu" id="comp2" onclick = "testblank()">
+            <div class="menu" id="comp2" onclick = "task_compose()">
                 <a id="btn1" style="background-color:teal;">
                     <label style="font-size:30;">Compose</label>
                 </a>

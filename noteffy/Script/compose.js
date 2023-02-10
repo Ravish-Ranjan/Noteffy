@@ -2,8 +2,7 @@ function closeF(){
     document.querySelector('form').remove();
     document.querySelector("#btn1").setAttribute("onclick","compose()");
 }
-function compose(){  
-    console.log(123);
+function note_compose(){  
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); 
@@ -24,6 +23,40 @@ function compose(){
     document.querySelector("body").appendChild(noteform);
     document.querySelector("#btn1").toggleAttribute("onclick","");
     document.getElementById("Date").value = today;
+}
+function task_compose(){  
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+    var yyyy = today.getFullYear();
+    today = yyyy + '-' + mm + '-' + dd;
+
+    var t = new Date();
+    time = String(t.getHours())+":"+String(t.getMinutes()); //current time
+    let noteform = document.createElement("form");
+    noteform.setAttribute("action","main.php");noteform.setAttribute("method","POST");
+    noteform.setAttribute("onsubmit","return checkEmpty(this)");
+    noteform.innerHTML = "<span id='Form_Caption'>ADD A NOTE</span>\
+    <button id = 'close' style=\"font-size:2vw;\" onclick = \"closeF()\">x</button>\
+    <label for='Date'>Date</label>\
+    <input type='date' name='T_Date' id='Date'>\
+    <label for='Time'>Time</label>\
+    <input type='time' name='T_Time' id='Time'>\
+    <label for='Title'>Title</label>\
+    <input type='text' name='T_Title' id='Title' placeholder='Title'>\
+    <label for='Task'>Tasks</label>\
+    <textarea style='resize:none;' placeholder='Your Tasks' name='Task' id='Task'  contenteditable='true' rows=8 cols=10>&#x2022;</textarea>\
+    <input type='submit' value='save' id='btn'>"
+    document.querySelector("body").appendChild(noteform);
+    document.querySelector("#btn1").toggleAttribute("onclick","");
+    document.getElementById("Date").value = today;
+    document.getElementById("Time").value = time;
+    var task =document.getElementById("Task");
+    task.addEventListener("keyup",()=>{
+        if(task.value.endsWith("\n")){
+            task.value+=String.fromCharCode(U+2022);
+        }
+    })
 }
 function checkEmpty(ele){
     let childs = ele.children,flag = true;
