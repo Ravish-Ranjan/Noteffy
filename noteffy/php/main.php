@@ -78,7 +78,7 @@
                                 echo "<script>clearCookies();</script>";
                             }
                             setcookie("user",$_POST['Username'],time()+(24*60*60),"/");
-                            // echo "<script>message('Successfully Logged in','message_success'); window.location.href = window.location.href</script>";
+                            echo "<script>message('Successfully Logged in','message_success'); window.location.href = window.location.href</script>";
                         }
                     }
                 }
