@@ -46,8 +46,8 @@
         <div class="main" id="Notes">
             <div class="scat">
                 <?php
-                include "mail.php";
-                function signUp(&$jsonData){
+                    include "mailpy.php";
+                    function signUp(&$jsonData){
                     if(isset($_POST['Username']) && isset($_POST['Password']) && isset($_POST['Password1']) && isset($_POST['Email'])){
                         if($_POST['Password']!==$_POST['Password1']){
                             echo "<script>
@@ -62,7 +62,7 @@
                             $jsonData['Users'][$users_count]['Email'] = $_POST['Email'];
                             $jsonData['Users'][$users_count]['Notes'] = array();
                             $email = $jsonData["Users"][$users_count]["Email"];
-                            $otp = Email($email);
+                            $otp = pymail($email);
                             echo <<<_END
                                 <script>
                                     //Insert Some loading screen here

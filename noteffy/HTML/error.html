@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="../media/logo5mix.png">
+        <title>Error - Noteffy</title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            @font-face{
+                font-family: codec-extrabold;
+                src: url('../media/Codec-Cold-Heavy-trial.ttf');
+            }
+            @font-face{
+                font-family: codec;
+                src: url('../media/Codec-Cold-Regular-trial.ttf');
+            }
+            #noteffy-error-image{
+                width: auto;
+                height: 12.17vh;
+                padding-top: 8.05vw;
+                padding-left: 8.05vw;
+            }
+            .container{
+                display: flex;
+            }
+            .container-child{
+                flex: 1;
+            }  
+            .container-child:first-child {
+                margin-right: 14.64vw;
+            } 
+            #mascot-gif{
+                width: auto;
+                height: 83.71vh;
+            }
+            #heading{
+                font-family: codec-extrabold;
+                padding-left: 7.32vw;
+                font-size: 5.12vw;
+            }
+            #details{
+                font-family: codec;
+                margin-top: 2.92vw;
+                padding-left: 7.32vw;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="container-child">
+                <img src="../media/noteffyTitle.png" id="noteffy-error-image">
+                <br>
+                <br>
+                <br>
+                <br>
+                <p id="heading">Oops! Looks like we've got an error!</p>
+                <p id="details">The requested URL was not found, please try again later.</p>
+            </div>
+            <div class="container-child">
+                <img src="../media/mascot_animation.gif" id="mascot-gif">
+            </div>
+        </div>
+    </body>  
+</html>
