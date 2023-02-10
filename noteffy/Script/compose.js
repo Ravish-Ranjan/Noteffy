@@ -45,16 +45,17 @@ function task_compose(){
     <label for='Title'>Title</label>\
     <input type='text' name='T_Title' id='Title' placeholder='Title'>\
     <label for='Task'>Tasks</label>\
-    <textarea style='resize:none;' placeholder='Your Tasks' name='Task' id='Task'  contenteditable='true' rows=8 cols=10>&#x2022;</textarea>\
+    <textarea style='resize:none;' placeholder='Your Tasks' name='Task' id='Task'  contenteditable='true' rows=8 cols=10>1.)</textarea>\
     <input type='submit' value='save' id='btn'>"
     document.querySelector("body").appendChild(noteform);
     document.querySelector("#btn1").toggleAttribute("onclick","");
     document.getElementById("Date").value = today;
     document.getElementById("Time").value = time;
     var task =document.getElementById("Task");
+    var iter =1;
     task.addEventListener("keyup",()=>{
         if(task.value.endsWith("\n")){
-            task.value+=String.fromCharCode(U+2022);
+            task.value+=String(++iter)+".)";
         }
     })
 }

@@ -159,7 +159,7 @@
                 $storage = json_encode($storage);
                 $storage = encrypt_data($storage);
                 file_put_contents("../data/storage.aes",$storage) or die("Failed to encode");
-
+                
                 // $user = 0;
                 $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
                 $storage = decrypt_data($storage);
@@ -177,7 +177,23 @@
         <div class="main" id="Tasks" >
             <div class="scat" style="background-image:url('../media/wood2.jpg');">
                 <?php
-                function task_compose($jsonData){
+                function Delete(&$jsonData){
+                    if(isset($_GET["T_no"]) && isset($_GET["User"])){
+                        $t_no = $_GET["T_no"];
+                        $User = $_GET["User"];
+                        array_splice($jsonData["Users"][$User]["To-do"],$t_no,1);
+                        echo "<script>window.location.href = '../php/main.php'</script>";
+                    }
+                }
+                function priority_calc($time,$cur){
+                    if(($time-$cur)<=1)
+                        return 1;
+                    else if(($time-$cur)<=5 && ($time-$cur)>1)
+                        return 2;
+                    else
+                        return 3;
+                }
+                function task_compose(&$jsonData){
                     $user = -1;
                     $User_count = count($jsonData['Users']);
                     $userName = getUser($jsonData);
@@ -188,36 +204,58 @@
                     }
                     if(isset($_POST['T_Title']) && isset($_POST['T_Time']) && isset($_POST['T_Date'])){
                         $to_do_count = count($jsonData["Users"][$user]["To-do"]);
-                        $jsonData["Users"][$user]["To-do"][$to_do_count]["Tasks"]= array();
                         $jsonData["Users"][$user]["To-do"][$to_do_count]["Title"] = $_POST['T_Title'];
                         $jsonData["Users"][$user]["To-do"][$to_do_count]["Time"] = $_POST['T_Time'];
                         $jsonData["Users"][$user]["To-do"][$to_do_count]["Date"] = $_POST['T_Date'];
                         $jsonData["Users"][$user]["To-do"][$to_do_count]["Priority"] = 1;
+                        $jsonData["Users"][$user]["To-do"][$to_do_count]["Tasks"]=explode("\n",$_POST['Task']);
                     }
-                    print_r(explode("\n",$_POST['Task']));
+                    if($user!=-1)
+                        return $user;
                 }
                 function display_task($jsonData,$user){
+                    
                     $count = count($jsonData['Users'][$user]['To-do']);
                     for ($i=0; $i < $count; $i++){
                         $item = $jsonData['Users'][$user]['To-do'][$i]; 
+
+                        // calculating priority
+                        date_default_timezone_set("Asia/Kolkata");
+                        $t_time = explode(":",$item["Time"]);
+                        $cur_time = explode(":",Date("h:i"));
+                        // echo priority_calc($t_time[0],$cur_time[0]);
+                        
                         $j = $i+1;
                         $noteimg = "../media/note".rand(1,3).".png";
-                        $pinimg = "../media/pin".rand(1,3).".png";
+                        $pinimg = "../media/pin".priority_calc($t_time[0],$cur_time[0]).".png";
                         $title = substr(explode(' ',$item['Title'])[0],0,8);
-                        $content = $item['Content'];
-                        $visible = substr($content,0,25);
-                        echo "
-                            <div class=\"divi\" style=\"background-image:url($noteimg);\">
-                                <div class=\"des\">
+                        $content = $item['Tasks'];
+
+                        echo "<a href='../php/main.php?T_no=$i&User=$user'>
+                        <div class=\"divi\" style=\"background-image:url($noteimg);\">
+                        <div class=\"des\">
                                     <label>$j.$title</label>
                                     <img src=$pinimg>
-                                </div>
-                                <p>$visible</p>
-                            </div>";
-                    }
-                }
-                task_compose($storage);
-                ?>
+                                    </div>";
+                                    for($k=0;$k<count($content);$k++){
+                                        echo "
+                                            <p>$content[$k]</p>
+                                        ";
+                                    }
+                                    echo "</div></a>";
+                                }
+                            }
+                            $u = task_compose($storage);
+                            Delete($storage);
+                            $storage = json_encode($storage);
+                            $storage = encrypt_data($storage);
+                            file_put_contents("../data/storage.aes",$storage) or die("Failed to encode");
+
+                            $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
+                            $storage = decrypt_data($storage);
+                            $storage = json_decode($storage,true);
+                            display_task($storage,$u);
+                            ?>
                 </div>
             </div>
             <div class="menu" id="comp2" onclick = "task_compose()">
@@ -227,4 +265,4 @@
             </div>
         </div>
     </body>
-</html>
+    </html>
