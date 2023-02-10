@@ -231,7 +231,7 @@
                         $title = substr(explode(' ',$item['Title'])[0],0,8);
                         $content = $item['Tasks'];
 
-                        echo "<a href='../php/main.php?T_no=$i&User=$user'>
+                        echo "<a href='../php/main.php?T_no=$i&User=$user' style='text-decoration:none;color:black'>
                         <div class=\"divi\" style=\"background-image:url($noteimg);\">
                         <div class=\"des\">
                                     <label>$j.$title</label>
