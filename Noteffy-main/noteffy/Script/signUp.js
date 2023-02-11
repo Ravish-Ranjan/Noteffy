@@ -1,4 +1,4 @@
-function transitionFunction(){
+function transitionFunction(){ // this function toggles the signIn/signUp function front end
     if(document.getElementById('toggle-checkbox').checked){
         document.getElementById("title-heading").innerHTML="Sign up";
         document.getElementById("sign-in-bg").style.backgroundImage = "url(../media/bg2.png)";
@@ -21,7 +21,7 @@ function transitionFunction(){
     }      
 }
 
-function config(){
+function config(){ // this function gives different messages for user to understand the states
     const queries = new URLSearchParams(window.location.search);
     let code = queries.get("err"),act = queries.get("activity");
     //For error messages

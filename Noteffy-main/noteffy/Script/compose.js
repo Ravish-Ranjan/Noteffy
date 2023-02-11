@@ -2,7 +2,7 @@ function closeF(){
     document.querySelector('form').remove();
     document.querySelector("#btn1").setAttribute("onclick","compose()");
 }
-function note_compose(){  
+function note_compose(){  //this function helps to create more notes for user
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); 
@@ -24,7 +24,7 @@ function note_compose(){
     document.querySelector("#btn1").toggleAttribute("onclick","");
     document.getElementById("Date").value = today;
 }
-function task_compose(){  
+function task_compose(){  //this function helps to create more tasks for user
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); 
@@ -59,7 +59,7 @@ function task_compose(){
         }
     })
 }
-function checkEmpty(ele){
+function checkEmpty(ele){ // this function checks if the user have any note/tasks or not
     let childs = ele.children,flag = true;
     for(i of childs){
         if(['INPUT','TEXTAREA'].indexOf(i.nodeName)!=-1 && i.value==''){

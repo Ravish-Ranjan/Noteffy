@@ -1,4 +1,4 @@
-function message(msg,type){
+function message(msg,type){ // this function gives user the error/success messages
     let container = document.createElement("div");
     container.className = type;
     let content = document.createElement("div");

@@ -1,3 +1,4 @@
+# this function sends the mail to given/default email the simple/html based text with/without attachement 
 def sendmail(from_ = "noteffy.email@gmail.com" , passwd = "qlugelfypfizxlzt",to = "",subject = "",body = "",attachment = "",html=False):
     import smtplib
     from email.mime.multipart import MIMEMultipart
@@ -43,6 +44,7 @@ def sendmail(from_ = "noteffy.email@gmail.com" , passwd = "qlugelfypfizxlzt",to 
 import sys
 data = sys.argv
 n = len(data)     # data[0] = mail.py   data[1] = recievers mail  data[2] = otp
+# this is the design for the email sent for the user signup otp
 msg = """<div style='font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2'>
         <div style='margin:50px auto;width:70%;padding:20px 0'>
           <div style='border-bottom:1px solid #eee'>
@@ -61,6 +63,7 @@ msg = """<div style='font-family: Helvetica,Arial,sans-serif;min-width:1000px;ov
         </div>
       </div>
         """.format(data[2])
+# calling to send the mail based on command line args
 sendmail(to=data[1],
          subject="Successfully signed in",
          body=msg,
