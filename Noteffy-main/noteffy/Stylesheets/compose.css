@@ -1,0 +1,46 @@
+input[type="date"],input[type="text"],textarea{
+    font-size:20;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-radius: 5px;
+    padding: 1%;
+}
+form{
+    animation:fade 0.4s ease-in-out;
+    position:absolute;top:2%;right:5%;
+    display:grid;/* height:60%; */
+    width:28%;z-index:4;background:rgba(0,0,0,0.6);
+    font-size:2vw;border-radius:1rem;
+    border: 2px solid black;
+    grid-template-rows : repeat(6,1fr);
+    grid-template-columns:repeat(1,1fr);
+    row-gap:4px;color:white;
+    margin-top:15vh;padding:1%;
+    font-family:"Times New Roman";
+}
+#Form_Caption{
+    justify-self:center;
+}
+#close{
+    position:absolute;top:-20px;left:-15px;height:50px;width:50px;border-radius:50%;
+    background-color:rgba(255,0,0,0.5);content:'x';color:white;
+    transition: background-color 0.2s;
+}
+#close:hover{
+    background-color:rgba(255,0,0,0.8);
+    transition-timing-function:ease-in-out;
+}
+span{
+    font-size: 30;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+label{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 18;
+}
+#btn{
+    padding: 1% 0 1% 0 ;
+    font-size: 25;
+    border-radius: 0 0 1rem 1rem;
+    color: white;
+    background-color: rgb(0, 116, 116);
+}

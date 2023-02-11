@@ -1,0 +1,4 @@
+uid - invalid username
+upwd - invalid password
+invm - invalid mail
+iotp - invalid OTP
