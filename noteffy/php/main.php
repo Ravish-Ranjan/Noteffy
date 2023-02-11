@@ -136,7 +136,6 @@
                     $count = count($jsonData['Users'][$user]['Notes']);
                     for ($i=0; $i < $count; $i++){
                         $item = $jsonData['Users'][$user]['Notes'][$i];
-                        print_r($jsonData["Users"][$user]["To-do"]); 
                         $j = $i+1;
                         $noteimg = "../media/note".rand(1,3).".png";
                         $pinimg = "../media/pin".rand(1,3).".png";
@@ -181,8 +180,16 @@
                     if(isset($_GET["T_no"]) && isset($_GET["User"])){
                         $t_no = $_GET["T_no"];
                         $User = $_GET["User"];
-                        array_splice($jsonData["Users"][$User]["To-do"],$t_no,1);
-                        echo "<script>window.location.href = '../php/main.php'</script>";
+                        $userName = getUser($jsonData);
+                        $flag = false;
+                        for($i=0;$i<count($jsonData["Users"]);$i++){
+                            if($jsonData["Users"][$i]["User_Name"]== $userName && $i==$User){
+                                array_splice($jsonData["Users"][$User]["To-do"],$t_no,1);
+                                // echo "<script>window.location.href = '../php/main.php'</script>";
+                                return;
+                            }
+                        }
+                        echo "<Script>window.location.href = '../php/main.php'</script>";
                     }
                 }
                 function priority_calc($time,$cur){
