@@ -42,6 +42,7 @@
         <div class="tab">
             <button class="tbs" onclick="openTab(event, 'Notes')">Notes</button>
             <button class="tbs" onclick="openTab(event, 'Tasks')">Tasks</button>
+            <button class="tbs" onclick="openTab(event, 'To-do')">To-do</button>
         </div>
         <div class="main" id="Notes">
             <div class="scat">
@@ -174,7 +175,7 @@
             </div>
         </div>
         <div class="main" id="Tasks" >
-            <div class="scat" style="background-image:url('../media/wood2.jpg');">
+            <div class="scat" style="background-image:url('../media/background_4.png');">
                 <?php
                 function Delete(&$jsonData){
                     if(isset($_GET["T_no"]) && isset($_GET["User"])){
@@ -269,6 +270,58 @@
                 <a id="btn1" style="background-color:teal;">
                     <label style="font-size:30;">Compose</label>
                 </a>
+            </div>
+        </div>
+        <div class="main" id="To-do">
+        <div class="scat" style="background-image:url('../media/background_6.png');">
+        <?php
+            function getUserNumber($jsonData){
+                for($i=0;$i<count($jsonData["Users"]);$i++){
+                    if($jsonData["Users"][$i]["User_Name"]==getUser($jsonData)){
+                        return $i;
+                    }
+                }
+                echo "<script>window.location.href='../HTML/error.html'</script>";
+            }
+            function display_todo($jsonData,$user){
+                $count = count($jsonData['Users'][$user]['To-do']);
+                for ($i=0; $i < $count; $i++){
+                    $item = $jsonData['Users'][$user]['To-do'][$i]; 
+
+                    // calculating priority 
+                    // I will change this
+                    date_default_timezone_set("Asia/Kolkata");
+                    $t_time = explode(":",$item["Time"]);
+                    $cur_time = explode(":",Date("h:i"));
+                    // echo priority_calc($t_time[0],$cur_time[0]);
+                    
+                    $j = $i+1;
+                    $noteimg = "../media/note".rand(1,3).".png";
+                    $pinimg = "../media/pin".priority_calc($t_time[0],$cur_time[0]).".png";
+                    $title = substr(explode(' ',$item['Title'])[0],0,8);
+                    $content = $item['Tasks'];
+
+                    echo "<a href='../php/main.php?T_no=$i&User=$user' style='text-decoration:none;color:black'>
+                    <div class=\"divi\" style=\"background-image:url($noteimg);\">
+                    <div class=\"des\">
+                                <label>$j.$title</label>
+                                <img src=$pinimg>
+                                </div>";
+                                for($k=0;$k<count($content);$k++){
+                                    $task = substr($content[$k],3);
+                                    echo "
+                                        <input type='checkbox' value=$task[$k]>$task<br>
+                                    ";
+                                }
+                                echo "</div></a>";
+                            }
+            }
+            $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
+            $storage = decrypt_data($storage);
+            $storage = json_decode($storage,true);
+            $u = getUserNumber($storage);
+            display_todo($storage,$u);
+        ?>
             </div>
         </div>
     </body>

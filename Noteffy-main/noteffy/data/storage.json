@@ -1,4 +1,11 @@
 {
-    "Users":[
+    "Users": [
+        {
+            "User_Name": "Gaurang Tyagi",
+            "Password": "Xraakl7Zbom+zDn2cgJGzg==",
+            "Email": "gaurangtyagi7@gmail.com",
+            "Notes": [],
+            "To-do": []
+        }
     ]
- }
+}
