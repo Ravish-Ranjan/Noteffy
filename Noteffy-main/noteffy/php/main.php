@@ -18,6 +18,7 @@
         
     </head>
     <body onload="pos()">
+        <!-- this div is for the top bar of the main page to display logo and user status-->
         <div class="top">
             <img src="../media/noteffytitle.png" id="logo">
             <div id="prof">
@@ -39,16 +40,18 @@
                 </a>
             </div>
         </div>
+        <!-- this div is for the tabs for the different functions of the project -->
         <div class="tab">
             <button class="tbs" onclick="openTab(event, 'Notes')">Notes</button>
             <button class="tbs" onclick="openTab(event, 'Tasks')">Tasks</button>
             <button class="tbs" onclick="openTab(event, 'To-do')">To-do</button>
         </div>
+        <!-- this div is to display the notes of the user in a scattered manner -->
         <div class="main" id="Notes">
             <div class="scat">
                 <?php
-                    include "mailpy.php";
-                    function signUp(&$jsonData){
+                include "mailpy.php";
+                function signUp(&$jsonData){ // this function signups the new user and save there auth data for further use
                     if(isset($_POST['Username']) && isset($_POST['Password']) && isset($_POST['Password1']) && isset($_POST['Email'])){
                         if($_POST['Password']!==$_POST['Password1']){
                             echo "<script>
@@ -84,7 +87,7 @@
                         }
                     }
                 }
-                function signIn(&$jsonData){
+                function signIn(&$jsonData){ //this function uses the saved data to verify and let the old user sign in
                     if(isset($_POST['User_Name_']) && isset($_POST['Password_'])){
                         $users_count = count($jsonData["Users"]);
                         $errc = "uid";$name = "";
@@ -107,14 +110,14 @@
                         
                         }
                     }
-                function getUser(){
+                function getUser(){ // this function fetches the user from the data
                     if(isset($_COOKIE["user"])){
                         return $_COOKIE["user"];
                     }
                     else
                         return " "; 
                 }
-                function fetch_store(&$jsonData){
+                function fetch_store(&$jsonData){ // this function fetches and stores the new note created by by the user
                     $user = -1;
                     $User_count = count($jsonData['Users']);
                     $userName = getUser($jsonData);
@@ -133,7 +136,7 @@
                     }
                     return $user;
                 }
-                function display(&$jsonData,$user){
+                function display(&$jsonData,$user){ // this function displays the user's notes in a scatter manner
                     $count = count($jsonData['Users'][$user]['Notes']);
                     for ($i=0; $i < $count; $i++){
                         $item = $jsonData['Users'][$user]['Notes'][$i];
@@ -168,16 +171,18 @@
                 display($storage,$user);
                 ?>
             </div>
+            <!-- this div is to let user create more notes -->
             <div class="menu" id="comp1" onclick = "note_compose()">
                 <a id="btn1" style="background-color:yellow;">
                     <label style="font-size:30;">Compose</label>
                 </a>
             </div>
         </div>
+        <!-- this div is for users tasks defined by him/her/they/them/zhe/zher/etc -->
         <div class="main" id="Tasks" >
             <div class="scat" style="background-image:url('../media/background_4.png');">
                 <?php
-                function Delete(&$jsonData){
+                function Delete(&$jsonData){ // this function is to let user delete a task
                     if(isset($_GET["T_no"]) && isset($_GET["User"])){
                         $t_no = $_GET["T_no"];
                         $User = $_GET["User"];
@@ -193,7 +198,7 @@
                         echo "<Script>window.location.href = '../php/main.php'</script>";
                     }
                 }
-                function priority_calc($time,$cur){
+                function priority_calc($time,$cur){ // this function is to calculate the priority of a task based on given time
                     if(($time-$cur)<=1)
                         return 1;
                     else if(($time-$cur)<=5 && ($time-$cur)>1)
@@ -201,7 +206,7 @@
                     else
                         return 3;
                 }
-                function task_compose(&$jsonData){
+                function task_compose(&$jsonData){ // this function is to let user create more tasks 
                     $user = -1;
                     $User_count = count($jsonData['Users']);
                     $userName = getUser($jsonData);
@@ -221,12 +226,10 @@
                     if($user!=-1)
                         return $user;
                 }
-                function display_task($jsonData,$user){
-                    
+                function display_task($jsonData,$user){ // this function is to display the tasks of the user in scatter manner
                     $count = count($jsonData['Users'][$user]['To-do']);
                     for ($i=0; $i < $count; $i++){
                         $item = $jsonData['Users'][$user]['To-do'][$i]; 
-
                         // calculating priority
                         date_default_timezone_set("Asia/Kolkata");
                         $t_time = explode(":",$item["Time"]);
@@ -242,30 +245,30 @@
                         echo "<a href='../php/main.php?T_no=$i&User=$user' style='text-decoration:none;color:black'>
                         <div class=\"divi\" style=\"background-image:url($noteimg);\">
                         <div class=\"des\">
-                                    <label>$j.$title</label>
-                                    <img src=$pinimg>
-                                    </div>";
-                                    for($k=0;$k<count($content);$k++){
-                                        echo "
-                                            <p>$content[$k]</p>
-                                        ";
-                                    }
-                                    echo "</div></a>";
-                                }
-                            }
-                            $u = task_compose($storage);
-                            Delete($storage);
-                            $storage = json_encode($storage);
-                            $storage = encrypt_data($storage);
-                            file_put_contents("../data/storage.aes",$storage) or die("Failed to encode");
-
-                            $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
-                            $storage = decrypt_data($storage);
-                            $storage = json_decode($storage,true);
-                            display_task($storage,$u);
-                            ?>
+                            <label>$j.$title</label>
+                            <img src=$pinimg>
+                        </div>";
+                        for($k=0;$k<count($content);$k++){
+                            echo "
+                                <p>$content[$k]</p>
+                            ";
+                        }
+                        echo "</div></a>";
+                    }
+                }
+                $u = task_compose($storage);
+                Delete($storage);
+                $storage = json_encode($storage);
+                $storage = encrypt_data($storage);
+                file_put_contents("../data/storage.aes",$storage) or die("Failed to encode");
+                $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
+                $storage = decrypt_data($storage);
+                $storage = json_decode($storage,true);
+                display_task($storage,$u);
+                ?>
                 </div>
             </div>
+            <!-- this div is for user to create more tasks -->
             <div class="menu" id="comp2" onclick = "task_compose()">
                 <a id="btn1" style="background-color:teal;">
                     <label style="font-size:30;">Compose</label>
@@ -323,6 +326,8 @@
             display_todo($storage,$u);
         ?>
             </div>
+        <!-- this div for the checklist which will be just the derived form of taks but for current date -->
+        <div class="main" id="ChkLst">
         </div>
     </body>
     </html>

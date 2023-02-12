@@ -1,5 +1,5 @@
 <?php
-    function Email($mail){
+    function Email($mail){ // this function mails from php to send otp to user to sign up
         $otp = rand(1000,9999);
         $to = $mail;
         $subject = "Successfully signed in";

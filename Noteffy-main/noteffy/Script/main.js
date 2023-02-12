@@ -1,8 +1,8 @@
-if ( window.history.replaceState ) {
+if ( window.history.replaceState ) { // this function changes the state of a page
     window.history.replaceState( null, null, window.location.href );
 }
 
-function clearCookies(){
+function clearCookies(){ // this function is used to clear the cookies of user to log him out
         const cookies = document.cookie.split(";");
         for (let i = 0; i < cookies.length; i++) {
             const cookie = cookies[i];
@@ -13,10 +13,10 @@ function clearCookies(){
             }
         }
 }
-function getRandomArbitrary(min, max) {
+function getRandomArbitrary(min, max) { //this function gets random value in givcen range
     return Math.random() * (max - min) + min;
 }
-function pos() {
+function pos() { // this function styles the notes/tasks to be displayed in scattered/random manner
     openTab(event, 'Notes');
     var count = $(".divi").length;
     for (let i = 0; i < count; i++){
@@ -29,7 +29,7 @@ function pos() {
         Object.assign(obj[i].style,styles);
     }
 }
-function disbl(){
+function disbl(){ // this function is used to block the display of compose buttons not in use
     if (document.getElementById("Notes").style.display == "block") {
         document.getElementById("comp1").style.display = "block";
         document.getElementById("comp2").style.display = "none";
@@ -39,7 +39,7 @@ function disbl(){
         document.getElementById("comp1").style.display = "none";
     }
 }
-function openTab(evt, cityName) {
+function openTab(evt, cityName) { // this function is used to move arround the tabs in the main page
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("main");
     for (i = 0; i < tabcontent.length; i++) {
