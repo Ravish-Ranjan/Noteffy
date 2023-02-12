@@ -26,6 +26,8 @@
                     <img src="..\media\goldbody2.png" alt="prof" height="75" >
                     <?php
                         include("hash.php");
+                        include("priority_calc.php");
+                        include "mailpy.php";
                         $storage = file_get_contents("../data/storage.aes") or die("Could Not open the file");
                         $storage = decrypt_data($storage);
                         $storage = json_decode($storage,True);
@@ -50,7 +52,6 @@
         <div class="main" id="Notes">
             <div class="scat">
                 <?php
-                include "mailpy.php";
                 function signUp(&$jsonData){ // this function signups the new user and save there auth data for further use
                     if(isset($_POST['Username']) && isset($_POST['Password']) && isset($_POST['Password1']) && isset($_POST['Email'])){
                         if($_POST['Password']!==$_POST['Password1']){
@@ -198,14 +199,6 @@
                         echo "<Script>window.location.href = '../php/main.php'</script>";
                     }
                 }
-                function priority_calc($time,$cur){ // this function is to calculate the priority of a task based on given time
-                    if(($time-$cur)<=1)
-                        return 1;
-                    else if(($time-$cur)<=5 && ($time-$cur)>1)
-                        return 2;
-                    else
-                        return 3;
-                }
                 function task_compose(&$jsonData){ // this function is to let user create more tasks 
                     $user = -1;
                     $User_count = count($jsonData['Users']);
@@ -232,20 +225,17 @@
                         $item = $jsonData['Users'][$user]['To-do'][$i]; 
                         // calculating priority
                         date_default_timezone_set("Asia/Kolkata");
-                        $t_time = explode(":",$item["Time"]);
-                        $cur_time = explode(":",Date("h:i"));
-                        // echo priority_calc($t_time[0],$cur_time[0]);
                         
                         $j = $i+1;
                         $noteimg = "../media/note".rand(1,3).".png";
-                        $pinimg = "../media/pin".priority_calc($t_time[0],$cur_time[0]).".png";
+                        $pinimg = "../media/pin".priority_calc($item).".png";
                         $title = substr(explode(' ',$item['Title'])[0],0,8);
                         $content = $item['Tasks'];
-
+                        
                         echo "<a href='../php/main.php?T_no=$i&User=$user' style='text-decoration:none;color:black'>
                         <div class=\"divi\" style=\"background-image:url($noteimg);\">
                         <div class=\"des\">
-                            <label>$j.$title</label>
+                        <label>$j.$title</label>
                             <img src=$pinimg>
                         </div>";
                         for($k=0;$k<count($content);$k++){
@@ -293,15 +283,11 @@
                     $item = $jsonData['Users'][$user]['To-do'][$i]; 
 
                     // calculating priority 
-                    // I will change this
                     date_default_timezone_set("Asia/Kolkata");
-                    $t_time = explode(":",$item["Time"]);
-                    $cur_time = explode(":",Date("h:i"));
-                    // echo priority_calc($t_time[0],$cur_time[0]);
                     
                     $j = $i+1;
                     $noteimg = "../media/note".rand(1,3).".png";
-                    $pinimg = "../media/pin".priority_calc($t_time[0],$cur_time[0]).".png";
+                    $pinimg = "../media/pin".priority_calc($item).".png";
                     $title = substr(explode(' ',$item['Title'])[0],0,8);
                     $content = $item['Tasks'];
 
