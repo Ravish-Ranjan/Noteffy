@@ -278,6 +278,7 @@
         <div class="main" id="To-do">
         <div class="scat" style="background-image:url('../media/background_6.png');">
         <?php
+        // This function gives the index of the user in the json file
             function getUserNumber($jsonData){
                 for($i=0;$i<count($jsonData["Users"]);$i++){
                     if($jsonData["Users"][$i]["User_Name"]==getUser($jsonData)){
