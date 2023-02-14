@@ -42,13 +42,11 @@
                 </a>
             </div>
         </div>
-        <!-- this div is for the tabs for the different functions of the project -->
         <div class="tab">
             <button class="tbs" onclick="openTab(event, 'Notes')">Notes</button>
             <button class="tbs" onclick="openTab(event, 'Tasks')">Tasks</button>
             <button class="tbs" onclick="openTab(event, 'To-do')">To-do</button>
         </div>
-        <!-- this div is to display the notes of the user in a scattered manner -->
         <div class="main" id="Notes">
             <div class="scat">
                 <?php
@@ -179,7 +177,6 @@
                 </a>
             </div>
         </div>
-        <!-- this div is for users tasks defined by him/her/they/them/zhe/zher/etc -->
         <div class="main" id="Tasks" >
             <div class="scat" style="background-image:url('../media/background_4.png');">
                 <?php
@@ -266,55 +263,53 @@
             </div>
         </div>
         <div class="main" id="To-do">
-        <div class="scat" style="background-image:url('../media/background_6.png');">
-        <?php
-        // This function gives the index of the user in the json file
-            function getUserNumber($jsonData){
-                for($i=0;$i<count($jsonData["Users"]);$i++){
-                    if($jsonData["Users"][$i]["User_Name"]==getUser($jsonData)){
-                        return $i;
+            <div class="scat" style="background-image:url('../media/background_6.png');">
+            <?php
+            // This function gives the index of the user in the json file
+                function getUserNumber($jsonData){
+                    for($i=0;$i<count($jsonData["Users"]);$i++){
+                        if($jsonData["Users"][$i]["User_Name"]==getUser($jsonData)){
+                            return $i;
+                        }
                     }
+                    echo "<script>window.location.href='../HTML/error.html'</script>";
                 }
-                echo "<script>window.location.href='../HTML/error.html'</script>";
-            }
-            function display_todo($jsonData,$user){
-                $count = count($jsonData['Users'][$user]['To-do']);
-                for ($i=0; $i < $count; $i++){
-                    $item = $jsonData['Users'][$user]['To-do'][$i]; 
+                function display_todo($jsonData,$user){
+                    $count = count($jsonData['Users'][$user]['To-do']);
+                    for ($i=0; $i < $count; $i++){
+                        $item = $jsonData['Users'][$user]['To-do'][$i]; 
 
-                    // calculating priority 
-                    date_default_timezone_set("Asia/Kolkata");
-                    
-                    $j = $i+1;
-                    $noteimg = "../media/note".rand(1,3).".png";
-                    $pinimg = "../media/pin".priority_calc($item).".png";
-                    $title = substr(explode(' ',$item['Title'])[0],0,8);
-                    $content = $item['Tasks'];
+                        // calculating priority 
+                        date_default_timezone_set("Asia/Kolkata");
 
-                    echo "<a href='../php/main.php?T_no=$i&User=$user' style='text-decoration:none;color:black'>
-                    <div class=\"divi\" style=\"background-image:url($noteimg);\">
-                    <div class=\"des\">
+                        $j = $i+1;
+                        $noteimg = "../media/note".rand(1,3).".png";
+                        $pinimg = "../media/pin".priority_calc($item).".png";
+                        $title = substr(explode(' ',$item['Title'])[0],0,8);
+                        $content = $item['Tasks'];
+
+                        echo "<a href='../php/main.php?T_no=$i&User=$user' style='text-decoration:none;color:black'>
+                        <div class=\"divi\" style=\"background-image:url($noteimg);overflow\">
+                            <div class=\"des\">
                                 <label>$j.$title</label>
                                 <img src=$pinimg>
-                                </div>";
-                                for($k=0;$k<count($content);$k++){
-                                    $task = substr($content[$k],3);
-                                    echo "
-                                        <input type='checkbox' value=$task[$k]>$task<br>
-                                    ";
-                                }
-                                echo "</div></a>";
+                            </div>
+                            <ul style='list-style-type:none;>";
+                            for($k=0;$k<count($content);$k++){
+                                $task = substr($content[$k],3);
+                                echo "
+                                    <li><input type='checkbox' value=$task[$k]>$task</li>
+                                ";
                             }
-            }
-            $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
-            $storage = decrypt_data($storage);
-            $storage = json_decode($storage,true);
-            $u = getUserNumber($storage);
-            display_todo($storage,$u);
-        ?>
-            </div>
-        <!-- this div for the checklist which will be just the derived form of taks but for current date -->
-        <div class="main" id="ChkLst">
+                            echo "</ul></div></a>";
+                    }
+                }
+                $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
+                $storage = decrypt_data($storage);
+                $storage = json_decode($storage,true);
+                $u = getUserNumber($storage);
+                display_todo($storage,$u);
+            ?>
         </div>
     </body>
     </html>
