@@ -43,11 +43,11 @@
             </div>
         </div>
         <div class="tab">
-            <button class="tbs" onclick="openTab(event, 'Notes')">Notes</button>
-            <button class="tbs" onclick="openTab(event, 'Tasks')">Tasks</button>
-            <button class="tbs" onclick="openTab(event, 'To-do')">To-do</button>
+            <button class="tbs" onclick="openTab(event, '0')">Notes</button>
+            <button class="tbs" onclick="openTab(event, '1')">Tasks</button>
+            <button class="tbs" onclick="openTab(event, '2')">To-do</button>
         </div>
-        <div class="main" id="Notes">
+        <div class="main" id="0">
             <div class="scat">
                 <?php
                 function signUp(&$jsonData){ // this function signups the new user and save there auth data for further use
@@ -177,7 +177,7 @@
                 </a>
             </div>
         </div>
-        <div class="main" id="Tasks" >
+        <div class="main" id="1" >
             <div class="scat" style="background-image:url('../media/background_4.png');">
                 <?php
                 function Delete(&$jsonData){ // this function is to let user delete a task
@@ -263,7 +263,7 @@
                 </a>
             </div>
         </div>
-        <div class="main" id="To-do">
+        <div class="main" id="2">
             <div class="scat" style="background-image:url('../media/background_6.png');">
             <?php
             // This function gives the index of the user in the json file

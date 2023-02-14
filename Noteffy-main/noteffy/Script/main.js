@@ -3,21 +3,36 @@ if ( window.history.replaceState ) { // this function changes the state of a pag
 }
 
 function clearCookies(){ // this function is used to clear the cookies of user to log him out
-        const cookies = document.cookie.split(";");
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i];
-            const namePos = cookie.indexOf("=");
-            const name = namePos > -1 ?cookie.substr(0, namePos):cookie;
-            if(name=='user'){
-                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-            }
+    const cookies = document.cookie.split(";");
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        const namePos = cookie.indexOf("=");
+        const name = namePos > -1 ?cookie.substr(0, namePos):cookie;
+        if(name=='user'){
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
         }
+    }
+}
+function setCookie(tabname){
+    const d = new Date();
+    d.setTime(d.getTime() + (5*10*1000));
+    document.cookie = "name="+tabname+";expires="+ d.toUTCString()+";path=/";
+}
+function chan(at){
+    for (let i = 0; i < 3; i++) {                  
+        document.getElementsByClassName("main")[i].style.display="none";
+    }
+    document.getElementById(at-1).style.display="block";
+    setCookie(at);
 }
 function getRandomArbitrary(min, max) { //this function gets random value in givcen range
     return Math.random() * (max - min) + min;
 }
 function pos() { // this function styles the notes/tasks to be displayed in scattered/random manner
-    openTab(event,'Notes');
+    if (document.cookie.length ==17){
+        chan(1);
+    }
+    chan(parseInt(String(document.cookie).split("name=")[1]));
     var count = $(".divi").length;
     for (let i = 0; i < count; i++){
         var styles ={
@@ -27,17 +42,6 @@ function pos() { // this function styles the notes/tasks to be displayed in scat
         };
         var obj = document.getElementsByClassName("divi");
         Object.assign(obj[i].style,styles);
-    }
-}
-function disbl(){ // this function is used to block the display of compose buttons not in use
-    divs = document.getElementsByClassName("main")
-    for (let i = 0; i < divs.length-1; i++) {
-        if (divs[i].style.display=="block") {
-            document.getElementById("comp"+String(i+1)).style.display="block" ;
-        }        
-        else{
-            document.getElementById("comp"+String(i+1)).style.display="none" ;
-        }
     }
 }
 function openTab(evt, tabname) { // this function is used to move arround the tabs in the main page
@@ -54,5 +58,14 @@ function openTab(evt, tabname) { // this function is used to move arround the ta
     evt.currentTarget.className += " active";
     // if
     // const bg = ["url(\"../media/bg1.png\")","url(\"../media/bg2.png\")"];
-    disbl()
+    divs = document.getElementsByClassName("main")
+    for (let i = 0; i < divs.length-1; i++) {
+        if (divs[i].style.display=="block") {
+            document.getElementById("comp"+String(i+1)).style.display="block" ;
+        }        
+        else{
+            document.getElementById("comp"+String(i+1)).style.display="none" ;
+        }
+    }
+    chan(parseInt(tabname)+1);
 }
