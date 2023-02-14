@@ -17,7 +17,7 @@ function getRandomArbitrary(min, max) { //this function gets random value in giv
     return Math.random() * (max - min) + min;
 }
 function pos() { // this function styles the notes/tasks to be displayed in scattered/random manner
-    openTab(event, 'Notes');
+    openTab(event,'Notes');
     var count = $(".divi").length;
     for (let i = 0; i < count; i++){
         var styles ={
@@ -54,6 +54,5 @@ function openTab(evt, tabname) { // this function is used to move arround the ta
     evt.currentTarget.className += " active";
     // if
     // const bg = ["url(\"../media/bg1.png\")","url(\"../media/bg2.png\")"];
-    
     disbl()
 }

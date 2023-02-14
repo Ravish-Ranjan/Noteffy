@@ -184,7 +184,6 @@ body{
 }
 .main::-webkit-scrollbar-thumb{
     width: 1%;
-
 }
 /* ===== Scrollbar CSS ===== */
 /* Firefox */
@@ -204,6 +203,19 @@ body{
 *::-webkit-scrollbar-thumb {
   background-color: #23272e;
   border-radius: 9px;
+  border: 1px solid #816846;
+}
+.lst::-webkit-scrollbar {
+    width: 8px;
+}
+.lst::-webkit-scrollbar-track {
+  background: #b5b5b5;
+  border-radius: 1rem;
+
+}
+.lst::-webkit-scrollbar-thumb {
+  background-color: #4c5564;
+  border-radius:19px;
   border: 1px solid #816846;
 }
 #logo{

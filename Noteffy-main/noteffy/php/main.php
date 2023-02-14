@@ -232,15 +232,16 @@
                         echo "<a href='../php/main.php?T_no=$i&User=$user' style='text-decoration:none;color:black'>
                         <div class=\"divi\" style=\"background-image:url($noteimg);\">
                         <div class=\"des\">
-                        <label>$j.$title</label>
-                            <img src=$pinimg>
-                        </div>";
+                            <label>$j.$title</label><img src=$pinimg>
+                        </div>
+                        <div class='lst' style='height:100px;overflow-y:scroll;'>
+                        <ul style='list-style-type:none;'>";
                         for($k=0;$k<count($content);$k++){
                             echo "
-                                <p>$content[$k]</p>
+                                <li>$content[$k]</li>
                             ";
                         }
-                        echo "</div></a>";
+                        echo "</ul></div></div></a>";
                     }
                 }
                 $u = task_compose($storage);
@@ -287,21 +288,21 @@
                         $pinimg = "../media/pin".priority_calc($item).".png";
                         $title = substr(explode(' ',$item['Title'])[0],0,8);
                         $content = $item['Tasks'];
+                        // print_r($content);
 
                         echo "<a href='../php/main.php?T_no=$i&User=$user' style='text-decoration:none;color:black'>
-                        <div class=\"divi\" style=\"background-image:url($noteimg);overflow\">
+                        <div class=\"divi\" style=\"background-image:url($noteimg);\">
                             <div class=\"des\">
                                 <label>$j.$title</label>
                                 <img src=$pinimg>
-                            </div>
-                            <ul style='list-style-type:none;>";
+                            </div><div class='lst' style='overflow-y:scroll;height:100px;'><ul>";
                             for($k=0;$k<count($content);$k++){
                                 $task = substr($content[$k],3);
                                 echo "
-                                    <li><input type='checkbox' value=$task[$k]>$task</li>
+                                    <input type='checkbox' value=$content[$k]>$content[$k]<br>
                                 ";
                             }
-                            echo "</ul></div></a>";
+                        echo "</ul></div></div></a>";
                     }
                 }
                 $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
