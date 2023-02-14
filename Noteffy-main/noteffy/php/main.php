@@ -18,6 +18,7 @@
         
     </head>
     <body onload="pos()">
+    <!-- <a href="https://web.whatsapp.com://send?text='hello'">Send</a> -->
         <!-- this div is for the top bar of the main page to display logo and user status-->
         <div class="top">
             <img src="../media/noteffytitle.png" id="logo">
@@ -287,8 +288,7 @@
                         $noteimg = "../media/note".rand(1,3).".png";
                         $pinimg = "../media/pin".priority_calc($item).".png";
                         $title = substr(explode(' ',$item['Title'])[0],0,8);
-                        $content = $item['Tasks'];
-                        // print_r($content);
+                        $content = $item["Tasks"];
 
                         echo "<a href='../php/main.php?T_no=$i&User=$user' style='text-decoration:none;color:black'>
                         <div class=\"divi\" style=\"background-image:url($noteimg);\">
@@ -299,7 +299,7 @@
                             for($k=0;$k<count($content);$k++){
                                 $task = substr($content[$k],3);
                                 echo "
-                                    <input type='checkbox' value=$content[$k]>$content[$k]<br>
+                                    <input  type='checkbox' id='tsk$i'><label for='tsk$i' onclick='strikeThrough(this)'>$content[$k]</label><br>
                                 ";
                             }
                         echo "</ul></div></div></a>";

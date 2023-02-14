@@ -69,3 +69,11 @@ function openTab(evt, tabname) { // this function is used to move arround the ta
     }
     chan(parseInt(tabname)+1);
 }
+function strikeThrough(obj){
+    if(!document.getElementById(obj.getAttribute("for")).checked){
+        obj.style['text-decoration-line'] = "line-through";
+    }
+    else
+        obj.style['text-decoration-line'] = "none";
+
+}
