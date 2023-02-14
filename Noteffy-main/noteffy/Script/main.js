@@ -30,16 +30,17 @@ function pos() { // this function styles the notes/tasks to be displayed in scat
     }
 }
 function disbl(){ // this function is used to block the display of compose buttons not in use
-    if (document.getElementById("Notes").style.display == "block") {
-        document.getElementById("comp1").style.display = "block";
-        document.getElementById("comp2").style.display = "none";
-    }
-    else{
-        document.getElementById("comp2").style.display = "block";
-        document.getElementById("comp1").style.display = "none";
+    divs = document.getElementsByClassName("main")
+    for (let i = 0; i < divs.length-1; i++) {
+        if (divs[i].style.display=="block") {
+            document.getElementById("comp"+String(i+1)).style.display="block" ;
+        }        
+        else{
+            document.getElementById("comp"+String(i+1)).style.display="none" ;
+        }
     }
 }
-function openTab(evt, cityName) { // this function is used to move arround the tabs in the main page
+function openTab(evt, tabname) { // this function is used to move arround the tabs in the main page
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("main");
     for (i = 0; i < tabcontent.length; i++) {
@@ -49,15 +50,10 @@ function openTab(evt, cityName) { // this function is used to move arround the t
     for (i = 0; i < tablinks.length; i++) {
       tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
-    document.getElementById(cityName).style.display = "block";
+    document.getElementById(tabname).style.display = "block";
     evt.currentTarget.className += " active";
     // if
-    const bg = ["url(\"../media/bg1.png\")","url(\"../media/bg2.png\")"];
-    if (document.body.style.backgroundImage == bg[0]){
-        document.body.style.backgroundImage = bg[1];
-    }
-    else{
-        document.body.style.backgroundImage = bg[0];
-    }
+    // const bg = ["url(\"../media/bg1.png\")","url(\"../media/bg2.png\")"];
+    
     disbl()
 }
