@@ -27,7 +27,6 @@
                     <?php
                         include("hash.php");
                         include("priority_calc.php");
-                        include "mailpy.php";
                         $storage = file_get_contents("../data/storage.aes") or die("Could Not open the file");
                         $storage = decrypt_data($storage);
                         $storage = json_decode($storage,True);
@@ -66,7 +65,10 @@
                             $jsonData['Users'][$users_count]['Notes'] = array();
                             $jsonData['Users'][$users_count]['To-do'] = array();
                             $email = $jsonData["Users"][$users_count]["Email"];
-                            $otp = pymail($email);
+                            $type = 1;
+                            $data = '';
+                            $command = "python C:/wamp64/www/python/mail.py $email $type $data";
+                            $otp = (int)exec($command);
                             echo <<<_END
                                 <script>
                                     //Insert Some loading screen here
