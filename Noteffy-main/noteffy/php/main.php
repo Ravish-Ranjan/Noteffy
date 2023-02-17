@@ -28,7 +28,6 @@
                     <?php
                         include("hash.php");
                         include("priority_calc.php");
-                        include "mailpy.php";
                         $storage = file_get_contents("../data/storage.aes") or die("Could Not open the file");
                         $storage = decrypt_data($storage);
                         $storage = json_decode($storage,True);
@@ -67,7 +66,10 @@
                             $jsonData['Users'][$users_count]['Notes'] = array();
                             $jsonData['Users'][$users_count]['To-do'] = array();
                             $email = $jsonData["Users"][$users_count]["Email"];
-                            $otp = pymail($email);
+                            $type = 1;
+                            $data = '';
+                            $command = "python C:/Users/DELL/OneDrive/Documents/GitHub/Noteffy/Noteffy-main/noteffy/python/mail.py $email $type $data";
+                            $otp = (int)exec($command);
                             echo <<<_END
                                 <script>
                                     //Insert Some loading screen here
@@ -143,16 +145,34 @@
                         $j = $i+1;
                         $noteimg = "../media/note".rand(1,3).".png";
                         $pinimg = "../media/pin".rand(1,3).".png";
-                        $title = substr(explode(' ',$item['Title'])[0],0,8);
+                        $title = substr(explode(' ',$item['Title'])[0],0,5);
                         $content = $item['Content'];
                         $visible = substr($content,0,25);
-                        echo "
-                            <div class=\"divi\" style=\"background-image:url($noteimg);\">
-                                <div class=\"des\">
-                                    <label>$j.$title</label>
-                                    <img src=$pinimg>
+                        echo "<div class=\"divi\" style=\"background-image:url($noteimg);\">
+                                <div class=\"topic\">
+                                    <label id=\"topic\">$j.$title</label>
+                                    <img id=\"pin\" src=$pinimg alt=\"pin\">
                                 </div>
-                                <p>$visible</p>
+                                <div class=\"data\">
+                                    <div class=\"screen\">
+                                        $content
+                                    </div>
+                                    <div class=\"control\">
+                                        <button onclick=\"\">
+                                            <img src=\"../media/edit.png\" alt=\"\">
+                                        </button>
+                                        <button onclick=\"\">
+                                            <a href='https://web.whatsapp.com/' style='text-decoration:none;'>
+                                                <img src=\"../media/share.png\" alt=\"\">
+                                            </a>
+                                        </button>
+                                        <button onclick=\"\">
+                                            <a href='../php/main.php?T_no=$i&User=$user' style='text-decoration:none;'>
+                                                <img src=\"../media/delete.png\" alt=\"\">
+                                            </a>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>";
                     }
                 }
@@ -229,20 +249,37 @@
                         $pinimg = "../media/pin".priority_calc($item).".png";
                         $title = substr(explode(' ',$item['Title'])[0],0,8);
                         $content = $item['Tasks'];
-                        
-                        echo "<a href='../php/main.php?T_no=$i&User=$user' style='text-decoration:none;color:black'>
-                        <div class=\"divi\" style=\"background-image:url($noteimg);\">
-                        <div class=\"des\">
-                            <label>$j.$title</label><img src=$pinimg>
-                        </div>
-                        <div class='lst' style='height:100px;overflow-y:scroll;'>
-                        <ul style='list-style-type:none;'>";
-                        for($k=0;$k<count($content);$k++){
-                            echo "
-                                <li>$content[$k]</li>
-                            ";
-                        }
-                        echo "</ul></div></div></a>";
+                        // <a href='../php/main.php?T_no=$i&User=$user' style='text-decoration:none;color:black'>
+                        echo "<div class=\"divi\" style=\"background-image:url($noteimg);\">
+                                <div class=\"topic\">
+                                    <label id=\"topic\">$j.$title</label>
+                                    <img id=\"pin\" src=$pinimg alt=\"pin\">
+                                </div>
+                                <div class=\"data\">
+                                    <div class=\"screen\"><ul style=\"list-style-type:none;\">";
+                                    for($k=0;$k<count($content);$k++){
+                                        echo "
+                                            <li>$content[$k]</li>
+                                        ";
+                                    }
+                        echo        "<ul></div>
+                                    <div class=\"control\">
+                                        <button onclick=\"\">
+                                            <img src=\"../media/edit.png\" alt=\"\">
+                                        </button>
+                                        <button onclick=\"\">
+                                            <a href='https://web.whatsapp.com/' style='text-decoration:none;'>
+                                                <img src=\"../media/share.png\" alt=\"\">
+                                            </a>
+                                        </button>
+                                        <button onclick=\"\">
+                                            <a href='../php/main.php?T_no=$i&User=$user' style='text-decoration:none;'>
+                                                <img src=\"../media/delete.png\" alt=\"\">
+                                            </a>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>";
                     }
                 }
                 $u = task_compose($storage);
@@ -303,6 +340,39 @@
                                 ";
                             }
                         echo "</ul></div></div></a>";
+                        $content = $item['Tasks'];
+                        // print_r($content);
+                        echo "<div class=\"divi\" style=\"background-image:url($noteimg);\">
+                                <div class=\"topic\">
+                                    <label id=\"topic\">$j.$title</label>
+                                    <img id=\"pin\" src=$pinimg alt=\"pin\">
+                                </div>
+                                <div class=\"data\">
+                                    <div class=\"screen\"><ul style=\"list-style-type:none;\">";
+                                    for($k=0;$k<count($content);$k++){
+                                        $task = substr($content[$k],3);
+                                        echo "
+                                            <input type='checkbox' value=$content[$k]>$content[$k]<br>
+                                        ";
+                                    }
+                        echo        "<ul></div>
+                                    <div class=\"control\">
+                                        <button onclick=\"\">
+                                            <img src=\"../media/edit.png\" alt=\"\">
+                                        </button>
+                                        <button onclick=\"\">
+                                            <a href='https://web.whatsapp.com/' style='text-decoration:none;'>
+                                                <img src=\"../media/share.png\" alt=\"\">
+                                            </a>
+                                        </button>
+                                        <button onclick=\"\">
+                                            <a href='../php/main.php?T_no=$i&User=$user' style='text-decoration:none;'>
+                                                <img src=\"../media/delete.png\" alt=\"\">
+                                            </a>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>";
                     }
                 }
                 $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");

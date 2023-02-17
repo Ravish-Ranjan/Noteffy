@@ -43,16 +43,17 @@ def sendmail(from_ = "noteffy.email@gmail.com" , passwd = "qlugelfypfizxlzt",to 
 
 import sys
 data = sys.argv
-n = len(data)     # data[0] = mail.py   data[1] = recievers mail  data[2] = otp
-# this is the design for the email sent for the user signup otp
-msg = """<div style='font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2'>
+# data[0] = mail.py   data[1] = recievers mail  data[2] = otp
+import random
+otp = random.randint(1000,9999)
+msg1 = """<div style='font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2'>
         <div style='margin:50px auto;width:70%;padding:20px 0'>
           <div style='border-bottom:1px solid #eee'>
             <a href='' style='font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600'>Noteffy</a>
           </div>
           <p style='font-size:1.1em'>Hi,</p>
           <p>Thank you for choosing Noteffy. Use the following OTP to complete your Sign Up procedures. OTP is valid for 5 minutes</p>
-          <h2 style='background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;'>"{}"</h2>
+          <h2 style='background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;'>{}</h2>
           <p style='font-size:0.9em;'>Regards,<br />Noteffy</p>
           <hr style='border:none;border-top:1px solid #eee' />
           <div style='float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300'>
@@ -62,9 +63,35 @@ msg = """<div style='font-family: Helvetica,Arial,sans-serif;min-width:1000px;ov
           </div>
         </div>
       </div>
-        """.format(data[2])
+        """.format(otp)
+msg2 = """<div style='font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2'>
+        <div style='margin:50px auto;width:70%;padding:20px 0'>
+          <div style='border-bottom:1px solid #eee'>
+            <a href='' style='font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600'>Noteffy</a>
+          </div>
+          <p style='font-size:1.1em'>Hey there,clear your to do list</p>
+          <p>{}</p>
+          <h2 style='background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;'></h2>
+          <p style='font-size:0.9em;'>Regards,<br />Noteffy</p>
+          <hr style='border:none;border-top:1px solid #eee' />
+          <div style='float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300'>
+            <p>Noteffy</p>
+            <p>Near my <b>ASS</b></p>
+            <p>New Delhi</p>
+          </div>
+        </div>
+      </div>
+        """.format(data[3])
+if int(data[2]) == 1:
+    sendmail(to=data[1],
+             subject="Otp for SignUp",
+             body=msg1,
+             html=True)
+elif int(data[2]) == 2:
+    sendmail(to=data[1],
+             subject="Hey There, Notiffy Here...",
+             body=msg2,
+             html=True)
+print(otp)
 # calling to send the mail based on command line args
-sendmail(to=data[1],
-         subject="Successfully signed in",
-         body=msg,
-         html=True)  #html true to enable html styling otherwise false
+#html true to enable html styling otherwise false
