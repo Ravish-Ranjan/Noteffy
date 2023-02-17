@@ -193,7 +193,6 @@
                 }
                 signUp($storage);
                 signIn($storage);
-                $m = fetch_store($storage);
                 Delete_Note($storage);
                 $storage = json_encode($storage);
                 $storage = encrypt_data($storage);
@@ -252,7 +251,7 @@
                     if($user!=-1)
                         return $user;
                 }
-                function display_task($jsonData,$user){ // this function is to display the tasks of the user in scatter manner
+                function display_task($jsonData,$user){ // this function is to  the tasks of the user in scatter manner
                     $count = count($jsonData['Users'][$user]['To-do']);
                     for ($i=0; $i < $count; $i++){
                         $item = $jsonData['Users'][$user]['To-do'][$i]; 
