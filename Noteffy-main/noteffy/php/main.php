@@ -119,6 +119,21 @@
                     else
                         return " "; 
                 }
+                function Delete_Note(&$jsonData){
+                    if(isset($_GET["N_no"]) && isset($_GET["User"])){
+                        $n_no = $_GET["N_no"];
+                        $User = $_GET["User"];
+                        $userName = getUser($jsonData);
+                        for($i=0;$i<count($jsonData["Users"]);$i++){
+                            if($jsonData["Users"][$i]["User_Name"]== $userName && $i==$User){
+                                array_splice($jsonData["Users"][$User]["Notes"],$n_no,1);
+                                echo "<script>window.location.href = '../php/main.php'</script>";
+                                return;
+                            }
+                        }
+                        echo "<Script>window.location.href = '../HTML/error.html'</script>";
+                    }
+                }
                 function fetch_store(&$jsonData){ // this function fetches and stores the new note created by by the user
                     $user = -1;
                     $User_count = count($jsonData['Users']);
@@ -167,7 +182,7 @@
                                             </a>
                                         </button>
                                         <button onclick=\"\">
-                                            <a href='../php/main.php?T_no=$i&User=$user' style='text-decoration:none;'>
+                                            <a href='../php/main.php?N_no=$i&User=$user' style='text-decoration:none;'>
                                                 <img src=\"../media/delete.png\" alt=\"\">
                                             </a>
                                         </button>
@@ -179,6 +194,7 @@
                 signUp($storage);
                 signIn($storage);
                 $m = fetch_store($storage);
+                Delete_Note($storage);
                 $storage = json_encode($storage);
                 $storage = encrypt_data($storage);
                 file_put_contents("../data/storage.aes",$storage) or die("Failed to encode");
@@ -201,12 +217,11 @@
         <div class="main" id="1" >
             <div class="scat" style="background-image:url('../media/background_4.png');">
                 <?php
-                function Delete(&$jsonData){ // this function is to let user delete a task
+                function Delete_task(&$jsonData){ // this function is to let user delete a task
                     if(isset($_GET["T_no"]) && isset($_GET["User"])){
                         $t_no = $_GET["T_no"];
                         $User = $_GET["User"];
                         $userName = getUser($jsonData);
-                        $flag = false;
                         for($i=0;$i<count($jsonData["Users"]);$i++){
                             if($jsonData["Users"][$i]["User_Name"]== $userName && $i==$User){
                                 array_splice($jsonData["Users"][$User]["To-do"],$t_no,1);
@@ -283,7 +298,7 @@
                     }
                 }
                 $u = task_compose($storage);
-                Delete($storage);
+                Delete_task($storage);
                 $storage = json_encode($storage);
                 $storage = encrypt_data($storage);
                 file_put_contents("../data/storage.aes",$storage) or die("Failed to encode");
@@ -327,21 +342,6 @@
                         $title = substr(explode(' ',$item['Title'])[0],0,8);
                         $content = $item["Tasks"];
 
-                        echo "<a href='../php/main.php?T_no=$i&User=$user' style='text-decoration:none;color:black'>
-                        <div class=\"divi\" style=\"background-image:url($noteimg);\">
-                            <div class=\"des\">
-                                <label>$j.$title</label>
-                                <img src=$pinimg>
-                            </div><div class='lst' style='overflow-y:scroll;height:100px;'><ul>";
-                            for($k=0;$k<count($content);$k++){
-                                $task = substr($content[$k],3);
-                                echo "
-                                    <input  type='checkbox' id='tsk$i'><label for='tsk$i' onclick='strikeThrough(this)'>$content[$k]</label><br>
-                                ";
-                            }
-                        echo "</ul></div></div></a>";
-                        $content = $item['Tasks'];
-                        // print_r($content);
                         echo "<div class=\"divi\" style=\"background-image:url($noteimg);\">
                                 <div class=\"topic\">
                                     <label id=\"topic\">$j.$title</label>
@@ -352,7 +352,7 @@
                                     for($k=0;$k<count($content);$k++){
                                         $task = substr($content[$k],3);
                                         echo "
-                                            <input type='checkbox' value=$content[$k]>$content[$k]<br>
+                                        <input  type='checkbox' id='tsk$i'><label for='tsk$i' onclick='strikeThrough(this)'>$content[$k]</label><br>
                                         ";
                                     }
                         echo        "<ul></div>

@@ -73,7 +73,8 @@ function strikeThrough(obj){
     if(!document.getElementById(obj.getAttribute("for")).checked){
         obj.style['text-decoration-line'] = "line-through";
     }
-    else
+    else{
         obj.style['text-decoration-line'] = "none";
+    }
 
 }
