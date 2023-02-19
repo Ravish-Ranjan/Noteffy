@@ -52,10 +52,9 @@ function task_compose(){  //this function helps to create more tasks for user
     document.getElementById("Date").value = today;
     document.getElementById("Time").value = time;
     var task =document.getElementById("Task");
-    var iter =1;
-    task.addEventListener("keyup",()=>{
-        if(task.value.endsWith("\n")){
-            task.value+=String(++iter)+".)";
+    task.addEventListener("keyup",(e)=>{
+        if(e.key==="Enter"){
+            task.value+=String(task.value.split("\n").length)+".)";
         }
     })
 }

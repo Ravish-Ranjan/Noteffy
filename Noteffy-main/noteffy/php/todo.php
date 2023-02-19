@@ -28,11 +28,11 @@
                         <img id=\"pin\" src=$pinimg alt=\"pin\">
                     </div>
                     <div class=\"data\">
-                        <div class=\"screen\"><ul style=\"list-style-type:none;\">";
+                        <div class=\"screen\" id='scrn'><ul style=\"list-style-type:none;\">";
                         for($k=0;$k<count($content);$k++){
                             $task = substr($content[$k],3);
                             echo "
-                            <input  type='checkbox' id='tsk$i'><label for='tsk$i' onclick='strikeThrough(this)'>$content[$k]</label><br>
+                            <input type='checkbox' id='tsk$k'><label for='tsk$k'>$content[$k]</label><br>
                             ";
                         }
             echo        "<ul></div>
@@ -54,5 +54,21 @@
                     </div>
                 </div>";
         }
+        // adds a line through the tasks that are completed
+        echo "
+        <script>
+            var to = document.getElementById('scrn')
+            to.addEventListener('click',(e)=>{
+                var id = e.target.id;
+                var l = document.getElementById(id);
+                var temp = document.querySelector('label[for='+id+']');
+                if(l.checked){
+                    temp.style.textDecorationLine = 'line-through';
+                }
+                else{
+                    temp.style.textDecorationLine = 'none';
+                }
+            });
+        </script>";
     }
 ?>
