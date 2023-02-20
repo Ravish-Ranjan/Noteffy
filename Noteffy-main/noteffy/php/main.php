@@ -38,7 +38,7 @@
                             echo "<p>Sign Up</p>";
                         }
                         else{
-                            echo "<p>".getUser()."<br>
+                            echo "<p><a href='../HTML/chart.html' style='text-decoration:none;color:white'>".getUser()."</a><br>
                             <a href = '../html/signUp.html' id = 'logout' onclick = 'clearCookies()'>Log Out</a></p>" ;
                         }
                         ?>
