@@ -22,7 +22,7 @@
                 $title = substr(explode(' ',$item['Title'])[0],0,8);
                 $content = $item["Tasks"];
     
-                echo "<div class=\"divi\" style=\"background-image:url($noteimg);\">
+                echo "<div class=\"divi\" style=\"background-image:url($noteimg);\" >
                         <div class=\"topic\">
                             <label id=\"topic\">$j.$title</label>
                             <img id=\"pin\" src=$pinimg alt=\"pin\">
@@ -32,7 +32,7 @@
                             for($k=0;$k<count($content);$k++){
                                 $task = substr($content[$k],3);
                                 echo "
-                                <input type='checkbox' id='tsk$k'><label for='tsk$k'>$content[$k]</label><br>
+                                <input type='checkbox' id='tsk$k$i'><label for='tsk$k$i'>$content[$k]</label><br>
                                 ";
                             }
                 echo        "<ul></div>
@@ -58,17 +58,20 @@
         // adds a line through the tasks that are completed
         echo "
         <script>
-            var to = document.getElementById('scrn')
+            var to = document.getElementById('divi')
             to.addEventListener('click',(e)=>{
                 var id = e.target.id;
+                if(id!=''){
                 var l = document.getElementById(id);
                 var temp = document.querySelector('label[for='+id+']');
-                if(l.checked){
+
+                if(l.checked && temp!=null){
                     temp.style.textDecorationLine = 'line-through';
                 }
-                else{
+                else if(temp!=null){
                     temp.style.textDecorationLine = 'none';
                 }
+            }
             });
         </script>";
     }

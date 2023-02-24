@@ -100,7 +100,7 @@
             </div>
         </div>
         <div class="main" id="2">
-            <div class="scat" style="background-image:url('../media/background_6.png');">
+            <div class="scat" style="background-image:url('../media/background_6.png'); "id='divi'>
             <?php
            
                 $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");

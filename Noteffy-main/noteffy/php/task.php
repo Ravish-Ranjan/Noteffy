@@ -7,7 +7,7 @@
             for($i=0;$i<count($jsonData["Users"]);$i++){
                 if($jsonData["Users"][$i]["User_Name"]== $userName && $i==$User){
                     array_splice($jsonData["Users"][$User]["To-do"],$t_no,1);
-                    // echo "<script>window.location.href = '../php/main.php'</script>";
+                    echo "<script>window.location.href = '../php/main.php'</script>";
                     return;
                 }
             }

@@ -1,5 +1,8 @@
 const ctx = document.getElementById('context');
-
+setTimeout(()=>{
+  document.getElementById("load").remove();
+  ctx.style.display = "block";
+},4000)
 new Chart(ctx, {
   type: 'line',
   data: {
