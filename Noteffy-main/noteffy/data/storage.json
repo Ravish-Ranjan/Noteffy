@@ -11,28 +11,7 @@
                     "Content": "Sample text"
                 }
             ],
-            "To-do": [
-                {
-                    "Title": "Sample Title2",
-                    "Time": "19:27",
-                    "Date": "2023-02-20",
-                    "Priority": 1,
-                    "Tasks": [
-                        "1.)qwerty"
-                    ],
-                    "completed": false
-                },
-                {
-                    "Title": "This is sample task",
-                    "Time": "19:41",
-                    "Date": "2023-02-21",
-                    "Priority": 1,
-                    "Tasks": [
-                        "1.)sdfasdfa"
-                    ],
-                    "completed": false
-                }
-            ]
+            "To-do": []
         },
         {
             "User_Name": "ravishranjan",
@@ -52,8 +31,7 @@
                         "4.)d\r",
                         "5.)e\r",
                         "6.)f"
-                    ],
-                    "completed": false
+                    ]
                 }
             ]
         }

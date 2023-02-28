@@ -108,6 +108,11 @@
                 $storage = json_decode($storage,true);
                 $u = getUserNumber($storage);
                 display_todo($storage,$u);
+                complete($storage);
+                $storage = json_encode($storage);
+                $storage = encrypt_data($storage);
+                file_put_contents("../data/storage.aes",$storage) or die("Failed to encode");
+                
             ?>
         </div>
     </body>

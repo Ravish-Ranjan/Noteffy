@@ -1,5 +1,5 @@
 function closeF(){
-    document.querySelector('form').remove();
+    document.querySelector('.FORM').remove();
     document.querySelector("#btn1").setAttribute("onclick","compose()");
 }
 function note_compose(){  //this function helps to create more notes for user
@@ -9,7 +9,8 @@ function note_compose(){  //this function helps to create more notes for user
     var yyyy = today.getFullYear();
     today = yyyy + '-' + mm + '-' + dd;
     let noteform = document.createElement("form");
-    noteform.setAttribute("action","main.php");noteform.setAttribute("method","POST");
+    noteform.setAttribute("action", "main.php"); noteform.setAttribute("method", "POST");
+    noteform.setAttribute("class", "FORM");
     noteform.setAttribute("onsubmit","return checkEmpty(this)");
     noteform.innerHTML = "<span id='Form_Caption'>ADD A NOTE</span>\
     <button id = 'close' style=\"font-size:2vw;\" onclick = \"closeF()\">x</button>\
@@ -30,10 +31,11 @@ function task_compose(){  //this function helps to create more tasks for user
     var mm = String(today.getMonth() + 1).padStart(2, '0'); 
     var yyyy = today.getFullYear();
     today = yyyy + '-' + mm + '-' + dd;
-
+    
     var t = new Date();
     time = String(t.getHours())+":"+String(t.getMinutes()); //current time
     let noteform = document.createElement("form");
+    noteform.setAttribute("class", "FORM");
     noteform.setAttribute("action","main.php");noteform.setAttribute("method","POST");
     noteform.setAttribute("onsubmit","return checkEmpty(this)");
     noteform.innerHTML = "<span id='Form_Caption'>ADD A NOTE</span>\

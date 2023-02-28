@@ -4,7 +4,7 @@ input[type="date"],input[type="text"],textarea{
     border-radius: 5px;
     padding: 1%;
 }
-form{
+.FORM{
     animation:fade 0.4s ease-in-out;
     position:absolute;top:2%;right:5%;
     display:grid;/* height:60%; */
