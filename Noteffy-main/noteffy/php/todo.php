@@ -17,6 +17,7 @@
             $tasks_storage = json_decode($tasks_storage,true);
             $stored_task_no = count($tasks_storage);
             $tasks_storage[$stored_task_no] = $jsonData["Users"][$userNumber]["To-do"][$t_no];
+            $tasks_storage[$stored_task_no]["User"] = getUserNumber($jsonData);
             $tasks_storage = json_encode($tasks_storage);
             file_put_contents("../data/task.json",$tasks_storage);
             array_splice($jsonData["Users"][$userNumber]["To-do"],$t_no,1);

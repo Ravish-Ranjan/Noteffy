@@ -1,14 +1,27 @@
 function calc_completed_task(jsonData) {
   let date = [];
   let count = [0];
+  let user;
+  let decodedCookie = decodeURIComponent(document.cookie);
+  decodedCookie = decodedCookie.split(";");
+  for (j = 0; j < decodedCookie.length; j++){
+    c = decodedCookie[j];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    c = c.split("=");
+    if (c[0].split() == "user_number") {
+      user = c[c.length-1];
+    }
+  }
   for (i = 0; i < jsonData.length; i++){
-    if (!(date.includes(jsonData[i]['Date']))) {
+    if (!(date.includes(jsonData[i]['Date'])) && user == jsonData[i]["User"]) {
       date.push(jsonData[i]['Date']);
     }
     count[i] = 0;
   }
   for (i = 0; i < jsonData.length; i++){
-    if (date.includes(jsonData[i]['Date']))
+    if (date.includes(jsonData[i]['Date']) && jsonData[i]["User"])
       count[date.indexOf(jsonData[i]['Date'])]++;
   }
   var obj = {
@@ -39,7 +52,10 @@ fetch("../data/task.json").then((res) => res.json()).then((json) => {
     options: {
       scales: {
         y: {
-          beginAtZero: false
+          beginAtZero: true
+        },
+        x: {
+          beginAtZero: true
         }
       }
     }

@@ -26,8 +26,8 @@
                 <a href="../HTML/signUp.html" id="prof" style="margin:0 2% 0 2%;">
                     <img src="..\media\goldbody2.png" alt="prof" height="75" >
                     <?php
-                        include("hash.php");
-                        include("priority_calc.php");
+                        include "hash.php";
+                        include "priority_calc.php";
                         include "note.php";
                         include "task.php";
                         include "todo.php";
@@ -40,6 +40,7 @@
                         else{
                             echo "<p><a href='../HTML/chart.html' style='text-decoration:none;color:white'>".getUser()."</a><br>
                             <a href = '../html/signUp.html' id = 'logout' onclick = 'clearCookies()'>Log Out</a></p>" ;
+                            setcookie("user_number",getUserNumber($storage),0,"/");
                         }
                         ?>
                 </a>
