@@ -21,8 +21,9 @@ function calc_completed_task(jsonData) {
     count[i] = 0;
   }
   for (i = 0; i < jsonData.length; i++){
-    if (date.includes(jsonData[i]['Date']) && jsonData[i]["User"])
+    if (date.includes(jsonData[i]['Date']) && jsonData[i]["User"] == user) {
       count[date.indexOf(jsonData[i]['Date'])]++;
+    }
   }
   var obj = {
     "date": date,
@@ -55,7 +56,7 @@ fetch("../data/task.json").then((res) => res.json()).then((json) => {
           beginAtZero: true
         },
         x: {
-          beginAtZero: true
+          beginAtZero: false
         }
       }
     }

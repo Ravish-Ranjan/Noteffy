@@ -24,6 +24,20 @@
             echo "<script>window.location.href = 'main.php'</script>";
         }
     }
+    function comp_task($i,$jsonData){
+        if(isset($_COOKIE['comp_task'])){
+            $temp = json_decode($_COOKIE['comp_task'],true);
+            if(array_key_exists(getUserNumber($jsonData),$temp)){
+                if(array_key_exists($i,$temp[getUserNumber($jsonData)])){
+                    return $temp[getUserNumber($jsonData)][$i];
+                }
+                else
+                    return false;
+            }
+        }
+        else
+            return false;
+    }
     // This function gives the index of the user in the json file
     function getUserNumber($jsonData){
         for($i=0;$i<count($jsonData["Users"]);$i++){
@@ -36,6 +50,7 @@
     function display_todo($jsonData,$user){
         $count = count($jsonData['Users'][$user]['To-do']);
         for ($i=0; $i < $count; $i++){
+            $c_task = comp_task($i,$jsonData); //gets the js object containing completed tasks
             $item = $jsonData['Users'][$user]['To-do'][$i]; 
             date_default_timezone_set("Asia/Kolkata");
             if($item["Date"] === (date("Y-m-d"))){
@@ -57,12 +72,19 @@
                             <div class=\"screen\" id='scrn'><ul style=\"list-style-type:none;\">";
                             echo "<form action='main.php' method='post' id='tks$i'>";
                             for($k=0;$k<count($content);$k++){
+                                $checked = "";
+                                $lineThrough = "";
+                                if($c_task!==false && $c_task !==null){
+                                    $content[$k] = str_replace("\r","",$content[$k]);
+                                    $checked = in_array($content[$k],$c_task)!=false ? $checked."checked" : "";
+                                    $lineThrough = in_array($content[$k],$c_task)!=false ? $lineThrough."text-decoration-line:line-through" : "none";
+                                }
                                 $task = substr($content[$k],3);
                                 $id = "tsk$k$i";
                                 $task_json = json_decode(file_get_contents("../data/task.json"),true);
                                 
                                 echo "
-                                <input type='checkbox' id='tsk$k$i' name='task$i$k'><label for='tsk$k$i'>$content[$k]</label><br>
+                                <input type='checkbox' id='tsk$k$i' name='task$i$k' $checked><label for='tsk$k$i' style=$lineThrough>$content[$k]</label><br>
                                 ";
                             }
                             echo "<input type='hidden' value='$i' name='Task_no'>";
@@ -90,28 +112,69 @@
         // adds a line through the tasks that are completed
         echo "
         <script>
+        function getUser(){
+            decodedCookie = decodeURIComponent(document.cookie);
+            decodedCookie = decodedCookie.split(';');
+            for(var i in decodedCookie){
+                let c = decodedCookie[i];
+                c = c.split('=');
+                if(c[0].trim() == 'user_number')
+                    return c[1];
+            }
+            return false;
+        }
+        function getTask(){
+            let user = getUser();
+            var obj = {};
+            obj[user] = {};
+            decodedCookie = decodeURIComponent(document.cookie);
+            decodedCookie = decodedCookie.split(';');
+            for(var i in decodedCookie){
+                let c = decodedCookie[i];
+                c = c.split('=');
+                if(c[0].trim() == 'comp_task'){
+                    obj = JSON.parse(c[1]);
+                    return obj;
+                }
+            }
+            return obj;
+        }
+
+
+        var user = getUser();
+        var task_no;
         var to = document.getElementById('divi')
+        let t = getTask();
         let fm;
-        let counter=0;
             to.addEventListener('click',(e)=>{
                 var id = e.target.id;
                 if(id!=''){
                 var l = document.getElementById(id);
                 fm = document.getElementById(l.parentElement.id);
+                task_no = fm.id.substring(3);
+                if((user in t) && t[user][task_no] === undefined)
+                    t[user][task_no] = Array();
+                else if(!(user in t)){
+                    t[user] = {};
+                    t[user][task_no] = Array();
+                }
                 var temp = document.querySelector('label[for='+id+']');
                 
                 if(l.checked && temp!=null){
                     temp.style.textDecorationLine = 'line-through';
-                    counter++;
+                    t[user][task_no].push(temp.innerText);
                 }
-                else if(temp!=null){
+                else if(!l.checked && temp!=null){
                     temp.style.textDecorationLine = 'none';
-                    counter--;
+                    t[user][task_no].pop(t[user][task_no].indexOf(temp.innerText));
                 }
             }
-            if(fm!=null && counter==fm.length-1)
+            document.cookie = 'comp_task='+JSON.stringify(t)+';path=/';
+            if(fm!=null && fm.length-1 == t[user][task_no].length){
                 fm.submit();
+            }
         });
+        console.log(t);
         </script>";
     }
 ?>
