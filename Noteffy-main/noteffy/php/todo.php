@@ -169,10 +169,12 @@
                     t[user][task_no].pop(t[user][task_no].indexOf(temp.innerText));
                 }
             }
-            document.cookie = 'comp_task='+JSON.stringify(t)+';path=/';
+            
             if(fm!=null && fm.length-1 == t[user][task_no].length){
+                t[user][task_no] = [];
                 fm.submit();
             }
+            document.cookie = 'comp_task='+JSON.stringify(t)+';path=/';
         });
         console.log(t);
         </script>";
