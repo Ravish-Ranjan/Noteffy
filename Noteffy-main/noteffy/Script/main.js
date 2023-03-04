@@ -25,14 +25,21 @@ function chan(at){
     document.getElementById(at-1).style.display="block";
     setCookie(at);
 }
-function getRandomArbitrary(min, max) { //this function gets random value in givcen range
+function getRandomArbitrary(min, max) { //this function gets random value in given range
     return Math.random() * (max - min) + min;
 }
 function pos() { // this function styles the notes/tasks to be displayed in scattered/random manner
-    if (document.cookie.length ==17){
-        chan(1);
+    decodedCookie = decodeURIComponent(document.cookie);
+    decodedCookie = decodedCookie.split(";");
+    flag = false;
+    for (j = 0; j < decodedCookie.length; j++){
+        if (decodedCookie[j].split("=")[0].trim() == "name") {
+            chan(decodedCookie[j].split("=")[1]);
+            flag = true;
+        }
     }
-    chan(parseInt(String(document.cookie).split("name=")[1]));
+    if (!flag)
+        chan(1);
     var count = $(".divi").length;
     for (let i = 0; i < count; i++){
         var styles ={

@@ -41,7 +41,7 @@ setTimeout(()=>{
 fetch("../data/task.json").then((res) => res.json()).then((json) => {
   let obj = calc_completed_task(json);
   new Chart(ctx, {
-    type: 'line',
+    type: 'bar',
     data: {
       labels: obj.date,
       datasets: [{

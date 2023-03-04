@@ -139,6 +139,13 @@
             }
             return obj;
         }
+        function removeTask(user,t,task_no){
+            var count = Object.keys(t[user]).length;
+            for(j=task_no;j<count-1;j++){
+                t[user][j] = t[user][j+1];
+            }
+            t[user][count-1] = [];
+        }
 
 
         var user = getUser();
@@ -169,14 +176,14 @@
                     t[user][task_no].pop(t[user][task_no].indexOf(temp.innerText));
                 }
             }
-            
             if(fm!=null && fm.length-1 == t[user][task_no].length){
-                t[user][task_no] = [];
+                removeTask(user,t,task_no);
                 fm.submit();
             }
-            document.cookie = 'comp_task='+JSON.stringify(t)+';path=/';
+            var d = new Date();
+            d.setTime(d.getTime()+24*60*60*1000);
+            document.cookie = 'comp_task='+JSON.stringify(t)+';expires='+d.toUTCString()+';path=/';
         });
-        console.log(t);
         </script>";
     }
 ?>
