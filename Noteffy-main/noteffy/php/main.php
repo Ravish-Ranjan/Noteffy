@@ -52,7 +52,7 @@
             <button class="tbs" onclick="openTab(event, '2')">To-do</button>
         </div>
         <div class="main" id="0">
-            <div class="scat">
+            <div class="scat" id="divi1">
                 <?php
                 
                 signUp($storage);
@@ -78,7 +78,7 @@
             </div>
         </div>
         <div class="main" id="1" >
-            <div class="scat" style="background-image:url('../media/background_4.png');">
+            <div class="scat" style="background-image:url('../media/background_4.png');" id="divi2">
                 <?php
 
                 $u = task_compose($storage);
@@ -101,7 +101,7 @@
             </div>
         </div>
         <div class="main" id="2">
-            <div class="scat" style="background-image:url('../media/background_6.png'); "id='divi'>
+            <div class="scat" style="background-image:url('../media/background_6.png'); "id='divi3'>
             <?php
            
                 $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
@@ -117,4 +117,6 @@
             ?>
         </div>
     </body>
+    <script src="../Script/note.js"></script>
+    <script src="../Script/tasks.js"></script>
     </html>

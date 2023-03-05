@@ -114,21 +114,19 @@
             $visible = substr($content,0,25);
             echo "<div class=\"divi\" style=\"background-image:url($noteimg);\">
                     <div class=\"topic\">
-                        <label id=\"topic\">$j.$title</label>
+                        <label class=\"title\">$j.$title</label>
                         <img id=\"pin\" src=$pinimg alt=\"pin\">
                     </div>
                     <div class=\"data\">
                         <div class=\"screen\">
-                            $content
+                            <p id='content$i'>$content</p>
                         </div>
                         <div class=\"control\">
                             <button onclick=\"\">
                                 <img src=\"../media/edit.png\" alt=\"\">
                             </button>
-                            <button onclick=\"\">
-                                <a href='https://web.whatsapp.com/' style='text-decoration:none;'>
-                                    <img src=\"../media/share.png\" alt=\"\">
-                                </a>
+                            <button onclick=\"\" id='clip'>
+                                <img src=\"../media/share.png\" alt=\"\" onClick='getContent($i)'>
                             </button>
                             <button onclick=\"\">
                                 <a href='../php/main.php?N_no=$i&User=$user' style='text-decoration:none;'>

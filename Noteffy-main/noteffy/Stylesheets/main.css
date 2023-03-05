@@ -90,7 +90,7 @@ body{
     height: 70%;
     padding: 5% 5% 0 5%;
 }
-#topic{
+.title{
     width: 80%;
     height: 100%;
     font-size: 3vw;

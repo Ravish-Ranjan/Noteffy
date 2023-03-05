@@ -65,7 +65,7 @@
     
                 echo "<div class=\"divi\" style=\"background-image:url($noteimg);\" id='$j' >
                         <div class=\"topic\">
-                            <label id=\"topic\">$j.$title</label>
+                            <label class=\"title\">$j.$title</label>
                             <img id=\"pin\" src=$pinimg alt=\"pin\">
                         </div>
                         <div class=\"data\">
@@ -150,7 +150,7 @@
 
         var user = getUser();
         var task_no;
-        var to = document.getElementById('divi')
+        var to = document.getElementById('divi3')
         let t = getTask();
         let fm;
             to.addEventListener('click',(e)=>{

@@ -49,25 +49,23 @@
             // <a href='../php/main.php?T_no=$i&User=$user' style='text-decoration:none;color:black'>
             echo "<div class=\"divi\" style=\"background-image:url($noteimg);\">
                     <div class=\"topic\">
-                        <label id=\"topic\">$j.$title</label>
+                        <label class=\"title\" id='title$i'>$j.$title</label>
                         <img id=\"pin\" src=$pinimg alt=\"pin\">
                     </div>
                     <div class=\"data\">
-                        <div class=\"screen\"><ul style=\"list-style-type:none;\">";
+                        <div class=\"screen\" id='tasks$i'><ul style=\"list-style-type:none;\">";
                         for($k=0;$k<count($content);$k++){
                             echo "
                                 <li>$content[$k]</li>
                             ";
                         }
-            echo        "<ul></div>
+            echo        "</ul></div>
                         <div class=\"control\">
                             <button onclick=\"\">
                                 <img src=\"../media/edit.png\" alt=\"\">
                             </button>
-                            <button onclick=\"\">
-                                <a href='https://web.whatsapp.com/' style='text-decoration:none;'>
-                                    <img src=\"../media/share.png\" alt=\"\">
-                                </a>
+                            <button onclick=\"getTasks($i)\">
+                                <img src=\"../media/share.png\" alt=\"\">
                             </button>
                             <button onclick=\"\">
                                 <a href='../php/main.php?T_no=$i&User=$user' style='text-decoration:none;'>
