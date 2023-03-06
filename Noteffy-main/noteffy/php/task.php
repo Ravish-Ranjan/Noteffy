@@ -24,12 +24,16 @@
             }
         }
         if(isset($_POST['T_Title']) && isset($_POST['T_Time']) && isset($_POST['T_Date'])){
-            $to_do_count = count($jsonData["Users"][$user]["To-do"]);
+            if(isset($_GET['task_no']))
+                $to_do_count = $_GET['task_no'];
+            else
+                $to_do_count = count($jsonData["Users"][$user]["To-do"]);
             $jsonData["Users"][$user]["To-do"][$to_do_count]["Title"] = $_POST['T_Title'];
             $jsonData["Users"][$user]["To-do"][$to_do_count]["Time"] = $_POST['T_Time'];
             $jsonData["Users"][$user]["To-do"][$to_do_count]["Date"] = $_POST['T_Date'];
             $jsonData["Users"][$user]["To-do"][$to_do_count]["Priority"] = 1;
             $jsonData["Users"][$user]["To-do"][$to_do_count]["Tasks"]=explode("\n",$_POST['Task']);
+            echo "<script>location.replace('main.php')</script>";
         }
         if($user!=-1)
             return $user;
@@ -62,7 +66,9 @@
             echo        "</ul></div>
                         <div class=\"control\">
                             <button onclick=\"\">
+                            <a href='main.php?task_no=$i'>
                                 <img src=\"../media/edit.png\" alt=\"\">
+                            </a>
                             </button>
                             <button onclick=\"getTasks($i)\">
                                 <img src=\"../media/share.png\" alt=\"\">
@@ -76,5 +82,31 @@
                     </div>
                 </div>";
         }
+    }
+    function updateTask($jsonData){
+        $user = isset($_COOKIE['user_number']) ? $_COOKIE['user_number'] : false;
+        $date = '';
+        $time = '';
+        $title = '';
+        $task = '';
+        if($user!=-1){
+            if(isset($_GET['task_no'])){
+                $task_no = $_GET['task_no'];
+                $date.= $jsonData["Users"][$user]["To-do"][$task_no]["Date"];
+                $time.= $jsonData["Users"][$user]["To-do"][$task_no]["Time"];
+                $title.= $jsonData["Users"][$user]["To-do"][$task_no]["Title"];
+                for($i=0;$i<count($jsonData["Users"][$user]["To-do"][$task_no]["Tasks"]);$i++){
+                    $newLinePos = strpos($jsonData["Users"][$user]["To-do"][$task_no]["Tasks"][$i],"\r");
+                    if($newLinePos!==FALSE)
+                        $task.= substr($jsonData["Users"][$user]["To-do"][$task_no]["Tasks"][$i],0,$newLinePos).'\n';
+                    else
+                        $task.= $jsonData["Users"][$user]["To-do"][$task_no]["Tasks"][$i];
+                }
+                echo "<script>
+                        task_compose('$date','$time','$title','$task','$task_no');
+                    </script>";
+            }
+        }
+        else return;
     }
 ?>

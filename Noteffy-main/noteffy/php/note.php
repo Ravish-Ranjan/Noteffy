@@ -145,7 +145,7 @@
                 </div>";
         }
     }
-    function updateNote(&$jsonData){
+    function updateNote($jsonData){
         $user = isset($_COOKIE['user_number']) ? $_COOKIE['user_number'] : false;
         $date = '';
         $title = '';

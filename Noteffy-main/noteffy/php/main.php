@@ -94,12 +94,13 @@
                 </div>
             </div>
             <!-- this div is for user to create more tasks -->
-            <div class="menu" id="comp2" onclick = "task_compose()">
+            <div class="menu" id="comp2" onclick = "task_compose('','','','','')">
                 <a id="btn1" style="background-color:teal;">
                     <label style="font-size:30;">Compose</label>
                 </a>
             </div>
         </div>
+        <?php updateTask($storage)?>
         <div class="main" id="2">
             <div class="scat" style="background-image:url('../media/background_6.png'); "id='divi3'>
             <?php

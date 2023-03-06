@@ -31,30 +31,41 @@ function note_compose(date,title,note,note_no){  //this function helps to create
     document.querySelector("#btn1").toggleAttribute("onclick", "");
     document.getElementById("Date").value = today;
 }
-function task_compose(){  //this function helps to create more tasks for user
+function task_compose(date,tm,title,tk,task_no){  //this function helps to create more tasks for user
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); 
     var yyyy = today.getFullYear();
-    today = yyyy + '-' + mm + '-' + dd;
+    let action = "main.php";
+
+    if (task_no.length != 0)
+        action += "?task_no=" + task_no;
+    if (date.length == 0)
+        today = yyyy + '-' + mm + '-' + dd;
+    else
+        today = date;
+    
     
     var t = new Date();
-    time = String(t.getHours())+":"+String(t.getMinutes()); //current time
+    if (tm.length == 0)
+        time = String(t.getHours()) + ":" + String(t.getMinutes()); //current time
+    else
+        time = tm;
     let noteform = document.createElement("form");
     noteform.setAttribute("class", "FORM");
-    noteform.setAttribute("action","main.php");noteform.setAttribute("method","POST");
+    noteform.setAttribute("action",action);noteform.setAttribute("method","POST");
     noteform.setAttribute("onsubmit","return checkEmpty(this)");
-    noteform.innerHTML = "<span id='Form_Caption'>ADD A NOTE</span>\
+    noteform.innerHTML = `<span id='Form_Caption'>ADD A NOTE</span>\
     <button id = 'close' style=\"font-size:2vw;\" onclick = \"closeF()\">x</button>\
     <label for='Date'>Date</label>\
     <input type='date' name='T_Date' id='Date'>\
     <label for='Time'>Time</label>\
     <input type='time' name='T_Time' id='Time'>\
     <label for='Title'>Title</label>\
-    <input type='text' name='T_Title' id='Title' placeholder='Title'>\
+    <input type='text' name='T_Title' id='Title' placeholder='Title' value=${title}>\
     <label for='Task'>Tasks</label>\
-    <textarea style='resize:none;' placeholder='Your Tasks' name='Task' id='Task'  contenteditable='true' rows=8 cols=10>1.)</textarea>\
-    <input type='submit' value='save' id='btn'>"
+    <textarea style='resize:none;' placeholder='Your Tasks' name='Task' id='Task'  contenteditable='true' rows=8 cols=10>${tk}</textarea>\
+    <input type='submit' value='save' id='btn'>`
     document.querySelector("body").appendChild(noteform);
     document.querySelector("#btn1").toggleAttribute("onclick","");
     document.getElementById("Date").value = today;
