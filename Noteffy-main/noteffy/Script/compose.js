@@ -2,27 +2,33 @@ function closeF(){
     document.querySelector('.FORM').remove();
     document.querySelector("#btn1").setAttribute("onclick","compose()");
 }
-function note_compose(){  //this function helps to create more notes for user
+function note_compose(date,title,note,note_no){  //this function helps to create more notes for user
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); 
     var yyyy = today.getFullYear();
-    today = yyyy + '-' + mm + '-' + dd;
+    let action = "main.php";
+    if (note_no.length != 0)
+        action += "?note_no=" + note_no;
+    if (date.length == 0)
+        today = yyyy + '-' + mm + '-' + dd;
+    else
+        today = date;
     let noteform = document.createElement("form");
-    noteform.setAttribute("action", "main.php"); noteform.setAttribute("method", "POST");
+    noteform.setAttribute("action", action); noteform.setAttribute("method", "POST");
     noteform.setAttribute("class", "FORM");
     noteform.setAttribute("onsubmit","return checkEmpty(this)");
-    noteform.innerHTML = "<span id='Form_Caption'>ADD A NOTE</span>\
+    noteform.innerHTML = `<span id='Form_Caption'>ADD A NOTE</span>\
     <button id = 'close' style=\"font-size:2vw;\" onclick = \"closeF()\">x</button>\
     <label for='Date'>Date</label>\
     <input type='date' name='Date' id='Date'>\
     <label for='Title'>Title</label>\
-    <input type='text' name='Title' id='Title' placeholder='Title'>\
+    <input type='text' name='Title' id='Title' placeholder='Title' value=${title}>\
     <label for='Note'>Content</label>\
-    <textarea style='resize:none;' placeholder='Your Note' name='Note' id='Note' rows=8 cols=10></textarea>\
-    <input type='submit' value='save' id='btn'>"
+    <textarea style='resize:none;' placeholder='Your Note' name='Note' id='Note' rows=8 cols=10 >${note}</textarea>\
+    <input type='submit' value='save' id='btn'>`
     document.querySelector("body").appendChild(noteform);
-    document.querySelector("#btn1").toggleAttribute("onclick","");
+    document.querySelector("#btn1").toggleAttribute("onclick", "");
     document.getElementById("Date").value = today;
 }
 function task_compose(){  //this function helps to create more tasks for user

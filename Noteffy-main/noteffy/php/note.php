@@ -95,10 +95,15 @@
               $user = $i;
         }
         if(isset($_POST['Title']) && isset($_POST['Note']) && isset($_POST['Date'])){
-            $Note_count = count($jsonData['Users'][$user]['Notes']);
+            if(isset($_GET['note_no'])){
+                $Note_count =  $_GET['note_no'];
+            }
+            else
+                $Note_count = count($jsonData['Users'][$user]['Notes']);
             $jsonData['Users'][$user]['Notes'][$Note_count]['Title'] = $_POST['Title'];
             $jsonData['Users'][$user]['Notes'][$Note_count]['Date'] = $_POST['Date'];
             $jsonData['Users'][$user]['Notes'][$Note_count]['Content'] = $_POST['Note'];
+            echo "<script>location.replace('main.php')</script>";
         }
         return $user;
     }
@@ -109,7 +114,7 @@
             $j = $i+1;
             $noteimg = "../media/note".rand(1,3).".png";
             $pinimg = "../media/pin".rand(1,3).".png";
-            $title = substr(explode(' ',$item['Title'])[0],0,5);
+            $title = substr(explode(' ',$item['Title'])[0],0,6);
             $content = $item['Content'];
             $visible = substr($content,0,25);
             echo "<div class=\"divi\" style=\"background-image:url($noteimg);\">
@@ -123,7 +128,9 @@
                         </div>
                         <div class=\"control\">
                             <button onclick=\"\">
+                            <a href=\"../php/main.php?note_no=$i\">
                                 <img src=\"../media/edit.png\" alt=\"\">
+                            </a>
                             </button>
                             <button onclick=\"\" id='clip'>
                                 <img src=\"../media/share.png\" alt=\"\" onClick='getContent($i)'>
@@ -137,5 +144,23 @@
                     </div>
                 </div>";
         }
+    }
+    function updateNote(&$jsonData){
+        $user = isset($_COOKIE['user_number']) ? $_COOKIE['user_number'] : false;
+        $date = '';
+        $title = '';
+        $note = '';
+        if($user!=-1){
+            if(isset($_GET['note_no'])){
+                $note_no = $_GET['note_no'];
+                $date.= $jsonData["Users"][$user]["Notes"][$note_no]["Date"];
+                $title.= $jsonData["Users"][$user]["Notes"][$note_no]["Title"];
+                $note.= $jsonData["Users"][$user]["Notes"][$note_no]["Content"];
+                echo "<script>
+                        note_compose('$date','$title','$note','$note_no');
+                    </script>";
+            }
+        }
+        else return;
     }
 ?>

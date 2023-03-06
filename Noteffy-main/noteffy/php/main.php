@@ -53,8 +53,7 @@
         </div>
         <div class="main" id="0">
             <div class="scat" id="divi1">
-                <?php
-                
+                <?php  
                 signUp($storage);
                 signIn($storage);
                 Delete_Note($storage);
@@ -71,12 +70,13 @@
                 ?>
             </div>
             <!-- this div is to let user create more notes -->
-            <div class="menu" id="comp1" onclick = "note_compose()">
+            <div class="menu" id="comp1" onclick = "note_compose('','','','')">
                 <a id="btn1" style="background-color:yellow;">
                     <label style="font-size:30;">Compose</label>
                 </a>
             </div>
         </div>
+        <?php updateNote($storage) ?>
         <div class="main" id="1" >
             <div class="scat" style="background-image:url('../media/background_4.png');" id="divi2">
                 <?php
