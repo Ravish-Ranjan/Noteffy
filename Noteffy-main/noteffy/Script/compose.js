@@ -40,6 +40,8 @@ function task_compose(date,tm,title,tk,task_no){  //this function helps to creat
 
     if (task_no.length != 0)
         action += "?task_no=" + task_no;
+    if (tk.length == 0)
+        tk += "1.)";
     if (date.length == 0)
         today = yyyy + '-' + mm + '-' + dd;
     else
@@ -75,6 +77,8 @@ function task_compose(date,tm,title,tk,task_no){  //this function helps to creat
         if(e.key==="Enter"){
             task.value+=String(task.value.split("\n").length)+".)";
         }
+        if (task.value.length == 0)
+            task.value += "1.)";
     })
 }
 function checkEmpty(ele){ // this function checks if the user have any note/tasks or not
