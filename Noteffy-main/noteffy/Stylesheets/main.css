@@ -15,7 +15,7 @@ body{
     flex-direction:column;
     height:100%;
     width:100%;
-    background-image: url("../media/bg1.png");
+    background-image: url("../media/workspaceBG.png");
 }
 .top{
     display: flex;
@@ -44,7 +44,7 @@ body{
     grid-template-columns: repeat(4,1fr);
     overflow-y:scroll;
     display:grid;
-    background-image:url("../media/wood1.jpg");
+    background-image:url("../media/background_2.png");
     height:100%;
     width:100%;
     border-radius: 1rem;
@@ -129,7 +129,7 @@ body{
 .control > button > img , .control > button > a > img{
     height: 40px;
     width: 40px;
-    filter:drop-shadow(5px 5px 1px rgba(0,0,0,0.5));
+    filter:drop-shadow(2px 2px 1px rgba(0,0,0,0.5));
 }
 .menu{
     height:7%;
@@ -144,7 +144,7 @@ body{
     width: 12%;
     background-color:rgba(255,255,255,1);
     box-shadow: 10px 10px 10px rgba(0,0,0,0.5);
-    border: 3px solid #73AD21;
+    /* border: 3px solid #73AD21; */
     margin:2%;
    
 }
@@ -170,7 +170,7 @@ body{
     display: block;
     box-shadow: inset -5px -5px 10px #777;
     background-color: inherit;
-    background-color: #ddd;
+    background-color: #8b8b8b;
     border-radius: 1rem 1rem 0 0;
     color: black;
     display: flex;
@@ -187,10 +187,10 @@ body{
 }
 
 .tab button:hover {
-    background-color: #ddd;
+    background-color: #ccc;
 }
 .tab button.active {
-    background-color: #ccc;
+    background-color: #ddd;
 }
 .tabcontent {
     float: left;
@@ -244,11 +244,12 @@ body{
   border: 1px solid #816846;
 }
 #logo{
-    width:  10.61vw;
-    height: 4.02vw;
-    padding-top: 1.46vw;
-    padding-left: 1.46vw;
-    /* position: absolute; */
+    font-family: codec-extrabold;
+    color: #ffffff;
+    padding-top: 2%;
+    padding-left: 2%;
+    font-size: 40;
+    text-shadow: 0 0 0.36vw #fff;
 }
 #prof{
     font-family: codec;

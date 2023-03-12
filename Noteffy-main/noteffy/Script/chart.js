@@ -45,28 +45,7 @@ fetch("../data/task.json").then((res) => res.json()).then((json) => {
   let obj = calc_completed_task(json);
   new Chart(ctx, {
     type: 'bar',
-    data: {
-      labels: obj.date,
-      datasets: [{
-        label: 'Number of tasks completed',
-        data: obj.count,
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        },
-        x: {
-          beginAtZero: false
-        }
-      },
-      layout: {
-        padding: {
-          left:10
-        }
-      }
-    }
+    data: { labels: obj.date, datasets: [{ label: 'Number of tasks completed', data: obj.count, borderWidth: 10 }]},
+    options: { scales: { y: { beginAtZero: true }, x: { beginAtZero: false } }, layout: { padding: { left:10 } }}
   });
 })

@@ -67,15 +67,15 @@
                         <div class=\"control\">
                             <button onclick=\"\">
                             <a href='main.php?task_no=$i'>
-                                <img src=\"../media/edit.png\" alt=\"\">
+                                <img title='edit the task' src=\"../media/edit.png\" alt=\"\">
                             </a>
                             </button>
                             <button onclick=\"getTasks($i)\">
-                                <img src=\"../media/share.png\" alt=\"\">
+                                <img title='copy the task to clipboard' src=\"../media/share.png\" alt=\"\">
                             </button>
                             <button onclick=\"\">
                                 <a href='../php/main.php?T_no=$i&User=$user' style='text-decoration:none;'>
-                                    <img src=\"../media/delete.png\" alt=\"\">
+                                    <img title='delete the task' src=\"../media/delete.png\" alt=\"\">
                                 </a>
                             </button>
                         </div>

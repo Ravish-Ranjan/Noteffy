@@ -92,16 +92,16 @@
                 echo        "<ul></div>
                             <div class=\"control\">
                                 <button onclick=\"\">
-                                    <img src=\"../media/edit.png\" alt=\"\">
+                                    <img title='edit the note' src=\"../media/edit.png\" alt=\"\">
                                 </button>
                                 <button onclick=\"\">
                                     <a href='https://web.whatsapp.com/' style='text-decoration:none;'>
-                                        <img src=\"../media/share.png\" alt=\"\">
+                                        <img title='copy the to-do list to clipboard' src=\"../media/share.png\" alt=\"\">
                                     </a>
                                 </button>
                                 <button onclick=\"\">
                                     <a href='../php/main.php?T_no=$i&User=$user' style='text-decoration:none;'>
-                                        <img src=\"../media/delete.png\" alt=\"\">
+                                        <img title='delete the to-do list' src=\"../media/delete.png\" alt=\"\">
                                     </a>
                                 </button>
                             </div>

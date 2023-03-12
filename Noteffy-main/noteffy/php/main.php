@@ -21,10 +21,10 @@
         <!-- <a href="https://web.whatsapp.com://send?text='hello'">Send</a> -->
         <!-- this div is for the top bar of the main page to display logo and user status-->
         <div class="top">
-            <img src="../media/noteffytitle.png" id="logo">
+            <label id="logo">Your Workstation</label>
             <div id="prof">
                 <a href="../HTML/signUp.html" id="prof" style="margin:0 2% 0 2%;">
-                    <img src="..\media\goldbody2.png" alt="prof" height="75" >
+                    <img src="../media/logoredq.png" alt="prof" height="75" >
                     <?php
                         include "hash.php";
                         include "priority_calc.php";
@@ -70,15 +70,15 @@
                 ?>
             </div>
             <!-- this div is to let user create more notes -->
-            <div class="menu" id="comp1" onclick = "note_compose('','','','')">
-                <a id="btn1" style="background-color:yellow;">
+            <div class="menu" id="comp1" onclick = "note_compose('','','','')" style="background-color:yellow;">
+                <a id="btn1">
                     <label style="font-size:30;">Compose</label>
                 </a>
             </div>
         </div>
         <?php updateNote($storage) ?>
         <div class="main" id="1" >
-            <div class="scat" style="background-image:url('../media/background_4.png');" id="divi2">
+            <div class="scat" style="background-image:url('../media/background_1.png');" id="divi2">
                 <?php
 
                 $u = task_compose($storage);
@@ -94,8 +94,8 @@
                 </div>
             </div>
             <!-- this div is for user to create more tasks -->
-            <div class="menu" id="comp2" onclick = "task_compose('','','','','')">
-                <a id="btn1" style="background-color:teal;">
+            <div class="menu" id="comp2" onclick = "task_compose('','','','','')" style="background-color:teal;">
+                <a id="btn1">
                     <label style="font-size:30;">Compose</label>
                 </a>
             </div>

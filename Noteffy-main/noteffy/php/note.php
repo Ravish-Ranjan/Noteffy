@@ -17,7 +17,7 @@
                 $email = $jsonData["Users"][$users_count]["Email"];
                 $type = 1;
                 $data = '';
-                $command = "python C:/Users/DELL/OneDrive/Documents/GitHub/Noteffy/Noteffy-main/noteffy/python/mail.py $email $type $data";
+                $command = "python ../Documents/GitHub/Noteffy/Noteffy-main/noteffy/python/mail.py $email $type $data";
                 $otp = (int)exec($command);
                 echo <<<_END
                     <script>
@@ -129,15 +129,15 @@
                         <div class=\"control\">
                             <button onclick=\"\">
                             <a href=\"../php/main.php?note_no=$i\">
-                                <img src=\"../media/edit.png\" alt=\"\">
+                                <img title='edit the note' src=\"../media/edit.png\" alt=\"\">
                             </a>
                             </button>
                             <button onclick=\"\" id='clip'>
-                                <img src=\"../media/share.png\" alt=\"\" onClick='getContent($i)'>
+                                <img title='copy the note to clipboard' src=\"../media/share.png\" alt=\"\" onClick='getContent($i)'>
                             </button>
                             <button onclick=\"\">
                                 <a href='../php/main.php?N_no=$i&User=$user' style='text-decoration:none;'>
-                                    <img src=\"../media/delete.png\" alt=\"\">
+                                    <img title='delete the note' src=\"../media/delete.png\" alt=\"\">
                                 </a>
                             </button>
                         </div>

@@ -2,10 +2,27 @@
     margin:0;
     padding:0;
 }
+body{
+    background-image: url("../media/workspaceBG.png");
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    
+}
 #container{
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    width:100vw;
+    height: 80%;
+    width:80%;
+    font-size: 20;
+    padding: 2%;
+    border-radius: 1rem;
+    background-color: cadetblue;
+    margin-right: 2%;
+}
+#context{
+    background-color: white;
+    padding: 2%;
+    border-radius: 1rem;
 }
