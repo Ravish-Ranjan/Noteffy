@@ -23,8 +23,7 @@
         <div class="top">
             <label id="logo">Your Workstation</label>
             <div id="prof">
-                <a href="../HTML/signUp.html" id="prof" style="margin:0 2% 0 2%;">
-                    <img src="../media/logoredq.png" alt="prof" height="75" >
+                    <img src="../media/logoredq.png" onclick="showmenu()" alt="prof" height="75" >
                     <?php
                         include "hash.php";
                         include "priority_calc.php";
@@ -38,12 +37,20 @@
                             echo "<p>Sign Up</p>";
                         }
                         else{
-                            echo "<p><a href='../HTML/chart.html' style='text-decoration:none;color:white'>".getUser()."</a><br>
-                            <a href = '../html/signUp.html' id = 'logout' onclick = 'clearCookies()'>Log Out</a></p>" ;
+                            echo "<div id='sidepanel' >
+                            <div class='panel-user'>
+                                <img src='../media/logoredq.png' height=100 width=100 alt='logo' style='filter:drop-shadow(2px 2px 5px black);'>
+                                <label style='text-decoration:none;color:black;'>Hi, ".getUser()." !</label>
+                            </div>
+                            <ul>
+                                <li><a href='../HTML/chart.html' style='text-decoration:none;'>Scoreboard</a><br></li>
+                                <li><a href='../html/signUp.html' id='logout' onclick='clearCookies()' style='text-decoration: none;'>Log Out</a></li>
+                                <li><a href='#' style='text-decoration: none;' onclick='hidemenu()'>Back</a></li>
+                            </ul>
+                            </div>" ;
                             setcookie("user_number",getUserNumber($storage),0,"/");
                         }
                         ?>
-                </a>
             </div>
         </div>
         <div class="tab">

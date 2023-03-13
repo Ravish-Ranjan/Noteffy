@@ -17,7 +17,7 @@
                 $email = $jsonData["Users"][$users_count]["Email"];
                 $type = 1;
                 $data = '';
-                $command = "python ../Documents/GitHub/Noteffy/Noteffy-main/noteffy/python/mail.py $email $type $data";
+                $command = "python C:/Users/DELL/OneDrive/Documents/GitHub/Noteffy/Noteffy-main/noteffy/python/mail.py $email $type $data";
                 $otp = (int)exec($command);
                 echo <<<_END
                     <script>

@@ -76,9 +76,13 @@ function openTab(evt, tabname) { // this function is used to move arround the ta
     }
     chan(parseInt(tabname)+1);
 }
-function bringmenu(){
-    document.getElementById("sidepanel").style.right= "10%";
+function showmenu(){
+    console.log("shown");
+    document.getElementById("sidepanel").style.display= "block";
+    // document.body.style.filter="blur(10px)";
 }
-function sendmenu(){
-    document.getElementById("sidepanel").style.right= "-30%";
+function hidemenu(){
+    console.log("hidden");
+    // document.body.style.filter="blur(0px)";
+    document.getElementById("sidepanel").style.display= "none";
 }

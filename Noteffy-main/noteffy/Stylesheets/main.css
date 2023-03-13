@@ -1,3 +1,4 @@
+/* *{outline:0.2vw solid green;} */
 @font-face {
     font-family: Minecraftia;
     src: url("../media/Minecraft.ttf");
@@ -38,7 +39,6 @@ body{
     width:98%;
     margin: 1%;
 }
-/* *{outline:0.2vw solid green;} */
 
 .scat{
     grid-template-columns: repeat(4,1fr);
@@ -263,8 +263,55 @@ body{
     font-family: codec-extrabold;
     
 }
-#logout{
-    text-decoration: none;color:red;
-    font-family:codec-extrabold;
-    height:auto;width:80%;
+#sidepanel{
+    position: absolute;
+    top: 10;
+    right: 0%;
+    height: 98%;
+    width: 20vw;
+    background-color: white;
+    z-index: 2;    
+    display: flex;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 1s;
+}
+.panel-user{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10%;
+}
+.panel-user >img{
+    filter: drop-shadow(-5px 5px 2px );
+}
+.panel-user >label{
+    font-size: 25;
+    text-shadow: none;
+    font-family: codec;
+}
+#sidepanel >ul{
+    width: 100%;
+    font-size: 25;
+    text-shadow: none;
+    font-family: codec-extrabold;
+    text-align: start;
+    padding-left: 10%;
+    padding-top: 10%;
+
+}
+#sidepanel >ul >li{
+    padding: 0.5rem 0 0.5rem 1rem;
+    font-family: codec;
+    transition: linear 0.15s;
+}
+#sidepanel >ul >li:hover{
+    background-color: rgb(200, 200, 200);
+    filter: invert(1);
+}
+
+#sidepanel >ul > li>a{
+    color: black;
 }

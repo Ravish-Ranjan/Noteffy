@@ -1,6 +1,7 @@
 function calc_completed_task(jsonData) {
   let date = [];
-  let count = [0];
+  date[0] = "";
+  let count = [1];
   let user;
   let decodedCookie = decodeURIComponent(document.cookie);
   decodedCookie = decodedCookie.split(";");
@@ -35,17 +36,55 @@ function calc_completed_task(jsonData) {
   return obj;
 }
 
+function getrandcolor(){
+  let clrs = [  "#a1c4fd",
+                "#84fab0",
+                "#e0c3fc",
+                "#5ee7df"]
+  let cl =  clrs[Math.floor(Math.random()*clrs.length)];
+  document.getElementById("container").style.backgroundColor = cl;
+  return cl;
+}
 
 const ctx = document.getElementById('context');
-setTimeout(()=>{
-  document.getElementById("load").remove();
-  ctx.style.display = "block";
-},4000)
+// setTimeout(()=>{
+//   document.getElementById("load").remove();
+//   ctx.style.display = "block";
+// },4000)
 fetch("../data/task.json").then((res) => res.json()).then((json) => {
   let obj = calc_completed_task(json);
-  new Chart(ctx, {
-    type: 'bar',
-    data: { labels: obj.date, datasets: [{ label: 'Number of tasks completed', data: obj.count, borderWidth: 10 }]},
-    options: { scales: { y: { beginAtZero: true }, x: { beginAtZero: false } }, layout: { padding: { left:10 } }}
+  Chart.defaults.font.size = 20;
+  Chart.defaults.font.weight = "bold";
+  Chart.defaults.color = "white";
+  Chart.defaults.backgroundColor = "gray";
+  const cht = new Chart(ctx, {
+    type: 'line',
+    data: { 
+      labels: obj.date,
+      datasets: [
+        { label: 'Number of tasks completed',
+          data: obj.count,borderWidth: 10,
+          backgroundColor:"black" ,
+          font:{
+            size:20,
+          },
+          borderColor:"#bdbdbd",
+        },
+      ]
+    },
+    options: { 
+      scales: { y: { beginAtZero: true },
+      x: { beginAtZero: false } },
+      layout: { padding: 10 },
+      plugins: {
+        legend: {
+            labels: {
+                font: {
+                    size: 18,
+                }
+            }
+        }
+    }
+    }
   });
 })

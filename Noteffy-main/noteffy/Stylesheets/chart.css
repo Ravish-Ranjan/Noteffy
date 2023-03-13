@@ -5,7 +5,7 @@
 body{
     background-image: url("../media/workspaceBG.png");
     display: flex;
-    justify-content:flex-start;
+    justify-content:flex-end;
     align-items: center;
     
 }
@@ -18,11 +18,19 @@ body{
     font-size: 20;
     padding: 2%;
     border-radius: 1rem;
-    background-color: cadetblue;
+    background-image: url("../media/wood2.jpg");
+    background-repeat: round;
     margin-right: 2%;
 }
 #context{
-    background-color: white;
     padding: 2%;
     border-radius: 1rem;
+    backdrop-filter: blur(5.5px);
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow:-5px 5px 20px;
+}
+#load{
+    position: absolute;
+    top: 50%;
+    left: 0;
 }
