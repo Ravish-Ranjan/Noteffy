@@ -20,7 +20,7 @@
     <body onload="pos()">
         <!-- <a href="https://web.whatsapp.com://send?text='hello'">Send</a> -->
         <!-- this div is for the top bar of the main page to display logo and user status-->
-        <div class="top">
+        <div class="top" id="dashboard">
             <label id="logo">Your Workstation</label>
             <div id="prof">
                     <img src="../media/logoredq.png" onclick="showmenu()" alt="prof" height="75" >
@@ -34,7 +34,7 @@
                         $storage = decrypt_data($storage);
                         $storage = json_decode($storage,True);
                         if(getUser()==" "){
-                            echo "<p>Sign Up</p>";
+                            echo "<p id='login-signup' onClick='signUp()'>Sign Up</p>";
                         }
                         else{
                             echo "<div id='sidepanel' >
