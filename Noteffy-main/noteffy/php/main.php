@@ -109,7 +109,7 @@
         </div>
         <?php updateTask($storage)?>
         <div class="main" id="2">
-            <div class="scat" style="background-image:url('../media/background_6.png'); "id='divi3'>
+            <div class="scat" style="background-image:url('../media/background_4.png'); "id='divi3'>
             <?php
            
                 $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");

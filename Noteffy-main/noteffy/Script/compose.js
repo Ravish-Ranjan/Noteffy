@@ -66,7 +66,7 @@ function task_compose(date,tm,title,tk,task_no){  //this function helps to creat
     <label for='Title'>Title</label>\
     <input type='text' name='T_Title' id='Title' placeholder='Title' value=${title}>\
     <label for='Task'>Tasks</label>\
-    <textarea style='resize:none;' placeholder='Your Tasks' name='Task' id='Task'  contenteditable='true' rows=8 cols=10>${tk}</textarea>\
+    <textarea style='resize:none;' placeholder='Your Tasks' name='Task' id='Task' rows=8 cols=10>${tk}</textarea>\
     <input type='submit' value='save' id='btn'>`
     document.querySelector("body").appendChild(noteform);
     document.querySelector("#btn1").toggleAttribute("onclick","");
