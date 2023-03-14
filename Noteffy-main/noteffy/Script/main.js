@@ -77,12 +77,20 @@ function openTab(evt, tabname) { // this function is used to move arround the ta
     chan(parseInt(tabname)+1);
 }
 function showmenu(){
-    console.log("shown");
-    document.getElementById("sidepanel").style.display= "block";
-    // document.body.style.filter="blur(10px)";
+    document.getElementById("sidepanel").style.display = "block";
+    document.getElementById("logo").style.filter = "blur(10px)";
+    for (i = 1; i < document.body.childElementCount; i++){
+        document.body.children[i].style.filter = "blur(10px)";
+    }
 }
 function hidemenu(){
-    console.log("hidden");
-    // document.body.style.filter="blur(0px)";
+    document.getElementById("logo").style.filter = "blur(0px)";
+    for (i = 1; i < document.body.childElementCount; i++){
+        document.body.children[i].style.filter = "blur(0px)";
+    }
     document.getElementById("sidepanel").style.display= "none";
+}
+function signUp() {
+    
+    window.location.href = "../HTML/signUp.html";
 }
