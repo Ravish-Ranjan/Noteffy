@@ -4,12 +4,40 @@
         <link rel="shortcut icon" href="../media/logo5mix.png" type="image/x-icon">
         <link rel="stylesheet" href="../Stylesheets/chart.css">
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="../Script/multiavatar.min.js"></script>
+        <script>
+            function idgen(){
+                let vals = "abcdefghijlmnopqrstuvwxyz";
+                msg = "";
+                let size = Math.floor((Math.random()*26)+1);
+                for (let int = 0; int < size; int++) {
+                    let x = Math.floor((Math.random() * 25) + 0);
+                    msg = msg + vals[x];
+                }
+                console.log(msg);
+                return msg;
+            }
+            function generate(){
+                var avatarId = idgen();
+                var svgCode = multiavatar(avatarId);
+                return svgCode
+            }
+            function crt(){
+                let data = generate();
+                document.getElementById("img").innerHTML = data;
+                document.getElementById("data").innerHTML = data;
+            }
+        </script>
     </head>
-    <body>
-        <img src="../media/noteffyTitle.png" alt="loading" id="load" height="100px" width="300px" >
-        <img src="../media/noteffy_loader.gif" alt="loading" id="load" height="100px" width="300px" >
+    <body onload="crt()">
+        <img src="../media/noteffyTitle.png" alt="loading" id="load" height="70px" width="210px" >
+        <img src="../media/noteffy_loader.gif" alt="loading" id="load" height="70px" width="210px" >
         <div id="container" >
             <canvas id="context" style="display:block"></canvas>
+        </div>
+        <div class="tile">
+            <div id="img"></div>
+            <label id="title">have to get username here</label>
         </div>
     </body>
     

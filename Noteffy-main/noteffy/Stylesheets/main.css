@@ -132,21 +132,20 @@ body{
     filter:drop-shadow(2px 2px 1px rgba(0,0,0,0.5));
 }
 .menu{
-    height:7%;
-    padding: 1rem 2rem 1rem 2rem;
+    height:5rem;
+    padding: 1rem;
     position:fixed;
     bottom: 20;
-    border-radius:1rem;
+    border-radius:50%;
     right: 20;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    width: 12%;
+    display: grid;
+    place-items: center;
+    width: 5rem;
+    
     background-color:rgba(255,255,255,1);
-    box-shadow: 10px 10px 10px rgba(0,0,0,0.5);
+    box-shadow: 5px 5px 2px rgba(255, 255, 255, 0.5);
     /* border: 3px solid #73AD21; */
     margin:2%;
-   
 }
 .menu>a{
     display:flex;

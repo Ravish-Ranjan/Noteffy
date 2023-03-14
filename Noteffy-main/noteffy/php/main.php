@@ -79,7 +79,7 @@
             <!-- this div is to let user create more notes -->
             <div class="menu" id="comp1" onclick = "note_compose('','','','')" style="background-color:yellow;">
                 <a id="btn1">
-                    <label style="font-size:30;">Compose</label>
+                    <img src="../media/quillpen.png" width="70" alt="compose">
                 </a>
             </div>
         </div>
@@ -103,7 +103,7 @@
             <!-- this div is for user to create more tasks -->
             <div class="menu" id="comp2" onclick = "task_compose('','','','','')" style="background-color:teal;">
                 <a id="btn1">
-                    <label style="font-size:30;">Compose</label>
+                    <img src="../media/goldenperi.png" width="70" height="70" alt="compose">
                 </a>
             </div>
         </div>
