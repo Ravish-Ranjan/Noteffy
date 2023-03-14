@@ -25,7 +25,7 @@ function note_compose(date,title,note,note_no){  //this function helps to create
     <label for='Title'>Title</label>\
     <input type='text' name='Title' id='Title' placeholder='Title' value=${title}>\
     <label for='Note'>Content</label>\
-    <textarea style='resize:none;' placeholder='Your Note' name='Note' id='Note' rows=8 cols=10 >${note}</textarea>\
+    <textarea style='resize:none;' placeholder='Your Note' name='Note' id='Note' rows=8 cols=7 >${note}</textarea>\
     <input type='submit' value='save' id='btn'>`
     document.querySelector("body").appendChild(noteform);
     document.querySelector("#btn1").toggleAttribute("onclick", "");
@@ -66,7 +66,7 @@ function task_compose(date,tm,title,tk,task_no){  //this function helps to creat
     <label for='Title'>Title</label>\
     <input type='text' name='T_Title' id='Title' placeholder='Title' value=${title}>\
     <label for='Task'>Tasks</label>\
-    <textarea style='resize:none;' placeholder='Your Tasks' name='Task' id='Task' rows=8 cols=10>${tk}</textarea>\
+    <textarea style='resize:none;' placeholder='Your Tasks' name='Task' id='Task'  contenteditable='true' rows=8 cols=7>${tk}</textarea>\
     <input type='submit' value='save' id='btn'>`
     document.querySelector("body").appendChild(noteform);
     document.querySelector("#btn1").toggleAttribute("onclick","");

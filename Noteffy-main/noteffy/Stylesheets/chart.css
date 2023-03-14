@@ -14,13 +14,14 @@ body{
     align-items: center;
     justify-content: center;
     height: 80%;
-    width:80%;
+    width:70%;
     font-size: 20;
     padding: 2%;
     border-radius: 1rem;
     background-image: url("../media/wood2.jpg");
     background-repeat: round;
     margin-right: 2%;
+    box-shadow:-5px 5px 20px rgb(156, 156, 156);
 }
 #context{
     padding: 2%;
@@ -31,6 +32,33 @@ body{
 }
 #load{
     position: absolute;
-    top: 50%;
-    left: 0;
+    top: 5%;
+    left: 4%;
+    transition: linear 1s;
+}
+#img{
+    height:250px;
+    aspect-ratio: 1/1;
+    padding: 2%;
+    
+}
+.tile{
+    position: absolute;
+    top: 20%;
+    left: 1%;
+    width: 20%;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(7.2px);
+    -webkit-backdrop-filter: blur(7.2px);
+    display: grid;
+    place-items: center;
+}
+.tile > label{
+    color: white;
+    font-size: 25;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
 }
