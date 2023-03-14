@@ -46,7 +46,7 @@
                 // echo $i.'<br>';
                 if($jsonData["Users"][$i]["User_Name"] === $_POST['User_Name_']){
                     if($jsonData["Users"][$i]["Password"]===encrypt_data($_POST["Password_"],str_pad($_POST["User_Name_"],32,'#',STR_PAD_RIGHT))){
-                        setcookie("user",$jsonData["Users"][$i]["User_Name"]);
+                        setcookie("user",$jsonData["Users"][$i]["User_Name"],0,"/");
                         echo "<script>window.location.href = window.location.href</script>";
                         return ;
                     }

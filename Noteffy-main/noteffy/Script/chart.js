@@ -36,6 +36,16 @@ function calc_completed_task(jsonData) {
   return obj;
 }
 
+function getUser() {
+  let decodedCookie = decodeURIComponent(document.cookie);
+  decodedCookie = decodedCookie.split(";");
+  for (i = 0; i < decodedCookie.length; i++){
+    if (decodedCookie[i].split("=")[0].trim() == "user") {
+      document.getElementById("title").innerText = decodedCookie[i].split("=")[1];
+    }
+  }
+}
+
 function getrandcolor(){
   let clrs = [  "#a1c4fd",
                 "#84fab0",
@@ -88,3 +98,4 @@ fetch("../data/task.json").then((res) => res.json()).then((json) => {
     }
   });
 })
+getUser();
