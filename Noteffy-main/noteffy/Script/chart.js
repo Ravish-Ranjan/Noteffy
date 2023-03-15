@@ -42,8 +42,10 @@ function getUser() {
   for (i = 0; i < decodedCookie.length; i++){
     if (decodedCookie[i].split("=")[0].trim() == "user") {
       document.getElementById("title").innerText = decodedCookie[i].split("=")[1];
+      return decodedCookie[i].split("=")[1];
     }
   }
+  return document.getElementById("title").innerText = "Your user name";
 }
 
 function getrandcolor(){
@@ -98,4 +100,3 @@ fetch("../data/task.json").then((res) => res.json()).then((json) => {
     }
   });
 })
-getUser();

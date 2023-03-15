@@ -11,6 +11,20 @@
     font-family: codec;
     src: url('../media/Codec-Cold-Regular-trial.ttf');
 }
+@keyframes shake {
+    0%{
+        transform: rotate(5deg);
+    }
+    25%{
+        transform: rotate(-10deg);
+    }
+    75%{
+        transform: rotate(10deg);
+    }
+    100%{
+        transform: rotate(-5deg);
+    }
+}
 body{
     display:flex;
     flex-direction:column;
@@ -313,4 +327,7 @@ body{
 
 #sidepanel >ul > li>a{
     color: black;
+}
+#btn1:hover{
+    animation:shake 1s infinite ease-out;
 }

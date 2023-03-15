@@ -6,19 +6,8 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="../Script/multiavatar.min.js"></script>
         <script>
-            function idgen(){
-                let vals = "abcdefghijlmnopqrstuvwxyz";
-                msg = "";
-                let size = Math.floor((Math.random()*26)+1);
-                for (let int = 0; int < size; int++) {
-                    let x = Math.floor((Math.random() * 25) + 0);
-                    msg = msg + vals[x];
-                }
-                console.log(msg);
-                return msg;
-            }
             function generate(){
-                var avatarId = idgen();
+                var avatarId = getUser();
                 var svgCode = multiavatar(avatarId);
                 return svgCode
             }
