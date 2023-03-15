@@ -5,10 +5,20 @@
             "Password": "Xraakl7Zbom+zDn2cgJGzg==",
             "Email": "gaurangtyagi7@gmail.com",
             "Notes": [
-                
+                {
+                    "Title": "This",
+                    "Date": "2023-03-15",
+                    "Content": "This is a note"
+                }
             ],
             "To-do": [
-                
+                {
+                    "Title": "Sample Title",
+                    "Time": "19:56",
+                    "Date": "2023-03-15",
+                    "Priority": 1,
+                    "Tasks": []
+                }
             ]
         },
         {

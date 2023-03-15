@@ -1,9 +1,14 @@
 <?php
+    function sanitize_array(&$arr){
+        for($i=0;$i<count($arr);$i++){
+            $arr[$i] = strip_tags($arr[$i]);
+        }
+    }
     function Delete_task(&$jsonData){ // this function is to let user delete a task
         if(isset($_GET["T_no"]) && isset($_GET["User"])){
             $t_no = $_GET["T_no"];
             $User = $_GET["User"];
-            $userName = getUser($jsonData);
+            $userName = getUser();
             for($i=0;$i<count($jsonData["Users"]);$i++){
                 if($jsonData["Users"][$i]["User_Name"]== $userName && $i==$User){
                     array_splice($jsonData["Users"][$User]["To-do"],$t_no,1);
@@ -17,7 +22,7 @@
     function task_compose(&$jsonData){ // this function is to let user create more tasks 
         $user = -1;
         $User_count = count($jsonData['Users']);
-        $userName = getUser($jsonData);
+        $userName = getUser();
         for($i=0;$i<$User_count;$i++){
             if($jsonData["Users"][$i]["User_Name"]==$userName){
                 $user = $i;
@@ -50,6 +55,7 @@
             $pinimg = "../media/pin".priority_calc($item).".png";
             $title = substr(explode(' ',$item['Title'])[0],0,8);
             $content = $item['Tasks'];
+        sanitize_array($content);
             // <a href='../php/main.php?T_no=$i&User=$user' style='text-decoration:none;color:black'>
             echo "<div class=\"divi\" style=\"background-image:url($noteimg);\">
                     <div class=\"topic\">

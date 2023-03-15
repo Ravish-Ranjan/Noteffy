@@ -41,7 +41,7 @@
     // This function gives the index of the user in the json file
     function getUserNumber($jsonData){
         for($i=0;$i<count($jsonData["Users"]);$i++){
-            if($jsonData["Users"][$i]["User_Name"]==getUser($jsonData)){
+            if($jsonData["Users"][$i]["User_Name"]==getUser()){
                 return $i;
             }
         }
@@ -61,7 +61,7 @@
                 $pinimg = "../media/pin".priority_calc($item).".png";
                 $title = substr(explode(' ',$item['Title'])[0],0,8);
                 $content = $item["Tasks"];
-                
+            sanitize_array($content);
     
                 echo "<div class=\"divi\" style=\"background-image:url($noteimg);\" id='$j' >
                         <div class=\"topic\">
@@ -82,7 +82,6 @@
                                 $task = substr($content[$k],3);
                                 $id = "tsk$k$i";
                                 $task_json = json_decode(file_get_contents("../data/task.json"),true);
-                                
                                 echo "
                                 <input type='checkbox' id='tsk$k$i' name='task$i$k' $checked><label for='tsk$k$i' style=$lineThrough>$content[$k]</label><br>
                                 ";

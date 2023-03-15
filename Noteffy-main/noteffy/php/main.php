@@ -34,11 +34,11 @@
                         $storage = decrypt_data($storage);
                         $storage = json_decode($storage,True);
                         if(getUser()==" "){
-                            echo "<p id='login-signup' onClick='signUp()'>Sign Up</p>";
+                            echo "<p style='cursor:pointer' id='login-signup' onClick='signUp()'>Sign Up</p>";
                         }
                         else{
-                            echo "<div id='sidepanel' >
-                            <div class='panel-user'>
+                            echo "<div  id='sidepanel' >
+                            <div class='panel-user' >
                                 <img src='../media/logoredq.png' height=100 width=100 alt='logo' style='filter:drop-shadow(2px 2px 5px black);'>
                                 <label style='text-decoration:none;color:black;'>Hi, ".getUser()." !</label>
                             </div>
