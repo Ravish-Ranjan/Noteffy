@@ -11,12 +11,40 @@
             $userName = getUser();
             for($i=0;$i<count($jsonData["Users"]);$i++){
                 if($jsonData["Users"][$i]["User_Name"]== $userName && $i==$User){
+                echo <<<_END
+                    <script>
+                        var d = new Date();
+                        d.setTime(d.getTime()+24*60*60*1000);
+                        let decodedCookie = decodeURIComponent(document.cookie);
+                        decodedCookie = decodedCookie.split(';');
+                        for (let i = 0; i < decodedCookie.length; i++) {
+                            const temp = decodedCookie[i].split('=')
+                            if (temp[0].trim() == 'comp_task') {
+                                let t = JSON.parse(temp[1]);
+                                console.log(parseInt($t_no))
+                                for(let j=parseInt($t_no);j<Object.keys(t[$User]).length-1;j++){
+                                    console.log('hello');
+                                    t[$User][j] = t[$User][j+1];
+                                }
+                                t[$User][Object.keys(t[$User]).length-1] = [];
+                                console.log(t);
+                                document.cookie = "comp_task="+JSON.stringify(t)+";expires="+d.toUTCString()+";path=/";
+                            }
+                        }
+                        </script>
+                    _END;
                     array_splice($jsonData["Users"][$User]["To-do"],$t_no,1);
-                    echo "<script>window.location.href = '../php/main.php'</script>";
+                    echo "
+                    <script>
+                        window.location.href = '../php/main.php'
+                    </script>";
                     return;
                 }
             }
-            echo "<Script>window.location.href = '../php/main.php'</script>";
+            echo "
+            <Script>
+                window.location.href = '../php/main.php'
+            </script>";
         }
     }
     function task_compose(&$jsonData){ // this function is to let user create more tasks 

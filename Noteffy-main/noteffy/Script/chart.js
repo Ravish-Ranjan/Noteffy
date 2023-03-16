@@ -100,3 +100,12 @@ fetch("../data/task.json").then((res) => res.json()).then((json) => {
     }
   });
 })
+var obj = {
+  "0": {
+    "0": ['a', 'b', 'c'],
+    "1" :['c','d','e']
+  }
+}
+obj["0"]["0"] = obj["0"]["1"];
+obj["0"]["1"] = [];
+console.log(obj);

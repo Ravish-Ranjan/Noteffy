@@ -140,9 +140,10 @@
         }
         function removeTask(user,t,task_no){
             var count = Object.keys(t[user]).length;
-            for(j=task_no;j<count-1;j++){
+            for(j=parseInt(task_no);j<count-1;j++){
                 t[user][j] = t[user][j+1];
             }
+            console.log(t);
             t[user][count-1] = [];
         }
 
