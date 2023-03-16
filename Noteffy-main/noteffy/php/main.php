@@ -18,8 +18,6 @@
         
     </head>
     <body onload="pos()">
-        <!-- <a href="https://web.whatsapp.com://send?text='hello'">Send</a> -->
-        <!-- this div is for the top bar of the main page to display logo and user status-->
         <div class="top" id="dashboard">
             <label id="logo">Your Workstation</label>
             <div id="prof">
@@ -46,6 +44,7 @@
                                 <li><a href='../HTML/chart.html' style='text-decoration:none;'>Scoreboard</a><br></li>
                                 <li><a href='../html/signUp.html' id='logout' onclick='clearCookies()' style='text-decoration: none;'>Log Out</a></li>
                                 <li><a href='#' style='text-decoration: none;' onclick='hidemenu()'>Back</a></li>
+                                <li><a href='index.php' style='text-decoration: none;'>Noteffy</a></li>
                             </ul>
                             </div>" ;
                             setcookie("user_number",getUserNumber($storage),0,"/");
