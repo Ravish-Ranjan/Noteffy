@@ -55,3 +55,18 @@ function config(){ // this function gives different messages for user to underst
     }
     
 }
+// flag is 1 if user is trying to signUp and 0 if user is trying to signIn
+function check_in_log() {
+    const queries = new URLSearchParams(window.location.search);
+    flag = queries.get("flag");
+    console.log(1==flag);
+    if (flag == 1) {
+        document.getElementById('toggle-checkbox').checked = true;
+        transitionFunction();
+    }
+    else {
+        document.getElementById('toggle-checkbox').checked = false;
+        console.log(flag);
+        transitionFunction();
+    }
+}

@@ -34,7 +34,7 @@
                         $storage = decrypt_data($storage);
                         $storage = json_decode($storage,True);
                         if(getUser()==" "){
-                            echo "<p style='cursor:pointer' id='login-signup' onClick='signUp()'>Sign Up</p>";
+                            echo "<script>window.location.href = 'index.php'</script>";
                         }
                         else{
                             echo "<div  id='sidepanel' >

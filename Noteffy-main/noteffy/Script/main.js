@@ -10,6 +10,7 @@ function clearCookies(){ // this function is used to clear the cookies of user t
         const name = namePos > -1 ?cookie.substr(0, namePos):cookie;
         if(name=='user'){
             document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+            window.location.href = '../php/index.php'
         }
     }
 }
