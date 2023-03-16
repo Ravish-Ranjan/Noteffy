@@ -4,6 +4,7 @@
     require_once('hash.php');
     $mailcmd = "python3 ".explode("/php",__DIR__)[0]."python/mail.py";
     date_default_timezone_set("Asia/Kolkata");
+    //Standardize link
     $crontable = new SplFileObject("../../../../home/shivang/cronbuffer.afh",'w+') or die("Could not open file");
 
     echo 1111;
@@ -62,11 +63,13 @@
 
   function cronUpdate(){
       global $crontable;
-      $storage = file_get_contents(__DIR__."/storage.aes") or die("Could Not open file");
+     //Standardize link
+      $storage = file_get_contents(__DIR__."../data/storage.aes") or die("Could Not open file");
       $storage = decrypt_data($storage);
       $storage = json_decode($storage,true);
-
-      $crontable->fwrite("* * * * * php /opt/lampp/htdocs/testing/cronapi.php\n");
+      
+     //Standardize link
+      $crontable->fwrite("* * * * * php /opt/lampp/htdocs/Noteffy-main/noteffy/php/cronapi.php\n");
       foreach($storage["Users"] as $user){
          cronCreate($user);
       }
