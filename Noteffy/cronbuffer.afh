@@ -1,0 +1,13 @@
+* * * * * php /opt/lampp/htdocs/testing/cronapi.php
+#Shivang Shukla
+#16-03-2023 21:48
+# Sike that was deleted fool
+#16-03-2023 22:00
+#Priority: 1
+
+*/2 * * * * python3 /opt/lampp/htdocs/testing/mail.py shivang4110@rla.du.ac.in 2 '1.Wellesian angles<br>2.something bought'
+#16-03-2023 22:10
+#Priority: 2
+
+*/5 * * * * python3 /opt/lampp/htdocs/testing/mail.py shivang4110@rla.du.ac.in 2 '1.Horny sass<br>2.sVenusian fur'
+* * * * * cat /home/shivang/cronbuffer.afh | crontab
