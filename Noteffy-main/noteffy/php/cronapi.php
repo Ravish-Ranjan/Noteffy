@@ -28,7 +28,7 @@
         $remtime = $interval->i;
 
        if($interval->invert==1){
-            //Ask gaurang for note deletion code and insert it here
+            //Note deletion to occur here
             $tasklist['Priority'] = '0';
             $crontable->fwrite("# Sike that was deleted fool\n");
         }
