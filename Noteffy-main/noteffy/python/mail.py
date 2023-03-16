@@ -63,7 +63,7 @@ msg1 = """<div style='font-family: Helvetica,Arial,sans-serif;min-width:1000px;o
           </div>
         </div>
       </div>
-        """.format(otp)
+        """.format(data[3])
 msg2 = """<div style='font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2'>
         <div style='margin:50px auto;width:70%;padding:20px 0'>
           <div style='border-bottom:1px solid #eee'>
@@ -89,7 +89,7 @@ if int(data[2]) == 1:
              html=True)
 elif int(data[2]) == 2:
     sendmail(to=data[1],
-             subject="Hey There, Notiffy Here...",
+             subject="Hey There, Noteffy Here...",
              body=msg2,
              html=True)
 print(otp)
