@@ -21,8 +21,9 @@ function signUp(&$jsonData)
             $email = $jsonData["Users"][$users_count]["Email"];
             $type = 1;
             $data = '';
-            $command = "python C:/Users/DELL/OneDrive/Documents/GitHub/Noteffy/Noteffy-main/noteffy/python/mail.py $email $type $data";
-            $otp = (int) exec($command);
+            $otp = rand(1000,9999);
+            $all = explode("\php",__DIR__)[0]."\python\mail.py";
+            exec("python $all $email $type $otp");
             echo <<<_END
                     <script>
                         //Insert Some loading screen here
