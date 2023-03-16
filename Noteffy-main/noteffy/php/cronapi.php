@@ -26,7 +26,7 @@
         $curdate = date_create(date('d-m-Y H:i'));
         $interval = date_diff($curdate,$findate);
         $remtime = $interval->i;
-
+ 
        if($interval->invert==1){
             //Note deletion to occur here
             $tasklist['Priority'] = '0';
