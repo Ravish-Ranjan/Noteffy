@@ -177,8 +177,6 @@ ul{
     color: #121212;
     font-family: codec;
     font-size: 2.19vw;
-    text-align: justify;
-    margin-right: 2%;
 }
 input[type=text], select, textarea{
     width: 30%;
