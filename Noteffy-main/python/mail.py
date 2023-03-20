@@ -45,7 +45,6 @@ import sys
 data = sys.argv
 # data[0] = mail.py   data[1] = recievers mail  data[2] = otp
 import random
-otp = random.randint(1000,9999)
 msg1 = """<div style='font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2'>
         <div style='margin:50px auto;width:70%;padding:20px 0'>
           <div style='border-bottom:1px solid #eee'>
@@ -63,7 +62,8 @@ msg1 = """<div style='font-family: Helvetica,Arial,sans-serif;min-width:1000px;o
           </div>
         </div>
       </div>
-        """.format(data[3])
+        """.format(data[3] if len(data)==4 else "")
+
 msg2 = """<div style='font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2'>
         <div style='margin:50px auto;width:70%;padding:20px 0'>
           <div style='border-bottom:1px solid #eee'>
@@ -81,7 +81,7 @@ msg2 = """<div style='font-family: Helvetica,Arial,sans-serif;min-width:1000px;o
           </div>
         </div>
       </div>
-        """.format(data[3])
+        """.format(data[3] if len(data)==4 else "")
 if int(data[2]) == 1:
     sendmail(to=data[1],
              subject="Otp for SignUp",
