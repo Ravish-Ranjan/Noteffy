@@ -1,3 +1,4 @@
+
 function transitionFunction(){ // this function toggles the signIn/signUp function front end
     if(document.getElementById('toggle-checkbox').checked){
         document.getElementById("title-heading").innerHTML="Sign up";
@@ -32,6 +33,8 @@ function config(){ // this function gives different messages for user to underst
         message("The password entered was incorrect","error");break;
     case 'invm':
         message("The mail you used was invalid","error");break;
+    case 'pnm':
+        message("The passwords you entered didn't match","error");break;
     case 'iotp':
         message("The OTP you entered was incorrect","error");break;
     default:
@@ -69,4 +72,30 @@ function check_in_log() {
         console.log(flag);
         transitionFunction();
     }
+}
+function concatOTP(){
+    let otp = "";
+    let digits = document.querySelectorAll("#otpform ul li input");
+    digits.forEach(
+        (digit) =>{
+            otp = otp.concat(digit.value);
+        }
+    );
+    document.querySelectorAll("#otpform input[type = \"hidden\"]")[0].value = otp;
+    return true;
+}
+function nextDig(ele){
+    if(ele.value!=""){
+        ele.parentElement.nextSibling.nextSibling.children[0].focus();
+    }
+}
+function validatesignup(ele){
+    var mail = document.querySelector("input[name='Email']").value;
+    var pwd = document.querySelector("input[name='Password']").value;var pwd2 = document.querySelector("input[name='Password1']").value;
+
+    if(pwd!=pwd2){
+        message("Passwords do not match","error");return false;
+    }
+
+    return true;
 }
