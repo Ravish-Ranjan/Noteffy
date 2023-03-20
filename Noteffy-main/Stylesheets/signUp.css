@@ -72,7 +72,7 @@ input, label{
 label{
     font-family: codec-extrabold;
 }
-input{
+#form-1 input,#form-2 input{
     border: 1px solid #b8b8b8;
     width: 24.89vw;
     height: 2.92vw;
@@ -82,7 +82,7 @@ input{
     font-family: codec-extrabold;
     margin-left: -1.09vw;
 }
-.form2-input{
+.form1-input,.form2-input{
     border: 1px solid #b8b8b8;
     width: 24.15vw;
     height: 2.19vw;
@@ -211,4 +211,26 @@ input:checked + .slider:before{
 }
 #form-container2{
     display: none;
+}
+
+#otpform{
+    display:flex;flex-direction:column;
+    padding:0 10% 0 10%;
+    align-items:center;
+    justify-content:center;
+}
+#otpform ul{
+    display:flex;flex-direction:row;
+    height:80%;width:80%;
+    align-items:center;
+    justify-content:center;
+}
+#otpform ul li{
+    list-style:none;
+}
+#otpform ul li input{
+    list-style:none;
+    height:10%;width:55%;
+    display:inline-block;
+    border-color:blue;
 }
