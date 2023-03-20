@@ -21,7 +21,7 @@
         <div class="top" id="dashboard">
             <label id="logo">Your Workstation</label>
             <div id="prof">
-                    <img src="../media/logoredq.png" onclick="showmenu()" alt="prof" height="75" >
+                    <img src="../media/logoredq.png" onclick="showmenu()" style="cursor:pointer;" alt="prof" height="75" >
                     <?php
                         include "hash.php";
                         include "priority_calc.php";
