@@ -84,9 +84,9 @@
             </div>
         </div>
         <div class="tab">
-            <button class="tbs" onclick="openTab(event, '0')">Notes</button>
-            <button class="tbs" onclick="openTab(event, '1')">Tasks</button>
-            <button class="tbs" onclick="openTab(event, '2')">To-do</button>
+            <button class="tbs" onclick="openTab(event, '0')"><img src="../media/notesWidget.png" alt=""></button>
+            <button class="tbs" onclick="openTab(event, '1')"><img src="../media/taskWidget.png" alt=""></button>
+            <button class="tbs" onclick="openTab(event, '2')"><img src="../media/taskWidget.png" alt=""></button>
         </div>
         <div class="main" id="0">
             <div class="scat" id="divi1">
