@@ -1,3 +1,42 @@
+<?php
+    include "hash.php";
+    include "priority_calc.php";
+    include "note.php";
+    include "task.php";
+    include "todo.php";
+    $storage = file_get_contents("../data/storage.aes") or die("Could Not open the file");
+    $storage = decrypt_data($storage);
+    $storage = json_decode($storage,True);
+?>
+<?php
+    $queries = array();
+    // Fetching raw POST object body because content-type is causing parsing issues
+    parse_str($_SERVER['QUERY_STRING'], $queries);
+    if(isset($queries['signup'])=='true'){
+        $raw = file_get_contents("php://input");
+        $jsond = json_decode($raw,true) or die(123);
+        if ($jsond['Password'] !== $jsond['Password1']) {
+                $data = array('Message'=>'failure');echo $data;
+            } else if ($jsond['Password'] === $jsond['Password1']) {
+                header('Content-Type: application/json;charset=utf-8');
+                $users_count = count($storage['Users']);
+                str_pad($jsond['Username'], 32, '#', STR_PAD_RIGHT);
+                $storage['Users'][$users_count]['User_Name'] = $jsond['Username'];
+                $storage['Users'][$users_count]['Password'] = encrypt_data($jsond['Password'], str_pad($jsond["Username"], 32, '#', STR_PAD_RIGHT));
+                $storage['Users'][$users_count]['Email'] = $jsond['Email'];
+                $storage['Users'][$users_count]['Notes'] = array();
+                $storage['Users'][$users_count]['To-do'] = array();
+                $storage1 = json_encode($storage);
+                $storage1 = encrypt_data($storage1);
+                $storage1 = file_put_contents("../data/storage.aes",$storage1) or die("Could not close file");
+                $respdata = array('Message'=>'success');
+                $data = json_encode($respdata);
+                echo $data;
+        }
+        die();echo 456;
+    }
+    
+?>
 <html>
     <head>
         <title>Main Page</title>
@@ -21,16 +60,8 @@
         <div class="top" id="dashboard">
             <label id="logo">Your Workstation</label>
             <div id="prof">
-                    <img src="../media/logoredq.png" onclick="showmenu()" style="cursor:pointer;" alt="prof" height="75" >
+                    <img src="../media/logoredq.png" onclick="showmenu()" alt="prof" height="75" >
                     <?php
-                        include "hash.php";
-                        include "priority_calc.php";
-                        include "note.php";
-                        include "task.php";
-                        include "todo.php";
-                        $storage = file_get_contents("../data/storage.aes") or die("Could Not open the file");
-                        $storage = decrypt_data($storage);
-                        $storage = json_decode($storage,True);
                         if(getUser()==" "){
                             // echo "<script>window.location.href = 'index.php'</script>";
                         }
@@ -42,9 +73,9 @@
                             </div>
                             <ul>
                                 <li><a href='../HTML/chart.html' style='text-decoration:none;'>Scoreboard</a><br></li>
-                                <li><a href='../html/signUp.html' id='logout' onclick='clearCookies()' style='text-decoration: none;'>Log Out</a></li>
-                                <li><a href='#' style='text-decoration: none;' onclick='hidemenu()'>Workspace</a></li>
-                                <li><a href='index.php' style='text-decoration: none;'>Home</a></li>
+                                <li><a href='../HTML/signUp.html' id='logout' onclick='clearCookies()' style='text-decoration: none;'>Log Out</a></li>
+                                <li><a href='#' style='text-decoration: none;' onclick='hidemenu()'>Back</a></li>
+                                <li><a href='index.php' style='text-decoration: none;'>Noteffy</a></li>
                             </ul>
                             </div>" ;
                             setcookie("user_number",getUserNumber($storage),0,"/");
@@ -53,9 +84,9 @@
             </div>
         </div>
         <div class="tab">
-            <button class="tbs" onclick="openTab(event, '0')"><img src="../media/notesWidget.png" alt=""></button>
-            <button class="tbs" onclick="openTab(event, '1')"><img src="../media/taskWidget.png" alt=""></button>
-            <button class="tbs" onclick="openTab(event, '2')"><img src="../media/taskWidget.png" alt=""></button>
+            <button class="tbs" onclick="openTab(event, '0')">Notes</button>
+            <button class="tbs" onclick="openTab(event, '1')">Tasks</button>
+            <button class="tbs" onclick="openTab(event, '2')">To-do</button>
         </div>
         <div class="main" id="0">
             <div class="scat" id="divi1">

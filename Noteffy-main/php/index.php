@@ -26,11 +26,13 @@
             </div>
             <div id="info-container">
                 <p id="text">About Noteffy</p>    
-                <p id="text-3">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                     Modi aspernatur aliquam architecto ipsa magnam! Consequuntur qui debitis
-                      quaerat harum commodi, quo, ipsam iusto corrupti obcaecati a, rerum eligendi quidem. Expedita?
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae ut repellat velit maiores, saepe laboriosam quidem minima voluptatum soluta. Odio aut tempora, enim itaque placeat obcaecati quasi doloribus laborum eveniet.
-                      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor voluptate tempora mollitia! Rem commodi facilis iure deleniti dignissimos in nobis omnis molestiae, repellendus corrupti enim, porro, dicta modi quasi laborum.
+                <p id="text-3">kal saade noh baaje yaha pahuz jhanha, agar zindagi mai sachmai kuch baada karna chahta hai,
+                    agar zindagi mai sachmai kuch baada karna chahta hai toh kal saade noh baaje yaha pahuz janha badi 
+                    mushkil se, maine tere liye ek pass arrange kiya hai kal saade noh baaje yaha pahuch jaanha, zindagi mai 
+                    agar vakiye mai kuch baada krna chahta hai, mere pas khud bahut cum logo ke liye mauke thee aur un
+                    cum logo mai maine tera naam rakha hai kyu kyuki muzhe pata hai tu kuch krna chahta hai, saade noh baaje
+                    yaha pahuch jaana miss mat krna vrna bahut pachtayega.
+                    Aaji lund mera
                 </p>
             </div>
         </div>
@@ -39,7 +41,7 @@
                 <center>
                     <p id="text-2">Contact Us</p>
                     <br>
-                    <form action="#">
+                    <form action="nigga">
                         <input type="text" id="name" name="name" placeholder="Your name..">
                         <br>
                         <input type="text" id="email" name="email" placeholder="Your email..">
@@ -64,7 +66,7 @@
                     </ul>
                 </div>
                 <br>
-                <p id="address">Add: divine ki maa ka ghar, Kurla(W), Mumbai, Maharashtra, India</p>
+                <p id="address">Add: meri nani ka ghar, Kurla(W), Mumbai, Maharashtra, India</p>
                 <div id="footer-logo">
                     <img src="../media/noteffyTitleBlack.png" id="footer-logo">
                 </div>

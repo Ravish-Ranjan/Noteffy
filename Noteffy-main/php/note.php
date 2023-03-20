@@ -30,7 +30,7 @@ function signUp(&$jsonData)
                         let val = prompt("Enter otp");
                         if(val!=$otp){
                              // Changed
-                            window.location.href = '../html/signUp.html?err=iotp&activity=signup&mail=$email';
+                            window.location.href = '../HTML/signUp.html?err=iotp&activity=signup&mail=$email';
                         }
                     </script>
                 _END;
@@ -62,9 +62,8 @@ function signIn(&$jsonData)
                 }
             }
         }
-        echo '<script>window.location.href="../html/signUp.html?err=' . $errc . '&name=' . $name . '&activity=' . ($errc == 'uid' ? "signup" : "signin") . '";</script>';
+        echo '<script>window.location.href="../HTML/signUp.html?err=' . $errc . '&name=' . $name . '&activity=' . ($errc == 'uid' ? "signup" : "signin") . '";</script>';
         return;
-
     }
 }
 function getUser()
@@ -120,15 +119,15 @@ function display(&$jsonData, $user)
     for ($i = 0; $i < $count; $i++) {
         $item = $jsonData['Users'][$user]['Notes'][$i];
         $j = $i + 1;
-        $noteimg = "../media/newNote" . rand(1, 3) . ".png";
+        $noteimg = "../media/note" . rand(1, 3) . ".png";
         $pinimg = "../media/pin" . rand(1, 3) . ".png";
-        // $title = substr(explode(' ', $item['Title'])[0], 0, 6);
-        $title = $item['Title'];
+        $title = substr(explode(' ', $item['Title'])[0], 0, 6);
         $content = $item['Content'];
         sanitize($content);
-        $visible = substr($content, 0, 25); //<label class=\"title\">$j.$title</label>
-        echo "<div title=' TITLE: $title' class=\"divi\" style=\"background-image:url($noteimg);\">
-        <div  class=\"topic\">
+        $visible = substr($content, 0, 25);
+        echo "<div class=\"divi\" style=\"background-image:url($noteimg);\">
+        <div class=\"topic\">
+        <label class=\"title\">$j.$title</label>
                         <img id=\"pin\" src=$pinimg alt=\"pin\">
                     </div>
                     <div class=\"data\">
