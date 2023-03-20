@@ -119,7 +119,7 @@ function display(&$jsonData, $user)
     for ($i = 0; $i < $count; $i++) {
         $item = $jsonData['Users'][$user]['Notes'][$i];
         $j = $i + 1;
-        $noteimg = "../media/note" . rand(1, 3) . ".png";
+        $noteimg = "../media/newNote" . rand(1, 3) . ".png";
         $pinimg = "../media/pin" . rand(1, 3) . ".png";
         $title = substr(explode(' ', $item['Title'])[0], 0, 6);
         $content = $item['Content'];
