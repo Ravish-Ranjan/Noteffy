@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="../media/logo5mix.png">
+        <title>Your Workspace</title>
+        <script>
+            function workspaceSelector1(){
+                if(document.getElementById("note-widget").click){
+                    document.getElementById("task-workspace").style.display = "none";
+                    document.getElementById("note-workspace").style.display = "block";
+                    document.getElementById("task-compose-button").style.display = "none";
+                    document.getElementById("note-compose-button").style.display = "block";
+                    document.getElementById("task-widget").style.opacity = "0.2";
+                    document.getElementById("note-widget").style.opacity = "1";
+                }
+            }
+            function workspaceSelector2(){
+                if(document.getElementById("task-widget").click){
+                    document.getElementById("task-workspace").style.display = "block";
+                    document.getElementById("note-workspace").style.display = "none";
+                    document.getElementById("note-compose-button").style.display = "none";
+                    document.getElementById("task-compose-button").style.display = "block";
+                    document.getElementById("note-widget").style.opacity = "0.2";
+                    document.getElementById("task-widget").style.opacity = "1";
+                }
+            }
+            function displayPanel(){
+                if(document.getElementById("user-avatar").click){
+                    document.getElementById("panel-content").style.marginRight = 0; 
+                    document.getElementById("main-background").style.opacity = "0.5";
+                }
+            }
+            function panelRevert(){
+                if(document.getElementById("back-bbt").click){
+                    document.getElementById("panel-content").style.marginRight = "-36.68vw";
+                    document.getElementById("main-background").style.opacity = "1";
+                }
+            }
+            function showNoteCompose(){
+                if(document.getElementById("note-compose-button").click){
+                   document.getElementById("note-compose-area").style.display = 'block';
+                }
+            }
+            function showTaskCompose(){
+                if(document.getElementById("task-compose-button").click){
+                   document.getElementById("task-compose-area").style.display = 'block';
+                }
+            }
+            function closeCompose1(){
+                if(document.getElementById("close-button-1").click){
+                   document.getElementById("note-compose-area").style.display = 'none';
+                }
+            }
+            function closeCompose2(){
+                if(document.getElementById("close-button-2").click){
+                   document.getElementById("task-compose-area").style.display = 'none';
+                }
+            }
+        </script>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            @font-face{
+                font-family: codec;
+                src: url('../media/Codec-Cold-Regular-trial.ttf');
+            }
+            @font-face{
+                font-family: codec-extrabold;
+                src: url('../media/Codec-Cold-Heavy-trial.ttf');
+            }
+            @keyframes rotation{
+                0%{
+                    transform: rotate(0deg);
+                }
+                25%{
+                    transform: rotate(10deg);
+                }
+                50%{
+                    transform: rotate(-20deg);
+                }
+                75%{
+                    transform: rotate(10deg);
+                }
+                100%{
+                    transform: rotate(0deg);
+                }
+            }
+            #main-background{
+                background-image: url('../media/workspaceBG.png');
+                background-repeat: no-repeat;
+                width: 100vw;
+                height: 100vh;
+            }
+            #heading{
+                font-family: codec-extrabold;
+                color: #ffffff;
+                padding-top: 4.39vw;
+                padding-left: 2.92vw;
+                font-size: 2.92vw;
+                text-shadow: 0 0 0.36vw #fff;
+            }
+            #widget-container{
+                display: flex;
+            }
+            #note-widget{
+                float: left;
+                cursor: pointer;
+                width: auto;
+                height: 12.17vh;
+                margin-top: 2.19vw;
+                margin-left: 7.32vw;
+            }
+            #task-widget{
+                float: right;
+                cursor: pointer;
+                width: auto;
+                height: 12.17vh;
+                margin-top: 2.19vw;
+                margin-left: 7.32vw;
+                opacity: 0.2;
+            }
+            #user-avatar{
+                float: right;
+                cursor: pointer;
+                width: auto;
+                height: 10.65vh;
+                margin-top: 2.92vw;
+                margin-left: 9.51vw;
+            }
+            #workspace-container{
+                display: flex;
+            }
+            #note-workspace{
+                border: 0.21vw solid #ffffff;
+                border-radius: 4.39vw;
+                width: 82.72vw;
+                height: 76.10vh;
+                margin-left: 2.92vw;
+                background-image: url('../media/background_3.png');
+                background-repeat: repeat;
+                background-size: 110%;
+                float: left;
+                position: absolute;
+            }
+            #task-workspace{
+                border: 0.21vw solid #ffffff;
+                border-radius: 4.39vw;
+                width: 82.72vw;
+                height: 76.10vh;
+                margin-left: 2.92vw;
+                background-image: url('../media/background_4.png');
+                /* background-repeat: no-repeat; */
+                background-size: 110%;
+                float: left;
+                position: absolute;
+            }
+            #compose-button{
+                float: right;
+                bottom: 0vw;
+            }
+            #note-compose-button{
+                position: absolute;
+                right: 0;
+                bottom: 2.19vw;
+                margin-right: 4.39vw;
+                border: none;
+                width: 5.85vw; 
+                /* height: 12.17vh; */
+                aspect-ratio: 1/1;
+                border-radius: 100%;
+                cursor: pointer;
+                appearance: none;
+                display: inline-block;
+            }
+            #note-button-image{
+                width: 3.29vw;
+                height: 6.84vh; 
+            }
+            #note-button-image:hover{
+                animation: rotation 1s infinite ease-in-out;
+            }
+            #task-compose-button{
+                position: absolute;
+                right: 0;
+                bottom: 2.19vw;
+                margin-right: 4.39vw;
+                border: none;
+                width: 5.85vw; 
+                /* height: 12.17vh; */
+                aspect-ratio: 1/1;
+                border-radius: 100%;
+                cursor: pointer;
+                appearance: none;
+                display: inline-block;
+            }
+            #task-button-image{
+                width: 4.02vw;
+                height: 5.32vh;
+            }
+            #task-button-image:hover{
+                animation: rotation 1s infinite ease-in-out;
+            }
+            #container-panel{
+                z-index: 1;
+                position: absolute;
+                right: 0;
+                top: 0;
+                height: 100%;
+                overflow-x: hidden; 
+            }
+            #panel-content{
+                width: 21.96vw;
+                height: 100%;
+                margin-right: -36.60vw; 
+                background-color: #ffffff;
+                transition: cubic-bezier(0.075, 0.82, 0.165, 1) 1s;
+            }
+            #hobo-homemade-dickcheese{
+                display: flex;
+                padding-top: 1.46vw;
+                padding-left: 0.73vw;
+            }
+            #panel-avatar{
+                width: auto;
+                height: 15.22vh;
+                float: left;
+            }
+            #panel-username{
+                float: right;
+                font-size: 1.83vw;
+                margin-top: 2.56vw;
+                font-family: codec;
+            }
+            a{
+                cursor: pointer;
+                display: block;
+                text-decoration: none;
+                background-color: #ffffff;
+                color: #121212;
+                font-size: 1.46vw;
+                font-family: codec-extrabold;
+                height: 6.08vh;
+                padding-left: 1.46vw;
+                padding-top: 1.09vw;
+            }
+            a:hover{
+                background-color: #121212;
+                color: #ffffff;
+                transition: 0.7s;
+            }
+            #back-bbt{
+                text-decoration: none;
+                background-color: #ffffff;
+                color: #121212;
+                font-size: 1.46vw;
+                font-family: codec-extrabold;
+                width: 100%;
+                height: 9.13vh;
+                cursor: pointer;
+                text-align: left;
+                padding-left: 1.31vw;
+                border: none;
+            }
+            #back-bbt:hover{
+                background-color: #121212;
+                color: #ffffff;
+                transition: 0.7s;
+            }
+            #note-compose-area{
+                width: 36.60vw;
+                height: 68.49vh;
+                background-color: #ffffff;
+                position: absolute;
+                z-index: 1;
+                bottom: 6.58vw;
+                margin-left: 51.24vw;
+                display: none;
+                border-radius: 1.46vw;
+            }
+            #task-compose-area{
+                width: 36.60vw;
+                height: 68.49vh;
+                background-color: #ffffff;
+                position: absolute;
+                z-index: 1;
+                bottom: 6.58vw;
+                margin-left: 51.24vw;
+                display: none;
+                border-radius: 1.46vw;
+            }
+            #close-button-1{
+                float: right;
+                margin-right: 0.73vw;
+                background-color: #ffffff;
+                border: none;
+                cursor: pointer;
+            }
+            #close-button-2{
+                float: right;
+                margin-right: 0.73vw;
+                background-color: #ffffff;
+                border: none;
+                cursor: pointer;
+            }
+            #fullscreen-button{
+                float: right;
+                background-color: #ffffff;
+                border: none;
+                margin-top: 0.31vw;
+                margin-right: 0.58vw;
+                cursor: pointer;
+            }
+            #fullscreen-icon{
+                height: 1.67vh;
+                width: 0.80vw;
+            }
+            #cancel-icon{
+                height: 1.67vh;
+                width: 0.80vw;
+                margin-top: 0.29vw;
+            }
+            #heading-top-wrapper{
+                float: left;
+                font-family: codec-extrabold;
+                margin-left: 1.46vw;
+            }
+            #top-wrapper{
+                margin-top: 0.7vw;
+                height: 4.56vh;
+            }
+            #text-1{
+                font-family: codec;
+                font-size: 1.46vw;
+            }
+            #note-inputs{
+                margin-left: 1.46vw;
+            }
+            input[type=text]{
+                border: none;
+                border-bottom: 0.07vw solid #555;
+                width: 28.25vw;
+                height: 4.56vh;
+            }
+            textarea{
+                resize: none;
+                border: none;
+                border-bottom: 0.07vw solid #555;
+            }
+            #note-submit-bbt{
+                border: none;
+                width: 7.32vw;
+                height: 6.08vh;
+                background-color: #ffffff;
+                color: #000000;
+                font-family: codec-extrabold;
+                cursor: pointer;
+                border-radius: 0.73vw;
+            }
+            #note-submit-bbt:hover{
+                background-color: #121212;
+                color: #ffffff;
+                transition: 0.5s;
+            }
+            #task-time-date{
+                border: none;
+                border-bottom: 0.07vw solid #555;
+            }
+            @media screen and (max-width:868px) {
+                #heading{
+                    display: none;
+                }
+            }
+
+            @media screen and (max-width:1000px) {
+                #note-workspace,#task-workspace{
+                    width: 80vw;
+                }
+                #task-compose-button,#note-compose-button{
+                    width: 5vw;
+                }
+                #note-widget,#task-widget{
+                    width: 30vw;
+                    height: 10vh;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="compose-wrapper">
+            <div id="task-compose-area">
+                <div id="top-wrapper">
+                    <p id="heading-top-wrapper">New Task</p>
+                    <button id="close-button-2" onclick="closeCompose2()">
+                        <img src="../media/cancelIcon.png" id="cancel-icon">
+                    </button>
+                    <button id="fullscreen-button">
+                        <img src="../media/fullscreenIcon.png" id="fullscreen-icon">
+                    </button>
+                </div>
+                <div id="note-inputs">
+                    <p id="text-1">Title</p>
+                    <input type="text" placeholder="Add here...">
+                    <br>
+                    <br>
+                    <br>
+                    <p id="text-1">Set Time</p>
+                    <input type="datetime-local" id="task-time-date">
+                    <br>
+                    <br>
+                    <br>
+                    <p id="text-1">Let's accomplish!</p>
+                    <textarea rows="10" cols="50" placeholder="Your tasks..."></textarea>
+                    <br>
+                    <br>
+                    <input type="submit" id="note-submit-bbt">
+                </div>
+            </div>
+            <div id="note-compose-area">
+                <div id="top-wrapper">
+                    <p id="heading-top-wrapper">New Note</p>
+                    <button id="close-button-1" onclick="closeCompose1()">
+                        <img src="../media/cancelIcon.png" id="cancel-icon">
+                    </button>
+                    <button id="fullscreen-button">
+                        <img src="../media/fullscreenIcon.png" id="fullscreen-icon">
+                    </button>
+                </div>
+                <div id="note-inputs">
+                    <p id="text-1">Title</p>
+                    <input type="text" placeholder="Add here...">
+                    <br>
+                    <br>
+                    <p id="text-1">What's in my mind?</p>
+                    <textarea rows="15" cols="50" placeholder="Add here..."></textarea>
+                    <br>
+                    <br>
+                    <input type="submit" id="note-submit-bbt">
+                </div>
+            </div>
+        </div>
+        <div id="wrapper">
+            <div id="container-panel">
+                <div id="panel-content">
+                    <div id="hobo-homemade-dickcheese">
+                        <img src="../media/logoredq.png" id="panel-avatar">
+                        <p id="panel-username">Hi, username!</p>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <div id="anchor-panel">
+                        <a href="#">Dashboard</a>
+                        <a href="#">Settings</a>
+                        <a>Log Out</a>
+                        <button onclick="panelRevert()" id="back-bbt">Back</button>
+                    </div>
+                </div>
+            </div>
+            <div id="main-background">
+                <div id="widget-container">
+                    <p id="heading">Your Workspace</p>
+                    <input type="image" src="../media/notesWidget.png" id="note-widget" onclick="workspaceSelector1()">
+                    <input type="image" src ="../media/taskWIdget.png" id="task-widget" onclick="workspaceSelector2()">
+                    <input type="image" src="../media/logoredq.png" id="user-avatar" onclick="displayPanel()">
+                </div>
+                <br>
+                <div id="workspace-container">
+                    <div id="task-workspace">
+                        <!--Add notes-->
+                    </div>
+                    <div id="note-workspace">
+                        <!--Add tasks-->
+                    </div>
+                    <div id="compose-button">
+                        <button type="button" id="task-compose-button" onclick="showTaskCompose()">
+                            <img src="../media/goldenperi.png" id="task-button-image">
+                        </button> 
+                        <button type="button" id="note-compose-button" onclick="showNoteCompose()">
+                            <img src="../media/quillpen.png" id="note-button-image">
+                        </button> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

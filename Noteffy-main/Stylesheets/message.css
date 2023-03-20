@@ -1,0 +1,41 @@
+*{
+    margin:0;
+    padding:0;
+}
+.message_success{
+    display: grid;
+    /* grid-template-columns: repeat(1,1fr); */
+    place-items: center;
+    border:1px solid black;
+    position:absolute;
+    left:50vw;
+    top: 2%;
+    aspect-ratio: 5/1;
+    width:200px;
+    place-items: center;
+    background-color: rgba(111, 241, 106, 0.721);
+    box-shadow: -2px 1px 4px solid black;
+    border-radius: 20px;
+    opacity: 70%;
+}
+.message_failure,.error{
+display: grid;
+grid-template-columns: repeat(1,1fr);
+border:1px solid black;
+position:absolute;
+left:50vw;top:4vw;
+height: 3vw;
+width:30vw;
+place-items: center;
+background-color: rgba(255, 0, 0, 0.721);
+z-index:4;
+box-shadow: -2px 1px 4px solid black;
+border-radius: 20px;
+opacity: 70%;
+}
+#content{
+font-family: url("../media/Minecraft.ttf");
+font-size:14px;
+color:white;
+font-weight: bolder;
+}

@@ -1,0 +1,37 @@
+{
+    "Users": [
+        {
+            "User_Name": "Gaurang Tyagi",
+            "Password": "Xraakl7Zbom+zDn2cgJGzg==",
+            "Email": "gaurangtyagi7@gmail.com",
+            "Notes": [],
+            "To-do": []
+        },
+        {
+            "User_Name": "ravishranjan",
+            "Password": "OSuDl18Zw3qc7EnpgYh8fQ==",
+            "Email": "ravishranjan2003@gmail.com",
+            "Notes": [],
+            "To-do": []
+        },
+        {
+            "User_Name": "Ravi",
+            "Password": "9iTf1JahPwt0BEOLWdbReQ==",
+            "Email": "gaurangtyagi7@gmail.com",
+            "Notes": [],
+            "To-do": [
+                {
+                    "Title": "Ravi task",
+                    "Time": "14:37",
+                    "Date": "2023-03-16",
+                    "Priority": 1,
+                    "Tasks": [
+                        "1.)aaj mujhe\r",
+                        "2.)tatti\r",
+                        "3.)aayi"
+                    ]
+                }
+            ]
+        }
+    ]
+}
