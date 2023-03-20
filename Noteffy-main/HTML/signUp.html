@@ -14,6 +14,7 @@
         <!-- scripts -->
         <script src="../Script/message.js"></script>
         <script src="../Script/signUp.js"></script>
+        <script src = "../Script/otpapi.js"></script>
 
         <title>Welcome - Noteffy</title>
     </head>
@@ -41,7 +42,7 @@
                                 <input class="form1-input" placeholder="Enter" type="text"  name="User_Name_" required><br><br>
                                 <label >Password</label>
                                 <input placeholder="Enter" type="password" name="Password_" required><br><br>
-                                <button id="log-bbt" type="submit" form="form-1" value="Submit">LOG IN</button>
+                                <button class="log-bbt" type="submit" form="form-1" value="Submit">LOG IN</button>
                                 <div class="end-container">
                                     <div class="continue-text">
                                         <p id="cont-text">or continue with</p>
@@ -63,7 +64,7 @@
                                 <input class="form2-input" placeholder="Enter" type="password" name="Password" required><br><br>
                                 <label>Confirm Password</label>
                                 <input class="form2-input" placeholder="Enter" type="password" name="Password1" required><br><br>
-                                <button id="log-bbt" type="submit" form="form-2" value="Submit">SIGN UP</button>
+                                <button id="log-bbt" onclick = "return generateOTP(this.parentElement.children[1].value,this.parentElement.children[5].value,this.parentElement.children[9].value,this.parentElement.children[13].value);" type="submit" form="form-2" value="Submit">SIGN UP</button>
                                 <div class="end-container2">
                                     <div class="continue-text">
                                         <p id="cont-text">or continue with</p>
