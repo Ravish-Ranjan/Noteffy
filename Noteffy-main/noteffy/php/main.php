@@ -43,8 +43,8 @@
                             <ul>
                                 <li><a href='../HTML/chart.html' style='text-decoration:none;'>Scoreboard</a><br></li>
                                 <li><a href='../html/signUp.html' id='logout' onclick='clearCookies()' style='text-decoration: none;'>Log Out</a></li>
-                                <li><a href='#' style='text-decoration: none;' onclick='hidemenu()'>Back</a></li>
-                                <li><a href='index.php' style='text-decoration: none;'>Noteffy</a></li>
+                                <li><a href='#' style='text-decoration: none;' onclick='hidemenu()'>Workspace</a></li>
+                                <li><a href='index.php' style='text-decoration: none;'>Home</a></li>
                             </ul>
                             </div>" ;
                             setcookie("user_number",getUserNumber($storage),0,"/");
