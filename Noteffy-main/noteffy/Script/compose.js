@@ -2,7 +2,11 @@ function closeF(){
     document.querySelector('.FORM').remove();
     document.querySelector("#btn1").setAttribute("onclick","compose()");
 }
-function note_compose(date,title,note,note_no){  //this function helps to create more notes for user
+function note_compose(date, title, note, note_no) {  //this function helps to create more notes for user
+    if (document.getElementsByClassName("FORM").length != 0) {
+        document.getElementsByClassName("FORM")[0].remove();
+        return;
+    }
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); 
@@ -17,7 +21,7 @@ function note_compose(date,title,note,note_no){  //this function helps to create
     let noteform = document.createElement("form");
     noteform.setAttribute("action", action); noteform.setAttribute("method", "POST");
     noteform.setAttribute("class", "FORM");
-    noteform.setAttribute("onsubmit","return checkEmpty(this)");
+    noteform.setAttribute("onsubmit", "return checkEmpty(this)");
     noteform.innerHTML = `<span id='Form_Caption'>ADD A NOTE</span>\
     <button id = 'close' style=\"font-size:2vw;\" onclick = \"closeF()\">x</button>\
     <label for='Date'>Date</label>\
@@ -31,7 +35,11 @@ function note_compose(date,title,note,note_no){  //this function helps to create
     document.querySelector("#btn1").toggleAttribute("onclick", "");
     document.getElementById("Date").value = today;
 }
-function task_compose(date,tm,title,tk,task_no){  //this function helps to create more tasks for user
+function task_compose(date, tm, title, tk, task_no) {  //this function helps to create more tasks for user
+    if (document.getElementsByClassName("FORM").length != 0) {
+        document.getElementsByClassName("FORM")[0].remove();
+        return;
+    }
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); 
@@ -57,7 +65,7 @@ function task_compose(date,tm,title,tk,task_no){  //this function helps to creat
     noteform.setAttribute("class", "FORM");
     noteform.setAttribute("action",action);noteform.setAttribute("method","POST");
     noteform.setAttribute("onsubmit","return checkEmpty(this)");
-    noteform.innerHTML = `<span id='Form_Caption'>ADD A NOTE</span>\
+    noteform.innerHTML = `<span id='Form_Caption'>ADD A TASK</span>\
     <button id = 'close' style=\"font-size:2vw;\" onclick = \"closeF()\">x</button>\
     <label for='Date'>Date</label>\
     <input type='date' name='T_Date' id='Date'>\

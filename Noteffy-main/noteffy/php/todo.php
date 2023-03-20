@@ -61,9 +61,10 @@
                 $pinimg = "../media/pin".priority_calc($item).".png";
                 $title = substr(explode(' ',$item['Title'])[0],0,8);
                 $content = $item["Tasks"];
-            sanitize_array($content);
+                sanitize_array($content);
+                $percent = count($c_task) * 100 / count($content).'% task completed';
     
-                echo "<div class=\"divi\" style=\"background-image:url($noteimg);\" id='$j' >
+                echo "<div title='$percent' class=\"divi\" style=\"background-image:url($noteimg);\" id='$j' >
                         <div class=\"topic\">
                             <label class=\"title\">$j.$title</label>
                             <img id=\"pin\" src=$pinimg alt=\"pin\">
