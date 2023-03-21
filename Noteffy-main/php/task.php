@@ -79,15 +79,14 @@
             date_default_timezone_set("Asia/Kolkata");
             
             $j = $i+1;
-            $noteimg = "../media/note".rand(1,3).".png";
+            $noteimg = "../media/newNote".rand(1,3).".png";
             $pinimg = "../media/pin".priority_calc($item).".png";
-            $title = substr(explode(' ',$item['Title'])[0],0,8);
-            $content = $item['Tasks'];
+            $title = $item['Title'];
+            $content = $item['Tasks']; //<label class=\"title\" id='title$i'>$j.$title</label>
         sanitize_array($content);
             // <a href='../php/main.php?T_no=$i&User=$user' style='text-decoration:none;color:black'>
-            echo "<div class=\"divi\" style=\"background-image:url($noteimg);\">
+            echo "<div class=\"divi\" style=\"background-image:url($noteimg);\" title='title:$title'>
                     <div class=\"topic\">
-                        <label class=\"title\" id='title$i'>$j.$title</label>
                         <img id=\"pin\" src=$pinimg alt=\"pin\">
                     </div>
                     <div class=\"data\">

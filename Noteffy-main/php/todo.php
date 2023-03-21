@@ -57,15 +57,14 @@
                 
                 // calculating priority 
                 $j = $i+1;
-                $noteimg = "../media/note".rand(1,3).".png";
+                $noteimg = "../media/newNote".rand(1,3).".png";
                 $pinimg = "../media/pin".priority_calc($item).".png";
-                $title = substr(explode(' ',$item['Title'])[0],0,8);
-                $content = $item["Tasks"];
+                $title = $item['Title'];
+                $content = $item["Tasks"]; //<label class=\"title\">$j.$title</label>
             sanitize_array($content);
     
-                echo "<div class=\"divi\" style=\"background-image:url($noteimg);\" id='$j' >
+                echo "<div class=\"divi\" style=\"background-image:url($noteimg);\" id='$j' title='title:$title' >
                         <div class=\"topic\">
-                            <label class=\"title\">$j.$title</label>
                             <img id=\"pin\" src=$pinimg alt=\"pin\">
                         </div>
                         <div class=\"data\">

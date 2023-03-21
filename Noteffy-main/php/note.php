@@ -121,13 +121,12 @@ function display(&$jsonData, $user)
         $j = $i + 1;
         $noteimg = "../media/newNote" . rand(1, 3) . ".png";
         $pinimg = "../media/pin" . rand(1, 3) . ".png";
-        $title = substr(explode(' ', $item['Title'])[0], 0, 6);
+        $title = $item['Title'];
         $content = $item['Content'];
         sanitize($content);
-        $visible = substr($content, 0, 25);
-        echo "<div class=\"divi\" style=\"background-image:url($noteimg);\">
+        $visible = substr($content, 0, 25); //
+        echo "<div class=\"divi\" style=\"background-image:url($noteimg);\" title='title:$title'>
         <div class=\"topic\">
-        <label class=\"title\">$j.$title</label>
                         <img id=\"pin\" src=$pinimg alt=\"pin\">
                     </div>
                     <div class=\"data\">
