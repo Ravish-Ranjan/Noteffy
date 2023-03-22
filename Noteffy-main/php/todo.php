@@ -1,4 +1,17 @@
 <?php
+    function percent($i,$jsonData){
+        if(isset($_COOKIE['percent'])){
+            $temp = json_decode($_COOKIE['percent'],true);
+            if(array_key_exists(getUserNumber($jsonData),$temp)){
+                if(array_key_exists("$i",$temp[getUserNumber($jsonData)])){
+                    return $temp[getUserNumber($jsonData)]["$i"]."% task completed";
+                } 
+                else
+                    return "0% task completed";
+            } else
+            return "0% task completed";
+        }
+    }
     function complete(&$jsonData){
         $userNumber = getUserNumber($jsonData);
         if(isset($_POST['Task_no']))
@@ -57,13 +70,19 @@
                 
                 // calculating priority 
                 $j = $i+1;
-                $noteimg = "../media/newNote".rand(1,3).".png";
+                $noteimg = "../media/newNote".priority_calc($item).".png";
                 $pinimg = "../media/pin".priority_calc($item).".png";
                 $title = $item['Title'];
                 $content = $item["Tasks"]; //<label class=\"title\">$j.$title</label>
-            sanitize_array($content);
-    
-                echo "<div class=\"divi\" style=\"background-image:url($noteimg);\" id='$j' title='title:$title' >
+                sanitize_array($content);
+            // if (isset($_COOKIE['percent']) && array_key_exists("$i", json_decode($_COOKIE['percent'], true)[getUserNumber($jsonData)]))
+            //     $percent = json_decode($_COOKIE['percent'], true)[getUserNumber($jsonData)]["$i"] . "% task completed";
+            // else if(!isset($_COOKIE['percent']))
+            //     $percent = "0% task completed";
+            // else
+            //     $percent = "0% task completed";
+            $percent = percent($i, $jsonData);
+                echo "<div class=\"divi\" style=\"background-image:url($noteimg);\" id='$j' title='$percent'>
                         <div class=\"topic\">
                             <img id=\"pin\" src=$pinimg alt=\"pin\">
                         </div>
@@ -87,7 +106,7 @@
                             }
                             echo "<input type='hidden' value='$i' name='Task_no'>";
                             echo "</form>";
-                echo        "<ul></div>
+                echo        "</ul></div>
                             <div class=\"control\">
                                 <button onclick=\"\">
                                     <img title='edit the note' src=\"../media/edit.png\" alt=\"\">
@@ -121,6 +140,29 @@
             }
             return false;
         }
+        function getPercent(){
+            let user = getUser();
+            var percent = {};
+            percent[user] = {};
+            decodedCookie = decodeURIComponent(document.cookie);
+            decodedCookie = decodedCookie.split(';');
+            for(var i in decodedCookie){
+                let c = decodedCookie[i];
+                c = c.split('=');
+                if(c[0].trim() == 'percent'){
+                    percent = JSON.parse(c[1]);
+                    return percent;
+                }
+            }
+            return percent;
+        }
+        function removePercent(user,p,task_no){
+            var count = Object.keys(p[user]).length;
+            for(j=parseInt(task_no);j<count-1;j++){
+                p[user][j] = p[user][j+1];
+            }
+            p[user][count-1] = 0;
+        }
         function getTask(){
             let user = getUser();
             var obj = {};
@@ -142,7 +184,6 @@
             for(j=parseInt(task_no);j<count-1;j++){
                 t[user][j] = t[user][j+1];
             }
-            console.log(t);
             t[user][count-1] = [];
         }
 
@@ -151,6 +192,7 @@
         var task_no;
         var to = document.getElementById('divi3')
         let t = getTask();
+        let p = getPercent();
         let fm;
             to.addEventListener('click',(e)=>{
                 var id = e.target.id;
@@ -164,9 +206,15 @@
                     t[user] = {};
                     t[user][task_no] = Array();
                 }
+                if((user in p) && p[user][task_no] === undefined)
+                    p[user][task_no] = 0;
+                else if(!(user in p)){
+                    p[user] = {};
+                    p[user][task_no] = 0;
+                }
                 var temp = document.querySelector('label[for='+id+']');
                 
-                if(l.checked && temp!=null){
+                if(l.checked && temp!=null && fm!=null){
                     temp.style.textDecorationLine = 'line-through';
                     t[user][task_no].push(temp.innerText);
                 }
@@ -177,10 +225,18 @@
             }
             if(fm!=null && fm.length-1 == t[user][task_no].length){
                 removeTask(user,t,task_no);
+                removePercent(user,p,task_no);
                 fm.submit();
             }
             var d = new Date();
             d.setTime(d.getTime()+24*60*60*1000);
+            var divi = fm.parentElement;
+            while(divi.className!='divi'){
+                divi = divi.parentElement;
+            }
+            p[user][task_no] = (t[user][task_no].length*100/(fm.length-1)).toPrecision(2);
+            divi.setAttribute('title',p[user][task_no]+'% task completed');
+            document.cookie = 'percent='+JSON.stringify(p)+';expires='+d.toUTCString()+';path=/';
             document.cookie = 'comp_task='+JSON.stringify(t)+';expires='+d.toUTCString()+';path=/';
         });
         </script>";
