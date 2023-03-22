@@ -1,0 +1,20 @@
+{
+    "Users" : [
+        {
+            "user_name" : "Gaurang Tyagi",
+            "Email" : "gaurangtyagi7@gmail.com",
+            "password" : "xyzaqq==",
+            "type" : true,
+            "identifier" : 1,
+            "Organization_code" : null
+        },
+        {
+            "user_name" : "Ravish Ranjan",
+            "Email" : "Ravishranjan4005@gmail.com",
+            "password" : "xyzaqq==",
+            "type" : false,
+            "identifier" : 2,
+            "Organization_code" : null
+        }
+    ]
+}

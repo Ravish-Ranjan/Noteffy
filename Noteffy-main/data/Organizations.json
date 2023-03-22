@@ -1,0 +1,9 @@
+{
+    "Organizations" : [
+        {
+            "Admin" : 1,
+            "Organization_code" : "xqc",
+            "group" : [1,2,3,4]
+        }
+    ]
+}
