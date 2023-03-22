@@ -79,7 +79,7 @@
             date_default_timezone_set("Asia/Kolkata");
             
             $j = $i+1;
-            $noteimg = "../media/newNote".rand(1,3).".png";
+            $noteimg = "../media/newNote".priority_calc($item).".png";
             $pinimg = "../media/pin".priority_calc($item).".png";
             $title = $item['Title'];
             $content = $item['Tasks']; //<label class=\"title\" id='title$i'>$j.$title</label>

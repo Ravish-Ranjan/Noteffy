@@ -66,21 +66,13 @@
             $c_task = comp_task($i,$jsonData); //gets the js object containing completed tasks
             $item = $jsonData['Users'][$user]['To-do'][$i]; 
             date_default_timezone_set("Asia/Kolkata");
-            if($item["Date"] === (date("Y-m-d"))){
-                
-                // calculating priority 
+            if($item["Date"] === (date("Y-m-d")) && $item['Priority']!=0){
                 $j = $i+1;
                 $noteimg = "../media/newNote".priority_calc($item).".png";
                 $pinimg = "../media/pin".priority_calc($item).".png";
                 $title = $item['Title'];
                 $content = $item["Tasks"]; //<label class=\"title\">$j.$title</label>
                 sanitize_array($content);
-            // if (isset($_COOKIE['percent']) && array_key_exists("$i", json_decode($_COOKIE['percent'], true)[getUserNumber($jsonData)]))
-            //     $percent = json_decode($_COOKIE['percent'], true)[getUserNumber($jsonData)]["$i"] . "% task completed";
-            // else if(!isset($_COOKIE['percent']))
-            //     $percent = "0% task completed";
-            // else
-            //     $percent = "0% task completed";
             $percent = percent($i, $jsonData);
                 echo "<div class=\"divi\" style=\"background-image:url($noteimg);\" id='$j' title='$percent'>
                         <div class=\"topic\">
@@ -124,6 +116,9 @@
                             </div>
                         </div>
                     </div>";
+            }
+            else{
+                echo "<script>window.location.href = 'main.php?T_no=$i&User=$user'</script>";
             }
         }
         // adds a line through the tasks that are completed

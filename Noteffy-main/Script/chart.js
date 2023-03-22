@@ -30,9 +30,7 @@ function calc_completed_task(jsonData) {
     "date": date,
     "count" :count
   }
-  if (count[0] >= 10) {
-    document.location.href = "https://www.youtube.com/watch?v=FJ3N_2r6R-o"
-  }
+  console.log(count);
   return obj;
 }
 
