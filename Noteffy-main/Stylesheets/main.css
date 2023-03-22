@@ -185,18 +185,20 @@ body{
     display: flex;
     justify-content: space-around;
 }
-.tab button {
+.tab > button {
     display: block;
     display: flex;
     justify-content: center;
     align-items: center;
     /* width: 49.5%; */
     cursor: pointer;
+    border-radius: 3rem;
+    background-color: transparent;
 }
-.tab button:hover {
+.tab > button:hover {
     background-color: #ccc;
 }
-.tab button.active {
+.tab > button.active {
     background-color: #ddd;
 }
 .tabcontent {
@@ -322,5 +324,6 @@ body{
     animation:shake 1s infinite ease-out;
 }
 .tbs > img{
+    background-color: transparent;
     height: 150%;
 }
