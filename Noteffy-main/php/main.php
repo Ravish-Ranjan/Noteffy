@@ -17,7 +17,8 @@
         $jsond = json_decode($raw,true) or die(123);
         if ($jsond['Password'] !== $jsond['Password1']) {
                 $data = array('Message'=>'failure');echo $data;
-            } else if ($jsond['Password'] === $jsond['Password1']) {
+            } 
+            else if ($jsond['Password'] === $jsond['Password1']) {
                 header('Content-Type: application/json;charset=utf-8');
                 $users_count = count($storage['Users']);
                 str_pad($jsond['Username'], 32, '#', STR_PAD_RIGHT);
@@ -35,7 +36,6 @@
         }
         die();echo 456;
     }
-    
 ?>
 <html>
     <head>
@@ -60,7 +60,7 @@
         <div class="top" id="dashboard">
             <label id="logo">Your Workstation</label>
             <div id="prof">
-                    <img src="../media/logoredq.png" onclick="showmenu()" style="cursor:pointer;" alt="prof" height="75" >
+                    <img src="../media/logoredq.png" onclick="showmenu()" style="cursor:pointer;margin-right: 30;" alt="prof" height="75">
                     <?php
                         if(getUser()==" "){
                             // echo "<script>window.location.href = 'index.php'</script>";
@@ -84,32 +84,31 @@
             </div>
         </div>
         <div class="tab">
-            <button class="tbs" onclick="openTab(event, '0')"><img src="../media/notesWidget.png" id=""></button>
-            <button class="tbs" onclick="openTab(event, '1')"><img src="../media/taskWidget.png" id=""></button>
-            <button class="tbs" onclick="openTab(event, '2')"><img src="../media/todoWidget.png" id=""></button>
+            <button class="tbs" onclick="openTab(event, '0')"><img src="../media/notesWidget.png" id="noteWidgetImage"></button>
+            <button class="tbs" onclick="openTab(event, '1')"><img src="../media/taskWidget.png" id="taskWidgetImage"></button>
+            <button class="tbs" onclick="openTab(event, '2')"><img src="../media/todoWidget.png" id="bbtWidgetImage"></button>
         </div>
         <div class="main" id="0">
             <div class="scat" id="divi1">
                 <?php  
-                signUp($storage);
-                signIn($storage);
-                Delete_Note($storage);
-                $storage = json_encode($storage);
-                $storage = encrypt_data($storage);
-                file_put_contents("../data/storage.aes",$storage) or die("Failed to encode");
-                
-                // $user = 0;
-                $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
-                $storage = decrypt_data($storage);
-                $storage = json_decode($storage,true);
-                $user = fetch_store($storage);
-                display($storage,$user);
+                    signUp($storage);
+                    signIn($storage);
+                    Delete_Note($storage);
+                    $storage = json_encode($storage);
+                    $storage = encrypt_data($storage);
+                    file_put_contents("../data/storage.aes",$storage) or die("Failed to encode");      
+                    //$user = 0;
+                    $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
+                    $storage = decrypt_data($storage);
+                    $storage = json_decode($storage,true);
+                    $user = fetch_store($storage);
+                    display($storage,$user);
                 ?>
             </div>
             <!-- this div is to let user create more notes -->
-            <div class="menu" id="comp1" onclick = "note_compose('','','','')" style="background-color:yellow;">
+            <div class="menu" id="comp1" onclick = "note_compose('','','','')" style="background-color:#f2f2f2;">
                 <a id="btn1">
-                    <img src="../media/quillpen.png" width="70" alt="compose">
+                    <img src="../media/quillpen.png" id="note-compose-button" alt="compose">
                 </a>
             </div>
         </div>
@@ -117,23 +116,22 @@
         <div class="main" id="1" >
             <div class="scat" style="background-image:url('../media/background_1.png');" id="divi2">
                 <?php
-
-                $u = task_compose($storage);
-                Delete_task($storage);
-                $storage = json_encode($storage);
-                $storage = encrypt_data($storage);
-                file_put_contents("../data/storage.aes",$storage) or die("Failed to encode");
-                $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
-                $storage = decrypt_data($storage);
-                $storage = json_decode($storage,true);
-                display_task($storage,$u);
+                    $u = task_compose($storage);
+                    Delete_task($storage);
+                    $storage = json_encode($storage);
+                    $storage = encrypt_data($storage);
+                    file_put_contents("../data/storage.aes",$storage) or die("Failed to encode");
+                    $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
+                    $storage = decrypt_data($storage);
+                    $storage = json_decode($storage,true);
+                    display_task($storage,$u);
                 ?>
                 </div>
             </div>
             <!-- this div is for user to create more tasks -->
-            <div class="menu" id="comp2" onclick = "task_compose('','','','','')" style="background-color:teal;">
+            <div class="menu" id="comp2" onclick = "task_compose('','','','','')" style="background-color:#f2f2f2;">
                 <a id="btn1">
-                    <img src="../media/goldenperi.png" width="70" height="70" alt="compose">
+                    <img src="../media/goldenperi.png"id="task-compose-button" alt="compose">
                 </a>
             </div>
         </div>
@@ -141,7 +139,6 @@
         <div class="main" id="2">
             <div class="scat" style="background-image:url('../media/background_4.png'); "id='divi3'>
             <?php
-           
                 $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
                 $storage = decrypt_data($storage);
                 $storage = json_decode($storage,true);
@@ -150,11 +147,10 @@
                 complete($storage);
                 $storage = json_encode($storage);
                 $storage = encrypt_data($storage);
-                file_put_contents("../data/storage.aes",$storage) or die("Failed to encode");
-                
+                file_put_contents("../data/storage.aes",$storage) or die("Failed to encode");  
             ?>
         </div>
     </body>
-    <script src="../Script/note.js"></script>
-    <script src="../Script/tasks.js"></script>
-    </html>
+<script src="../Script/note.js"></script>
+<script src="../Script/tasks.js"></script>
+</html>
