@@ -7,56 +7,78 @@
     src: url('../media/Codec-Cold-Regular-trial.ttf');
 }
 input[type="date"],input[type="text"],textarea{
-    font-size:20;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    border-radius: 5px;
+    font-size: 20;
+    font-family: codec;
     padding: 1%;
+    border: none;
+    border-bottom: 1px solid #555;
 }
 .FORM{
     animation:fade 0.4s ease-in-out;
-    position:absolute;
-    top:2%;
-    right:5%;
+    position: absolute;
+    top: 2%;
+    right: 15%;
     display:grid;/* height:60%; */
     width:28%;
     z-index:4;
-    background:rgba(0,0,0,0.6);
-    font-size:2vw;
+    background: #ffffff;
+    font-size: 2vw;
     border-radius:1rem;
-    border: 2px solid white;
-    grid-template-rows : repeat(6,1fr);
-    grid-template-columns:repeat(1,1fr);
-    row-gap:4px;
-    color:white;
-    margin-top:15vh;
-    padding:1%;
+    width: 40%;
+    height: 70%;
+    row-gap: 2px;
+    color:#000000;
+    margin-top: 15vh;
+    padding: 1%;
     font-family: codec-extrabold;
+}
+#cancel-icon-img{
+    height: 10;
+    width: 10;
+}
+#Date{
+    font-family: codec;
+}
+#Time{
+    font-family: codec;
 }
 #Form_Caption{
-    justify-self:center;
+    justify-self: center;
     font-family: codec-extrabold;
+    font-size: 20;
 }
 #close{
-    position:absolute;top:-20px;left:-15px;height:50px;width:50px;border-radius:50%;
-    background-color:rgba(255,0,0,0.5);content:'x';color:white;
-    transition: background-color 0.2s;
-}
-#close:hover{
-    background-color:rgba(255,0,0,0.8);
-    transition-timing-function:ease-in-out;
+    position:absolute;
+    top:-7px;
+    left:-5px;
+    height:50px;
+    width:50px;
+    cursor: pointer;
+    border: none;
+    background: none;
 }
 span{
     font-size: 30;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 label{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 18;
+    font-family: codec;
+    font-size: 21;
+    margin-top: 30;
 }
 #btn{
-    padding: 1% 0 1% 0 ;
-    font-size: 25;
-    border-radius: 0 0 1rem 1rem;
+    margin-top: 12;
+    width: 30%;
+    height: 60%;
+    font-size: 18;
+    border-radius: 20rem;
     color: white;
-    background-color: rgb(0, 116, 116);
+    background-color: #ffffff;
+    color: #000000;
+    font-family: codec-extrabold;
+    border: none;
+}
+#btn:hover{
+    background-color: #000000;
+    color: #ffffff;
 }

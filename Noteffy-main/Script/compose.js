@@ -22,15 +22,12 @@ function note_compose(date, title, note, note_no) {  //this function helps to cr
     noteform.setAttribute("action", action); noteform.setAttribute("method", "POST");
     noteform.setAttribute("class", "FORM");
     noteform.setAttribute("onsubmit", "return checkEmpty(this)");
-    noteform.innerHTML = `<span id='Form_Caption'>ADD A NOTE</span>\
-    <button id = 'close' style=\"font-size:2vw;\" onclick = \"closeF()\">x</button>\
-    <label for='Date'>Date</label>\
+    noteform.innerHTML = `<span id='Form_Caption'>New Note</span>\
+    <button id = 'close' onclick = \"closeF()\"><img src='../media/cancelicon.png' id='cancel-icon-img'></button>\
     <input type='date' name='Date' id='Date'>\
-    <label for='Title'>Title</label>\
     <input type='text' name='Title' id='Title' placeholder='Title' value=${title}>\
-    <label for='Note'>Content</label>\
-    <textarea style='resize:none;' placeholder='Your Note' name='Note' id='Note' rows=8 cols=7 >${note}</textarea>\
-    <input type='submit' value='save' id='btn'>`
+    <textarea style='resize:none;' placeholder='What is in my mind?' name='Note' id='Note' rows=8 cols=7 >${note}</textarea>\
+    <center><input type='submit' value='Save' id='btn'></center>`
     document.querySelector("body").appendChild(noteform);
     document.querySelector("#btn1").toggleAttribute("onclick", "");
     document.getElementById("Date").value = today;
@@ -65,17 +62,14 @@ function task_compose(date, tm, title, tk, task_no) {  //this function helps to 
     noteform.setAttribute("class", "FORM");
     noteform.setAttribute("action",action);noteform.setAttribute("method","POST");
     noteform.setAttribute("onsubmit","return checkEmpty(this)");
-    noteform.innerHTML = `<span id='Form_Caption'>ADD A TASK</span>\
+    noteform.innerHTML = `<span id='Form_Caption'>New Task</span>\
     <button id = 'close' style=\"font-size:2vw;\" onclick = \"closeF()\">x</button>\
-    <label for='Date'>Date</label>\
     <input type='date' name='T_Date' id='Date'>\
-    <label for='Time'>Time</label>\
     <input type='time' name='T_Time' id='Time'>\
-    <label for='Title'>Title</label>\
     <input type='text' name='T_Title' id='Title' placeholder='Title' value=${title}>\
     <label for='Task'>Tasks</label>\
-    <textarea style='resize:none;' placeholder='Your Tasks' name='Task' id='Task'  contenteditable='true' rows=8 cols=7>${tk}</textarea>\
-    <input type='submit' value='save' id='btn'>`
+    <textarea style='resize:none; margin:0;' placeholder='Your Tasks' name='Task' id='Task' contenteditable='true' rows=8 cols=7>${tk}</textarea>\
+    <center><input type='submit' value='save' id='btn'></center>`
     document.querySelector("body").appendChild(noteform);
     document.querySelector("#btn1").toggleAttribute("onclick","");
     document.getElementById("Date").value = today;

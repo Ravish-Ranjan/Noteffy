@@ -60,7 +60,7 @@
         <div class="top" id="dashboard">
             <label id="logo">Your Workstation</label>
             <div id="prof">
-                    <img src="../media/logoredq.png" onclick="showmenu()" style="cursor:pointer;margin-right: 30;" alt="prof" height="75">
+                    <img src="../media/logoredq.png" onclick="showmenu()" style="cursor:pointer;margin-right:30;margin-top:30;" alt="prof" height="75">
                     <?php
                         if(getUser()==" "){
                             // echo "<script>window.location.href = 'index.php'</script>";
@@ -114,7 +114,7 @@
         </div>
         <?php updateNote($storage) ?>
         <div class="main" id="1" >
-            <div class="scat" style="background-image:url('../media/background_1.png');" id="divi2">
+            <div class="scat" style="background-image:url('../media/background_1.png');background-size:110%;" id="divi2">
                 <?php
                     $u = task_compose($storage);
                     Delete_task($storage);
@@ -137,7 +137,7 @@
         </div>
         <?php updateTask($storage)?>
         <div class="main" id="2">
-            <div class="scat" style="background-image:url('../media/background_4.png'); "id='divi3'>
+            <div class="scat" style="background-image:url('../media/background_4.png');background-size:110%;" id='divi3'>
             <?php
                 $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
                 $storage = decrypt_data($storage);
