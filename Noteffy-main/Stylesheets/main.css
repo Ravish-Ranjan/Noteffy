@@ -56,7 +56,6 @@ body{
     border-radius: 2rem;
     margin-left: 2%;
 }
-
 .scat{
     grid-template-columns: repeat(4,1fr);
     /* overflow-y:scroll; */
@@ -165,7 +164,6 @@ body{
     display: grid;
     place-items: center;
     width: 5rem;
-    
     background-color:rgba(255,255,255,1);
     box-shadow: 5px 5px 2px rgba(255, 255, 255, 0.5);
     /* border: 3px solid #73AD21; */
@@ -181,9 +179,6 @@ body{
 }
 .tab {
     /* float: left; */
-    border: 1px solid #ccc;
-    border-radius: 1rem 1rem 0 0 ;
-    background-color: rgba(0,0,0,0);
     width: 98%;
     margin-left: 1%;
     height: 40px;
@@ -192,24 +187,12 @@ body{
 }
 .tab button {
     display: block;
-    box-shadow: inset -5px -5px 10px #777;
-    background-color: inherit;
-    background-color: #8b8b8b;
-    border-radius: 1rem 1rem 0 0;
-    color: black;
     display: flex;
     justify-content: center;
     align-items: center;
     /* width: 49.5%; */
-    border: none;
-    text-align: left;
     cursor: pointer;
-    transition: 0.3s;
-    font-size: 22;
-    font-family: codec;
-    font-weight: bold;
 }
-
 .tab button:hover {
     background-color: #ccc;
 }
@@ -260,7 +243,6 @@ body{
 .lst::-webkit-scrollbar-track {
   background: #b5b5b5;
   border-radius: 1rem;
-
 }
 .lst::-webkit-scrollbar-thumb {
   background-color: #4c5564;
@@ -285,7 +267,6 @@ body{
 }
 #log{
     font-family: codec-extrabold;
-    
 }
 #sidepanel{
     position: absolute;
@@ -324,7 +305,6 @@ body{
     text-align: start;
     padding-left: 10%;
     padding-top: 10%;
-
 }
 #sidepanel >ul >li{
     padding: 0.5rem 0 0.5rem 1rem;
@@ -335,14 +315,12 @@ body{
     background-color: rgb(200, 200, 200);
     filter: invert(1);
 }
-
 #sidepanel >ul > li>a{
     color: black;
 }
 #btn1:hover{
     animation:shake 1s infinite ease-out;
 }
-
 .tbs > img{
     height: 150%;
 }
