@@ -96,6 +96,7 @@ fetch("../data/task.json").then((res) => res.json()).then((json) => {
   Chart.defaults.backgroundColor = "gray";
   const cht = new Chart(ctx, {
     type: 'line',
+    responsive : false,
     data: { 
       labels: obj.date,
       datasets: [
