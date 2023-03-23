@@ -1,3 +1,35 @@
+function generate(){
+  var avatarId = getUser();
+  var svgCode = multiavatar(avatarId);
+  return svgCode
+}
+function crt(){
+  let data = generate();
+  document.getElementById("data").innerHTML = data;
+}
+function openTab(evt, tabname) { // this function is used to move arround the tabs in the main page
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("main");
+  for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tbs");
+  for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabname).style.display = "block";
+  evt.currentTarget.className += " active";
+  divs = document.getElementsByClassName("main")
+  for (let i = 0; i < divs.length-1; i++) {
+      if (divs[i].style.display=="block") {
+          document.getElementById("comp"+String(i+1)).style.display="block" ;
+      }        
+      else{
+          document.getElementById("comp"+String(i+1)).style.display="none" ;
+      }
+  }
+  chan(parseInt(tabname)+1);
+}
 function calc_completed_task(jsonData) {
   let date = [];
   date[0] = "";
@@ -30,7 +62,7 @@ function calc_completed_task(jsonData) {
     "date": date,
     "count" :count
   }
-  console.log(count);
+  document.getElementById("score-number").innerText = count[count.length-1];
   return obj;
 }
 
@@ -39,7 +71,6 @@ function getUser() {
   decodedCookie = decodedCookie.split(";");
   for (i = 0; i < decodedCookie.length; i++){
     if (decodedCookie[i].split("=")[0].trim() == "user") {
-      document.getElementById("title").innerText = decodedCookie[i].split("=")[1];
       return decodedCookie[i].split("=")[1];
     }
   }
@@ -55,20 +86,17 @@ function getrandcolor(){
   document.getElementById("container").style.backgroundColor = cl;
   return cl;
 }
-
+document.getElementById("user-name").innerText = getUser();
 const ctx = document.getElementById('context');
-// setTimeout(()=>{
-//   document.getElementById("load").remove();
-//   ctx.style.display = "block";
-// },4000)
 fetch("../data/task.json").then((res) => res.json()).then((json) => {
   let obj = calc_completed_task(json);
   Chart.defaults.font.size = 20;
   Chart.defaults.font.weight = "bold";
-  Chart.defaults.color = "white";
+  Chart.defaults.color = "black";
   Chart.defaults.backgroundColor = "gray";
   const cht = new Chart(ctx, {
     type: 'line',
+    responsive : false,
     data: { 
       labels: obj.date,
       datasets: [
