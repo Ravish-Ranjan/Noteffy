@@ -57,10 +57,6 @@ function getrandcolor(){
 }
 
 const ctx = document.getElementById('context');
-// setTimeout(()=>{
-//   document.getElementById("load").remove();
-//   ctx.style.display = "block";
-// },4000)
 fetch("../data/task.json").then((res) => res.json()).then((json) => {
   let obj = calc_completed_task(json);
   Chart.defaults.font.size = 20;

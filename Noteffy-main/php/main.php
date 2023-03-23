@@ -7,11 +7,15 @@
     $storage = file_get_contents("../data/storage.aes") or die("Could Not open the file");
     $storage = decrypt_data($storage);
     $storage = json_decode($storage,True);
+
+    // alternate
+    $alternate = file_get_contents("../data/Data.json");
+    $alternate = json_decode($alternate, true);
 ?>
 <?php
     $queries = array();
     // Fetching raw POST object body because content-type is causing parsing issues
-    parse_str($_SERVER['QUERY_STRING'], $queries);
+    // parse_str($_SERVER['QUERY_STRING'], $queries);
     if(isset($queries['signup'])=='true'){
         $raw = file_get_contents("php://input");
         $jsond = json_decode($raw,true) or die(123);
@@ -101,8 +105,12 @@
                     $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
                     $storage = decrypt_data($storage);
                     $storage = json_decode($storage,true);
-                    $user = fetch_store($storage);
-                    display($storage,$user);
+                    $alternate = file_get_contents("../data/Data.json");
+                    $alternate = json_decode($alternate, true);
+                    $user = fetch_store($alternate);
+                    display($alternate,$user);
+                    $alternate = json_encode($alternate);
+                    file_put_contents("../data/Data.json", $alternate);
                 ?>
             </div>
             <!-- this div is to let user create more notes -->

@@ -1,11 +1,11 @@
 {
     "Users" : [
         {
+            "identifier" : 1,
             "user_name" : "Gaurang Tyagi",
             "Email" : "gaurangtyagi7@gmail.com",
             "password" : "xyzaqq==",
             "type" : true,
-            "identifier" : 1,
             "Organization_code" : null
         },
         {

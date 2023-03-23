@@ -89,43 +89,59 @@ function Delete_Note(&$jsonData)
         echo "<Script>window.location.href = '../HTML/error.html'</script>";
     }
 }
-function fetch_store(&$jsonData)
-{ // this function fetches and stores the new note created by by the user
-    $user = -1;
-    $User_count = count($jsonData['Users']);
-    $userName = getUser();
-    //Do not disturb until later
-    echo ' ';
+function fetch_store(&$jsonData){
+ // this function fetches and stores the new note created by by the user
+    // $user = -1;
+    // $User_count = count($jsonData['Users']);
+    // $userName = getUser();
+    // //Do not disturb until later
+    // echo ' ';
 
-    for ($i = 0; $i < $User_count; $i++) {
-        if ($jsonData['Users'][$i]['User_Name'] == $userName)
-            $user = $i;
-    }
+    // for ($i = 0; $i < $User_count; $i++) {
+    //     if ($jsonData['Users'][$i]['User_Name'] == $userName)
+    //         $user = $i;
+    // }
+    // if (isset($_POST['Title']) && isset($_POST['Note']) && isset($_POST['Date'])) {
+    //     if (isset($_GET['note_no'])) {
+    //         $Note_count = $_GET['note_no'];
+    //     } else
+    //     $Note_count = count($jsonData['Users'][$user]['Notes']);
+    //     $jsonData['Users'][$user]['Notes'][$Note_count]['Title'] = $_POST['Title'];
+    //     $jsonData['Users'][$user]['Notes'][$Note_count]['Date'] = $_POST['Date'];
+    //     $jsonData['Users'][$user]['Notes'][$Note_count]['Content'] = $_POST['Note'];
+    //     echo "<script>location.replace('main.php')</script>";
+    // }
+    // return $user;
+    $user = 0;
+    if ($jsonData["User_Data"][$user]["identifier"] != $user)
+        die("Could not find user");
     if (isset($_POST['Title']) && isset($_POST['Note']) && isset($_POST['Date'])) {
-        if (isset($_GET['note_no'])) {
-            $Note_count = $_GET['note_no'];
-        } else
-        $Note_count = count($jsonData['Users'][$user]['Notes']);
-        $jsonData['Users'][$user]['Notes'][$Note_count]['Title'] = $_POST['Title'];
-        $jsonData['Users'][$user]['Notes'][$Note_count]['Date'] = $_POST['Date'];
-        $jsonData['Users'][$user]['Notes'][$Note_count]['Content'] = $_POST['Note'];
-        echo "<script>location.replace('main.php')</script>";
-    }
+            if (isset($_GET['note_no'])) {
+                $Note_count = $_GET['note_no'];
+            } else
+            $Note_count = count($jsonData['User_Data'][$user]['Notes']);
+            $jsonData['User_Data'][$user]['Notes'][$Note_count]['Title'] = $_POST['Title'];
+            $jsonData['User_Data'][$user]['Notes'][$Note_count]['Date'] = $_POST['Date'];
+            $jsonData['User_Data'][$user]['Notes'][$Note_count]['Content'] = $_POST['Note'];
+            $jsonData['User_Data'][$user]['Notes'][$Note_count]['Note_type'] = false;
+            echo "<script>location.replace('main.php')</script>";
+        }
     return $user;
 }
 function display(&$jsonData, $user)
 { // this function displays the user's notes in a scatter manner
-    $count = count($jsonData['Users'][$user]['Notes']);
+    $count = count($jsonData['User_Data'][$user]['Notes']);
     for ($i = 0; $i < $count; $i++) {
-        $item = $jsonData['Users'][$user]['Notes'][$i];
-        $j = $i + 1;
-        $noteimg = "../media/newNote" . rand(1, 3) . ".png";
-        $pinimg = "../media/pin" . rand(1, 3) . ".png";
-        $title = $item['Title'];
-        $content = $item['Content'];
-        sanitize($content);
-        $visible = substr($content, 0, 25); //
-        echo "<div class=\"divi\" style=\"background-image:url($noteimg);\" title='title:$title'>
+        if (!$jsonData['User_Data'][$user]['Notes'][$i]["Note_type"]) {
+            $item = $jsonData['User_Data'][$user]['Notes'][$i];
+            $j = $i + 1;
+            $noteimg = "../media/newNote" . rand(1, 3) . ".png";
+            $pinimg = "../media/pin" . rand(1, 3) . ".png";
+            $title = $item['Title'];
+            $content = $item['Content'];
+            sanitize($content);
+            $visible = substr($content, 0, 25); //
+            echo "<div class=\"divi\" style=\"background-image:url($noteimg);\" title='Title:$title'>
         <div class=\"topic\">
                         <img id=\"pin\" src=$pinimg alt=\"pin\">
                     </div>
@@ -150,6 +166,42 @@ function display(&$jsonData, $user)
                         </div>
                     </div>
                 </div>";
+        }
+    // $count = count($jsonData['Users'][$user]['Notes']);
+    // for ($i = 0; $i < $count; $i++) {
+    //     $item = $jsonData['Users'][$user]['Notes'][$i];
+    //     $j = $i + 1;
+    //     $noteimg = "../media/newNote" . rand(1, 3) . ".png";
+    //     $pinimg = "../media/pin" . rand(1, 3) . ".png";
+    //     $title = $item['Title'];
+    //     $content = $item['Content'];
+    //     sanitize($content);
+    //     $visible = substr($content, 0, 25); //
+    //     echo "<div class=\"divi\" style=\"background-image:url($noteimg);\" title='title:$title'>
+    //     <div class=\"topic\">
+    //                     <img id=\"pin\" src=$pinimg alt=\"pin\">
+    //                 </div>
+    //                 <div class=\"data\">
+    //                     <div class=\"screen\">
+    //                         <p id='content$i'>$content</p>
+    //                     </div>
+    //                     <div class=\"control\">
+    //                         <button onclick=\"\">
+    //                         <a href=\"../php/main.php?note_no=$i\">
+    //                             <img title='edit the note' src=\"../media/edit.png\" alt=\"\">
+    //                         </a>
+    //                         </button>
+    //                         <button onclick=\"\" id='clip'>
+    //                             <img title='copy the note to clipboard' src=\"../media/share.png\" alt=\"\" onClick='getContent($i)'>
+    //                         </button>
+    //                         <button onclick=\"\">
+    //                             <a href='../php/main.php?N_no=$i&User=$user' style='text-decoration:none;'>
+    //                                 <img title='delete the note' src=\"../media/delete.png\" alt=\"\">
+    //                             </a>
+    //                         </button>
+    //                     </div>
+    //                 </div>
+    //             </div>";
     }
 }
 function updateNote($jsonData)
