@@ -1,0 +1,140 @@
+@font-face{
+    font-family: codec-extrabold;
+    src: url('../media/Codec-Cold-Heavy-trial.ttf');
+}
+@font-face{
+    font-family: codec;
+    src: url('../media/Codec-Cold-Regular-trial.ttf');
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-image: url('../media/statsBG.png');
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+}
+#container{
+    float: left;
+    height: 60%;
+    width: 60%;
+    font-size: 20;
+    padding: 2%;
+    border-radius: 1rem; 
+    padding-top: 6%;
+}
+#context{
+    padding: 2%;
+    border-radius: 1rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow:-2px 2px 2px;
+}
+#load{
+    position: absolute;
+    top: 5%;
+    left: 4%;
+    transition: linear 1s;
+}
+#page-header{
+    width: 100%;
+    height: 15%;
+    background-color: #a800ff;
+}
+.header-links{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 100px;
+    margin-left: 5%;
+    padding-top: 2.7%;
+}
+.tbs{
+    color: #571082;
+    font-family: codec-extrabold;
+    font-size: 25; 
+    transition: 0.3s;     
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+.tbs:hover{
+    color: #ffffff;
+    transition: 0.3s;
+}
+#user-details{
+    background-color:#ffe100;
+    filter: drop-shadow(0px 0px 5px rgba(0,0,0,.5));
+    border: 3px solid black;
+    border-radius: 80px;
+    float: right;
+    margin-right: 3%;
+    margin-top: -3%;
+    width: 30%;
+    height: 630%;
+}
+#user-avatar{
+    width: auto;
+    height: 23%;
+    padding-top: 10%;
+}
+#user-name{
+    font-family: codec-extrabold;
+    color: #141414;
+    font-size: 30;
+    padding-top: 5%;
+}
+#user-score{
+    font-family: codec-extrabold;
+    color: #141414;
+    font-size: 20;
+    padding-top: 8%;
+}
+#floppie{
+    width: auto;
+    height: 8%;
+    display: inline-block;
+    padding-top: 3%;
+}
+#score-number{
+    display: inline-block;
+    font-family: codec-extrabold;
+    color: #141414;
+}
+.user-cards{
+    background-color: #141414;
+    border-radius: 50px;
+    width: 250px;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 50px;  
+}
+#card-text-1, #card-text-2, #card-text-3, #card-text-4{
+    font-family: codec-extrabold;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 17;
+}
+#card-text-5, #card-text-6{
+    font-family: codec-extrabold;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 15;
+}
+#back-bbt:link, #back-bbt:visited {
+    background-color: #ffe100;
+    color: #141414;
+    padding: 4px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16;
+    border-radius: 10px;
+    transition: 0.3s;
+    font-family: codec-extrabold;
+}
+#back-bbt:hover{
+    background-color: #141414;
+    transition: 0.3s;
+    color: white;
+}
