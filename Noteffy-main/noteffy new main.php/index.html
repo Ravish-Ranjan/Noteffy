@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <title>Workspace</title>
+        <link rel="stylesheet" href="style.css">
+        <script defer src="script.js"></script>
+    </head>
+    <body onload="workspacemain(),workstationmain()">
+        <div class="workspace">
+            <div class="top">
+                <h1>Workspace</h1>
+                <ul>
+                    <li onclick="workspacemain()">Classes</li>
+                    <li onclick="workspacetodo()">To-Do</li>
+                </ul>
+                <img onclick="showsidespace()" src="" alt="logo">
+            </div>
+            <div id="mainspace" class="main"></div>
+            <div class="compose">+</div>
+            <div id="spaceside" onclick="hidesidespace()" class="sidepanel"></div>
+        </div>
+        <div class="workstation">
+            <div class="top">
+                <h1>Workstation</h1>
+                <ul>
+                    <li>Notes</li>
+                    <li>Tasks</li>
+                    <li>To-Do list</li>
+                </ul>
+                <img onclick="showsidestation()" src="" alt="logo">
+            </div>
+            <div id="mainstation" class="main"></div>
+            <div class="compose">+</div>
+            <div id="stationside" onclick="hidesidestation()" class="sidepanel"></div>
+        </div>
+        <div class="scroll" id="scroll" title="workstation" onclick="swtch()">⪢</div>
+    </body>
+</html>
