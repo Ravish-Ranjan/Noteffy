@@ -64,7 +64,7 @@
                     </ul>
                 </div>
                 <br>
-                <p id="address">Add: divine ki maa ka ghar, Kurla(W), Mumbai, Maharashtra, India</p>
+                <p id="address">Add: University of Delhi (South Campus), New Delhi, Delhi, India</p>
                 <div id="footer-logo">
                     <img src="../media/noteffyTitleBlack.png" id="footer-logo">
                 </div>

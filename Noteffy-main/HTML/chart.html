@@ -2,9 +2,7 @@
     <head>
         <title>Chart</title>
         <link rel="shortcut icon" href="../media/logo5mix.png" type="image/x-icon">
-        <link rel="stylesheet" href="../Stylesheets/chart.css">
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="../Script/multiavatar.min.js"></script>
         <script>
             function generate(){
                 var avatarId = getUser();
@@ -13,20 +11,197 @@
             }
             function crt(){
                 let data = generate();
-                document.getElementById("img").innerHTML = data;
                 document.getElementById("data").innerHTML = data;
             }
         </script>
+        <style>
+            @font-face{
+                font-family: codec-extrabold;
+                src: url('../media/Codec-Cold-Heavy-trial.ttf');
+            }
+            @font-face{
+                font-family: codec;
+                src: url('../media/Codec-Cold-Regular-trial.ttf');
+            }
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            body{
+                background-image: url('../media/statsBG.png');
+                background-size: auto 100%;
+                background-repeat: no-repeat;
+            }
+            #container{
+                float: left;
+                height: 60%;
+                width: 60%;
+                font-size: 20;
+                padding: 2%;
+                border-radius: 1rem; 
+                padding-top: 6%;
+            }
+            #context{
+                padding: 2%;
+                border-radius: 1rem;
+                background-color: rgba(255, 255, 255, 0.2);
+                box-shadow:-2px 2px 2px;
+            }
+            #load{
+                position: absolute;
+                top: 5%;
+                left: 4%;
+                transition: linear 1s;
+            }
+            #page-header{
+                width: 100%;
+                height: 15%;
+                background-color: #a800ff;
+            }
+            .header-links{
+                margin-left: 5%;
+                padding-top: 2.7%;
+            }
+            ul{
+                width: auto;
+                display: flex;
+                flex-direction: row;
+                gap: 8%;
+            }
+            li{
+                display: inline-block;
+            }
+            a{
+                text-decoration: none;
+                color: #571082;
+                font-family: codec-extrabold;
+                font-size: 25; 
+                transition: 0.3s;              
+            }
+            a:hover{
+                color: #ffffff;
+                transition: 0.3s;
+            }
+            a:active{
+                color: #ffffff;
+            }
+            #user-details{
+                background-color:#ffe100;
+                filter: drop-shadow(0px 0px 5px rgba(0,0,0,.5));
+                border: 3px solid black;
+                border-radius: 80px;
+                float: right;
+                margin-right: 3%;
+                margin-top: -3%;
+                width: 30%;
+                height: 630%;
+            }
+            #user-avatar{
+                width: auto;
+                height: 23%;
+                padding-top: 10%;
+            }
+            #user-name{
+                font-family: codec-extrabold;
+                color: #141414;
+                font-size: 30;
+                padding-top: 5%;
+            }
+            #user-score{
+                font-family: codec-extrabold;
+                color: #141414;
+                font-size: 20;
+                padding-top: 8%;
+            }
+            #floppie{
+                width: auto;
+                height: 8%;
+                display: inline-block;
+                padding-top: 3%;
+            }
+            #score-number{
+                display: inline-block;
+                font-family: codec-extrabold;
+                color: #141414;
+            }
+            .user-cards{
+                background-color: #141414;
+                border-radius: 50px;
+                width: 250px;
+                height: 50px;
+                text-align: center;
+                vertical-align: middle;
+                line-height: 50px;  
+            }
+            #card-text-1, #card-text-2, #card-text-3, #card-text-4{
+                font-family: codec-extrabold;
+                color: #ffffff;
+                display: inline-block;
+                font-size: 17;
+            }
+            #card-text-5, #card-text-6{
+                font-family: codec-extrabold;
+                color: #ffffff;
+                display: inline-block;
+                font-size: 15;
+            }
+            #back-bbt:link, #back-bbt:visited {
+                background-color: #ffe100;
+                color: #141414;
+                padding: 4px 15px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16;
+                border-radius: 10px;
+                transition: 0.3s;
+            }
+            #back-bbt:hover{
+                background-color: #141414;
+                transition: 0.3s;
+                color: white;
+            }
+        </style>
     </head>
     <body onload="crt()">
-        <img src="../media/noteffyTitle.png" alt="loading" id="load" height="70px" width="210px" >
-        <img src="../media/noteffy_loader.gif" alt="loading" id="load" height="70px" width="210px" >
+        <div id="page-header">
+            <div class="header-links">
+                <ul>
+                    <li><a href="!">Settings</a></li>
+                    <li><a href="!">Explore</a></li>
+                    <li><a href="!">Graveyard</a></li>
+                    <li><a href="chart.html">Statistics</a></li>
+                </ul>
+            </div>
+            <div id="user-details">
+                <center>
+                    <img src="../media/logoredq.png" id="user-avatar"><!--user avatar-->
+                    <p id="user-name">username</p>
+                    <p id="user-score">Your Score:</p>
+                    <img src="../media/floppieTheMeanie.png" id="floppie">
+                    <p id="score-number">!NUM</p>
+                    <br><br>
+                    <div class="user-cards">
+                        <p id="card-text-1">Date Joined: </p>
+                        <p id="card-text-2">!NUM</p>
+                    </div>
+                    <br>
+                    <div class="user-cards">
+                        <p id="card-text-3">Saved Notes: </p>
+                        <p id="card-text-4">!NUM</p>
+                    </div>
+                    <br>
+                    <div class="user-cards">
+                        <p id="card-text-5">Current Active Notes: </p>
+                        <p id="card-text-6">!NUM</p>
+                    </div>
+                    <br>
+                    <a href="../php/main.php" id="back-bbt">Back</a>
+                </center>
+            </div>
+        </div>
         <div id="container" >
             <canvas id="context" style="display:block"></canvas>
-        </div>
-        <div class="tile">
-            <div id="img"></div>
-            <label id="title"></label>
         </div>
     </body>
     

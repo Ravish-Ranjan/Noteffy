@@ -68,14 +68,16 @@
                         else{
                             echo "<div  id='sidepanel' >
                             <div class='panel-user' >
-                                <img src='../media/logoredq.png' height=100 width=100 alt='logo' style='filter:drop-shadow(2px 2px 5px black);'>
+                                <img src='../media/logoredq.png' height=80 width=80 alt='logo' style='margin-left: 20;filter:drop-shadow(2px 2px 5px black);'>
                                 <label style='text-decoration:none;color:black;'>Hi, ".getUser()." !</label>
                             </div>
                             <ul>
-                                <li><a href='../HTML/chart.html' style='text-decoration:none;'>Scoreboard</a><br></li>
-                                <li><a href='../HTML/signUp.html' id='logout' onclick='clearCookies()' style='text-decoration: none;'>Log Out</a></li>
-                                <li><a href='#' style='text-decoration: none;' onclick='hidemenu()'>Workspace</a></li>
+                                <li><a href='../HTML/chart.html' style='text-decoration:none;'>Dashboard</a><br></li>
+                                <li><a href='' style='text-decoration: none;'>Settings</a></li>
                                 <li><a href='index.php' style='text-decoration: none;'>Home</a></li>
+                                <li><a href='#' style='text-decoration: none;' onclick='hidemenu()'>Back</a></li>
+                                <li><a href='../HTML/signUp.html' id='logout' onclick='clearCookies()' style='text-decoration: none;'>Log Out</a></li>
+
                             </ul>
                             </div>" ;
                             setcookie("user_number",getUserNumber($storage),0,"/");
