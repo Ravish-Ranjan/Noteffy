@@ -13,6 +13,29 @@
                 let data = generate();
                 document.getElementById("data").innerHTML = data;
             }
+            function openTab(evt, tabname) { // this function is used to move arround the tabs in the main page
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("main");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tbs");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(tabname).style.display = "block";
+                evt.currentTarget.className += " active";
+                divs = document.getElementsByClassName("main")
+                for (let i = 0; i < divs.length-1; i++) {
+                    if (divs[i].style.display=="block") {
+                        document.getElementById("comp"+String(i+1)).style.display="block" ;
+                    }        
+                    else{
+                        document.getElementById("comp"+String(i+1)).style.display="none" ;
+                    }
+                }
+                chan(parseInt(tabname)+1);
+            }
         </script>
         <style>
             @font-face{
@@ -59,31 +82,24 @@
                 background-color: #a800ff;
             }
             .header-links{
+                display: flex;
+                flex-wrap: wrap;
+                gap: 100px;
                 margin-left: 5%;
                 padding-top: 2.7%;
             }
-            ul{
-                width: auto;
-                display: flex;
-                flex-direction: row;
-                gap: 8%;
-            }
-            li{
-                display: inline-block;
-            }
-            a{
-                text-decoration: none;
+            .tbs{
                 color: #571082;
                 font-family: codec-extrabold;
                 font-size: 25; 
-                transition: 0.3s;              
+                transition: 0.3s;     
+                background: none;
+                border: 0;
+                cursor: pointer;
             }
-            a:hover{
+            .tbs:hover{
                 color: #ffffff;
                 transition: 0.3s;
-            }
-            a:active{
-                color: #ffffff;
             }
             #user-details{
                 background-color:#ffe100;
@@ -155,6 +171,7 @@
                 font-size: 16;
                 border-radius: 10px;
                 transition: 0.3s;
+                font-family: codec-extrabold;
             }
             #back-bbt:hover{
                 background-color: #141414;
@@ -166,33 +183,31 @@
     <body onload="crt()">
         <div id="page-header">
             <div class="header-links">
-                <ul>
-                    <li><a href="!">Settings</a></li>
-                    <li><a href="!">Explore</a></li>
-                    <li><a href="!">Graveyard</a></li>
-                    <li><a href="chart.html">Statistics</a></li>
-                </ul>
+                <button class="tbs" onclick="openTab(event, '0')">Settings</button>
+                <button class="tbs" onclick="openTab(event, '1')">Explore</button>
+                <button class="tbs" onclick="openTab(event, '2')">Graveyard</button>
+                <button class="tbs" onclick="openTab(event, '3')">Statistics</button>
             </div>
             <div id="user-details">
                 <center>
                     <img src="../media/logoredq.png" id="user-avatar"><!--user avatar-->
                     <p id="user-name">username</p>
-                    <p id="user-score">Your Score:</p>
+                    <p id="user-score">Your Score:</p><!--user score-->
                     <img src="../media/floppieTheMeanie.png" id="floppie">
                     <p id="score-number">!NUM</p>
                     <br><br>
                     <div class="user-cards">
-                        <p id="card-text-1">Date Joined: </p>
+                        <p id="card-text-1">Date Joined: </p><!--joining date-->
                         <p id="card-text-2">!NUM</p>
                     </div>
                     <br>
                     <div class="user-cards">
-                        <p id="card-text-3">Saved Notes: </p>
+                        <p id="card-text-3">Saved Notes: </p><!--saved notes-->
                         <p id="card-text-4">!NUM</p>
                     </div>
                     <br>
                     <div class="user-cards">
-                        <p id="card-text-5">Current Active Notes: </p>
+                        <p id="card-text-5">Current Active Notes: </p><!--current active notes-->
                         <p id="card-text-6">!NUM</p>
                     </div>
                     <br>
@@ -200,8 +215,19 @@
                 </center>
             </div>
         </div>
-        <div id="container" >
-            <canvas id="context" style="display:block"></canvas>
+        <div class="main" id="0" style="display: none;">
+            <p>you entered Settings</p>
+        </div>
+        <div class="main" id="1" style="display: none;">
+            <p>you entered explore</p>
+        </div>
+        <div class="main" id="2" style="display: none;">
+            <p>you entered Graveyard</p>
+        </div>
+        <div class="main" id="3">
+            <div id="container" >
+                <canvas id="context" style="display:block"></canvas>
+            </div>
         </div>
     </body>
     
