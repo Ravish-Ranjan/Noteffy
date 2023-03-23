@@ -1,20 +1,19 @@
 {
-    "Users" : [
+    "Users": [
         {
-            "identifier" : 1,
-            "user_name" : "Gaurang Tyagi",
-            "Email" : "gaurangtyagi7@gmail.com",
-            "password" : "xyzaqq==",
-            "type" : true,
-            "Organization_code" : null
+            "identifier": 1,
+            "user_name": "Gaurang Tyagi",
+            "Email": "gaurangtyagi7@gmail.com",
+            "password": "xyzaqq==",
+            "type": true,
+            "Organization_code": null
         },
         {
-            "user_name" : "Ravish Ranjan",
-            "Email" : "Ravishranjan4005@gmail.com",
-            "password" : "xyzaqq==",
-            "type" : false,
-            "identifier" : 2,
-            "Organization_code" : null
+            "User_Name": "Test_User",
+            "Password": "+muKw5AS3y1OT9JQYLW2vQ==",
+            "Email": "gaurangtyagi7@gmail.com",
+            "Type": false,
+            "Organization_Code": null
         }
     ]
 }
