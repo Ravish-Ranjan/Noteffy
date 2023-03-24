@@ -19,7 +19,7 @@
         <title>Welcome - Noteffy</title>
     </head>
     <body onload = "config();check_in_log()">
-        <a href="../php/main.php"><img src="../media/noteffytitle.png" id="noteffy-title"></a>
+        <a href="#"><img src="../media/noteffytitle.png" id="noteffy-title"></a>
         <div id="sign-in-bg">
             <img src="../media/goldbody2.png" id="mascot-1">
             <div class="box-container">
@@ -29,9 +29,9 @@
                             <p id="title-heading">Sign in</p>
                         </div>
                         <div class="sign-container1">  
-                            <label class="switch">
+                            <label class="switch" id =>
                                 <input type="checkbox" onclick="transitionFunction()" id="toggle-checkbox">
-                                <span class="slider round"></span>
+                                <span class="slider round slider1"></span>
                             </label>
                         </div>
                     </div>
@@ -58,13 +58,17 @@
                             <form method="post" id="form-2" action="../php/main.php">
                                 <label>Enter Email</label>
                                 <input class="form2-input" placeholder="Enter" type="text" name="Email" required><br><br>
-                                <label>Enter Username</label>
+                                <label> Username</label>
                                 <input class="form2-input" placeholder="Enter" type="text" name="Username" required><br><br>
                                 <label>Create Password</label>
                                 <input class="form2-input" placeholder="Enter" type="password" name="Password" required><br><br>
                                 <label>Confirm Password</label>
                                 <input class="form2-input" placeholder="Enter" type="password" name="Password1" required><br><br>
-                                <button id="log-bbt" onclick = "return generateOTP(this.parentElement.children[1].value,this.parentElement.children[5].value,this.parentElement.children[9].value,this.parentElement.children[13].value);" type="submit" form="form-2" value="Submit">SIGN UP</button>
+                                <label class="switch" id = "adminswitch">
+                                <input type="checkbox" id="toggle-checkbox">
+                                <span class="slider round slider2"><label style="position:relative;left:120%;">Administrator privileges</label></span>
+                            </label>
+                                <button class = "log-bbt" id="log-bbt2" onclick = "return generateOTP(this.parentElement.children[1].value,this.parentElement.children[5].value,this.parentElement.children[9].value,this.parentElement.children[13].value);" type="submit" form="form-2" value="Submit">SIGN UP</button>
                                 <div class="end-container2">
                                     <div class="continue-text">
                                         <p id="cont-text">or continue with</p>

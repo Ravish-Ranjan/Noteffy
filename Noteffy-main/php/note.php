@@ -3,46 +3,46 @@ function sanitize(&$data)
 {
     $data = strip_tags($data);
 }
-function signUp(&$jsonData)
-{ // this function signups the new user and save there auth data for further use
-    if (isset($_POST['Username']) && isset($_POST['Password']) && isset($_POST['Password1']) && isset($_POST['Email'])) {
-        if ($_POST['Password'] !== $_POST['Password1']) {
-            echo "<script>
-                message('Sign Up failed','message_failure');
-                </script>";
-        } else if ($_POST['Password'] === $_POST['Password1']) {
-            $users_count = count($jsonData['Users']);
-            str_pad($_POST["Username"], 32, '#', STR_PAD_RIGHT);
-            $jsonData['Users'][$users_count]['User_Name'] = $_POST['Username'];
-            $jsonData['Users'][$users_count]['Password'] = encrypt_data($_POST['Password'], str_pad($_POST["Username"], 32, '#', STR_PAD_RIGHT));
-            $jsonData['Users'][$users_count]['Email'] = $_POST['Email'];
-            $jsonData['Users'][$users_count]['Notes'] = array();
-            $jsonData['Users'][$users_count]['To-do'] = array();
-            $email = $jsonData["Users"][$users_count]["Email"];
-            $type = 1;
-            $data = '';
-            $otp = rand(1000,9999);
-            $all = explode("\php",__DIR__)[0]."\python\mail.py";
-            exec("python $all $email $type $otp");
-            echo <<<_END
-                    <script>
-                        //Insert Some loading screen here
-                        let val = prompt("Enter otp");
-                        if(val!=$otp){
-                             // Changed
-                            window.location.href = '../HTML/signUp.html?err=iotp&activity=signup&mail=$email';
-                        }
-                    </script>
-                _END;
+// function signUp(&$jsonData)
+// { // this function signups the new user and save there auth data for further use
+//     if (isset($_POST['Username']) && isset($_POST['Password']) && isset($_POST['Password1']) && isset($_POST['Email'])) {
+//         if ($_POST['Password'] !== $_POST['Password1']) {
+//             echo "<script>
+//                 message('Sign Up failed','message_failure');
+//                 </script>";
+//         } else if ($_POST['Password'] === $_POST['Password1']) {
+//             $users_count = count($jsonData['Users']);
+//             str_pad($_POST["Username"], 32, '#', STR_PAD_RIGHT);
+//             $jsonData['Users'][$users_count]['User_Name'] = $_POST['Username'];
+//             $jsonData['Users'][$users_count]['Password'] = encrypt_data($_POST['Password'], str_pad($_POST["Username"], 32, '#', STR_PAD_RIGHT));
+//             $jsonData['Users'][$users_count]['Email'] = $_POST['Email'];
+//             $jsonData['Users'][$users_count]['Notes'] = array();
+//             $jsonData['Users'][$users_count]['To-do'] = array();
+//             $email = $jsonData["Users"][$users_count]["Email"];
+//             $type = 1;
+//             $data = '';
+//             $otp = rand(1000,9999);
+//             $all = explode("\php",__DIR__)[0]."\python\mail.py";
+//             exec("python $all $email $type $otp");
+//             echo <<<_END
+//                     <script>
+//                         //Insert Some loading screen here
+//                         let val = prompt("Enter otp");
+//                         if(val!=$otp){
+//                              // Changed
+//                             window.location.href = '../HTML/signUp.html?err=iotp&activity=signup&mail=$email';
+//                         }
+//                     </script>
+//                 _END;
 
-            if (isset($_COOKIE["user"])) {
-                echo "<script>clearCookies();</script>";
-            }
-            setcookie("user", $_POST['Username'], time() + (24 * 60 * 60), "/");
-            echo "<script>message('Successfully Logged in','message_success'); window.location.href = window.location.href</script>";
-        }
-    }
-}
+//             if (isset($_COOKIE["user"])) {
+//                 echo "<script>clearCookies();</script>";
+//             }
+//             setcookie("user", $_POST['Username'], time() + (24 * 60 * 60), "/");
+//             echo "<script>message('Successfully Logged in','message_success'); window.location.href = window.location.href</script>";
+//         }
+//     }
+// }
 function signIn(&$jsonData)
 { //this function uses the saved data to verify and let the old user sign in
     if (isset($_POST['User_Name_']) && isset($_POST['Password_'])) {

@@ -30,6 +30,7 @@
                 header('Content-Type: application/json;charset=utf-8');
                 $users_count = count($details['Users']);
                 str_pad($jsond['Username'], 32, '#', STR_PAD_RIGHT);
+                $details['Users'][$users_count]['identifier'] = $users_count;
                 $details['Users'][$users_count]['User_Name'] = $jsond['Username'];
                 $details['Users'][$users_count]['Password'] = encrypt_data($jsond['Password'], str_pad($jsond["Username"], 32, '#', STR_PAD_RIGHT));
                 $details['Users'][$users_count]['Email'] = $jsond['Email'];
@@ -49,7 +50,7 @@
                 $data = json_encode($respdata);
                 echo $data;
         }
-        die();echo 456;
+        die();
     }
 ?>
 <html>

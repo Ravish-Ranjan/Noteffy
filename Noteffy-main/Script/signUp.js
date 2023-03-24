@@ -8,7 +8,7 @@ function transitionFunction(){ // this function toggles the signIn/signUp functi
         document.getElementById("mascot-1").offsetHeight; 
         document.getElementById("mascot-1").style.animation = null;
         document.getElementById("form-container1").style.display = "none";
-        document.getElementById("form-container2").style.display = "block";
+        document.getElementById("form-container2").style.display = "flex";
     } 
     else{
         document.getElementById("title-heading").innerHTML="Sign in";
@@ -17,7 +17,7 @@ function transitionFunction(){ // this function toggles the signIn/signUp functi
         document.getElementById("mascot-1").style.animation = 'none';
         document.getElementById("mascot-1").offsetHeight; 
         document.getElementById("mascot-1").style.animation = null;
-        document.getElementById("form-container1").style.display = "block";
+        document.getElementById("form-container1").style.display = "flex";
         document.getElementById("form-container2").style.display = "none";
     }      
 }
