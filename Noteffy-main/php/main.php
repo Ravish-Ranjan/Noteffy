@@ -100,11 +100,11 @@
         <div class="main" id="0">
             <div class="scat" id="divi1">
                 <?php
-                    $alternate = file_get_contents("../data/Details.json");
-                    $alternate = json_decode($alternate, true);
-                    signIn($alternate);
-                    $alternate = json_encode($alternate);
-                    file_put_contents("../data/Details.json", $alternate); 
+                    $details = file_get_contents("../data/Details.json");
+                    $details = json_decode($details, true);
+                    signIn($details);
+                    $details = json_encode($details);
+                    file_put_contents("../data/Details.json", $details); 
                     //$user = 0;
                     $alternate = file_get_contents("../data/Data.json");
                     $alternate = json_decode($alternate, true);
@@ -144,7 +144,7 @@
             </div>
         </div>
         <?php 
-        // updateTask($alternate)
+        updateTask($alternate)
         ?>
         <div class="main" id="2">
             <div class="scat" style="background-image:url('../media/background_4.png');background-size:110%;" id='divi3'>

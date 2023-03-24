@@ -102,7 +102,7 @@
                                 <img title='copy the task to clipboard' src=\"../media/share.png\" alt=\"\">
                             </button>
                             <button onclick=\"\">
-                                <a href='../php/main.php?T_no=$i style='text-decoration:none;'>
+                                <a href='../php/main.php?T_no=$i' style='text-decoration:none;'>
                                     <img title='delete the task' src=\"../media/delete.png\" alt=\"\">
                                 </a>
                             </button>
@@ -126,9 +126,9 @@
                 for($i=0;$i<count($jsonData["User_Data"][$user]["To-do"][$task_no]["Tasks"]);$i++){
                     $newLinePos = strpos($jsonData["User_Data"][$user]["To-do"][$task_no]["Tasks"][$i],"\r");
                     if($newLinePos!==FALSE)
-                        $task.= substr($jsonData["Users"][$user]["To-do"][$task_no]["Tasks"][$i],0,$newLinePos).'\n';
+                        $task.= substr($jsonData["User_Data"][$user]["To-do"][$task_no]["Tasks"][$i],0,$newLinePos).'\n';
                     else
-                        $task.= $jsonData["Users"][$user]["To-do"][$task_no]["Tasks"][$i];
+                        $task.= $jsonData["User_Data"][$user]["To-do"][$task_no]["Tasks"][$i];
                 }
                 echo "<script>
                         task_compose('$date','$time','$title','$task','$task_no');
