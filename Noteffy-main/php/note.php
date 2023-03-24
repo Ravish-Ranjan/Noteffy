@@ -3,46 +3,7 @@ function sanitize(&$data)
 {
     $data = strip_tags($data);
 }
-// function signUp(&$jsonData)
-// { // this function signups the new user and save there auth data for further use
-//     if (isset($_POST['Username']) && isset($_POST['Password']) && isset($_POST['Password1']) && isset($_POST['Email'])) {
-//         if ($_POST['Password'] !== $_POST['Password1']) {
-//             echo "<script>
-//                 message('Sign Up failed','message_failure');
-//                 </script>";
-//         } else if ($_POST['Password'] === $_POST['Password1']) {
-//             $users_count = count($jsonData['Users']);
-//             str_pad($_POST["Username"], 32, '#', STR_PAD_RIGHT);
-//             $jsonData['Users'][$users_count]['User_Name'] = $_POST['Username'];
-//             $jsonData['Users'][$users_count]['Password'] = encrypt_data($_POST['Password'], str_pad($_POST["Username"], 32, '#', STR_PAD_RIGHT));
-//             $jsonData['Users'][$users_count]['Email'] = $_POST['Email'];
-//             $jsonData['Users'][$users_count]['Notes'] = array();
-//             $jsonData['Users'][$users_count]['To-do'] = array();
-//             $email = $jsonData["Users"][$users_count]["Email"];
-//             $type = 1;
-//             $data = '';
-//             $otp = rand(1000,9999);
-//             $all = explode("\php",__DIR__)[0]."\python\mail.py";
-//             exec("python $all $email $type $otp");
-//             echo <<<_END
-//                     <script>
-//                         //Insert Some loading screen here
-//                         let val = prompt("Enter otp");
-//                         if(val!=$otp){
-//                              // Changed
-//                             window.location.href = '../HTML/signUp.html?err=iotp&activity=signup&mail=$email';
-//                         }
-//                     </script>
-//                 _END;
 
-//             if (isset($_COOKIE["user"])) {
-//                 echo "<script>clearCookies();</script>";
-//             }
-//             setcookie("user", $_POST['Username'], time() + (24 * 60 * 60), "/");
-//             echo "<script>message('Successfully Logged in','message_success'); window.location.href = window.location.href</script>";
-//         }
-//     }
-// }
 function signIn(&$jsonData)
 { //this function uses the saved data to verify and let the old user sign in
     if (isset($_POST['User_Name_']) && isset($_POST['Password_'])) {
@@ -51,13 +12,14 @@ function signIn(&$jsonData)
         $name = "";
         for ($i = 0; $i < $users_count; $i++) {
             // echo $i.'<br>';
-            if ($jsonData["Users"][$i]["User_Name"] === $_POST['User_Name_']) {
+            if ($jsonData["Users"][$i]["identifier"] == $i) {
                 if ($jsonData["Users"][$i]["Password"] === encrypt_data($_POST["Password_"], str_pad($_POST["User_Name_"], 32, '#', STR_PAD_RIGHT))) {
                     setcookie("user", $jsonData["Users"][$i]["User_Name"], 0, "/");
+                    setcookie("user_number", $jsonData["Users"][$i]["identifier"], 0, "/");
                     echo "<script>window.location.href = window.location.href</script>";
                     return;
                 } else {
-                    $name = $jsonData["Users"][$i]["User_Name"];
+                    $name = $jsonData["Users"][$i]["user_name"];
                     $errc = "upwd";
                 }
             }
@@ -75,13 +37,12 @@ function getUser()
 }
 function Delete_Note(&$jsonData)
 {
-    if (isset($_GET["N_no"]) && isset($_GET["User"])) {
+    if (isset($_GET["N_no"])) {
         $n_no = $_GET["N_no"];
-        $User = $_GET["User"];
-        $userName = getUser();
-        for ($i = 0; $i < count($jsonData["Users"]); $i++) {
-            if ($jsonData["Users"][$i]["User_Name"] == $userName && $i == $User) {
-                array_splice($jsonData["Users"][$User]["Notes"], $n_no, 1);
+        $userNumber = getUserNumber();
+        for ($i = 0; $i < count($jsonData["User_Data"]); $i++) {
+            if ($jsonData["User_Data"][$i]["identifier"] == $userNumber) {
+                array_splice($jsonData["User_Data"][$userNumber]["Notes"], $n_no, 1);
                 echo "<script>window.location.href = '../php/main.php'</script>";
                 return;
             }
@@ -112,7 +73,7 @@ function fetch_store(&$jsonData){
     //     echo "<script>location.replace('main.php')</script>";
     // }
     // return $user;
-    $user = 0;
+    $user = getUserNumber();
     if ($jsonData["User_Data"][$user]["identifier"] != $user)
         die("Could not find user");
     if (isset($_POST['Title']) && isset($_POST['Note']) && isset($_POST['Date'])) {
@@ -213,9 +174,9 @@ function updateNote($jsonData)
     if ($user != -1) {
         if (isset($_GET['note_no'])) {
             $note_no = $_GET['note_no'];
-            $date .= $jsonData["Users"][$user]["Notes"][$note_no]["Date"];
-            $title .= $jsonData["Users"][$user]["Notes"][$note_no]["Title"];
-            $note .= $jsonData["Users"][$user]["Notes"][$note_no]["Content"];
+            $date .= $jsonData["User_Data"][$user]["Notes"][$note_no]["Date"];
+            $title .= $jsonData["User_Data"][$user]["Notes"][$note_no]["Title"];
+            $note .= $jsonData["User_Data"][$user]["Notes"][$note_no]["Content"];
             echo "<script>
                         note_compose('$date','$title','$note','$note_no');
                     </script>";

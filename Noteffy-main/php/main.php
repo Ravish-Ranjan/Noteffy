@@ -4,10 +4,6 @@
     include "note.php";
     include "task.php";
     include "todo.php";
-    $storage = file_get_contents("../data/storage.aes") or die("Could Not open the file");
-    $storage = decrypt_data($storage);
-    $storage = json_decode($storage,True);
-
     // details
     $details = file_get_contents("../data/Details.json");
     $details = json_decode($details, true);
@@ -19,7 +15,7 @@
 <?php
     $queries = array();
     // Fetching raw POST object body because content-type is causing parsing issues
-    parse_str($_SERVER['QUERY_STRING'], $queries);
+    // parse_str($_SERVER['QUERY_STRING'], $queries);
     if(isset($queries['signup'])=='true'){
         $raw = file_get_contents("php://input");
         $jsond = json_decode($raw,true) or die(123);
@@ -35,13 +31,10 @@
                 $details['Users'][$users_count]['Password'] = encrypt_data($jsond['Password'], str_pad($jsond["Username"], 32, '#', STR_PAD_RIGHT));
                 $details['Users'][$users_count]['Email'] = $jsond['Email'];
                 $details['Users'][$users_count]['Type'] = false;
-                $details['Users'][$users_count]['Organization_Code'] = null;
+                $details['Users'][$users_count]['Organization_Code'] = array();
                 $alternate['User_Data'][$users_count]['identifier'] = $users_count;
                 $alternate['User_Data'][$users_count]['Notes'] = array();
                 $alternate['User_Data'][$users_count]['To-do'] = array();
-                // $storage1 = json_encode($storage);
-                // $storage1 = encrypt_data($storage1);
-                // $storage1 = file_put_contents("../data/storage.aes",$storage1) or die("Could not close file");
                 $details = json_encode($details);
                 $alternate = json_encode($alternate);
                 file_put_contents("../data/Details.json", $details);
@@ -78,7 +71,7 @@
             <div id="prof">
                     <img src="../media/logoredq.png" onclick="showmenu()" style="cursor:pointer;margin-right:30;margin-top:30;" alt="prof" height="75">
                     <?php
-                        if(getUser()==" "){
+                        if(!isset($_COOKIE['user_number'])){
                             // echo "<script>window.location.href = 'index.php'</script>";
                         }
                         else{
@@ -89,12 +82,12 @@
                             </div>
                             <ul>
                                 <li><a href='../HTML/chart.html' style='text-decoration:none;'>Scoreboard</a><br></li>
-                                <li><a href='../HTML/signUp.html' id='logout' onclick='clearCookies()' style='text-decoration: none;'>Log Out</a></li>
+                                <li><a  id='logout' onclick='clearCookies()' style='text-decoration: none;cursor:poin'>Log Out</a></li>
                                 <li><a href='#' style='text-decoration: none;' onclick='hidemenu()'>Workspace</a></li>
                                 <li><a href='index.php' style='text-decoration: none;'>Home</a></li>
                             </ul>
                             </div>" ;
-                            setcookie("user_number",getUserNumber($storage),0,"/");
+                            setcookie("user_number",getUserNumber(),0,"/");
                         }
                         ?>
             </div>
@@ -106,23 +99,19 @@
         </div>
         <div class="main" id="0">
             <div class="scat" id="divi1">
-                <?php  
-                    signUp($storage);
-                    signIn($storage);
-                    Delete_Note($storage);
-                    $storage = json_encode($storage);
-                    $storage = encrypt_data($storage);
-                    file_put_contents("../data/storage.aes",$storage) or die("Failed to encode");      
+                <?php
+                    $alternate = file_get_contents("../data/Details.json");
+                    $alternate = json_decode($alternate, true);
+                    signIn($alternate);
+                    $alternate = json_encode($alternate);
+                    file_put_contents("../data/Details.json", $alternate); 
                     //$user = 0;
-                    $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
-                    $storage = decrypt_data($storage);
-                    $storage = json_decode($storage,true);
                     $alternate = file_get_contents("../data/Data.json");
                     $alternate = json_decode($alternate, true);
+                    Delete_Note($alternate);
                     $user = fetch_store($alternate);
                     display($alternate,$user);
-                    $alternate = json_encode($alternate);
-                    file_put_contents("../data/Data.json", $alternate);
+                    
                 ?>
             </div>
             <!-- this div is to let user create more notes -->
@@ -132,19 +121,18 @@
                 </a>
             </div>
         </div>
-        <?php updateNote($storage) ?>
+        <?php updateNote($alternate) ?>
         <div class="main" id="1" >
             <div class="scat" style="background-image:url('../media/background_1.png');background-size:110%;" id="divi2">
                 <?php
-                    $u = task_compose($storage);
-                    Delete_task($storage);
-                    $storage = json_encode($storage);
-                    $storage = encrypt_data($storage);
-                    file_put_contents("../data/storage.aes",$storage) or die("Failed to encode");
-                    $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
-                    $storage = decrypt_data($storage);
-                    $storage = json_decode($storage,true);
-                    display_task($storage,$u);
+                    $alternate = json_encode($alternate);
+                    file_put_contents("../data/Data.json", $alternate);
+
+                    $alternate = file_get_contents("../data/Data.json");
+                    $alternate = json_decode($alternate,true);
+                    $u = task_compose($alternate);
+                    Delete_task($alternate);
+                    display_task($alternate,$u);
                 ?>
                 </div>
             </div>
@@ -155,22 +143,25 @@
                 </a>
             </div>
         </div>
-        <?php updateTask($storage)?>
+        <?php 
+        // updateTask($alternate)
+        ?>
         <div class="main" id="2">
             <div class="scat" style="background-image:url('../media/background_4.png');background-size:110%;" id='divi3'>
             <?php
-                $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
-                $storage = decrypt_data($storage);
-                $storage = json_decode($storage,true);
-                $u = getUserNumber($storage);
-                display_todo($storage,$u);
-                complete($storage);
-                $storage = json_encode($storage);
-                $storage = encrypt_data($storage);
-                file_put_contents("../data/storage.aes",$storage) or die("Failed to encode");  
+                $alternate = json_encode($alternate);
+                file_put_contents("../data/Data.json",$alternate);
+                
+                $alternate = file_get_contents("../data/Data.json");
+                $alternate = json_decode($alternate, true);
+                $u = getUserNumber();
+                display_todo($alternate,$u);
+                complete($alternate);
+                $alternate = json_encode($alternate);
+                file_put_contents("../data/Data.json",$alternate);
             ?>
         </div>
     </body>
-<script src="../Script/note.js"></script>
+<script defer src="../Script/note.js"></script>
 <script src="../Script/tasks.js"></script>
 </html>

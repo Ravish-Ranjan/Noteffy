@@ -2,9 +2,9 @@
     function percent($i,$jsonData){
         if(isset($_COOKIE['percent'])){
             $temp = json_decode($_COOKIE['percent'],true);
-            if(array_key_exists(getUserNumber($jsonData),$temp)){
-                if(array_key_exists("$i",$temp[getUserNumber($jsonData)])){
-                    return $temp[getUserNumber($jsonData)]["$i"]."% task completed";
+            if(array_key_exists(getUserNumber(),$temp)){
+                if(array_key_exists("$i",$temp[getUserNumber()])){
+                    return $temp[getUserNumber()]["$i"]."% task completed";
                 } 
                 else
                     return "0% task completed";
@@ -13,13 +13,13 @@
         }
     }
     function complete(&$jsonData){
-        $userNumber = getUserNumber($jsonData);
+        $userNumber = getUserNumber();
         if(isset($_POST['Task_no']))
             $t_no = $_POST['Task_no'];
         else
             return;
         $flag = true;
-        for($i=0;$i<count($jsonData["Users"][$userNumber]["To-do"][$t_no]["Tasks"]);$i++){
+        for($i=0;$i<count($jsonData["User_Data"][$userNumber]["To-do"][$t_no]["Tasks"]);$i++){
             if(!isset($_POST["task$t_no$i"])){
                 $flag = false;
                 break;
@@ -29,20 +29,20 @@
             $tasks_storage = file_get_contents("../data/task.json");
             $tasks_storage = json_decode($tasks_storage,true);
             $stored_task_no = count($tasks_storage);
-            $tasks_storage[$stored_task_no] = $jsonData["Users"][$userNumber]["To-do"][$t_no];
-            $tasks_storage[$stored_task_no]["User"] = getUserNumber($jsonData);
+            $tasks_storage[$stored_task_no] = $jsonData["User_Data"][$userNumber]["To-do"][$t_no];
+            $tasks_storage[$stored_task_no]["User"] = getUserNumber();
             $tasks_storage = json_encode($tasks_storage);
             file_put_contents("../data/task.json",$tasks_storage);
-            array_splice($jsonData["Users"][$userNumber]["To-do"],$t_no,1);
+            array_splice($jsonData["User_Data"][$userNumber]["To-do"],$t_no,1);
             echo "<script>window.location.href = 'main.php'</script>";
         }
     }
     function comp_task($i,$jsonData){
         if(isset($_COOKIE['comp_task'])){
             $temp = json_decode($_COOKIE['comp_task'],true);
-            if(array_key_exists(getUserNumber($jsonData),$temp)){
-                if(array_key_exists($i,$temp[getUserNumber($jsonData)])){
-                    return $temp[getUserNumber($jsonData)][$i];
+            if(array_key_exists(getUserNumber(),$temp)){
+                if(array_key_exists($i,$temp[getUserNumber()])){
+                    return $temp[getUserNumber()][$i];
                 }
                 else
                     return false;
@@ -52,19 +52,16 @@
             return false;
     }
     // This function gives the index of the user in the json file
-    function getUserNumber($jsonData){
-        for($i=0;$i<count($jsonData["Users"]);$i++){
-            if($jsonData["Users"][$i]["User_Name"]==getUser()){
-                return $i;
-            }
-        }
-        echo "<script>window.location.href='../HTML/error.html'</script>";
+    function getUserNumber(){
+    if (isset($_COOKIE['user_number']))
+        return (int) ($_COOKIE['user_number']);
+    echo "<script>window.location.href='../HTML/error.html'</script>";
     }
     function display_todo($jsonData,$user){
-        $count = count($jsonData['Users'][$user]['To-do']);
+        $count = count($jsonData['User_Data'][$user]['To-do']);
         for ($i=0; $i < $count; $i++){
             $c_task = comp_task($i,$jsonData); //gets the js object containing completed tasks
-            $item = $jsonData['Users'][$user]['To-do'][$i]; 
+            $item = $jsonData['User_Data'][$user]['To-do'][$i]; 
             date_default_timezone_set("Asia/Kolkata");
             if($item["Date"] === (date("Y-m-d")) && $item['Priority']!=0){
                 $j = $i+1;

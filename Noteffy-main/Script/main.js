@@ -3,20 +3,25 @@ if ( window.history.replaceState ) { // this function changes the state of a pag
 }
 
 function clearCookies(){ // this function is used to clear the cookies of user to log him out
-    const cookies = document.cookie.split(";");
-    for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i];
-        const namePos = cookie.indexOf("=");
-        const name = namePos > -1 ?cookie.substr(0, namePos):cookie;
-        if(name=='user'){
-            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-            window.location.href = '../php/index.php'
+    let decodedCookie = decodeURIComponent(document.cookie);
+    decodedCookie = decodedCookie.split(";");
+    for (i = 0; i < decodedCookie.length; i++){
+        let temp = decodedCookie[i].split("=");
+        if (temp[0].trim() == "user") {
+            console.log(temp[1]);
+            document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            window.location.href = '../php/index.php';
+        }
+        if (temp[0].trim() == "user_number") {
+            console.log(temp[1]);
+            document.cookie = "user_number=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            window.location.href = '../php/index.php';
         }
     }
 }
 function setCookie(tabname){
     const d = new Date();
-    d.setTime(d.getTime() + (5*10*1000));
+    d.setTime(d.getTime() + (24*60*60*1000));
     document.cookie = "name="+tabname+";expires="+ d.toUTCString()+";path=/";
 }
 function chan(at){
