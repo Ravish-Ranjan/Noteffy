@@ -15,7 +15,7 @@
 <?php
     $queries = array();
     // Fetching raw POST object body because content-type is causing parsing issues
-    // parse_str($_SERVER['QUERY_STRING'], $queries);
+    parse_str($_SERVER['QUERY_STRING'], $queries);
     if(isset($queries['signup'])=='true'){
         $raw = file_get_contents("php://input");
         $jsond = json_decode($raw,true) or die(123);
