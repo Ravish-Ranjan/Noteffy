@@ -1,5 +1,3 @@
-
-
 function generateOTP(email,usern,pwd,pwd2){
     var params = {
         'op':'generate',
@@ -13,14 +11,14 @@ function generateOTP(email,usern,pwd,pwd2){
     fetch("../php/otpapi.php?"+ (new URLSearchParams(params).toString()),options);
     document.querySelector("#form-container2").innerHTML = `\\\
     <div id="otpform">\\\
-    <label>Enter OTP</label>\
+    <label id="otp-heading">Enter OTP</label>\
     <ul>\
     <li><input placeholder="Enter" type="text" oninput = "nextDig(this)" maxlength = 1 name="OTP1" required><br><br></li>\
     <li><input placeholder="Enter" type="text" oninput = "nextDig(this)" maxlength = 1 name="OTP2" required><br><br></li>\
     <li><input placeholder="Enter" type="text" oninput = "nextDig(this)" maxlength = 1 name="OTP3" required><br><br></li>\
     <li><input placeholder="Enter" type="text" maxlength = 1 name="OTP4" required><br><br></li></ul>\
     <input type = "hidden" name = "OTP"></input>\
-    <button type "submit" onclick = "concatOTP();validateOTP('${usern}','${email}','${pwd}','${pwd2}');">Submit</button>\
+    <button id="otp-submit-bbt" type "submit" onclick = "concatOTP();validateOTP('${usern}','${email}','${pwd}','${pwd2}');">Submit</button>\
     </button>\
     `;
     return false;

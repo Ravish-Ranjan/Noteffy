@@ -180,23 +180,49 @@ input:checked + .slider:before{
     display: none;
 }
 #otpform{
-    display:flex;flex-direction:column;
-    padding:0 10% 0 10%;
-    align-items:center;
-    justify-content:center;
+    display: flex;
+    flex-direction: column;
+    padding: 0 10% 0 10%;
+    align-items: center;
+    justify-content: center;
 }
 #otpform ul{
-    display:flex;flex-direction:row;
-    height:80%;width:80%;
-    align-items:center;
-    justify-content:center;
+    display: flex;
+    flex-direction: row;
+    height: 80%;
+    width: 80%;
+    align-items: center;
+    justify-content: center;
 }
 #otpform ul li{
-    list-style:none;
+    list-style: none;
+    font-family: codec-extrabold;
 }
 #otpform ul li input{
     list-style:none;
-    height:10%;width:55%;
+    height:10%;
+    width:55%;
     display:inline-block;
     border-color:blue;
+}
+#otp-heading{
+    font-family: codec-extrabold;
+}
+#otp-submit-bbt{
+    cursor: pointer;
+    text-decoration: none;
+    font-family: codec-extrabold;
+    border-radius: 1.46vw;
+    background-color: #ffffff;
+    width: 7.32vw;
+    height: 3.29vw;
+    text-align: center;
+    color: #1c1c1c;
+    border: none;
+    transition: 0.3s;
+}
+#otp-submit-bbt:hover{
+    background-color: #1c1c1c;
+    color: #ffffff;
+    transition: 0.3s;
 }
