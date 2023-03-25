@@ -5,6 +5,7 @@
     include "note.php";
     include "task.php";
     include "todo.php";
+    include "admin.php";
    
 ?>
 <?php

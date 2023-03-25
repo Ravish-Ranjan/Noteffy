@@ -100,3 +100,28 @@ function signUp() {
     
     window.location.href = "../HTML/signUp.html";
 }
+
+function switchAdmin(){
+    let decoded = decodeURIComponent(document.cookie);
+    let vals = decoded.split(';');
+    for(let u = 0;u < vals.length;u++){
+        let key_val = vals[u].split('=');
+        if(key_val[0].trim()=="user_number"){
+            var loc = window.location.href.split('/php')[0];
+            fetch(loc+"/php/main.php?"+(new URLSearchParams({'op':'chadmin'})),{
+            method:"POST",mode:"cors",header:'Content-Type:application/json;charset=utf-8'
+            }).then((dat)=>dat.json()).then((jsond)=>{
+            if(jsond['Message']=="admin success"){
+                //Unlock panel here
+                message("successfully converted into admin");
+            }else if(jsond['Message']=="admin present"){
+                message("you are already any admin")
+            }
+            else{
+                message("can't connect to the server right now");
+            }
+            console.log(jsond);
+    });
+        }
+    }
+}   
