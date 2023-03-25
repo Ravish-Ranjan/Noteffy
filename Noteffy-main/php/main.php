@@ -4,6 +4,8 @@
     include "note.php";
     include "task.php";
     include "todo.php";
+    include "admin.php";
+    
     // details
     $details = file_get_contents("../data/Details.json");
     $details = json_decode($details, true);
@@ -45,6 +47,7 @@
         }
         die();
     }
+    allowAdmin($details);
 ?>
 <html>
     <head>
