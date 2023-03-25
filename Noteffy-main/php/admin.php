@@ -18,7 +18,7 @@
                         $resp["Message"] = "admin present";
                     }
                     echo json_encode($resp);
-                    file_put_contents("../data/Details.json", json_encode($jssonData));die();
+                    file_put_contents("../data/Details.json", json_encode($jsonData));die();
                 }
             }
             $resp["Message"] = "failure";
