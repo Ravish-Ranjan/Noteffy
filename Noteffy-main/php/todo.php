@@ -51,12 +51,6 @@
         else
             return false;
     }
-    // This function gives the index of the user in the json file
-    function getUserNumber(){
-    if (isset($_COOKIE['user_number']))
-        return (int) ($_COOKIE['user_number']);
-    echo "<script>window.location.href='../HTML/error.html'</script>";
-    }
     function display_todo($jsonData,$user){
         $count = count($jsonData['User_Data'][$user]['To-do']);
         for ($i=0; $i < $count; $i++){
@@ -114,9 +108,9 @@
                         </div>
                     </div>";
             }
-            else{
-                echo "<script>window.location.href = 'main.php?T_no=$i&User=$user'</script>";
-            }
+            // else{
+            //     echo "<script>window.location.href = 'main.php?T_no=$i</script>";
+            // }
         }
         // adds a line through the tasks that are completed
         echo "

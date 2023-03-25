@@ -1,9 +1,4 @@
 <?php
-    function sanitize_array(&$arr){
-        for($i=0;$i<count($arr);$i++){
-            $arr[$i] = strip_tags($arr[$i]);
-        }
-    }
     function Delete_task(&$jsonData){ // this function is to let user delete a task
         if(isset($_GET["T_no"])){
             $t_no = $_GET["T_no"];

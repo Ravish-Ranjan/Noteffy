@@ -1,50 +1,23 @@
 <?php
+    include "initial.php";
     include "hash.php";
     include "priority_calc.php";
     include "note.php";
     include "task.php";
     include "todo.php";
-    // details
-    $details = file_get_contents("../data/Details.json");
-    $details = json_decode($details, true);
-    
-    // alternate
-    $alternate = file_get_contents("../data/Data.json");
-    $alternate = json_decode($alternate, true);
+   
 ?>
 <?php
     $queries = array();
     // Fetching raw POST object body because content-type is causing parsing issues
     parse_str($_SERVER['QUERY_STRING'], $queries);
-    if(isset($queries['signup'])=='true'){
-        $raw = file_get_contents("php://input");
-        $jsond = json_decode($raw,true) or die(123);
-        if ($jsond['Password'] !== $jsond['Password1']) {
-                $data = array('Message'=>'failure');echo $data;
-            } 
-            else if ($jsond['Password'] === $jsond['Password1']) {
-                header('Content-Type: application/json;charset=utf-8');
-                $users_count = count($details['Users']);
-                str_pad($jsond['Username'], 32, '#', STR_PAD_RIGHT);
-                $details['Users'][$users_count]['identifier'] = $users_count;
-                $details['Users'][$users_count]['User_Name'] = $jsond['Username'];
-                $details['Users'][$users_count]['Password'] = encrypt_data($jsond['Password'], str_pad($jsond["Username"], 32, '#', STR_PAD_RIGHT));
-                $details['Users'][$users_count]['Email'] = $jsond['Email'];
-                $details['Users'][$users_count]['Type'] = false;
-                $details['Users'][$users_count]['Organization_Code'] = array();
-                $alternate['User_Data'][$users_count]['identifier'] = $users_count;
-                $alternate['User_Data'][$users_count]['Notes'] = array();
-                $alternate['User_Data'][$users_count]['To-do'] = array();
-                $details = json_encode($details);
-                $alternate = json_encode($alternate);
-                file_put_contents("../data/Details.json", $details);
-                file_put_contents("../data/Data.json", $alternate);
-                $respdata = array('Message'=>'success');
-                $data = json_encode($respdata);
-                echo $data;
-        }
-        die();
-    }
+    $details = file_get_contents("../data/Details.json");
+    $details = json_decode($details, true);
+    signUp($queries);
+    signIn($details);
+    $details = json_encode($details);
+    file_put_contents("../data/Details.json", $details);
+    
 ?>
 <html>
     <head>
@@ -102,7 +75,6 @@
                 <?php
                     $details = file_get_contents("../data/Details.json");
                     $details = json_decode($details, true);
-                    signIn($details);
                     $details = json_encode($details);
                     file_put_contents("../data/Details.json", $details); 
                     //$user = 0;
