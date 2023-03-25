@@ -54,12 +54,29 @@
         <script src="../Script/compose.js"></script>
         <script src="../Script/main.js"></script>
         <script src="../Script/message.js"></script>
-        
+        <style>
+            .user-panel,.admin-panel{
+                height: 98%;
+                width: 96%;
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+            }
+            .user-panel{
+                left: 1%;
+            }
+            .admin-panel{
+                right: -94%;
+            }
+        </style>
     </head>
     <body onload="pos()">
-        <div class="top" id="dashboard">
-            <label id="logo">Your Workstation</label>
-            <div id="prof">
+    <div class="main-parent-wrapper">
+        <div class="user-panel">
+            <div class="top" id="dashboard">
+                <label id="logo">Your Workstation</label>
+                <div id="prof">
                     <img src="../media/logoredq.png" onclick="showmenu()" style="cursor:pointer;margin-right:30;margin-top:30;" alt="prof" height="75">
                     <?php
                         if(getUser()==" "){
@@ -82,77 +99,81 @@
                             </div>" ;
                             setcookie("user_number",getUserNumber($storage),0,"/");
                         }
-                        ?>
-            </div>
-        </div>
-        <div class="tab">
-            <button class="tbs" onclick="openTab(event, '0')"><img src="../media/notesWidget.png" id="noteWidgetImage"></button>
-            <button class="tbs" onclick="openTab(event, '1')"><img src="../media/taskWidget.png" id="taskWidgetImage"></button>
-            <button class="tbs" onclick="openTab(event, '2')"><img src="../media/todoWidget.png" id="bbtWidgetImage"></button>
-        </div>
-        <div class="main" id="0">
-            <div class="scat" id="divi1">
-                <?php  
-                    signUp($storage);
-                    signIn($storage);
-                    Delete_Note($storage);
-                    $storage = json_encode($storage);
-                    $storage = encrypt_data($storage);
-                    file_put_contents("../data/storage.aes",$storage) or die("Failed to encode");      
-                    //$user = 0;
-                    $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
-                    $storage = decrypt_data($storage);
-                    $storage = json_decode($storage,true);
-                    $user = fetch_store($storage);
-                    display($storage,$user);
-                ?>
-            </div>
-            <!-- this div is to let user create more notes -->
-            <div class="menu" id="comp1" onclick = "note_compose('','','','')" style="background-color:#f2f2f2;">
-                <a id="btn1">
-                    <img src="../media/quillpen.png" id="note-compose-button" alt="compose">
-                </a>
-            </div>
-        </div>
-        <?php updateNote($storage) ?>
-        <div class="main" id="1" >
-            <div class="scat" style="background-image:url('../media/background_1.png');background-size:110%;" id="divi2">
-                <?php
-                    $u = task_compose($storage);
-                    Delete_task($storage);
-                    $storage = json_encode($storage);
-                    $storage = encrypt_data($storage);
-                    file_put_contents("../data/storage.aes",$storage) or die("Failed to encode");
-                    $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
-                    $storage = decrypt_data($storage);
-                    $storage = json_decode($storage,true);
-                    display_task($storage,$u);
-                ?>
+                    ?>
                 </div>
             </div>
-            <!-- this div is for user to create more tasks -->
-            <div class="menu" id="comp2" onclick = "task_compose('','','','','')" style="background-color:#f2f2f2;">
-                <a id="btn1">
-                    <img src="../media/goldenperi.png"id="task-compose-button" alt="compose">
-                </a>
+            <div class="tab">
+                <button class="tbs" onclick="openTab(event, '0')"><img src="../media/notesWidget.png" id="noteWidgetImage"></button>
+                <button class="tbs" onclick="openTab(event, '1')"><img src="../media/taskWidget.png" id="taskWidgetImage"></button>
+                <button class="tbs" onclick="openTab(event, '2')"><img src="../media/todoWidget.png" id="bbtWidgetImage"></button>
+            </div>
+            <div class="main" id="0">
+                <div class="scat" id="divi1">
+                    <?php  
+                        signUp($storage);
+                        signIn($storage);
+                        Delete_Note($storage);
+                        $storage = json_encode($storage);
+                        $storage = encrypt_data($storage);
+                        file_put_contents("../data/storage.aes",$storage) or die("Failed to encode");      
+                        //$user = 0;
+                        $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
+                        $storage = decrypt_data($storage);
+                        $storage = json_decode($storage,true);
+                        $user = fetch_store($storage);
+                        display($storage,$user);
+                    ?>
+                </div>
+                <!-- this div is to let user create more notes -->
+                <div class="menu" id="comp1" onclick = "note_compose('','','','')" style="background-color:#f2f2f2;">
+                    <a id="btn1">
+                        <img src="../media/quillpen.png" id="note-compose-button" alt="compose">
+                    </a>
+                </div>
+            </div>
+            <?php updateNote($storage) ?>
+            <div class="main" id="1">
+                <div class="scat" style="background-image:url('../media/background_1.png');background-size:110%;" id="divi2">
+                    <?php
+                        $u = task_compose($storage);
+                        Delete_task($storage);
+                        $storage = json_encode($storage);
+                        $storage = encrypt_data($storage);
+                        file_put_contents("../data/storage.aes",$storage) or die("Failed to encode");
+                        $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
+                        $storage = decrypt_data($storage);
+                        $storage = json_decode($storage,true);
+                        display_task($storage,$u);
+                    ?>
+                </div>
+                <!-- this div is for user to create more tasks -->
+                <div class="menu" id="comp2" onclick = "task_compose('','','','','')" style="background-color:#f2f2f2;">
+                    <a id="btn1">
+                        <img src="../media/goldenperi.png"id="task-compose-button" alt="compose">
+                    </a>
+                </div>
+            </div>
+            <?php updateTask($storage)?>
+            <div class="main" id="2">
+                <div class="scat" style="background-image:url('../media/background_4.png');background-size:110%;" id='divi3'>
+                    <?php
+                    $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
+                    $storage = decrypt_data($storage);
+                    $storage = json_decode($storage,true);
+                    $u = getUserNumber($storage);
+                    display_todo($storage,$u);
+                    complete($storage);
+                    $storage = json_encode($storage);
+                    $storage = encrypt_data($storage);
+                    file_put_contents("../data/storage.aes",$storage) or die("Failed to encode");  
+                ?>
             </div>
         </div>
-        <?php updateTask($storage)?>
-        <div class="main" id="2">
-            <div class="scat" style="background-image:url('../media/background_4.png');background-size:110%;" id='divi3'>
-            <?php
-                $storage = file_get_contents("../data/storage.aes") or die("Could Not open file");
-                $storage = decrypt_data($storage);
-                $storage = json_decode($storage,true);
-                $u = getUserNumber($storage);
-                display_todo($storage,$u);
-                complete($storage);
-                $storage = json_encode($storage);
-                $storage = encrypt_data($storage);
-                file_put_contents("../data/storage.aes",$storage) or die("Failed to encode");  
-            ?>
+        <!-- admin panel -->
+        <div class="admin-panel">
+            <p>admin panel</p>
         </div>
     </body>
-<script src="../Script/note.js"></script>
-<script src="../Script/tasks.js"></script>
+    <script src="../Script/note.js"></script>
+    <script src="../Script/tasks.js"></script>
 </html>
