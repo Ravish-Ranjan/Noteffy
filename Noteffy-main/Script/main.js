@@ -3,20 +3,25 @@ if ( window.history.replaceState ) { // this function changes the state of a pag
 }
 
 function clearCookies(){ // this function is used to clear the cookies of user to log him out
-    const cookies = document.cookie.split(";");
-    for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i];
-        const namePos = cookie.indexOf("=");
-        const name = namePos > -1 ?cookie.substr(0, namePos):cookie;
-        if(name=='user'){
-            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-            window.location.href = '../php/index.php'
+    let decodedCookie = decodeURIComponent(document.cookie);
+    decodedCookie = decodedCookie.split(";");
+    for (i = 0; i < decodedCookie.length; i++){
+        let temp = decodedCookie[i].split("=");
+        if (temp[0].trim() == "user") {
+            console.log(temp[1]);
+            document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            window.location.href = '../php/index.php';
+        }
+        if (temp[0].trim() == "user_number") {
+            console.log(temp[1]);
+            document.cookie = "user_number=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            window.location.href = '../php/index.php';
         }
     }
 }
 function setCookie(tabname){
     const d = new Date();
-    d.setTime(d.getTime() + (5*10*1000));
+    d.setTime(d.getTime() + (24*60*60*1000));
     document.cookie = "name="+tabname+";expires="+ d.toUTCString()+";path=/";
 }
 function chan(at){
@@ -95,3 +100,28 @@ function signUp() {
     
     window.location.href = "../HTML/signUp.html";
 }
+
+function switchAdmin(){
+    let decoded = decodeURIComponent(document.cookie);
+    let vals = decoded.split(';');
+    for(let u = 0;u < vals.length;u++){
+        let key_val = vals[u].split('=');
+        if(key_val[0].trim()=="user_number"){
+            var loc = window.location.href.split('/php')[0];
+            fetch(loc+"/php/main.php?"+(new URLSearchParams({'op':'chadmin'})),{
+            method:"POST",mode:"cors",header:'Content-Type:application/json;charset=utf-8'
+            }).then((dat)=>dat.json()).then((jsond)=>{
+            if(jsond['Message']=="admin success"){
+                //Unlock panel here
+                message("successfully converted into admin");
+            }else if(jsond['Message']=="admin present"){
+                message("you are already any admin")
+            }
+            else{
+                message("can't connect to the server right now");
+            }
+            console.log(jsond);
+    });
+        }
+    }
+}   
