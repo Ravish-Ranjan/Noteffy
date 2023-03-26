@@ -95,8 +95,10 @@ function getrandcolor(){
 let userName = async () => {
   document.getElementById("user-name").innerText = await decrypt_data(getUser());
 }
-userName(); //fetching the username o
+userName(); //fetching the username 
 const ctx = document.getElementById('context');
+
+// fetching data for chart
 fetch("../data/task.json").then((res) => res.json()).then((json) => {
   let obj = calc_completed_task(json);
   Chart.defaults.font.size = 20;
@@ -134,4 +136,33 @@ fetch("../data/task.json").then((res) => res.json()).then((json) => {
     }
     }
   });
+})
+// fetching date joined
+fetch("../data/Data.json").then((res) => res.json()).then((data)=> {
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let userNumber;
+  decodedCookie = decodedCookie.split(";");
+  for (let i = 0; i < decodedCookie.length; i++){
+    let temp = decodedCookie[i].split("=");
+    if (temp[0].trim() == "user_number") {
+      userNumber = temp[1].trim();
+    }
+  }
+  let drypt = async () => {
+    userNumber = await decrypt_data(userNumber, '');
+    document.getElementById("card-text-2").innerText = data["User_Data"][userNumber]["Date_Joined"];
+    document.getElementById("card-text-4").innerText = data["User_Data"][userNumber]["Notes"].length;
+    let task_counter = 0;
+    for (let i = 0; i < data["User_Data"][userNumber]["To-do"].length; i++){
+      let d = new Date();
+      let temp = d.getFullYear();
+      temp += '-0' + (d.getMonth()+1);
+      temp += '-' + d.getDate();
+      if (data["User_Data"][userNumber]["To-do"][i]["Date"] == temp)
+      task_counter++;
+    }
+    document.getElementById("card-text-6").innerText = task_counter;
+
+  }
+  drypt();
 })

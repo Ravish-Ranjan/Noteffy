@@ -49,6 +49,7 @@
                     $details['Users'][$users_count]['Type'] = false;
                     $details['Users'][$users_count]['Organization_Code'] = array();
                     $alternate['User_Data'][$users_count]['identifier'] = $users_count;
+                    $alternate['User_Data'][$users_count]['Date_Joined'] = Date("Y-m-d");
                     $alternate['User_Data'][$users_count]['Notes'] = array();
                     $alternate['User_Data'][$users_count]['To-do'] = array();
 
