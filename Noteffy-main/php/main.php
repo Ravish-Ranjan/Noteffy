@@ -39,29 +39,13 @@ file_put_contents("../data/Details.json", $details);
     <script src="../Script/main.js"></script>
     <script src="../Script/message.js"></script>
     <style>
-        .user-panel,
-        .admin-panel {
-            height: 98%;
-            width: 96%;
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-        }
-
-        .user-panel {
-            left: 1%;
-        }
-
-        .admin-panel {
-            right: -94%;
-        }
+        
     </style>
 </head>
 
 <body onload="pos()">
     <div class="main-parent-wrapper">
-        <div class="user-panel">
+        <div class="user-panel" id="wrapper">
             <div class="top" id="dashboard">
                 <label id="logo">Your Workstation</label>
                 <div id="prof">

@@ -85,14 +85,14 @@ function openTab(evt, tabname) { // this function is used to move arround the ta
 function showmenu(){
     document.getElementById("sidepanel").style.display = "block";
     document.getElementById("logo").style.filter = "blur(10px)";
-    for (i = 1; i < document.body.childElementCount; i++){
-        document.body.children[i].style.filter = "blur(10px)";
+    for (i = 1; i < document.getElementById("wrapper").childElementCount; i++){
+        document.getElementById("wrapper").children[i].style.filter = "blur(10px)";
     }
 }
 function hidemenu(){
     document.getElementById("logo").style.filter = "blur(0px)";
-    for (i = 1; i < document.body.childElementCount; i++){
-        document.body.children[i].style.filter = "blur(0px)";
+    for (i = 1; i < document.getElementById("wrapper").childElementCount; i++){
+        document.getElementById("wrapper").children[i].style.filter = "blur(0px)";
     }
     document.getElementById("sidepanel").style.display= "none";
 }
@@ -124,4 +124,4 @@ function switchAdmin(){
     });
         }
     }
-}   
+}

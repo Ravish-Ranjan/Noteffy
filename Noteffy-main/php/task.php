@@ -107,7 +107,7 @@
         }
     }
     function updateTask($jsonData){
-        $user = isset($_COOKIE['user_number']) ? $_COOKIE['user_number'] : false;
+        $user = getUserNumber();
         $date = '';
         $time = '';
         $title = '';
@@ -130,6 +130,6 @@
                     </script>";
             }
         }
-        else return;
+        else echo "<script>window.location.href = '../HTML/error.html'</script>";
     }
 ?>

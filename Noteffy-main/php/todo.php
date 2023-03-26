@@ -115,6 +115,13 @@
         // adds a line through the tasks that are completed
         echo "
         <script>
+        async function decrypt_data(enc_data) {
+            let loc = window.location.href.split('/main.php');
+            let resp = await fetch(loc[0] + '/encrypt_cookie.php?' + (new URLSearchParams({ value: enc_data })), { method: 'GET', mode: 'cors' });
+            resp = await resp.json();
+            return resp['res'];
+        }
+        let remember = async ()=>{
         function getUser(){
             decodedCookie = decodeURIComponent(document.cookie);
             decodedCookie = decodedCookie.split(';');
@@ -126,8 +133,8 @@
             }
             return false;
         }
-        function getPercent(){
-            let user = getUser();
+        async function getPercent(){
+            let user = await decrypt_data(getUser());
             var percent = {};
             percent[user] = {};
             decodedCookie = decodeURIComponent(document.cookie);
@@ -149,8 +156,8 @@
             }
             p[user][count-1] = 0;
         }
-        function getTask(){
-            let user = getUser();
+        async function getTask(){
+            let user = decrypt_data(getUser());
             var obj = {};
             obj[user] = {};
             decodedCookie = decodeURIComponent(document.cookie);
@@ -174,7 +181,7 @@
         }
 
 
-        var user = getUser();
+        var user = await decrypt_data(getUser());
         var task_no;
         var to = document.getElementById('divi3')
         let t = getTask();
@@ -225,6 +232,8 @@
             document.cookie = 'percent='+JSON.stringify(p)+';expires='+d.toUTCString()+';path=/';
             document.cookie = 'comp_task='+JSON.stringify(t)+';expires='+d.toUTCString()+';path=/';
         });
+    }
+    remember();
         </script>";
     }
 ?>

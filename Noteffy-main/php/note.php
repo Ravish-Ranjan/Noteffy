@@ -74,7 +74,7 @@ function display(&$jsonData, $user)
 }
 function updateNote($jsonData)
 {
-    $user = isset($_COOKIE['user_number']) ? $_COOKIE['user_number'] : false;
+    $user = getUserNumber();
     $date = '';
     $title = '';
     $note = '';
@@ -89,6 +89,6 @@ function updateNote($jsonData)
                     </script>";
         }
     } else
-        return;
+        echo "<script>window.location.href = '../HTML/error.html'</script>";
 }
 ?>

@@ -2,14 +2,14 @@
     function getUser()
     { // this function fetches the user from the data
         if (isset($_COOKIE["user"])) {
-            return $_COOKIE["user"];
+            return decrypt_data($_COOKIE["user"],'');
         } else
             return " ";
     }
     // This function gives the index of the user in the json file
     function getUserNumber(){
         if (isset($_COOKIE['user_number']))
-            return (int) ($_COOKIE['user_number']);
+            return (int) (decrypt_data($_COOKIE['user_number'],''));
         echo "<cript>window.location.href='../HTML/error.html'</script>";
         }
     // removes html tags from data
@@ -73,8 +73,10 @@
                 // echo $i.'<br>';
                 if ($jsonData["Users"][$i]["identifier"] == $i) {
                     if ($jsonData["Users"][$i]["Password"] === encrypt_data($_POST["Password_"], str_pad($_POST["User_Name_"], 32, '#', STR_PAD_RIGHT))) {
-                        setcookie("user", $jsonData["Users"][$i]["User_Name"], 0, "/");
-                        setcookie("user_number", $jsonData["Users"][$i]["identifier"], 0, "/");
+                        $temp = encrypt_data($jsonData["Users"][$i]["User_Name"], '');
+                        $temp1 = encrypt_data($jsonData["Users"][$i]["identifier"], '');
+                        setcookie("user", $temp, 0, "/");
+                        setcookie("user_number", $temp1, 0, "/");
                         echo "<script>window.location.href = window.location.href</script>";
                         return;
                     } else {

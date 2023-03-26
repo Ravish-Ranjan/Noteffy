@@ -1,4 +1,10 @@
-function generate(){
+async function decrypt_data(enc_data) {
+  let loc = window.location.href.split('/HTML/chart.html');
+  let resp = await fetch(loc[0] + '/php/encrypt_cookie.php?' + (new URLSearchParams({ value: enc_data })), { method: 'GET', mode: 'cors' });
+  resp = await resp.json();
+  return resp['res'];
+}
+function generate() {
   var avatarId = getUser();
   var svgCode = multiavatar(avatarId);
   return svgCode
@@ -74,7 +80,7 @@ function getUser() {
       return decodedCookie[i].split("=")[1];
     }
   }
-  return document.getElementById("title").innerText = "Your user name";
+  return  "Your user name";
 }
 
 function getrandcolor(){
@@ -86,7 +92,10 @@ function getrandcolor(){
   document.getElementById("container").style.backgroundColor = cl;
   return cl;
 }
-document.getElementById("user-name").innerText = getUser();
+let userName = async () => {
+  document.getElementById("user-name").innerText = await decrypt_data(getUser());
+}
+userName(); //fetching the username o
 const ctx = document.getElementById('context');
 fetch("../data/task.json").then((res) => res.json()).then((json) => {
   let obj = calc_completed_task(json);
