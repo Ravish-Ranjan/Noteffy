@@ -13,6 +13,7 @@ function crt(){
   let data = generate();
   document.getElementById("data").innerHTML = data;
 }
+
 function openTab(evt, tabname) { // this function is used to move arround the tabs in the main page
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("main");
@@ -26,15 +27,6 @@ function openTab(evt, tabname) { // this function is used to move arround the ta
   document.getElementById(tabname).style.display = "block";
   evt.currentTarget.className += " active";
   divs = document.getElementsByClassName("main")
-  for (let i = 0; i < divs.length-1; i++) {
-      if (divs[i].style.display=="block") {
-          document.getElementById("comp"+String(i+1)).style.display="block" ;
-      }        
-      else{
-          document.getElementById("comp"+String(i+1)).style.display="none" ;
-      }
-  }
-  chan(parseInt(tabname)+1);
 }
 function calc_completed_task(jsonData) {
   let date = [];
@@ -107,7 +99,6 @@ fetch("../data/task.json").then((res) => res.json()).then((json) => {
   Chart.defaults.backgroundColor = "gray";
   const cht = new Chart(ctx, {
     type: 'line',
-    responsive : false,
     data: { 
       labels: obj.date,
       datasets: [
@@ -166,3 +157,49 @@ fetch("../data/Data.json").then((res) => res.json()).then((data)=> {
   }
   drypt();
 })
+// graveyard
+graveyard = async () => {
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let userNumber;
+    decodedCookie = decodedCookie.split(";");
+    for (let i = 0; i < decodedCookie.length; i++){
+      let temp = decodedCookie[i].split("=");
+      if (temp[0].trim() == "user_number") {
+        userNumber = temp[1].trim();
+      }
+  }
+  userNumber = await decrypt_data(userNumber, '');
+  display = document.getElementById("2");
+  fetch("../data/Data.json").then((res) => res.json()).then((recycle) => {
+    Array.from(recycle["User_Data"][userNumber]["recycle"]).map((ele) => {
+      let markUp =  `<div class="divi" style="background-image:url(../media/note1.png);">
+      <div class="topic">
+          <img id="pin" src="../media/pin1.png" alt="pin">
+      </div>
+      <div class="screen"><ul style="list-style-type:none;">`
+      for (i = 0; i < ele["Tasks"].length; i++){
+        markUp += `<li>${ele["Tasks"][i]}</li>`;
+      }
+      markUp += `</ul></div>
+          <div class="control">
+              <button onclick="">
+              <a>
+                  <img title='edit the task' src="../media/edit.png" alt="loading image">
+              </a>
+              </button>
+              <button onclick="">
+                  <img title='copy the task to clipboard' src="../media/share.png" alt="loading image">
+              </button>
+              <button onclick="">
+                  <a  style='text-decoration:none;'>
+                      <img title='delete the task' src="../media/delete.png" alt="loading image">
+                  </a>
+              </button>
+          </div>
+      </div>
+    </div>`;
+      display.innerHTML += markUp;
+  });
+})
+}
+graveyard();

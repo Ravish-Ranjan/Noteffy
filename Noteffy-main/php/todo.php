@@ -57,7 +57,7 @@
             $c_task = comp_task($i,$jsonData); //gets the js object containing completed tasks
             $item = $jsonData['User_Data'][$user]['To-do'][$i]; 
             date_default_timezone_set("Asia/Kolkata");
-            if($item["Date"] === (date("Y-m-d")) && $item['Priority']!=0){
+            if($item["Date"] === (date("Y-m-d"))){
                 $j = $i+1;
                 $noteimg = "../media/newNote".priority_calc($item).".png";
                 $pinimg = "../media/pin".priority_calc($item).".png";
@@ -108,9 +108,6 @@
                         </div>
                     </div>";
             }
-            // else{
-            //     echo "<script>window.location.href = 'main.php?T_no=$i</script>";
-            // }
         }
         // adds a line through the tasks that are completed
         echo "

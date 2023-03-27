@@ -125,19 +125,19 @@ file_put_contents("../data/Details.json", $details);
             </div>
             <!-- this div is for user to create more tasks -->
             <div class="menu" id="comp2" onclick = "task_compose('','','','','')" style="background-color:#f2f2f2;">
-                    <a id="btn1">
-                        <img src="../media/goldenperi.png"id="task-compose-button" alt="compose">
-                    </a>
-                </div>
+                <a id="btn1">
+                    <img src="../media/goldenperi.png"id="task-compose-button" alt="compose">
+                </a>
+            </div>
             <?php
-            updateTask($alternate)
+            updateTask($alternate);
+            $alternate = json_encode($alternate);
+            file_put_contents("../data/Data.json", $alternate);
                 ?>
             <div class="main" id="2">
                 <div class="scat" style="background-image:url('../media/background_4.png');background-size:110%;"
                     id='divi3'>
                     <?php
-                    $alternate = json_encode($alternate);
-                    file_put_contents("../data/Data.json", $alternate);
 
                     $alternate = file_get_contents("../data/Data.json");
                     $alternate = json_decode($alternate, true);

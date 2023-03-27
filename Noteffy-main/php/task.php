@@ -61,19 +61,22 @@
         if($user!=-1)
             return $user;
     }
-    function display_task($jsonData,$user){ // this function is to  the tasks of the user in scatter manner
+    function display_task(&$jsonData,$user){ // this function is to  the tasks of the user in scatter manner
         $count = count($jsonData['User_Data'][$user]['To-do']);
         for ($i=0; $i < $count; $i++){
             $item = $jsonData['User_Data'][$user]['To-do'][$i]; 
-            // calculating priority
             date_default_timezone_set("Asia/Kolkata");
-            
-            $j = $i+1;
-            $noteimg = "../media/newNote".priority_calc($item).".png";
-            $pinimg = "../media/pin".priority_calc($item).".png";
+
+        $timeDiff = ((int) ($item['Time'])%12) - (int)date("h:i");
+        $dayDiff =  strtotime($item['Date']) - strtotime(date("Y-m-d"));
+        $temp = $timeDiff + $dayDiff;
+        if ($temp >= 0) {
+            $j = $i + 1;
+            $noteimg = "../media/newNote" . priority_calc($item) . ".png";
+            $pinimg = "../media/pin" . priority_calc($item) . ".png";
             $title = $item['Title'];
             $content = $item['Tasks']; //<label class=\"title\" id='title$i'>$j.$title</label>
-        sanitize_array($content);
+            sanitize_array($content);
             // <a href='../php/main.php?T_no=$i&User=$user' style='text-decoration:none;color:black'>
             echo "<div class=\"divi\" style=\"background-image:url($noteimg);\" title='title:$title'>
                     <div class=\"topic\">
@@ -81,12 +84,12 @@
                     </div>
                     <div class=\"data\">
                         <div class=\"screen\" id='tasks$i'><ul style=\"list-style-type:none;\">";
-                        for($k=0;$k<count($content);$k++){
-                            echo "
+            for ($k = 0; $k < count($content); $k++) {
+                echo "
                                 <li>$content[$k]</li>
                             ";
-                        }
-            echo        "</ul></div>
+            }
+            echo "</ul></div>
                         <div class=\"control\">
                             <button onclick=\"\">
                             <a href='main.php?task_no=$i'>
@@ -104,6 +107,11 @@
                         </div>
                     </div>
                 </div>";
+        }
+        else{
+            array_push($jsonData["User_Data"][$user]["recycle"], $jsonData["User_Data"][$user]["To-do"][$i]);
+            array_splice($jsonData["User_Data"][$user]["To-do"], $i, 1);
+        }
         }
     }
     function updateTask($jsonData){

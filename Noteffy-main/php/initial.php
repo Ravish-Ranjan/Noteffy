@@ -52,6 +52,7 @@
                     $alternate['User_Data'][$users_count]['Date_Joined'] = Date("Y-m-d");
                     $alternate['User_Data'][$users_count]['Notes'] = array();
                     $alternate['User_Data'][$users_count]['To-do'] = array();
+                    $alternate['User_Data'][$users_count]['recycle'] = array();
 
                     $details = json_encode($details);
                     $alternate = json_encode($alternate);
