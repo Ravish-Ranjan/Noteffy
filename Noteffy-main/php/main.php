@@ -1,27 +1,24 @@
 <?php
-include "initial.php";
-include "hash.php";
-include "priority_calc.php";
-include "note.php";
-include "task.php";
-include "todo.php";
-include "admin.php";
-
+    include "initial.php";
+    include "hash.php";
+    include "priority_calc.php";
+    include "note.php";
+    include "task.php";
+    include "todo.php";
+    include "admin.php";
 ?>
 <?php
-$queries = array();
-// Fetching raw POST object body because content-type is causing parsing issues
-// parse_str($_SERVER['QUERY_STRING'], $queries);
-$details = file_get_contents("../data/Details.json");
-$details = json_decode($details, true);
-signUp($queries);
-signIn($details);
-$details = json_encode($details);
-file_put_contents("../data/Details.json", $details);
-
+    $queries = array();
+    // Fetching raw POST object body because content-type is causing parsing issues
+    // parse_str($_SERVER['QUERY_STRING'], $queries);
+    $details = file_get_contents("../data/Details.json");
+    $details = json_decode($details, true);
+    signUp($queries);
+    signIn($details);
+    $details = json_encode($details);
+    file_put_contents("../data/Details.json", $details);
 ?>
 <html>
-
 <head>
     <title>Main Page</title>
 
@@ -38,16 +35,58 @@ file_put_contents("../data/Details.json", $details);
     <script src="../Script/compose.js"></script>
     <script src="../Script/main.js"></script>
     <script src="../Script/message.js"></script>
-    <style>
-        
-    </style>
-</head>
+    <script>
+        function revealAdmin(){
+            if(document.getElementById("unlock-button").click){
+                document.getElementById("top-container").style.opacity = "1";
+                document.getElementById("admin-workspace-panel").style.opacity = "1";
+                document.getElementById("button-info-container").style.display = "none";
+                document.getElementById("unlock-images").style.display = "none";
+            }
+        }
+        function revealWorkspacePanel(){
+            if(document.getElementById("admin-nav-button-1").click){
+                document.getElementById("admin-workspace-panel").style.display = "block";
+                document.getElementById("todo-admin-panel").style.display = "none";
+            }
+        }
 
+        function revealToDoPanel(){
+            if(document.getElementById("admin-nav-button-2").click){
+                document.getElementById("admin-workspace-panel").style.display = "none";
+                document.getElementById("todo-admin-panel").style.display = "block";
+            }
+        }
+    </script>
+</head>
 <body onload="pos()">
     <div class="main-parent-wrapper">
         <!-- admin panel -->
         <div class="admin-panel">
-            <p>admin panel</p>
+            <div id="unlock-images">
+                <img src="../media/arrowImg.png" id="arrow-image">
+                <img src="../media/quillPenBlack.png" id="quill-black">
+            </div>
+            <div id="admin-control-panel">
+                <div id="button-info-container">
+                    <button id="unlock-button" onclick="revealAdmin()">Unlock</button>
+                    <p id="unlock-text-1">You haven't unlocked the create feature as of now!</p>
+                    <p id="unlock-text-2">Do you wish to activate admin privileges?</p>
+                </div>
+                <div id="top-container">
+                    <img src="../media/logoredq.png" id="user-admin-logo">
+                    <button id="admin-nav-button-1" onclick="revealWorkspacePanel()">Workspaces</button>
+                    <button id="admin-nav-button-2" onclick="revealToDoPanel()">To-Do's</button>
+                </div>
+                <div id="todo-admin-panel">
+                    <h1>To-Do'sss</h1>
+                    <!-- this div will show the to-do's assigned & needs to complete in other workspaces-->
+                </div>
+                <div id="admin-workspace-panel">
+                    <h1>workspacesss</h1>
+                    <!-- this div will show workpaces the user made & joined other -->
+                </div>
+            </div>
         </div>
         <!-- user panel -->
         <div class="user-panel" id="wrapper">
@@ -57,9 +96,10 @@ file_put_contents("../data/Details.json", $details);
                     <img src="../media/logoredq.png" onclick="showmenu()"
                         style="cursor:pointer;margin-right:30;margin-top:30;" alt="prof" height="75">
                     <?php
-                    if (!isset($_COOKIE['user_number'])) {
+                    if(!isset($_COOKIE['user_number'])){
                         // echo "<script>window.location.href = 'index.php'</script>";
-                    } else {
+                    } 
+                    else{
                         echo "<div  id='sidepanel' >
                             <div class='panel-user' >
                                 <img src='../media/logoredq.png' height=80 width=80 alt='logo' style='margin-left: 20;filter:drop-shadow(2px 2px 5px black);'>
@@ -72,32 +112,28 @@ file_put_contents("../data/Details.json", $details);
                                 <li><a  id='logout' onclick='clearCookies()' style='text-decoration: none;cursor:pointer'>Log Out</a></li>
                             </ul>
                             </div>";
-                    }
+                        }
                     ?>
                 </div>
             </div>
             <div class="tab">
-                <button class="tbs" onclick="openTab(event, '0')"><img src="../media/notesWidget.png"
-                        id="noteWidgetImage"></button>
-                <button class="tbs" onclick="openTab(event, '1')"><img src="../media/taskWidget.png"
-                        id="taskWidgetImage"></button>
-                <button class="tbs" onclick="openTab(event, '2')"><img src="../media/todoWidget.png"
-                        id="bbtWidgetImage"></button>
+                <button class="tbs" onclick="openTab(event, '0')"><img src="../media/notesWidget.png" id="noteWidgetImage"></button>
+                <button class="tbs" onclick="openTab(event, '1')"><img src="../media/taskWidget.png" id="taskWidgetImage"></button>
+                <button class="tbs" onclick="openTab(event, '2')"><img src="../media/todoWidget.png" id="bbtWidgetImage"></button>
             </div>
             <div class="main" id="0">
                 <div class="scat" id="divi1">
                     <?php
-                    $details = file_get_contents("../data/Details.json");
-                    $details = json_decode($details, true);
-                    $details = json_encode($details);
-                    file_put_contents("../data/Details.json", $details);
-                    //$user = 0;
-                    $alternate = file_get_contents("../data/Data.json");
-                    $alternate = json_decode($alternate, true);
-                    Delete_Note($alternate);
-                    $user = fetch_store($alternate);
-                    display($alternate, $user);
-
+                        $details = file_get_contents("../data/Details.json");
+                        $details = json_decode($details, true);
+                        $details = json_encode($details);
+                        file_put_contents("../data/Details.json", $details);
+                        //$user = 0;
+                        $alternate = file_get_contents("../data/Data.json");
+                        $alternate = json_decode($alternate, true);
+                        Delete_Note($alternate);
+                        $user = fetch_store($alternate);
+                        display($alternate, $user);
                     ?>
                 </div>
                 <!-- this div is to let user create more notes -->
@@ -109,17 +145,15 @@ file_put_contents("../data/Details.json", $details);
             </div>
             <?php updateNote($alternate) ?>
             <div class="main" id="1">
-                <div class="scat" style="background-image:url('../media/background_1.png');background-size:110%;"
-                    id="divi2">
+                <div class="scat" style="background-image:url('../media/background_1.png');background-size:110%;" id="divi2">
                     <?php
-                    $alternate = json_encode($alternate);
-                    file_put_contents("../data/Data.json", $alternate);
-
-                    $alternate = file_get_contents("../data/Data.json");
-                    $alternate = json_decode($alternate, true);
-                    $u = task_compose($alternate);
-                    Delete_task($alternate);
-                    display_task($alternate, $u);
+                        $alternate = json_encode($alternate);
+                        file_put_contents("../data/Data.json", $alternate);
+                        $alternate = file_get_contents("../data/Data.json");
+                        $alternate = json_decode($alternate, true);
+                        $u = task_compose($alternate);
+                        Delete_task($alternate);
+                        display_task($alternate, $u);
                     ?>
                 </div>
             </div>
@@ -130,14 +164,19 @@ file_put_contents("../data/Details.json", $details);
                 </a>
             </div>
             <?php
+<<<<<<< Updated upstream
             updateTask($alternate);
             $alternate = json_encode($alternate);
             file_put_contents("../data/Data.json", $alternate);
                 ?>
+=======
+                updateTask($alternate)
+            ?>
+>>>>>>> Stashed changes
             <div class="main" id="2">
-                <div class="scat" style="background-image:url('../media/background_4.png');background-size:110%;"
-                    id='divi3'>
+                <div class="scat" style="background-image:url('../media/background_4.png');background-size:110%;" id='divi3'>
                     <?php
+<<<<<<< Updated upstream
 
                     $alternate = file_get_contents("../data/Data.json");
                     $alternate = json_decode($alternate, true);
@@ -146,6 +185,17 @@ file_put_contents("../data/Details.json", $details);
                     complete($alternate);
                     $alternate = json_encode($alternate);
                     file_put_contents("../data/Data.json", $alternate);
+=======
+                        $alternate = json_encode($alternate);
+                        file_put_contents("../data/Data.json", $alternate);
+                        $alternate = file_get_contents("../data/Data.json");
+                        $alternate = json_decode($alternate, true);
+                        $u = getUserNumber();
+                        display_todo($alternate, $u);
+                        complete($alternate);
+                        $alternate = json_encode($alternate);
+                        file_put_contents("../data/Data.json", $alternate);
+>>>>>>> Stashed changes
                     ?>
                 </div>
             </div>
