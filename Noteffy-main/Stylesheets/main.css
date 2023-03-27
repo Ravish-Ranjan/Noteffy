@@ -198,8 +198,7 @@ body {
     border: none;
 }
 
-.control>button>img,
-.control>button>a>img {
+.control>button>img,.control>button>a>img{
     height: 30px;
     width: 30px;
     /* filter:drop-shadow(2px 2px 1px rgba(0,0,0,0.5)); */
@@ -208,7 +207,7 @@ body {
 .menu {
     height: 4rem;
     padding: 1rem;
-    position: fixed;
+    position: absolute;
     bottom: 20;
     border-radius: 50%;
     right: 20;
@@ -395,22 +394,18 @@ body {
 .tbs {
     border: none;
 }
-
 #note-compose-button {
     width: 40;
     padding: 0;
     margin: 0;
 }
-
 #task-compose-button {
     width: 60;
     height: 40;
     padding: 0;
     margin: 0;
 }
-
-.user-panel,
-.admin-panel {
+.user-panel,.admin-panel {
     height: 98%;
     width: 96%;
     position: absolute;
@@ -418,11 +413,104 @@ body {
     flex-direction: column;
     text-align: center;
 }
-
 .user-panel {
     left: 100%;
 }
-
-.admin-panel {
-    right: 100%;
+#unlock-button{
+    font-family: codec-extrabold;
+    width: 130px;
+    height: 70px;
+    border-radius: 40px;
+    background-color: #ffffff;
+    color: #23272e;
+    font-size: 20px;
+    border: none;
+    margin: 0;
+    position: absolute;
+    top: 45%;
+    left: 28%;
+    transition: 0.5s;
+    cursor: pointer;
+    z-index: 1;
+}
+#unlock-button:hover{
+    color: #ffffff;
+    background-color: #23272e;
+    transition: 0.5s;
+}
+#unlock-text-1{
+    color: #ffffff;
+    font-family: codec;
+    margin: 0;
+    position: absolute;
+    top: 45%;
+    left: 40%;
+    font-size: 30px;
+}
+#unlock-text-2{
+    font-size: 30px;
+    color: #ffffff;
+    font-family: codec;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    font-family: codec;
+}
+#arrow-image{
+    height: auto;
+    width: 10%;
+    top: 20%;
+    left: 16%;
+    position: absolute;
+}
+#user-admin-logo{
+    position: absolute;
+    height: 12%;
+    width: auto;
+    top: 30;
+    left: 30;
+}
+#admin-nav-button-1{
+    height: 10%;
+    width: 10%;
+    position: absolute;
+}
+#admin-nav-button-2{
+    height: 10%;
+    width: 10%;
+    left: 40%;
+    position: absolute;
+}
+#admin-workspace-panel{
+    outline: 2px dashed white;
+    height: 80%;
+    width: 100%;
+    margin-left: 20px;
+    top: 120;
+    position: absolute;
+    display: block;
+}
+#todo-admin-panel{
+    outline: 2px dashed white;
+    height: 80%;
+    width: 100%;
+    margin-left: 20px;
+    top: 120;
+    position: absolute;
+    display: none;
+}
+#top-container{
+    opacity: 0.1;
+}
+#admin-workspace-panel{
+    opacity: 0.1;
+}
+#quill-black{
+    height: 15%;
+    width: auto;
+    position: absolute;
+    z-index: 1;
+    top: 20%;
+    left: 25%;
 }
