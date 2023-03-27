@@ -164,19 +164,14 @@
                 </a>
             </div>
             <?php
-<<<<<<< Updated upstream
-            updateTask($alternate);
-            $alternate = json_encode($alternate);
-            file_put_contents("../data/Data.json", $alternate);
+                updateTask($alternate);
+                $alternate = json_encode($alternate);
+                file_put_contents("../data/Data.json", $alternate);
                 ?>
-=======
-                updateTask($alternate)
-            ?>
->>>>>>> Stashed changes
+
             <div class="main" id="2">
                 <div class="scat" style="background-image:url('../media/background_4.png');background-size:110%;" id='divi3'>
                     <?php
-<<<<<<< Updated upstream
 
                     $alternate = file_get_contents("../data/Data.json");
                     $alternate = json_decode($alternate, true);
@@ -185,7 +180,7 @@
                     complete($alternate);
                     $alternate = json_encode($alternate);
                     file_put_contents("../data/Data.json", $alternate);
-=======
+
                         $alternate = json_encode($alternate);
                         file_put_contents("../data/Data.json", $alternate);
                         $alternate = file_get_contents("../data/Data.json");
@@ -195,7 +190,6 @@
                         complete($alternate);
                         $alternate = json_encode($alternate);
                         file_put_contents("../data/Data.json", $alternate);
->>>>>>> Stashed changes
                     ?>
                 </div>
             </div>
