@@ -110,7 +110,7 @@
         }
         else{
             array_push($jsonData["User_Data"][$user]["recycle"], $jsonData["User_Data"][$user]["To-do"][$i]);
-            array_splice($jsonData["User_Data"][$user]["To-do"], $i, 1);
+            unset($jsonData["User_Data"][$user]["To-do"][$i]);
         }
         }
     }
