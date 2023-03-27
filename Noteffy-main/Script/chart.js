@@ -172,9 +172,9 @@ graveyard = async () => {
   display = document.getElementById("2");
   fetch("../data/Data.json").then((res) => res.json()).then((recycle) => {
     Array.from(recycle["User_Data"][userNumber]["recycle"]).map((ele) => {
-      let markUp =  `<div class="divi" style="background-image:url(../media/note1.png);">
+      let markUp =  `<div class="divi" style="background-image:url(../media/newNote.png);">
       <div class="topic">
-          <img id="pin" src="../media/pin1.png" alt="pin">
+          <img id="pin" src="../media/gravePin.png" alt="pin">
       </div>
       <div class="screen"><ul style="list-style-type:none;">`
       for (i = 0; i < ele["Tasks"].length; i++){
