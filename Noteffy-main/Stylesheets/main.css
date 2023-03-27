@@ -420,9 +420,9 @@ body {
 }
 
 .user-panel {
-    left: 1%;
+    left: 100%;
 }
 
 .admin-panel {
-    right: -94%;
+    right: 100%;
 }

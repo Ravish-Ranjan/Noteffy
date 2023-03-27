@@ -65,12 +65,20 @@ function openTab(evt, tabname) { // this function is used to move arround the ta
     }
     tablinks = document.getElementsByClassName("tbs");
     for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
+      tablinks[i].className = tablinks[i].className.replace("active", "");
     }
+    
     document.getElementById(tabname).style.display = "block";
     evt.currentTarget.className += " active";
-    // if
-    // const bg = ["url(\"../media/bg1.png\")","url(\"../media/bg2.png\")"];
+
+    Array.from(tablinks).map((ele)=>{
+        if(!(ele.className.includes('active'))){
+            ele.style.opacity = "0.5";
+        }
+        else{
+            ele.style.opacity = "1";
+        }
+    });
     divs = document.getElementsByClassName("main")
     for (let i = 0; i < divs.length-1; i++) {
         if (divs[i].style.display=="block") {

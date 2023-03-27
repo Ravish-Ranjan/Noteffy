@@ -45,6 +45,11 @@ file_put_contents("../data/Details.json", $details);
 
 <body onload="pos()">
     <div class="main-parent-wrapper">
+        <!-- admin panel -->
+        <div class="admin-panel">
+            <p>admin panel</p>
+        </div>
+        <!-- user panel -->
         <div class="user-panel" id="wrapper">
             <div class="top" id="dashboard">
                 <label id="logo">Your Workstation</label>
@@ -62,12 +67,9 @@ file_put_contents("../data/Details.json", $details);
                             </div>
                             <ul>
                                 <li><a href='../HTML/chart.html' style='text-decoration:none;'>Dashboard</a><br></li>
-                                <li><a href='' style='text-decoration: none;'>Settings</a></li>
-                                <li><a  id='logout' onclick='clearCookies()' style='text-decoration: none;cursor:pointer'>Log Out</a></li>
-                                <li><a href='#' style='text-decoration: none;' onclick='hidemenu()'>Workspace</a></li>
                                 <li><a href='index.php' style='text-decoration: none;'>Home</a></li>
-                                <li><a href='#' style='text-decoration: none;' onclick='hidemenu()'>Back</a></li>
-
+                                <li><a style='text-decoration: none;cursor:pointer;' onclick='hidemenu()'>Back</a></li>
+                                <li><a  id='logout' onclick='clearCookies()' style='text-decoration: none;cursor:pointer'>Log Out</a></li>
                             </ul>
                             </div>";
                     }
@@ -146,10 +148,6 @@ file_put_contents("../data/Details.json", $details);
                     file_put_contents("../data/Data.json", $alternate);
                     ?>
                 </div>
-            </div>
-            <!-- admin panel -->
-            <div class="admin-panel">
-                <p>admin panel</p>
             </div>
         </div>
     </div>

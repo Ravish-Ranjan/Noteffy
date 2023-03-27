@@ -44,7 +44,8 @@
 }
 .white-box{
     width: 51.97vw;
-    height: 48.65vw;overflow-y:scroll;
+    height: 91.65vh;
+    overflow-y:scroll;
     scrollbar-color: rgba(0,0,0,0);
     float: right;
     padding-right: 0.73vw;
@@ -81,18 +82,18 @@ input, label, #adminswitch{
 label{
     font-family: codec-extrabold;
 }
-
 #form-1 input,#form-2 input{
     border: 1px solid #b8b8b8;
     width: 20.89vw;
-    height: 2.92vw;
+    height: 2.99vw;
     border-radius: 2.19vw;
     font-family: codec-extrabold;
+    padding-left: 10px;
 }
 .form1-input,.form2-input{
     border: 1px solid #b8b8b8;
     width: 24.15vw;
-    height: 2.19vw;
+    height: 3.19vh;
     border-radius: 2.19vw;
     font-family: codec-extrabold;
 }
@@ -140,9 +141,6 @@ label{
 .slider1:hover{
     box-shadow: 0 0 10px 2px #00ff15;
 }
-.slider2:hover{
-    box-shadow: 0 0 10px 2px orange;
-}
 .slider:before{
     position: absolute;
     content: "";
@@ -152,22 +150,13 @@ label{
     bottom: 0.29vw;
     background-color: #00ff15;
     -webkit-transition: 0.4s;
-    transition: 0.4s;
+    transition: 0.5s;
 }
 .slider1{
-    background-color:green;
-}
-.slider2:before{
-    background-color: orange;
+    background-color:white;
 }
 input:checked + .slider{
     background-color: #fff;
-}
-input:focus + .slider{
-    box-shadow: 0 0 1px #00ff15;
-}
-input:focus + .slider2{
-    box-shadow: 0 0 1px orange;
 }
 input:checked + .slider:before{
     transform: translateX(1.68vw);

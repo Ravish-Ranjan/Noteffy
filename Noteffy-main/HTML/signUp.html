@@ -40,7 +40,7 @@
                             <form method="post" id="form-1" action="../php/main.php">
                                 <br>
                                 <br>
-                                <label>Enter Username\Password</label>
+                                <label>Enter Username\Email</label>
                                 <input class="form1-input" placeholder="Enter" type="text"  name="User_Name_" required><br><br>
                                 <label >Password</label>
                                 <input placeholder="Enter" type="password" name="Password_" required><br><br>
@@ -57,9 +57,6 @@
                                 <input class="form2-input" placeholder="Enter" type="password" name="Password" required><br><br>
                                 <label>Confirm Password</label>
                                 <input class="form2-input" placeholder="Enter" type="password" name="Password1" required><br><br>
-                                <label class="switch" id = "adminswitch">
-                                <input type="checkbox" id="toggle-checkbox">
-                                <span class="slider round slider2"><label style="position:relative;left:120%;">Administrator privileges</label></span>
                             </label>
                                 <button class = "log-bbt" id="log-bbt2" onclick = "return generateOTP(this.parentElement.children[1].value,this.parentElement.children[5].value,this.parentElement.children[9].value,this.parentElement.children[13].value);" type="submit" form="form-2" value="Submit">SIGN UP</button>
                             </form>
