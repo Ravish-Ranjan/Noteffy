@@ -67,7 +67,9 @@
             $item = $jsonData['User_Data'][$user]['To-do'][$i]; 
             date_default_timezone_set("Asia/Kolkata");
 
-        $timeDiff = ((int) ($item['Time'])%12) - (int)date("h:i");
+        $storedTime = (int) $item['Time'] >= 12 ? ((int) ($item['Time']) % 12) : (int) $item['Time'];
+        $curTime = (int) date("h:i")>= 12 ? ((int) (date("h:i")) % 12) : (int)date("h:i");
+        $timeDiff = $storedTime - $curTime;
         $dayDiff =  strtotime($item['Date']) - strtotime(date("Y-m-d"));
         $temp = $timeDiff + $dayDiff;
         if ($temp >= 0) {
