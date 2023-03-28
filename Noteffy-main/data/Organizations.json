@@ -1,9 +1,1 @@
-{
-    "Organizations" : [
-        {
-            "Admin" : 1,
-            "Organization_code" : "xqc",
-            "group" : [1,2,3,4]
-        }
-    ]
-}
+{"Organizations":[{"Admin":0,"Cname":"Walter's Lab","Cdesc":"Some good stuff, Jesssssseeeeeeeehhhhhhhhh.........","CLimit":"10","Organization_code":"tv89wAVsw","group":[]},{"Admin":0,"Cname":"El Mariachi","Cdesc":"were","CLimit":"3","Organization_code":"kcRoyo8qu","group":[]},{"Admin":0,"Cname":"El Mariachi","Cdesc":"Where are you","CLimit":"10","Organization_code":"vXJfWidPJ","group":[]}]}

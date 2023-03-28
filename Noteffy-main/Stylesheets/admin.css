@@ -1,0 +1,142 @@
+.workstation,.workspace{
+    height: 98%;
+    width: 96%;
+    outline: 2px dashed white;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.workspace{
+    top: 1%;
+    left: 1%;
+}
+.workstation{
+    top: 1%;
+    right: -94%;
+}
+.top{
+    /* width: 100%; */
+    height: 14%;
+    outline: 1px solid white;
+    display: flex;
+    color: white;
+    justify-content:space-between;
+    align-items: center;
+    padding: 0 2%;
+}
+.workspace > .top{
+    flex-direction: row-reverse;
+}
+.top >h1{   margin: 0 3%;}
+.main{
+    width: 100%;
+    height: 86%;
+    background-color: rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+}
+.admin-workspace-panel{
+    flex-flow:row wrap;
+}
+.admin-workspace-panel img{
+    height: 11.5vh;
+    aspect-ratio: 1/1;
+}
+.compose{
+    position: absolute;
+    height: 10vh;
+    aspect-ratio: 1/1;
+    background-color: white;
+    bottom: 2%;
+    font-size: 60;
+    display: grid;
+    place-items: center;cursor:pointer;
+    right: 1%;
+    z-index: 1;
+}
+.workstation >.compose{
+    left: 1%;
+}
+.sidepanel{
+    position: absolute;
+    height: 100%;
+    width: 20%;
+    background-color: rgba(255, 255, 255, 0.5);
+    top: 0%;
+    display: none;
+}
+.workstation > .sidepanel{
+    right: 0;
+    top: 0%;
+}
+.tile,.class{
+    width: 23%;
+    height: 32%;
+    margin: 1%;
+    padding: 1%;
+    /* aspect-ratio: 9/16; */
+    outline: 2px solid white;
+    border-radius: 2em;
+    text-align: start;
+    color: white;
+    background-color: rgba(255,255,255,0.2);
+    font-family: monospace;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.tile >h2{
+    font-size: 25;
+}
+.class{
+    display: flex;
+    flex-direction: row;
+}
+.class > .backg{
+    height: 100%;
+    width: 70%;
+    outline: 2px dashed white;
+    background-image: url("https://e0.pxfuel.com/wallpapers/430/15/desktop-wallpaper-geometry-shapes-minimalism-artwork-samsung-galaxy-s6-s7-google-pixel-xl-nexus-6-6p-lg-g5-abstract-and-background.jpg");
+    background-repeat: round;
+}
+.class >.options{
+    display: flex;
+    flex-direction: column;
+}
+.work{
+    height: 10%;
+    width: 96%;
+    padding: 1%;
+    margin: 0 1%;
+    outline: 2px solid white;
+    color: white;
+    font-size: 15;
+    font-family: monospace;
+    text-align: start;
+}
+::-webkit-scrollbar{
+    background-color: #555;
+    /* margin-top: 2%; */
+    height: 10px;
+    width: 10px;
+}
+::-webkit-scrollbar-thumb{
+    border-radius: 100vw;
+    background-color: green;
+}
+.scroll{
+    position: absolute;
+    top: 0;
+    right: 0%;
+    height: 100%;
+    width: 6%;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: grid;
+    place-items: center;
+    font-size: 50;
+    font-weight: bold;
+    cursor: pointer;
+}

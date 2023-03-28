@@ -13,7 +13,7 @@ input[type="date"],input[type="text"],textarea{
     border: none;
     border-bottom: 1px solid #555;
 }
-.FORM{
+.FORM,.FORM2{
     animation:fade 0.4s ease-in-out;
     position: absolute;
     top: 2%;
@@ -30,6 +30,8 @@ input[type="date"],input[type="text"],textarea{
     margin-top: 15vh;
     padding: 1%;
     font-family: codec-extrabold;
+}.FORM2{
+    right:20%;
 }
 #cancel-icon-img{
     height: 10;

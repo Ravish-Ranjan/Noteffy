@@ -15,8 +15,10 @@
     $details = json_decode($details, true);
     signUp($queries);
     signIn($details);
+    allowAdmin($details);
     $details = json_encode($details);
     file_put_contents("../data/Details.json", $details);
+
 ?>
 <html>
 <head>
@@ -25,6 +27,7 @@
     <!-- stylesheets -->
     <link rel="stylesheet" href="../Stylesheets/message.css">
     <link rel="stylesheet" href="../Stylesheets/main.css">
+    <link rel="stylesheet" href="../Stylesheets/admin.css">
     <link rel="stylesheet" href="../Stylesheets/compose.css">
 
     <!-- favicon -->
@@ -36,13 +39,11 @@
     <script src="../Script/main.js"></script>
     <script src="../Script/message.js"></script>
     <script>
-        function revealAdmin(){
-            if(document.getElementById("unlock-button").click){
-                document.getElementById("top-container").style.opacity = "1";
-                document.getElementById("admin-workspace-panel").style.opacity = "1";
-                document.getElementById("button-info-container").style.display = "none";
-                document.getElementById("unlock-images").style.display = "none";
-            }
+        function hideAdmin(){
+                document.getElementById("top-container").style.opacity = "0";
+                document.getElementById("admin-workspace-panel").style.opacity = "0";
+                document.getElementById("button-info-container").style.display = "block";
+                document.getElementById("unlock-images").style.display = "block";
         }
         function revealWorkspacePanel(){
             if(document.getElementById("admin-nav-button-1").click){
@@ -67,9 +68,16 @@
                 <img src="../media/arrowImg.png" id="arrow-image">
                 <img src="../media/quillPenBlack.png" id="quill-black">
             </div>
+            <?php 
+                $orgs = file_get_contents("../data/Organizations.json");
+                $orgs = json_decode($orgs,true);
+                createClass($details,$orgs);
+                $orgs1 = json_encode($orgs);
+                file_put_contents("../data/Organizations.json",$orgs1);
+            ?>
             <div id="admin-control-panel">
                 <div id="button-info-container">
-                    <button id="unlock-button" onclick="revealAdmin()">Unlock</button>
+                    <button id="unlock-button" onclick="switchAdmin()">Unlock</button>
                     <p id="unlock-text-1">You haven't unlocked the create feature as of now!</p>
                     <p id="unlock-text-2">Do you wish to activate admin privileges?</p>
                 </div>
@@ -84,8 +92,10 @@
                 </div>
                 <div id="admin-workspace-panel">
                     <h1>workspacesss</h1>
+                    <div class="class"><div class="backg"><h2>ClassName</h2></div><div class="options"><button>opt1</button><button>opt2</button></div></div>
                     <!-- this div will show workpaces the user made & joined other -->
                 </div>
+                <div class = "compose" onclick="class_compose('','','','')">+</div>
             </div>
         </div>
         <!-- user panel -->

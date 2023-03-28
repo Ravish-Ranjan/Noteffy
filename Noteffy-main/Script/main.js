@@ -34,7 +34,12 @@ function chan(at){
 function getRandomArbitrary(min, max) { //this function gets random value in given range
     return Math.random() * (max - min) + min;
 }
-function pos() { // this function styles the notes/tasks to be displayed in scattered/random manner
+async function pos() { // this function styles the notes/tasks to be displayed in scattered/random manner
+    window.scrollTo(window.innerWidth,0);
+    var cadmin = await checkAdmin();
+    if(cadmin!=1){
+        hideAdmin();
+    }
     decodedCookie = decodeURIComponent(document.cookie);
     decodedCookie = decodedCookie.split(";");
     flag = false;
@@ -121,15 +126,41 @@ function switchAdmin(){
             }).then((dat)=>dat.json()).then((jsond)=>{
             if(jsond['Message']=="admin success"){
                 //Unlock panel here
-                message("successfully converted into admin");
+                window.location.reload();
+                return 1;
             }else if(jsond['Message']=="admin present"){
-                message("you are already any admin")
+                message("you are already any admin");return 2;
             }
             else{
                 message("can't connect to the server right now");
+                return -1;
             }
             console.log(jsond);
     });
+        }
+    }
+}
+async function checkAdmin(){
+    let decoded = decodeURIComponent(document.cookie);
+    let vals = decoded.split(';');
+    console.log(123);
+    for(let u = 0;u < vals.length;u++){
+        let key_val = vals[u].split('=');
+        if(key_val[0].trim()=="user_number"){
+            var loc = window.location.href.split('/php')[0];
+            var res = await fetch(loc+"/php/main.php?"+(new URLSearchParams({'op':'checkadmin'})),{
+            method:"POST",mode:"cors",header:'Content-Type:application/json;charset=utf-8'
+            });
+            var js = await res.json();
+            console.log(js["Message"]);
+            switch(js["Message"]){
+                case 'admin true':
+                    return 1;
+                case 'admin false':
+                    return 0;
+                default:
+                    return -1;
+            }
         }
     }
 }

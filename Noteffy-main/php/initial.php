@@ -10,7 +10,7 @@
     function getUserNumber(){
         if (isset($_COOKIE['user_number']))
             return (int) (decrypt_data($_COOKIE['user_number'],''));
-        echo "<cript>window.location.href='../HTML/error.html'</script>";
+        echo "<script>window.location.href='../HTML/error.html'</script>";
         }
     // removes html tags from data
     function sanitize(&$data)
