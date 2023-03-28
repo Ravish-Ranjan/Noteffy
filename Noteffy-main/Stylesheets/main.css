@@ -34,9 +34,8 @@
 body {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    width: 100%;
-    background-image: url("../media/workspaceBG.png");
+    background: url("../media/workspaceBGnew.png");
+    background-repeat: no-repeat;
 }
 
 .top {
@@ -59,7 +58,7 @@ body {
     display: flex;
     flex-direction: row;
     height: 74%;
-    width: 87%;
+    width: 90%;
     margin: 1%;
     border: 2px solid white;
     border-radius: 2rem;
