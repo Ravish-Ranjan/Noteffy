@@ -155,6 +155,8 @@
                         $u = task_compose($alternate);
                         Delete_task($alternate);
                         display_task($alternate, $u);
+                        $alternate = json_encode($alternate);
+                        file_put_contents("../Data/Data.json",$alternate);
                     ?>
                 </div>
             </div>
@@ -165,6 +167,8 @@
                 </a>
             </div>
             <?php
+                $alternate = file_get_contents("../Data/Data.json");
+                $alternate = json_decode($alternate, true);
                 updateTask($alternate);
                 $alternate = json_encode($alternate);
                 file_put_contents("../data/Data.json", $alternate);
@@ -173,17 +177,6 @@
             <div class="main" id="2">
                 <div class="scat" style="background-image:url('../media/background_4.png');background-size:110%;" id='divi3'>
                     <?php
-
-                    $alternate = file_get_contents("../data/Data.json");
-                    $alternate = json_decode($alternate, true);
-                    $u = getUserNumber();
-                    display_todo($alternate, $u);
-                    complete($alternate);
-                    $alternate = json_encode($alternate);
-                    file_put_contents("../data/Data.json", $alternate);
-
-                        $alternate = json_encode($alternate);
-                        file_put_contents("../data/Data.json", $alternate);
                         $alternate = file_get_contents("../data/Data.json");
                         $alternate = json_decode($alternate, true);
                         $u = getUserNumber();

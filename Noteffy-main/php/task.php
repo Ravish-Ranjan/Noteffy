@@ -1,4 +1,5 @@
 <?php
+    
     function Delete_task(&$jsonData){ // this function is to let user delete a task
         if(isset($_GET["T_no"])){
             $t_no = $_GET["T_no"];
@@ -43,20 +44,19 @@
         }
     }
     function task_compose(&$jsonData){ // this function is to let user create more tasks 
-        $User_count = count($jsonData['User_Data']);
-        $userName = getUser();
         $user = getUserNumber();
         if(isset($_POST['T_Title']) && isset($_POST['T_Time']) && isset($_POST['T_Date'])){
             if(isset($_GET['task_no']))
                 $to_do_count = $_GET['task_no'];
             else
                 $to_do_count = count($jsonData["User_Data"][$user]["To-do"]);
-            $jsonData["User_Data"][$user]["To-do"][$to_do_count]["Title"] = $_POST['T_Title'];
-            $jsonData["User_Data"][$user]["To-do"][$to_do_count]["Time"] = $_POST['T_Time'];
-            $jsonData["User_Data"][$user]["To-do"][$to_do_count]["Date"] = $_POST['T_Date'];
-            $jsonData["User_Data"][$user]["To-do"][$to_do_count]["Priority"] = 1;
-            $jsonData["User_Data"][$user]["To-do"][$to_do_count]["Tasks"]=explode("\n",$_POST['Task']);
-            echo "<script>location.replace('main.php')</script>";
+                $jsonData["User_Data"][$user]["To-do"][$to_do_count]["Title"] = $_POST['T_Title'];
+                $jsonData["User_Data"][$user]["To-do"][$to_do_count]["Time"] = $_POST['T_Time'];
+                $jsonData["User_Data"][$user]["To-do"][$to_do_count]["Date"] = $_POST['T_Date'];
+                $jsonData["User_Data"][$user]["To-do"][$to_do_count]["Priority"] = 1;
+                $jsonData["User_Data"][$user]["To-do"][$to_do_count]["Tasks"]=explode("\n",$_POST['Task']);
+                echo "<script>location.replace('main.php')</script>";
+                return $user;
         }
         if($user!=-1)
             return $user;
@@ -67,11 +67,10 @@
             $item = $jsonData['User_Data'][$user]['To-do'][$i]; 
             date_default_timezone_set("Asia/Kolkata");
 
-        $storedTime = (int) $item['Time'] >= 12 ? ((int) ($item['Time']) % 12) : (int) $item['Time'];
-        $curTime = (int) date("h:i")>= 12 ? ((int) (date("h:i")) % 12) : (int)date("h:i");
-        $timeDiff = $storedTime - $curTime;
-        $dayDiff =  strtotime($item['Date']) - strtotime(date("Y-m-d"));
-        $temp = $timeDiff + $dayDiff;
+            $timeDiffernce = strtotime($item['Time']) - strtotime(date("H:i"));
+            $dayDifference = strtotime($item['Date']) - strtotime(date("Y-m-d"));
+            $temp = $timeDiffernce + $dayDifference;
+        
         if ($temp >= 0) {
             $j = $i + 1;
             $noteimg = "../media/newNote" . priority_calc($item) . ".png";
