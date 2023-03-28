@@ -15,8 +15,11 @@
     $details = json_decode($details, true);
     signUp($queries);
     signIn($details);
+    checkAdmin($details);
+    allowAdmin($details);
     $details = json_encode($details);
     file_put_contents("../data/Details.json", $details);
+
 ?>
 <html>
 <head>
@@ -37,12 +40,10 @@
     <script src="../Script/message.js"></script>
     <script>
         function revealAdmin(){
-            if(document.getElementById("unlock-button").click){
                 document.getElementById("top-container").style.opacity = "1";
                 document.getElementById("admin-workspace-panel").style.opacity = "1";
                 document.getElementById("button-info-container").style.display = "none";
                 document.getElementById("unlock-images").style.display = "none";
-            }
         }
         function revealWorkspacePanel(){
             if(document.getElementById("admin-nav-button-1").click){
@@ -69,7 +70,7 @@
             </div>
             <div id="admin-control-panel">
                 <div id="button-info-container">
-                    <button id="unlock-button" onclick="revealAdmin()">Unlock</button>
+                    <button id="unlock-button" onclick="switchAdmin()">Unlock</button>
                     <p id="unlock-text-1">You haven't unlocked the create feature as of now!</p>
                     <p id="unlock-text-2">Do you wish to activate admin privileges?</p>
                 </div>
