@@ -39,25 +39,7 @@
     <script src="../Script/main.js"></script>
     <script src="../Script/message.js"></script>
     <script>
-        function revealAdmin(){
-                document.getElementById("top-container").style.opacity = "1";
-                document.getElementById("admin-workspace-panel").style.opacity = "1";
-                document.getElementById("button-info-container").style.display = "none";
-                document.getElementById("unlock-images").style.display = "none";
-        }
-        function revealWorkspacePanel(){
-            if(document.getElementById("admin-nav-button-1").click){
-                document.getElementById("admin-workspace-panel").style.display = "block";
-                document.getElementById("todo-admin-panel").style.display = "none";
-            }
-        }
-
-        function revealToDoPanel(){
-            if(document.getElementById("admin-nav-button-2").click){
-                document.getElementById("admin-workspace-panel").style.display = "none";
-                document.getElementById("todo-admin-panel").style.display = "block";
-            }
-        }
+        
     </script>
 </head>
 <body onload="pos()">

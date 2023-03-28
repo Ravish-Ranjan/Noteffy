@@ -113,7 +113,25 @@ function signUp() {
     
     window.location.href = "../HTML/signUp.html";
 }
+function revealAdmin(){
+    document.getElementById("top-container").style.opacity = "1";
+    document.getElementById("admin-workspace-panel").style.opacity = "1";
+    document.getElementById("button-info-container").style.display = "none";
+    document.getElementById("unlock-images").style.display = "none";
+}
+function revealWorkspacePanel(){
+if(document.getElementById("admin-nav-button-1").click){
+    document.getElementById("admin-workspace-panel").style.display = "block";
+    document.getElementById("todo-admin-panel").style.display = "none";
+}
+}
 
+function revealToDoPanel(){
+if(document.getElementById("admin-nav-button-2").click){
+    document.getElementById("admin-workspace-panel").style.display = "none";
+    document.getElementById("todo-admin-panel").style.display = "block";
+}
+}
 function switchAdmin(){
     let decoded = decodeURIComponent(document.cookie);
     let vals = decoded.split(';');
@@ -129,13 +147,12 @@ function switchAdmin(){
                 revealAdmin();
                 return 1;
             }else if(jsond['Message']=="admin present"){
-                message("you are already any admin");return 2;
+                message("you are already any admin","message_success");return 2;
             }
             else{
-                message("can't connect to the server right now");
+                message("can't connect to the server right now","message_failure");
                 return -1;
             }
-            console.log(jsond);
     });
         }
     }
@@ -143,17 +160,14 @@ function switchAdmin(){
 async function checkAdmin(){
     let decoded = decodeURIComponent(document.cookie);
     let vals = decoded.split(';');
-    console.log(123);
     for(let u = 0;u < vals.length;u++){
         let key_val = vals[u].split('=');
         if(key_val[0].trim()=="user_number"){
             var loc = window.location.href.split('/php')[0];
-            console.log(loc);
             var res = await fetch(loc+"/php/main.php?"+(new URLSearchParams({'op':'checkadmin'})),{
             method:"POST",mode:"cors",header:'Content-Type:application/json;charset=utf-8'
             });
-            var js = await res.json();
-            console.log(js["Message"]);
+            var js = await res.json();;
             switch(js["Message"]){
                 case 'admin true':
                     return 1;
