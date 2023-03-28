@@ -15,7 +15,6 @@
     $details = json_decode($details, true);
     signUp($queries);
     signIn($details);
-    checkAdmin($details);
     allowAdmin($details);
     $details = json_encode($details);
     file_put_contents("../data/Details.json", $details);
@@ -38,9 +37,6 @@
     <script src="../Script/compose.js"></script>
     <script src="../Script/main.js"></script>
     <script src="../Script/message.js"></script>
-    <script>
-        
-    </script>
 </head>
 <body onload="pos()">
     <div class="main-parent-wrapper">
