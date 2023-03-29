@@ -8,7 +8,6 @@
     font-family: codec;
     src: url('../media/Codec-Cold-Regular-trial.ttf');
 }
-
 @keyframes shake {
     00% {
         transform: rotate(0deg);
@@ -520,8 +519,40 @@ body {
     left: 25%;
 }
 #admin-workspace-panel{
-    opacity:1;
+    opacity: 1;
 }
 #button-info-container,#unlock-images{
-    display:none;
+    display: none;
+}
+.search-box{
+    float: right;
+    display: flex;
+    position: relative;
+    margin-left: 40%;
+}
+.searchTerm {
+    width: 80%;
+    border-right: none;
+    padding: 5px;
+    height: 20px;
+    border-radius: 5px 0 0 5px;
+    color: #000000;
+    font-size: 10;
+    font-family: codec;
+}   
+.searchButton {
+    width: 40px;
+    height: 20px;
+    background-color: #000000;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.5s;
+    border-radius: 0 5px 5px 0;
+}  
+.searchButton:hover{
+    color: #000;
+    background-color: #fff;
+    transition: 0.5s;
 }

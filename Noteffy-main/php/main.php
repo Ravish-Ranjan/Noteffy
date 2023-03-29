@@ -30,6 +30,8 @@ file_put_contents("../data/Details.json", $details);
     <link rel="stylesheet" href="../Stylesheets/main.css">
     <link rel="stylesheet" href="../Stylesheets/admin.css">
     <link rel="stylesheet" href="../Stylesheets/compose.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">
 
     <!-- favicon -->
     <link rel="shortcut icon" href="../media/logo5mix.png" type="image/x-icon">
@@ -109,6 +111,12 @@ file_put_contents("../data/Details.json", $details);
         <div class="user-panel" id="wrapper">
             <div class="top" id="dashboard">
                 <label id="logo">Your Workstation</label>
+                <div class="search-box">
+                    <input type="text" class="searchTerm" placeholder="What you lookin' for?">
+                    <button type="submit" class="searchButton" action="#">
+                        <i class="fa fa-search" id="fa-fa-search"></i>
+                    </button>
+                </div>
                 <div id="prof">
                     <img src="../media/logoredq.png" onclick="showmenu()"
                         style="cursor:pointer;margin-right:30;margin-top:30;" alt="prof" height="75">
