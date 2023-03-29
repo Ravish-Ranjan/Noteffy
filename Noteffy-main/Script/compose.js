@@ -1,6 +1,11 @@
-function closeF(){
-    document.querySelector('.FORM').remove();
-    document.querySelector("#btn1").setAttribute("onclick","compose()");
+function closeF(x){
+    if(x==1){    
+        document.querySelector('.FORM').remove();
+    }
+    else if(x==2){    
+        document.querySelector('.FORM2').remove();
+    }
+        document.querySelector("#btn1").setAttribute("onclick","compose()");
 }
 function note_compose(date, title, note, note_no) {  //this function helps to create more notes for user
     if (document.getElementsByClassName("FORM").length != 0) {
@@ -82,6 +87,32 @@ function task_compose(date, tm, title, tk, task_no) {  //this function helps to 
         if (task.value.length == 0)
             task.value += "1.)";
     })
+}
+function class_compose(classname,desc,member_limit) {  //this function helps to create more notes for user
+    if (document.getElementsByClassName("FORM2").length != 0) {
+        document.getElementsByClassName("FORM2")[0].remove();
+        return;
+    }
+    //Change this to fetch a code from API
+    let chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let code = '';
+    for(var u = 0;u < 9;u++){
+        let c = Math.floor(Math.random()*chars.length);
+        code+=chars[c];
+    }
+    let noteform = document.createElement("form");let action = "main.php";
+    noteform.setAttribute("action", action); noteform.setAttribute("method", "POST");
+    noteform.setAttribute("class", "FORM2");
+    noteform.setAttribute("onsubmit", "return checkEmpty(this)");
+    noteform.innerHTML = `<span id='Form_Caption'>New Workspace</span>\
+    <button id = 'close' onclick = \"closeF(2)\"><img src='../media/cancelicon.png' id='cancel-icon-img'></button>\
+    <input type='text' name='ClassName' id='CName' placeholder='Name'>\
+    <textarea name = "ClassDesc" style='resize:none;' placeholder='This is my classroom?' name='' id='Cdesc' rows=4 cols=7 ></textarea>\
+    <input type='text' name='ClassLimit' id='CLim' placeholder='ClassLimit'>\
+    <input type='text' name='ClassCode' id='CCode' value='${code}' readonly>\
+    <center><input type='submit' value='Save' id='btn3'></center>`
+    document.querySelector("body").appendChild(noteform);
+    // document.querySelector("#btn1").toggleAttribute("onclick", "");
 }
 function checkEmpty(ele){ // this function checks if the user have any note/tasks or not
     let childs = ele.children,flag = true;

@@ -37,8 +37,13 @@ function getRandomArbitrary(min, max) { //this function gets random value in giv
 async function pos() { // this function styles the notes/tasks to be displayed in scattered/random manner
     window.scrollTo(window.innerWidth,0);
     var cadmin = await checkAdmin();
+<<<<<<< HEAD
     if(cadmin==1){
         revealAdmin();
+=======
+    if(cadmin!=1){
+        hideAdmin();
+>>>>>>> d27cbda633a52179e4284439dce4592fd4256091
     }
     decodedCookie = decodeURIComponent(document.cookie);
     decodedCookie = decodedCookie.split(";");
@@ -144,6 +149,7 @@ function switchAdmin(){
             }).then((dat)=>dat.json()).then((jsond)=>{
             if(jsond['Message']=="admin success"){
                 //Unlock panel here
+<<<<<<< HEAD
                 revealAdmin();
                 return 1;
             }else if(jsond['Message']=="admin present"){
@@ -151,6 +157,15 @@ function switchAdmin(){
             }
             else{
                 message("can't connect to the server right now","message_failure");
+=======
+                window.location.reload();
+                return 1;
+            }else if(jsond['Message']=="admin present"){
+                message("you are already any admin");return 2;
+            }
+            else{
+                message("can't connect to the server right now");
+>>>>>>> d27cbda633a52179e4284439dce4592fd4256091
                 return -1;
             }
     });
@@ -160,6 +175,10 @@ function switchAdmin(){
 async function checkAdmin(){
     let decoded = decodeURIComponent(document.cookie);
     let vals = decoded.split(';');
+<<<<<<< HEAD
+=======
+    console.log(123);
+>>>>>>> d27cbda633a52179e4284439dce4592fd4256091
     for(let u = 0;u < vals.length;u++){
         let key_val = vals[u].split('=');
         if(key_val[0].trim()=="user_number"){
@@ -167,7 +186,12 @@ async function checkAdmin(){
             var res = await fetch(loc+"/php/main.php?"+(new URLSearchParams({'op':'checkadmin'})),{
             method:"POST",mode:"cors",header:'Content-Type:application/json;charset=utf-8'
             });
+<<<<<<< HEAD
             var js = await res.json();;
+=======
+            var js = await res.json();
+            console.log(js["Message"]);
+>>>>>>> d27cbda633a52179e4284439dce4592fd4256091
             switch(js["Message"]){
                 case 'admin true':
                     return 1;
