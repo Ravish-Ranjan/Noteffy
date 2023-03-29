@@ -27,6 +27,7 @@
     <!-- stylesheets -->
     <link rel="stylesheet" href="../Stylesheets/message.css">
     <link rel="stylesheet" href="../Stylesheets/main.css">
+    <link rel="stylesheet" href="../Stylesheets/admin.css">
     <link rel="stylesheet" href="../Stylesheets/compose.css">
 
     <!-- favicon -->
@@ -37,6 +38,27 @@
     <script src="../Script/compose.js"></script>
     <script src="../Script/main.js"></script>
     <script src="../Script/message.js"></script>
+    <script>
+        function hideAdmin(){
+                document.getElementById("top-container").style.opacity = "0";
+                document.getElementById("admin-workspace-panel").style.opacity = "0";
+                document.getElementById("button-info-container").style.display = "block";
+                document.getElementById("unlock-images").style.display = "block";
+        }
+        function revealWorkspacePanel(){
+            if(document.getElementById("admin-nav-button-1").click){
+                document.getElementById("admin-workspace-panel").style.display = "block";
+                document.getElementById("todo-admin-panel").style.display = "none";
+            }
+        }
+
+        function revealToDoPanel(){
+            if(document.getElementById("admin-nav-button-2").click){
+                document.getElementById("admin-workspace-panel").style.display = "none";
+                document.getElementById("todo-admin-panel").style.display = "block";
+            }
+        }
+    </script>
 </head>
 <body onload="pos()">
     <div class="main-parent-wrapper">
@@ -46,6 +68,13 @@
                 <img src="../media/arrowImg.png" id="arrow-image">
                 <img src="../media/quillPenBlack.png" id="quill-black">
             </div>
+            <?php 
+                $orgs = file_get_contents("../data/Organizations.json");
+                $orgs = json_decode($orgs,true);
+                createClass($details,$orgs);
+                $orgs1 = json_encode($orgs);
+                file_put_contents("../data/Organizations.json",$orgs1);
+            ?>
             <div id="admin-control-panel">
                 <div id="button-info-container">
                     <button id="unlock-button" onclick="switchAdmin()">Unlock</button>
@@ -63,8 +92,10 @@
                 </div>
                 <div id="admin-workspace-panel">
                     <h1>workspacesss</h1>
+                    <div class="class"><div class="backg"><h2>ClassName</h2></div><div class="options"><button>opt1</button><button>opt2</button></div></div>
                     <!-- this div will show workpaces the user made & joined other -->
                 </div>
+                <div class = "compose" onclick="class_compose('','','','')">+</div>
             </div>
         </div>
         <!-- user panel -->

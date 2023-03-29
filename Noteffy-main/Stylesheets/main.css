@@ -503,7 +503,7 @@ body {
     left: 110%;
 }
 #top-container{
-    opacity: 0.1;
+    opacity: 0.9;
 }
 #admin-workspace-panel{
     opacity: 0.1;
@@ -515,4 +515,10 @@ body {
     z-index: 1;
     top: 20%;
     left: 25%;
+}
+#admin-workspace-panel{
+    opacity:1;
+}
+#button-info-container,#unlock-images{
+    display:none;
 }
