@@ -93,7 +93,6 @@ file_put_contents("../data/Details.json", $details);
                     <!-- this div will show the to-do's assigned & needs to complete in other workspaces-->
                 </div>
                 <div id="admin-workspace-panel">
-                    <h1>workspacesss</h1>
                     <?php
                         $orgs = file_get_contents("../data/Organizations.json");
                         $orgs = json_decode($orgs, true);
