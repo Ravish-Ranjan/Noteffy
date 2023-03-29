@@ -38,6 +38,27 @@
     <script src="../Script/compose.js"></script>
     <script src="../Script/main.js"></script>
     <script src="../Script/message.js"></script>
+    <script>
+        function hideAdmin(){
+                document.getElementById("top-container").style.opacity = "0";
+                document.getElementById("admin-workspace-panel").style.opacity = "0";
+                document.getElementById("button-info-container").style.display = "block";
+                document.getElementById("unlock-images").style.display = "block";
+        }
+        function revealWorkspacePanel(){
+            if(document.getElementById("admin-nav-button-1").click){
+                document.getElementById("admin-workspace-panel").style.display = "block";
+                document.getElementById("todo-admin-panel").style.display = "none";
+            }
+        }
+
+        function revealToDoPanel(){
+            if(document.getElementById("admin-nav-button-2").click){
+                document.getElementById("admin-workspace-panel").style.display = "none";
+                document.getElementById("todo-admin-panel").style.display = "block";
+            }
+        }
+    </script>
 </head>
 <body onload="pos()">
     <div class="main-parent-wrapper">
