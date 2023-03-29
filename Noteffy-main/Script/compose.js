@@ -88,7 +88,19 @@ function task_compose(date, tm, title, tk, task_no) {  //this function helps to 
             task.value += "1.)";
     })
 }
-function class_compose(classname,desc,member_limit) {  //this function helps to create more notes for user
+function showCreateWorkspace(){
+    if(document.getElementById("create-workspace-bbt")){
+        document.getElementById("create-workspace-panel").style.display = 'block';
+        document.getElementById("bbt-container").style.display = 'none';
+    }
+}
+function showJoinWorkspace(){
+    if(document.getElementById("join-workspace-bbt")){
+        document.getElementById("join-workspace-panel").style.display = 'block';
+        document.getElementById("bbt-container").style.display = 'none';
+    }
+}
+function class_compose(classname,desc,member_limit) {  //this function helps to create more workspaces for user
     if (document.getElementsByClassName("FORM2").length != 0) {
         document.getElementsByClassName("FORM2")[0].remove();
         return;
@@ -104,13 +116,23 @@ function class_compose(classname,desc,member_limit) {  //this function helps to 
     noteform.setAttribute("action", action); noteform.setAttribute("method", "POST");
     noteform.setAttribute("class", "FORM2");
     noteform.setAttribute("onsubmit", "return checkEmpty(this)");
-    noteform.innerHTML = `<span id='Form_Caption'>New Workspace</span>\
+    noteform.innerHTML = 
+    `<span id='Form_Caption'>Workspace Selector</span>\
     <button id = 'close' onclick = \"closeF(2)\"><img src='../media/cancelicon.png' id='cancel-icon-img'></button>\
-    <input type='text' name='ClassName' id='CName' placeholder='Name'>\
-    <textarea name = "ClassDesc" style='resize:none;' placeholder='This is my classroom?' name='' id='Cdesc' rows=4 cols=7 ></textarea>\
-    <input type='text' name='ClassLimit' id='CLim' placeholder='ClassLimit'>\
-    <input type='text' name='ClassCode' id='CCode' value='${code}' readonly>\
-    <center><input type='submit' value='Save' id='btn3'></center>`
+    <div id='bbt-container'>
+        <button id="create-workspace-bbt" onclick='showCreateWorkspace()'>Create Workspace</button>\
+        <button id="join-workspace-bbt" onclick='showJoinWorkspace()'>Join Workspace</button>\
+    </div>
+    <div id='create-workspace-panel'>
+        <input type='text' name='ClassName' id='CName' placeholder='Name'>\
+        <textarea name = "ClassDesc" style='resize:none;' placeholder='This is my classroom?' name='' id='Cdesc' rows=4 cols=7 ></textarea>\
+        <input type='text' name='ClassLimit' id='CLim' placeholder='ClassLimit'>\
+        <input type='text' name='ClassCode' id='CCode' value='${code}' readonly>\
+        <center><input type='submit' value='Save' id='btn'></center>
+    </div>
+    <div id='join-workspace-panel'>
+        <input type='text' name='ClassCode' placeholder='Enter Workspace Code' id='CCode' value='${code}' readonly>\
+    </div>`
     document.querySelector("body").appendChild(noteform);
     // document.querySelector("#btn1").toggleAttribute("onclick", "");
 }

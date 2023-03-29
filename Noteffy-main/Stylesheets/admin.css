@@ -114,3 +114,31 @@
     font-family: monospace;
     text-align: start;
 }
+#bbt-container{
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#create-workspace-bbt,#join-workspace-bbt{
+    font-family: codec;
+    width: 140;
+    height: 60;
+    border-radius: 40px;
+    border: 2px solid black;
+    color: black;
+    background-color: white;
+    transition: 0.5s;
+    cursor: pointer;
+}
+#create-workspace-bbt:hover,#join-workspace-bbt:hover{
+    color: white;
+    background-color: black;
+    transition: 0.5s;
+}
+#create-workspace-panel{
+    display: none;
+}
+#join-workspace-panel{
+    display: none;
+}

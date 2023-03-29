@@ -71,11 +71,11 @@ file_put_contents("../data/Details.json", $details);
                 <img src="../media/quillPenBlack.png" id="quill-black">
             </div>
             <?php
-            $orgs = file_get_contents("../data/Organizations.json");
-            $orgs = json_decode($orgs, true);
-            createClass($details, $orgs);
-            $orgs1 = json_encode($orgs);
-            file_put_contents("../data/Organizations.json", $orgs1);
+                $orgs = file_get_contents("../data/Organizations.json");
+                $orgs = json_decode($orgs, true);
+                createClass($details, $orgs);
+                $orgs1 = json_encode($orgs);
+                file_put_contents("../data/Organizations.json", $orgs1);
             ?>
             <div id="admin-control-panel">
                 <div id="button-info-container">
