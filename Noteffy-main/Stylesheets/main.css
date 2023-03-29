@@ -504,6 +504,7 @@ body {
 }
 #top-container{
     opacity: 0.9;
+    overflow-y: scroll;
 }
 #admin-workspace-panel{
     opacity: 0.1;
