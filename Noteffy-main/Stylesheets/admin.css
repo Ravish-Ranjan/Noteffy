@@ -107,26 +107,3 @@
     font-family: monospace;
     text-align: start;
 }
-::-webkit-scrollbar{
-    background-color: #555;
-    /* margin-top: 2%; */
-    height: 10px;
-    width: 10px;
-}
-::-webkit-scrollbar-thumb{
-    border-radius: 100vw;
-    background-color: green;
-}
-.scroll{
-    position: absolute;
-    top: 0;
-    right: 0%;
-    height: 100%;
-    width: 6%;
-    background-color: rgba(255, 255, 255, 0.5);
-    display: grid;
-    place-items: center;
-    font-size: 50;
-    font-weight: bold;
-    cursor: pointer;
-}
