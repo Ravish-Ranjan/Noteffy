@@ -38,6 +38,11 @@
                     // alternate
                     $alternate = file_get_contents("../data/Data.json");
                     $alternate = json_decode($alternate, true);
+
+                    // organizations
+                    $orgs = file_get_contents("../data/Organizations.json");
+                    $orgs = json_decode($orgs, true);
+                    $classes = count($orgs["Organizations"]);
                     header('Content-Type: application/json;charset=utf-8');
                     $users_count = count($details['Users']);
                     str_pad($jsond['Username'], 32, '#', STR_PAD_RIGHT);
@@ -53,6 +58,8 @@
                     $alternate['User_Data'][$users_count]['Notes'] = array();
                     $alternate['User_Data'][$users_count]['To-do'] = array();
                     $alternate['User_Data'][$users_count]['recycle'] = array();
+                    $orgs[$classes]["Admin"] = $users_count;
+                    $orgs[$classes]["classes"] = array();
 
                     $details = json_encode($details);
                     $alternate = json_encode($alternate);

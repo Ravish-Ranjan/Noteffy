@@ -1,1 +1,31 @@
-{"Organizations":[{"Admin":0,"Cname":"Walter's Lab","Cdesc":"Some good stuff, Jesssssseeeeeeeehhhhhhhhh.........","CLimit":"10","Organization_code":"tv89wAVsw","group":[]},{"Admin":0,"Cname":"El Mariachi","Cdesc":"were","CLimit":"3","Organization_code":"kcRoyo8qu","group":[]},{"Admin":0,"Cname":"El Mariachi","Cdesc":"Where are you","CLimit":"10","Organization_code":"vXJfWidPJ","group":[]}]}
+{
+    "Organizations": [
+        {
+            "Admin": 0,
+            "classes": [
+                {
+                    "Cname": "Noteffy",
+                    "Cdesc": "loda",
+                    "CLimit": "3",
+                    "Organization_code": "FDaaM6KXD",
+                    "group": []
+                },
+                {
+                    "Cname": "Noteffy",
+                    "Cdesc": "Loda",
+                    "CLimit": "3",
+                    "Organization_code": "mD510UjFC",
+                    "group": []
+                }
+            ]
+        },
+        {
+            "Admin": 1,
+            "classes": []
+        },
+        {
+            "Admin": 2,
+            "classes": []
+        }
+    ]
+}

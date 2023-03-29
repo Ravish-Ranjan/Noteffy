@@ -16,13 +16,11 @@
     right: -100%;
 }
 .top{
-    /* width: 100%; */
     height: 14%;
     display: flex;
     color: white;
     justify-content:space-between;
     align-items: center;
-    padding: 0 2%;
 }
 .workspace > .top{
     flex-direction: row-reverse;
@@ -47,7 +45,7 @@
     display: grid;
     place-items: center;cursor:pointer;
     right: 1%;
-    z-index: 1;
+    z-index: 0;
 }
 .workstation >.compose{
     left: 1%;
