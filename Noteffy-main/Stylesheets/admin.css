@@ -13,10 +13,11 @@
 }
 .workstation{
     top: 1%;
-    right: -100%;
+    right: -94%;
 }
 .top{
     height: 14%;
+    outline: 1px solid white;
     display: flex;
     color: white;
     justify-content:space-between;
@@ -25,8 +26,15 @@
 .workspace > .top{
     flex-direction: row-reverse;
 }
-.top>h1{   
-    margin: 0 3%;
+.top >h1{   margin: 0 3%;}
+.main{
+    width: 100%;
+    height: 86%;
+    background-color: rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    overflow-y: scroll;
 }
 .admin-workspace-panel{
     flex-flow:row wrap;
