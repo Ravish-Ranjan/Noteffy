@@ -92,6 +92,7 @@ function showCreateWorkspace(){
     if(document.getElementById("create-workspace-bbt")){
         document.getElementById("create-workspace-panel").style.display = 'block';
         document.getElementById("bbt-container").style.display = 'none';
+        console.log(FORM2);
     }
 }
 function showJoinWorkspace(){
@@ -115,7 +116,7 @@ function class_compose(classname,desc,member_limit) {  //this function helps to 
     let noteform = document.createElement("form");let action = "main.php";
     noteform.setAttribute("action", action); noteform.setAttribute("method", "POST");
     noteform.setAttribute("class", "FORM2");
-    noteform.setAttribute("onsubmit", "return checkEmpty(this)");
+    noteform.setAttribute("onsubmit", "event.preventDefault();return checkEmpty(this)");
     noteform.innerHTML = 
     `<span id='Form_Caption'>Workspace Selector</span>\
     <button id = 'close' onclick = \"closeF(2)\"><img src='../media/cancelicon.png' id='cancel-icon-img'></button>\
@@ -128,11 +129,13 @@ function class_compose(classname,desc,member_limit) {  //this function helps to 
         <textarea name = "ClassDesc" style='resize:none;' placeholder='This is my classroom?' name='' id='Cdesc' rows=4 cols=7 ></textarea>\
         <input type='text' name='ClassLimit' id='CLim' placeholder='ClassLimit'>\
         <input type='text' name='ClassCode' id='CCode' value='${code}' readonly>\
-        <center><input type='submit' value='Save' id='btn'></center>
-    </div>
-    <div id='join-workspace-panel'>
-        <input type='text' name='ClassCode' placeholder='Enter Workspace Code' id='CCode' value='${code}' readonly>\
-    </div>`
+        <center><input type='submit' value='Save' id='btn' onclick='submit() '></center>
+        </div>
+        <div id='join-workspace-panel'>
+        <input type='text' name='ClassCode' placeholder='Enter Workspace Code' id='CCode' value='${code}'>\
+        <center><input type='submit' value='JOIN' id='btn' onclick='submit()'></center>
+        </div>
+        `
     document.querySelector("body").appendChild(noteform);
     // document.querySelector("#btn1").toggleAttribute("onclick", "");
 }

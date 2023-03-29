@@ -47,6 +47,16 @@ function allowAdmin(&$jsonData)
     }
     die();
 }
+function isInOrganization($user,$classData){
+    for($i=0;$i<count($classData["Organizations"]);$i++){
+        for($j=0;$j<count($classData["Organizations"][$i]["classes"]);$j++){
+            if(in_array($user,$classData["Organizations"][$i]["classes"][$j]["group"])){
+                return true;
+            }
+        }
+    }
+    return false;
+}
 function createClass(&$personal, &$classData)
 {
     $user = getUserNumber();
@@ -56,7 +66,7 @@ function createClass(&$personal, &$classData)
     $orgs = count($classData["Organizations"]);
     $admin = -1;
     if ($user != -1) {
-        if (isset($_POST['ClassName'])) {
+        if (isset($_POST['ClassName']) && ($_POST['ClassName']) != '') {
             $className = $_POST['ClassName'];
             $classCode = $_POST['ClassCode'];
             $classDesc = $_POST['ClassDesc'];
@@ -86,14 +96,23 @@ function createClass(&$personal, &$classData)
                     return;
                 }
             }
-        }
-    } else
-        echo "<script>window.location.href = '../HTML/error.html'</script>";
+        } else if (isset($_POST['ClassCode']) && $_POST['ClassName'] == '') {
+            $code = $_POST['ClassCode'];
+            for ($u = 0; $u < $orgs; $u++) {
+                    for ($c = 0; $c < count($classData["Organizations"][$u]["classes"]); $c++) {
+                        if ($classData["Organizations"][$u]["classes"][$c]["Organization_code"] == $code) {
+                            array_push($classData["Organizations"][$u]["classes"][$c]["group"], $user);
+                            return;
+                        }
+                    }
+            }
+        } 
+        
+    }
 }
 function displayClass(&$classData)
 {
     $user = getUserNumber();
-
     $orgs = count($classData["Organizations"]);
     if ($user != -1) {
         for ($j = 0; $j < $orgs; $j++) {
@@ -108,6 +127,21 @@ function displayClass(&$classData)
                     <div class='options'><button>opt1</button><button>opt2</button></div>
                 </div>
                     ";
+                }
+            }
+            else if($user != $classData["Organizations"][$j]["Admin"] && isInOrganization($user,$classData)){
+                for ($k = 0; $k < count($classData["Organizations"][$j]["classes"]); $k++) {
+                    if (in_array($user, $classData["Organizations"][$j]["classes"][$k]["group"])) {
+                        $title = $classData["Organizations"][$j]["classes"][$k]["Cname"];
+                        echo "
+                    <div class='class'>
+                    <div class='backg'>
+                        <h2>$title</h2>
+                    </div>
+                    <div class='options'><button>opt1</button><button>opt2</button></div>
+                </div>
+                    ";
+                    }
                 }
             }
         }
