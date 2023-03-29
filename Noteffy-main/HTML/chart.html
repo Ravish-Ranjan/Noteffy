@@ -5,7 +5,28 @@
         <link rel="stylesheet" href="../Stylesheets/chart.css">
         <script  src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <style>
-           
+           ::-webkit-scrollbar{
+                width: 10px;
+            }  
+            ::-webkit-scrollbar-track{
+                background: #f1f1f1; 
+            }    
+            ::-webkit-scrollbar-thumb{
+                background: #888; 
+                border-radius: 10px;
+            }    
+            ::-webkit-scrollbar-thumb:hover{
+                background: #555; 
+            }
+            #graveyard-space{
+                width: 63%;
+                height: 80%;
+                background-color: #f3f3f3;
+                border-radius: 50px;
+                margin-left: 1.5%;
+                margin-top: 1%;
+                border: 3px solid #141414;
+            }
         </style>
     </head>
     <body>
@@ -50,7 +71,9 @@
             <p>you entered explore</p>
         </div>
         <div class="main" id="2" style="display: none;">
-            
+            <div id="graveyard-space">
+
+            </div>
         </div>
         <div class="main" id="3">
             <div id="container" >

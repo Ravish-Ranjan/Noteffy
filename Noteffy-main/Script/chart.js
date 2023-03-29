@@ -169,7 +169,7 @@ graveyard = async () => {
       }
   }
   userNumber = await decrypt_data(userNumber, '');
-  display = document.getElementById("2");
+  display = document.getElementById("graveyard-space");
   fetch("../data/Data.json").then((res) => res.json()).then((recycle) => {
     Array.from(recycle["User_Data"][userNumber]["recycle"]).map((ele) => {
       let markUp =  `<div class="divi" style="background-image:url(../media/newNote.png);">
