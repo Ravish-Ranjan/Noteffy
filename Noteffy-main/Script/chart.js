@@ -172,32 +172,18 @@ graveyard = async () => {
   display = document.getElementById("graveyard-space");
   fetch("../data/Data.json").then((res) => res.json()).then((recycle) => {
     Array.from(recycle["User_Data"][userNumber]["recycle"]).map((ele) => {
-      let markUp =  `<div class="divi" style="background-image:url(../media/newNote.png);">
-      <div class="topic">
+      let markUp =  
+      `<div class="divi" style="background-image:url(../media/newNote.png);">
+        <div class="topic">
           <img id="pin" src="../media/gravePin.png" alt="pin">
-      </div>
-      <div class="screen"><ul style="list-style-type:none;">`
-      for (i = 0; i < ele["Tasks"].length; i++){
-        markUp += `<li>${ele["Tasks"][i]}</li>`;
-      }
-      markUp += `</ul></div>
-          <div class="control">
-              <button onclick="">
-              <a>
-                  <img title='edit the task' src="../media/edit.png" alt="loading image">
-              </a>
-              </button>
-              <button onclick="">
-                  <img title='copy the task to clipboard' src="../media/share.png" alt="loading image">
-              </button>
-              <button onclick="">
-                  <a  style='text-decoration:none;'>
-                      <img title='delete the task' src="../media/delete.png" alt="loading image">
-                  </a>
-              </button>
-          </div>
-      </div>
-    </div>`;
+        </div>
+        <div class="screen"><ul style="list-style-type:none;">`
+        for (i = 0; i < ele["Tasks"].length; i++){
+          markUp += `<li>${ele["Tasks"][i]}</li>`;
+        }
+        markUp += `</ul></div>
+        </div>
+      </div>`;
       display.innerHTML += markUp;
   });
 })

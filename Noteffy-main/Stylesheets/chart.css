@@ -176,17 +176,15 @@ body{
     }
 }
 .divi {
-    width: 26vh;
-    margin: 5%;
-    height: 40vh;
+    width: 15vh;
+    margin: 3%;
+    height: 27vh;
     padding: 0% 5% 5% 5%;
-    background-image: url("note2.png");
     filter: drop-shadow(10px 10px 5px rgba(0, 0, 0, 0.5));
     background-repeat: round;
     background-size: contain;
     display: flex;
     flex-direction: column;
-    justify-content: space;
 }
 .topic {
     /* height: 20%; */
@@ -195,8 +193,8 @@ body{
     justify-content: end;
 }
 #pin {
-    aspect-ratio: 1/1;
-    width: 30%;
+    width: 50%;
+    transform: translate(55px, -15px);
     /* filter:drop-shadow(-5px 5px 5px rgba(0,0,0,0.5)); */
 }
 
