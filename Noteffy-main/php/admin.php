@@ -47,9 +47,6 @@
         }
         die();
     }
-<<<<<<< HEAD
-?>
-=======
     function createClass(&$personal,&$classData)
     {
         $user = getUserNumber();
@@ -110,4 +107,3 @@
             
     }
 ?>
->>>>>>> d27cbda633a52179e4284439dce4592fd4256091
