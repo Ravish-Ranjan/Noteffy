@@ -1,5 +1,6 @@
 <?php
     require_once("initial.php");require_once("hash.php");
+    function getmembers(){
     if(!isset($_GET["op"]) || ($_GET["op"] != "getmembers")){
         return;
     }
@@ -35,6 +36,48 @@
     }
     $resp["Message"] = "failure";$resp = json_encode($resp);
     echo $resp;die();
+}
+    getmembers();
+?>
+<?php
+    function fetchtodo(&$orgs){
+        // require_once("initial.php");require_once("hash.php");
+        if(!isset($_COOKIE['user_number'])){
+            echo '<script>window.replace("index.php")</script>';return;
+        }
+        if(!isset($_GET["admin"]) || !isset($_GET["todo"])){
+            return;
+        }
+        header("Content-Type: application/json;charset=utf-8");
+        $orgs = file_get_contents("../data/Organizations.json");
+        $orgs = json_decode($orgs,true);
+        $respdata = array("To-do"=>array());
+        
+        $user = getUserNumber();
+        for($k = 0;$k < count($orgs["Organizations"]);$k++){
+            for($l = 0;$l < count($orgs["Organizations"][$k]["classes"]);$l++){
+                $classitem["Name"] = $orgs["Organizations"][$k]["classes"][$l]["Cname"];
+                $classitem["Tasks"] = array();
+                if (in_array($user,$orgs["Organizations"][$k]["classes"][$l]["group"])) {
+                       $todolist = $orgs["Organizations"][$k]["classes"][$l]["To-do"];
+                       foreach($todolist as $todo){
+                        if(in_array($user,$todo["assignees"])){
+                            $cleantasks = $todo;unset($cleantasks["assignees"]);
+                            array_push($classitem["Tasks"],$cleantasks);
+                        }
+                       }
+                    }
+                    if($classitem["Tasks"]!=null)
+                       { array_push($respdata["To-do"],$classitem);}
+                }
+            }
+        $orgs1 = json_encode($orgs,true);
+        file_put_contents("../data/Organizations.json",$orgs1);
+        $respdata["Message"] = ($respdata["To-do"]==null)?"failure":"success";
+        $respdata = json_encode($respdata);echo $respdata;
+        die();
+    }
+    fetchtodo($jdata);
 ?>
 <?php
 

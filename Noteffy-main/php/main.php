@@ -98,6 +98,7 @@ file_put_contents("../data/Details.json", $details);
                 </div>
                 <div id="todo-admin-panel">
                     <h1>To-Do'sss</h1>
+                    <script>displayAdminTodo(this)</script>
                     <!-- this div will show the to-do's assigned & needs to complete in other workspaces-->
                 </div>
                 <div id="admin-workspace-panel">

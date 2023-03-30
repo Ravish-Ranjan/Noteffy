@@ -210,3 +210,37 @@ function revealToDoPanel() {
         document.getElementById("todo-admin-panel").style.display = "block";
     }
 }
+async function displayAdminTodo(ele){
+    let adminlist = document.querySelector('#todo-admin-panel');
+    let options = {
+        method:'GET',
+        mode:'cors'
+    };
+    let queries = {
+        'admin':true,
+        'todo':true
+    };
+    var loc = window.location.href.split('/php')[0];
+    console.log(loc+"/php/admin.php?"+(new URLSearchParams(queries)));
+    let resplist = await fetch(loc+"/php/admin.php?"+(new URLSearchParams(queries)),options);
+    let jsonlist = await resplist.json();
+    if(jsonlist['To-do']!=null){
+        jsonlist['To-do'].forEach(ele => {
+            const color = Math.floor(Math.random()*16777215).toString(16);
+            
+            //Classroom name
+            let classgroup = document.createElement('div');
+            classgroup.classList = ['classg'];classgroup.style.opacity = 0.8;
+            ele['Tasks'].forEach((task)=>{
+                let tasknode = document.createElement('label');
+                tasknode.style.backgroundColor = color;
+                tasknode.innerHTML = `${task.Title} Due: ${task.Time} on ${task.Date}`;
+                classgroup.appendChild(tasknode);
+            });
+            adminlist.appendChild(classgroup);
+        });
+    }else{
+        adminlist.innerHTML = `
+        <h1>No tasks currently</h1>`;
+    }
+}
