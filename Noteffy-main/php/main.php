@@ -75,9 +75,15 @@ file_put_contents("../data/Details.json", $details);
             <?php
                 $orgs = file_get_contents("../data/Organizations.json");
                 $orgs = json_decode($orgs, true);
-                createClass($details, $orgs);
+                $flag = createClass($details, $orgs);
                 $orgs1 = json_encode($orgs);
                 file_put_contents("../data/Organizations.json", $orgs1);
+                if($flag){
+                    echo "<script>message('invalid class code','message_success')</script>";
+                }
+                else if(!$flag && isset($_POST['ClassCode'])){
+                    echo "<script>message('invalid class code','error')</script>";
+                }
             ?>
             <div id="admin-control-panel">
                 <div id="button-info-container">

@@ -102,10 +102,11 @@ function createClass(&$personal, &$classData)
                     for ($c = 0; $c < count($classData["Organizations"][$u]["classes"]); $c++) {
                         if ($classData["Organizations"][$u]["classes"][$c]["Organization_code"] == $code) {
                             array_push($classData["Organizations"][$u]["classes"][$c]["group"], $user);
-                            return;
+                            return true;
                         }
                     }
             }
+            return false;
         } 
         
     }
