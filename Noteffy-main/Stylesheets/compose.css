@@ -30,7 +30,7 @@ input[type="date"],input[type="text"],textarea{
     margin-top: 15vh;
     padding: 1%;
     font-family: codec-extrabold;
-}.FORM2{
+}.FORM2,.FORM[ad='true']{
     right:20%;
 }
 #cancel-icon-img{
