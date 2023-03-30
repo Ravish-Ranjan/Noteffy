@@ -41,9 +41,9 @@ body{
     transition: 0.3s;
 }
 #admin-details-card{
-    background-color:#ffe100;
+    background-color:#4fd0ff;
     filter: drop-shadow(0px 0px 5px rgba(0,0,0,.5));
-    border: 3px solid black;
+    border: 3px solid white;
     border-radius: 80px;
     float: right;
     margin-right: 3%;
@@ -63,7 +63,7 @@ body{
     padding-top: 5%;
 }
 #back-bbt:link, #back-bbt:visited {
-    background-color: #ffe100;
+    background-color:#4fd0ff;
     color: #141414;
     padding: 4px 15px;
     text-align: center;
