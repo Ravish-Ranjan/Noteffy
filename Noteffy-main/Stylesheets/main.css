@@ -383,6 +383,15 @@ body {
     padding-left: 10%;
     padding-top: 10%;
 }
+#sidepanel-admin>ul {
+    width: 100%;
+    font-size: 25;
+    text-shadow: none;
+    font-family: codec-extrabold;
+    text-align: start;
+    padding-left: 10%;
+    padding-top: 10%;
+}
 
 #sidepanel>ul>li {
     padding: 0.5rem 0 0.5rem 1rem;
@@ -396,6 +405,20 @@ body {
 }
 
 #sidepanel>ul>li>a {
+    color: black;
+}
+#sidepanel-admin>ul>li {
+    padding: 0.5rem 0 0.5rem 1rem;
+    font-family: codec;
+    transition: linear 0.15s;
+}
+
+#sidepanel-admin>ul>li:hover {
+    background-color: rgb(200, 200, 200);
+    filter: invert(1);
+}
+
+#sidepanel-admin>ul>li>a {
     color: black;
 }
 

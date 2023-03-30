@@ -31,7 +31,7 @@ file_put_contents("../data/Details.json", $details);
     <link rel="stylesheet" href="../Stylesheets/admin.css">
     <link rel="stylesheet" href="../Stylesheets/compose.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">
+    <!-- <link rel="stylesheet" href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css"> -->
 
     <!-- favicon -->
     <link rel="shortcut icon" href="../media/logo5mix.png" type="image/x-icon">

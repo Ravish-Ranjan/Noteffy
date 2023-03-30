@@ -151,7 +151,7 @@ function class_compose(classname,desc,member_limit) {  //this function helps to 
         <center><input type='submit' value='Save' id='btn' onclick='submit() '></center>
         </div>
         <div id='join-workspace-panel'>
-        <input type='text' name='ClassCode' placeholder='Enter Workspace Code' id='CCode' value='${code}'>\
+        <input type='text' name='JClassCode' placeholder='Enter Workspace Code' id='CCode' value=''>\
         <center><input type='submit' value='JOIN' id='btn' onclick='submit()'></center>
         </div>
         `

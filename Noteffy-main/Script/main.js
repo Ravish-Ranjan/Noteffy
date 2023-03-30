@@ -172,7 +172,6 @@ function switchAdmin(){
 async function checkAdmin(){
     let decoded = decodeURIComponent(document.cookie);
     let vals = decoded.split(';');
-    console.log(123);
     for(let u = 0;u < vals.length;u++){
         let key_val = vals[u].split('=');
         if(key_val[0].trim()=="user_number"){
@@ -181,7 +180,6 @@ async function checkAdmin(){
             method:"POST",mode:"cors",header:'Content-Type:application/json;charset=utf-8'
             });
             var js = await res.json();
-            console.log(js["Message"]);
             switch(js["Message"]){
                 case 'admin true':
                     return 1;
