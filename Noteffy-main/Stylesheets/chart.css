@@ -243,3 +243,6 @@ body{
     background-size: round;
     box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.5) inset;
 }
+#graveyard-space{
+    display: flex;
+}
