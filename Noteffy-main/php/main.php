@@ -41,27 +41,6 @@ file_put_contents("../data/Details.json", $details);
     <script src="../Script/compose.js"></script>
     <script src="../Script/main.js"></script>
     <script src="../Script/message.js"></script>
-    <script>
-        function hideAdmin() {
-            document.getElementById("top-container").style.opacity = "0";
-            document.getElementById("admin-workspace-panel").style.opacity = "0";
-            document.getElementById("button-info-container").style.display = "block";
-            document.getElementById("unlock-images").style.display = "block";
-        }
-        function revealWorkspacePanel() {
-            if (document.getElementById("admin-nav-button-1").click) {
-                document.getElementById("admin-workspace-panel").style.display = "block";
-                document.getElementById("todo-admin-panel").style.display = "none";
-            }
-        }
-
-        function revealToDoPanel() {
-            if (document.getElementById("admin-nav-button-2").click) {
-                document.getElementById("admin-workspace-panel").style.display = "none";
-                document.getElementById("todo-admin-panel").style.display = "block";
-            }
-        }
-    </script>
 </head>
 
 <body onload="pos()">
@@ -75,10 +54,7 @@ file_put_contents("../data/Details.json", $details);
             <?php
                 $orgs = file_get_contents("../data/Organizations.json");
                 $orgs = json_decode($orgs, true);
-
                 $flag = createClass($details, $orgs);
-                createAdminTask($details,$orgs);
-
                 $orgs1 = json_encode($orgs);
                 file_put_contents("../data/Organizations.json", $orgs1);
                 if($flag){
@@ -95,7 +71,25 @@ file_put_contents("../data/Details.json", $details);
                     <p id="unlock-text-2">Do you wish to activate admin privileges?</p>
                 </div>
                 <div id="top-container">
-                    <img src="../media/logoredq.png" id="user-admin-logo">
+                    <img src="../media/logoredq.png" id="user-admin-logo" onclick="showAdminMenu()">
+                    <?php
+                    if (!isset($_COOKIE['user_number'])) {
+                        // echo "<script>window.location.href = 'index.php'</script>";
+                    } else {
+                        echo 
+                            "<div  id='sidepanel-admin' >
+                                <div class='panel-user-admin' >
+                                    <img src='../media/logoredq.png' height=80 width=80 alt='logo' style='margin-left: 20;filter:drop-shadow(2px 2px 5px black);'>
+                                    <label style='text-decoration:none;color:black;'>Hi, " . getUser() . " !</label>
+                                </div>
+                                <ul>
+                                    <li><a href='../HTML/control.html' style='text-decoration:none;'>Control</a><br></li>
+                                    <li><a href='index.php' style='text-decoration: none;'>Home</a></li>
+                                    <li><a style='text-decoration: none;cursor:pointer;' onclick='hideAdminMenu()'>Back</a></li>
+                                </ul>
+                            </div>";
+                    }
+                    ?>
                     <button id="admin-nav-button-1" onclick="revealWorkspacePanel()">Workspaces</button>
                     <button id="admin-nav-button-2" onclick="revealToDoPanel()">To-Do's</button>
                 </div>
@@ -113,7 +107,7 @@ file_put_contents("../data/Details.json", $details);
                      ?>
                     <!-- this div will show workpaces the user made & joined other -->
                 </div>
-                <div class="compose" onclick="class_compose('','','','')">+</div>
+                <div class="compose" id="admin-compose-bbt" onclick="class_compose('','','','')">+</div>
             </div>
         </div>
         <!-- user panel -->
@@ -127,8 +121,7 @@ file_put_contents("../data/Details.json", $details);
                     </button>
                 </div>
                 <div id="prof">
-                    <img src="../media/logoredq.png" onclick="showmenu()"
-                        style="cursor:pointer;margin-right:30;margin-top:30;" alt="prof" height="75">
+                    <img src="../media/logoredq.png" onclick="showmenu()" style="cursor:pointer;margin-right:30;margin-top:30;" alt="prof" height="75">
                     <?php
                     if (!isset($_COOKIE['user_number'])) {
                         // echo "<script>window.location.href = 'index.php'</script>";
