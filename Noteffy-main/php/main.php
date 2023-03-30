@@ -54,7 +54,10 @@ file_put_contents("../data/Details.json", $details);
             <?php
                 $orgs = file_get_contents("../data/Organizations.json");
                 $orgs = json_decode($orgs, true);
+
                 $flag = createClass($details, $orgs);
+                createAdminTask($details,$orgs);
+
                 $orgs1 = json_encode($orgs);
                 file_put_contents("../data/Organizations.json", $orgs1);
                 if($flag){

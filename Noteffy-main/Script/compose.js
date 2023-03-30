@@ -75,6 +75,23 @@ async function task_compose(date, tm, title, tk, task_no,flag = 0,ele = null) { 
             list+=`<option name = "res" value = "${Object.keys(userjs.list[u])}">${Object.values(userjs.list[u])}</option>`
         }
         list+=`</select>`;
+    }var params = {
+        'op':'getmembers',
+        'class':classname
+    }
+    var options = {
+        method:"GET",
+        mode:"cors"
+    }
+    let list;
+    if(flag == 1){
+        let resp = await fetch("../php/admin.php?"+ (new URLSearchParams(params).toString()),options);
+        let userjs = await resp.json();
+        list = `<select name="assignedmems[]" id="assmem" multiple>`;
+        for(let u = 0;u < userjs.list.length;u++){
+            list+=`<option name = "res" value = "${Object.keys(userjs.list[u])}">${Object.values(userjs.list[u])}</option>`
+        }
+        list+=`</select>`;
     }
     var t = new Date();
     if (tm.length == 0)
@@ -82,13 +99,16 @@ async function task_compose(date, tm, title, tk, task_no,flag = 0,ele = null) { 
     else
         time = tm;
     let noteform = document.createElement("form");
-    noteform.setAttribute("class", "FORM");noteform.setAttribute("enctype","multipart/form-data");
+    noteform.setAttribute("class", "FORM");noteform.setAttribute("enctype","multipart/form-data");noteform.setAttribute("enctype","multipart/form-data");
+    noteform.setAttribute("ad","true");
     noteform.setAttribute("action",action);noteform.setAttribute("method","POST");
     if(flag==1){noteform.setAttribute("ad","true");}
     noteform.setAttribute("onsubmit","return checkEmpty(this)");
     noteform.innerHTML = `<span id='Form_Caption'>New Task</span>\
-    <button id = 'close' style=\"font-size:2vw;\" onclick = \"closeF()\">x</button>\
+    <button id = 'close' style=\"font-size:2vw;\" onclick = \"closeF(1)\">x</button>\
     <input type='date' name='T_Date' id='Date'>\
+    <input type='time' name='T_Time' id='Time'>`+((flag==1)?list:``)+
+    `<input type='text' name='T_Title' id='Title' placeholder='Title' value=${title}>\
     <input type='time' name='T_Time' id='Time'>`+((flag==1)?list:``)+
     `<input type='text' name='T_Title' id='Title' placeholder='Title' value=${title}>\
     <label for='Task'>Tasks</label>\
