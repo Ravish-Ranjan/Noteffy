@@ -109,8 +109,20 @@ function hidemenu(){
     }
     document.getElementById("sidepanel").style.display= "none";
 }
+function showAdminMenu(){
+    document.getElementById("sidepanel-admin").style.display = "block";
+    document.getElementById("admin-workspace-panel").style.filter = "blur(10px)";
+    document.getElementById("admin-nav-button-1").style.filter = "blur(10px)";
+    document.getElementById("admin-nav-button-2").style.filter = "blur(10px)";
+}
+function hideAdminMenu(){
+    document.getElementById("logo").style.filter = "blur(0px)";
+    document.getElementById("admin-workspace-panel").style.filter = "blur(0px)";
+    document.getElementById("admin-nav-button-1").style.filter = "blur(0px)";
+    document.getElementById("admin-nav-button-2").style.filter = "blur(0px)";
+    document.getElementById("sidepanel-admin").style.display= "none";
+}
 function signUp() {
-    
     window.location.href = "../HTML/signUp.html";
 }
 function revealAdmin(){
@@ -179,5 +191,24 @@ async function checkAdmin(){
                     return -1;
             }
         }
+    }
+}
+function hideAdmin() {
+    document.getElementById("top-container").style.opacity = "0";
+    document.getElementById("admin-workspace-panel").style.opacity = "0";
+    document.getElementById("button-info-container").style.display = "block";
+    document.getElementById("unlock-images").style.display = "block";
+}
+function revealWorkspacePanel() {
+    if (document.getElementById("admin-nav-button-1").click) {
+        document.getElementById("admin-workspace-panel").style.display = "block";
+        document.getElementById("todo-admin-panel").style.display = "none";
+    }
+}
+
+function revealToDoPanel() {
+    if (document.getElementById("admin-nav-button-2").click) {
+        document.getElementById("admin-workspace-panel").style.display = "none";
+        document.getElementById("todo-admin-panel").style.display = "block";
     }
 }

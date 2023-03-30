@@ -345,6 +345,24 @@ body {
     align-items: center;
     padding-top: 10%;
 }
+#sidepanel-admin {
+    position: absolute;
+    top: 10;
+    float: left;
+    height: 98%;
+    width: 20vw;
+    background-color: white;
+    z-index: 1;
+    display: none;
+}
+
+.panel-user-admin {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10%;
+}
 
 .panel-user>img {
     filter: drop-shadow(-5px 5px 2px);
@@ -485,8 +503,10 @@ body {
     width: 100%;
     margin-left: 15px;
     top: 120;
+    z-index: -1;
     position: absolute;
     display: block;
+    opacity: 1;
 }
 #todo-admin-panel{
     outline: 2px solid white;
@@ -505,11 +525,6 @@ body {
     opacity: 0.9;
     overflow-y: scroll;
 }
-#admin-workspace-panel{
-    opacity: 0.1;
-    overflow: scroll;
-    display: flex;
-}
 #quill-black{
     height: 15%;
     width: auto;
@@ -517,9 +532,6 @@ body {
     z-index: 1;
     top: 20%;
     left: 25%;
-}
-#admin-workspace-panel{
-    opacity: 1;
 }
 #button-info-container,#unlock-images{
     display: none;

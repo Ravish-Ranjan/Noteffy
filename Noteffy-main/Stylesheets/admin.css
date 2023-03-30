@@ -35,9 +35,6 @@
     flex-wrap: wrap;
     overflow-y: scroll;
 }
-.admin-workspace-panel{
-    flex-flow:row wrap;
-}
 .admin-workspace-panel img{
     height: 11.5vh;
     aspect-ratio: 1/1;
