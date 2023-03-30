@@ -84,6 +84,7 @@ async function task_compose(date, tm, title, tk, task_no,flag = 0,ele = null) { 
     let noteform = document.createElement("form");
     noteform.setAttribute("class", "FORM");noteform.setAttribute("enctype","multipart/form-data");
     noteform.setAttribute("action",action);noteform.setAttribute("method","POST");
+    if(flag==1){noteform.setAttribute("ad","true");}
     noteform.setAttribute("onsubmit","return checkEmpty(this)");
     noteform.innerHTML = `<span id='Form_Caption'>New Task</span>\
     <button id = 'close' style=\"font-size:2vw;\" onclick = \"closeF()\">x</button>\
