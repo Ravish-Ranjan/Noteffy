@@ -37,7 +37,7 @@ function note_compose(date, title, note, note_no) {  //this function helps to cr
     document.querySelector("#btn1").toggleAttribute("onclick", "");
     document.getElementById("Date").value = today;
 }
-function task_compose(date, tm, title, tk, task_no) {  //this function helps to create more tasks for user
+async function task_compose(date, tm, title, tk, task_no,flag = 0,ele = null) {  //this function helps to create more tasks for user
     if (document.getElementsByClassName("FORM").length != 0) {
         document.getElementsByClassName("FORM")[0].remove();
         return;
@@ -46,7 +46,8 @@ function task_compose(date, tm, title, tk, task_no) {  //this function helps to 
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); 
     var yyyy = today.getFullYear();
-    let action = "main.php";
+    let classname = ele.parentElement.querySelector("h2").innerHTML;
+    let action = "main.php"+((flag==1)?encodeURI(`?admin=true&class=${classname}`):"");
 
     if (task_no.length != 0)
         action += "?task_no=" + task_no;
@@ -57,21 +58,38 @@ function task_compose(date, tm, title, tk, task_no) {  //this function helps to 
     else
         today = date;
     
-    
+    var params = {
+        'op':'getmembers',
+        'class':classname
+    }
+    var options = {
+        method:"GET",
+        mode:"cors"
+    }
+    let list;
+    if(flag == 1){
+        let resp = await fetch("../php/admin.php?"+ (new URLSearchParams(params).toString()),options);
+        let userjs = await resp.json();
+        list = `<select name="assignedmems[]" id="assmem" multiple>`;
+        for(let u = 0;u < userjs.list.length;u++){
+            list+=`<option name = "res" value = "${Object.keys(userjs.list[u])}">${Object.values(userjs.list[u])}</option>`
+        }
+        list+=`</select>`;
+    }
     var t = new Date();
     if (tm.length == 0)
         time = String(t.getHours()) + ":" + String(t.getMinutes()); //current time
     else
         time = tm;
     let noteform = document.createElement("form");
-    noteform.setAttribute("class", "FORM");
+    noteform.setAttribute("class", "FORM");noteform.setAttribute("enctype","multipart/form-data");
     noteform.setAttribute("action",action);noteform.setAttribute("method","POST");
     noteform.setAttribute("onsubmit","return checkEmpty(this)");
     noteform.innerHTML = `<span id='Form_Caption'>New Task</span>\
     <button id = 'close' style=\"font-size:2vw;\" onclick = \"closeF()\">x</button>\
     <input type='date' name='T_Date' id='Date'>\
-    <input type='time' name='T_Time' id='Time'>\
-    <input type='text' name='T_Title' id='Title' placeholder='Title' value=${title}>\
+    <input type='time' name='T_Time' id='Time'>`+((flag==1)?list:``)+
+    `<input type='text' name='T_Title' id='Title' placeholder='Title' value=${title}>\
     <label for='Task'>Tasks</label>\
     <textarea style='resize:none; margin:0;' placeholder='Your Tasks' name='Task' id='Task' contenteditable='true' rows=8 cols=7>${tk}</textarea>\
     <center><input type='submit' value='save' id='btn'></center>`

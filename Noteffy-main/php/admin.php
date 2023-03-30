@@ -1,4 +1,42 @@
 <?php
+    require_once("initial.php");require_once("hash.php");
+    if(!isset($_GET["op"]) || ($_GET["op"] != "getmembers")){
+        return;
+    }
+    header("Content-Type: application/json;charset=utf-8");
+    $orgs = file_get_contents("../data/Organizations.json");
+    $orgs = json_decode($orgs,true);
+    $resp = array();
+
+    $user = getUserNumber();$class = $_GET["class"];
+    for($k = 0;$k < count($orgs["Organizations"]);$k++){
+        if($user == $orgs["Organizations"][$k]["Admin"]){
+            for ($j = 0; $j < count($orgs["Organizations"][$k]["classes"]); $j++) {
+                if ($orgs["Organizations"][$k]["classes"][$j]["Cname"]==$class) {
+                   $memlist = $orgs["Organizations"][$k]["classes"][$j]["group"];
+                   $mems = array();
+                   foreach($memlist as $uid){
+                        $mname = seekUserName($uid);
+                        if($mname!=-1)
+                            {array_push($mems,array($uid=>$mname));}
+                        else{
+                            //Splice array here,remove non members
+                        }
+                   }
+                   $resp["Message"] = "success";
+                   $resp["list"] = $mems;$resp = json_encode($resp);
+                   echo $resp;die();
+                }
+            }
+            $resp["Message"] = "success";
+            $resp["list"] = array();$resp = json_encode($resp);
+            echo $resp;die();
+        }
+    }
+    $resp["Message"] = "failure";$resp = json_encode($resp);
+    echo $resp;die();
+?>
+<?php
 
 function allowAdmin(&$jsonData)
 {
@@ -93,6 +131,7 @@ function createClass(&$personal, &$classData)
                     $classData["Organizations"][$u]["classes"][$classes]['CLimit'] = $classLimit;
                     $classData["Organizations"][$u]["classes"][$classes]['Organization_code'] = $classCode;
                     $classData["Organizations"][$u]["classes"][$classes]['group'] = array();
+                    $classData["Organizations"][$u]["classes"][$classes]['To-do'] = array();
                     return;
                 }
             }
@@ -117,6 +156,7 @@ function displayClass(&$classData)
     $orgs = count($classData["Organizations"]);
     if ($user != -1) {
         for ($j = 0; $j < $orgs; $j++) {
+            //Classes created by user
             if ($user == $classData["Organizations"][$j]["Admin"]) {
                 for ($k = 0; $k < count($classData["Organizations"][$user]["classes"]); $k++) {
                     $title = $classData["Organizations"][$user]["classes"][$k]["Cname"];
@@ -125,11 +165,12 @@ function displayClass(&$classData)
                     <div class='backg'>
                         <h2>$title</h2>
                     </div>
-                    <div class='options'><button>opt1</button><button>opt2</button></div>
+                    <div class='options' onclick=\"task_compose('', '', '', '', '',1,this)\"><button>opt1</button><button>opt2</button></div>
                 </div>
                     ";
                 }
             }
+            //Classes in which user is a member
             else if($user != $classData["Organizations"][$j]["Admin"] && isInOrganization($user,$classData)){
                 for ($k = 0; $k < count($classData["Organizations"][$j]["classes"]); $k++) {
                     if (in_array($user, $classData["Organizations"][$j]["classes"][$k]["group"])) {
@@ -148,4 +189,42 @@ function displayClass(&$classData)
         }
     }
     }
+function createAdminTask(&$users,&$orgs){
+    if(!isset($_GET["admin"]) || !isset($_GET["class"]) || $_GET["admin"]!="true"){
+        return;
+    }
+    $user = getUserNumber();
+    $orgcount = count($orgs["Organizations"]);
+    if ($user != -1) {
+        // echo $_POST['T_Title'];
+        if(isset($_POST['T_Title']) && isset($_POST['T_Time']) && isset($_POST['T_Date'])){
+            for ($j = 0; $j < $orgcount; $j++) {
+                if ($user == $orgs["Organizations"][$j]["Admin"]) {
+                    // echo "<script>location.replace('res.php')</script>";
+                    $id = count($orgs["Organizations"][$j]["classes"]);
+                    for ($k = 0; $k < count($orgs["Organizations"][$j]["classes"]); $k++) {
+                        if($orgs["Organizations"][$j]["classes"][$k]["Cname"]==$_GET["class"]){
+
+                            $to_do_count = count($orgs["Organizations"][$j]["classes"][$k]["To-do"]);
+                            $orgs["Organizations"][$j]["classes"][$k]["To-do"][$to_do_count]["Title"] = $_POST['T_Title'];
+                            $orgs["Organizations"][$j]["classes"][$k]["To-do"][$to_do_count]["Time"] = $_POST['T_Time'];
+                            $orgs["Organizations"][$j]["classes"][$k]["To-do"][$to_do_count]["Date"] = $_POST['T_Date'];
+                            $orgs["Organizations"][$j]["classes"][$k]["To-do"][$to_do_count]["Priority"] = 1;
+                            $orgs["Organizations"][$j]["classes"][$k]["To-do"][$to_do_count]["Tasks"]=explode("\n",$_POST['Task']);
+
+                            $ids = array();
+                            foreach($_POST['assignedmems'] as $memes){
+                                array_push($ids,(int) $memes);
+
+                            }
+                            $orgs["Organizations"][$j]["classes"][$k]["To-do"][$to_do_count]["assignees"] = $ids;
+                            echo "<script>location.replace('main.php')</script>";
+                        }
+                    }
+                }
+            }
+                
+        }
+    }
+}
 ?>

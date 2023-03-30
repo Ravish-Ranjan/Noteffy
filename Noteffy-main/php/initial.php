@@ -1,4 +1,15 @@
 <?php
+    function seekUserName($uval)
+    { // this function fetches the user from the data
+        $users = file_get_contents("../data/Details.json");
+        $users = json_decode($users,true);
+        for($t = 0;$t < count($users["Users"]);$t++){
+            if($users["Users"][$t]["identifier"]==$uval){
+                return $users["Users"][$t]["User_Name"];
+            }
+        }
+        return -1;
+    }
     function getUser()
     { // this function fetches the user from the data
         if (isset($_COOKIE["user"])) {

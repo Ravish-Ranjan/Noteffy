@@ -44,6 +44,9 @@
         }
     }
     function task_compose(&$jsonData){ // this function is to let user create more tasks 
+        if(isset($_GET['admin'])){
+            return;
+        }
         $user = getUserNumber();
         if(isset($_POST['T_Title']) && isset($_POST['T_Time']) && isset($_POST['T_Date'])){
             if(isset($_GET['task_no']))
