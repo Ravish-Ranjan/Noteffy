@@ -45,7 +45,7 @@ body{
     display: flex;
     flex-wrap: wrap;
     gap: 100px;
-    margin-left: 5%;
+    margin-left: 10%;
     padding-top: 2.7%;
 }
 .tbs{
