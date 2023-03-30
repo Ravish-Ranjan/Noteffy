@@ -453,6 +453,9 @@ body {
     flex-direction: column;
     text-align: center;
 }
+.admin-panel{
+    z-index: 2;
+}
 #unlock-button{
     font-family: codec-extrabold;
     width: 130px;

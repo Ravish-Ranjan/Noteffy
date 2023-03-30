@@ -1,0 +1,81 @@
+@font-face{
+    font-family: codec-extrabold;
+    src: url('../media/Codec-Cold-Heavy-trial.ttf');
+}
+@font-face{
+    font-family: codec;
+    src: url('../media/Codec-Cold-Regular-trial.ttf');
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-image: url('../media/statsBG.png');
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+}
+#control-header{
+    width: 100%;
+    height: 15%;
+    background-color: #121212;
+}
+.control-header-links{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 100px;
+    margin-left: 10%;
+    padding-top: 2.7%;
+}
+.tbs{
+    color: #ffffff;
+    font-family: codec-extrabold;
+    font-size: 25; 
+    transition: 0.3s;     
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+.tbs:hover{
+    color: #a3a3a3;
+    transition: 0.3s;
+}
+#admin-details-card{
+    background-color:#ffe100;
+    filter: drop-shadow(0px 0px 5px rgba(0,0,0,.5));
+    border: 3px solid black;
+    border-radius: 80px;
+    float: right;
+    margin-right: 3%;
+    margin-top: -3%;
+    width: 30%;
+    height: 630%;
+}
+#admin-avatar{
+    width: auto;
+    height: 23%;
+    padding-top: 10%;
+}
+#admin-name{
+    font-family: codec-extrabold;
+    color: #141414;
+    font-size: 30;
+    padding-top: 5%;
+}
+#back-bbt:link, #back-bbt:visited {
+    background-color: #ffe100;
+    color: #141414;
+    padding: 4px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16;
+    border-radius: 10px;
+    transition: 0.3s;
+    font-family: codec-extrabold;
+}
+#back-bbt:hover{
+    background-color: #141414;
+    transition: 0.3s;
+    color: white;
+}
