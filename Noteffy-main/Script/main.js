@@ -210,6 +210,38 @@ function revealToDoPanel() {
         document.getElementById("todo-admin-panel").style.display = "block";
     }
 }
+function collapsetasks(ele){
+    let todo = ele.parentElement;
+    let tasks = ele.getAttribute("data-array");
+    tasks = tasks.split(',');
+    tasks = tasks.reverse();
+    tasks.forEach((task)=>{
+        let domtask = document.createElement("label");
+        domtask.style.backgroundColor = ele.style.backgroundColor;
+        domtask.style.opacity = '0.6';
+        domtask.setAttribute('for','123');
+        domtask.innerHTML = `${task}`;
+        if(ele.nextSibling!=null){
+            todo.insertBefore(domtask,ele.nextSibling);
+        }
+        else{
+            todo.appendChild(domtask);
+        }
+    });
+    ele.setAttribute("onclick","uncollapsetasks(this)");
+}
+function uncollapsetasks(ele){
+    let todo = ele.parentElement;
+    let task = ele.nextSibling;
+    ele.setAttribute("onclick","collapsetasks(this)");
+    while(task.getAttribute("for")=="123"){
+        let curr = task;
+        task = task.nextSibling;
+        curr.remove();
+        if(task==null)
+            break;
+    }
+}
 async function displayAdminTodo(ele){
     let adminlist = document.querySelector('#todo-admin-panel');
     let options = {
@@ -229,9 +261,12 @@ async function displayAdminTodo(ele){
             
             //Classroom name
             let classgroup = document.createElement('div');
-            classgroup.classList = ['classg']; classgroup.style.opacity = 0.8;
-            ele['Tasks'].forEach((task)=>{    
+            classgroup.classList = ['classg'];classgroup.style.opacity = 0.8;
+            ele['Tasks'].forEach((task)=>{
                 let tasknode = document.createElement('label');
+                let tasks = task.Tasks;
+                tasknode.setAttribute("data-array",`${tasks})`);
+                tasknode.setAttribute("onclick","collapsetasks(this)")
                 tasknode.style.backgroundColor = color;
                 tasknode.innerHTML = `${task.Title} Due: ${task.Time} on ${task.Date}`;
                 classgroup.appendChild(tasknode);
