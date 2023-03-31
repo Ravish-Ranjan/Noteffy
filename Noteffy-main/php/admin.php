@@ -41,6 +41,7 @@
 ?>
 <?php
     function fetchtodo(&$orgs){
+        date_default_timezone_set("Asia/Kolkata");
         // require_once("initial.php");require_once("hash.php");
         if(!isset($_COOKIE['user_number'])){
             echo '<script>window.replace("index.php")</script>';return;
@@ -60,10 +61,17 @@
                 $classitem["Tasks"] = array();
                 if (in_array($user,$orgs["Organizations"][$k]["classes"][$l]["group"])) {
                        $todolist = $orgs["Organizations"][$k]["classes"][$l]["To-do"];
-                       foreach($todolist as $todo){
-                        if(in_array($user,$todo["assignees"])){
-                            $cleantasks = $todo;unset($cleantasks["assignees"]);
+                       for($iter=0;$iter<count($todolist);$iter++){
+                        $dayDifference = strtotime($todolist[$iter]['Date']) - strtotime(date("Y-m-d"));
+                        $timeDifference = strtotime($todolist[$iter]['Time']) - strtotime(date("H:i"));
+                        $diff = $dayDifference + $timeDifference;
+                        if(in_array($user,$todolist[$iter]["assignees"]) && $diff>=0){
+                            $cleantasks = $todolist[$iter];unset($cleantasks["assignees"]);
                             array_push($classitem["Tasks"],$cleantasks);
+                        }
+                        else if($diff<0){
+                            array_push($orgs["Organizations"][$k]["classes"][$l]["Recycle"], $todolist[$iter]);
+                            array_splice($orgs["Organizations"][$k]["classes"][$l]["To-do"], $iter,1);
                         }
                        }
                     }
@@ -175,6 +183,7 @@ function createClass(&$personal, &$classData)
                     $classData["Organizations"][$u]["classes"][$classes]['Organization_code'] = $classCode;
                     $classData["Organizations"][$u]["classes"][$classes]['group'] = array();
                     $classData["Organizations"][$u]["classes"][$classes]['To-do'] = array();
+                    $classData["Organizations"][$u]["classes"][$classes]['Recycle'] = array();
                     return;
                 }
             }

@@ -229,8 +229,8 @@ async function displayAdminTodo(ele){
             
             //Classroom name
             let classgroup = document.createElement('div');
-            classgroup.classList = ['classg'];classgroup.style.opacity = 0.8;
-            ele['Tasks'].forEach((task)=>{
+            classgroup.classList = ['classg']; classgroup.style.opacity = 0.8;
+            ele['Tasks'].forEach((task)=>{    
                 let tasknode = document.createElement('label');
                 tasknode.style.backgroundColor = color;
                 tasknode.innerHTML = `${task.Title} Due: ${task.Time} on ${task.Date}`;
