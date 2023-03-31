@@ -133,7 +133,7 @@ function revealAdmin(){
 }
 function revealWorkspacePanel(){
 if(document.getElementById("admin-nav-button-1").click){
-    document.getElementById("admin-workspace-panel").style.display = "block";
+    document.getElementById("admin-workspace-panel").style.display = "flex";
     document.getElementById("todo-admin-panel").style.display = "none";
 }
 }
@@ -141,7 +141,7 @@ if(document.getElementById("admin-nav-button-1").click){
 function revealToDoPanel(){
 if(document.getElementById("admin-nav-button-2").click){
     document.getElementById("admin-workspace-panel").style.display = "none";
-    document.getElementById("todo-admin-panel").style.display = "block";
+    document.getElementById("todo-admin-panel").style.display = "flex";
 }
 }
 function switchAdmin(){

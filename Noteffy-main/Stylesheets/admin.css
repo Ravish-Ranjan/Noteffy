@@ -140,7 +140,7 @@
     display: none;
 }
 #todo-admin-panel{
-    display:flex;flex-basis:10%;
+    display:none;flex-basis:10%;
     flex-flow:column;
     align-items:center;
 }
