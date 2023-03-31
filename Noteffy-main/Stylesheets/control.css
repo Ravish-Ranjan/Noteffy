@@ -52,18 +52,34 @@ body{
     height: 500%;
     border-radius: 40px;
 }
+#insight-wrapper{
+    display: inline-block;
+}
+#insight-panel{
+    margin-top: 60;
+    margin-left: 40;
+    border: 2px solid black;
+    width: 45%;
+    height: 500%;
+    border-radius: 40px;
+}
+#chart-panel{
+    border: 2px solid black;
+    width: 25%;
+    height: 500%;
+}
 #explore-user-card{
     background-color: white;
     border: 2px solid black;
-    width: 15%;
-    height: 25%;
+    width: 140;
+    height: 120;
     border-radius: 50px;
     margin-top: 20;
     margin-left: 20;
 }
 #user-card-avatar{
     height: auto;
-    width: 45%;
+    width: 55;
     display: block;
     margin-left: auto;
     margin-right: auto;
