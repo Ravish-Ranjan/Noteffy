@@ -54,10 +54,10 @@ file_put_contents("../data/Details.json", $details);
             <?php
                 $orgs = file_get_contents("../data/Organizations.json");
                 $orgs = json_decode($orgs, true);
-
+                
                 $flag = createClass($details, $orgs);
                 createAdminTask($details,$orgs);
-
+                
                 $orgs1 = json_encode($orgs);
                 file_put_contents("../data/Organizations.json", $orgs1);
                 if($flag){
@@ -66,7 +66,7 @@ file_put_contents("../data/Details.json", $details);
                 else if(!$flag && isset($_POST['ClassCode'])){
                     echo "<script>message('invalid class code','error')</script>";
                 }
-            ?>
+                ?>
             <div id="admin-control-panel">
                 <div id="button-info-container">
                     <button id="unlock-button" onclick="switchAdmin()">Unlock</button>
@@ -86,13 +86,13 @@ file_put_contents("../data/Details.json", $details);
                                     <label style='text-decoration:none;color:black;'>Hi, " . getUser() . " !</label>
                                 </div>
                                 <ul>
-                                    <li><a href='../HTML/control.html' style='text-decoration:none;'>Control</a><br></li>
-                                    <li><a href='index.php' style='text-decoration: none;'>Home</a></li>
-                                    <li><a style='text-decoration: none;cursor:pointer;' onclick='hideAdminMenu()'>Back</a></li>
+                                <li><a href='../HTML/control.html' style='text-decoration:none;'>Control</a><br></li>
+                                <li><a href='index.php' style='text-decoration: none;'>Home</a></li>
+                                <li><a style='text-decoration: none;cursor:pointer;' onclick='hideAdminMenu()'>Back</a></li>
                                 </ul>
-                            </div>";
-                    }
-                    ?>
+                                </div>";
+                            }
+                            ?>
                     <button id="admin-nav-button-1" onclick="revealWorkspacePanel()">Workspaces</button>
                     <button id="admin-nav-button-2" onclick="revealToDoPanel()">To-Do's</button>
                 </div>
@@ -108,7 +108,7 @@ file_put_contents("../data/Details.json", $details);
                         displayClass($orgs);
                         $orgs1 = json_encode($orgs);
                         file_put_contents("../data/Organizations.json", $orgs1);
-                     ?>
+                        ?>
                     <!-- this div will show workpaces the user made & joined other -->
                 </div>
                 <div class="compose" id="admin-compose-bbt" onclick="class_compose('','','','')">+</div>
@@ -131,28 +131,28 @@ file_put_contents("../data/Details.json", $details);
                         // echo "<script>window.location.href = 'index.php'</script>";
                     } else {
                         echo "<div  id='sidepanel' >
-                            <div class='panel-user' >
-                                <img src='../media/logoredq.png' height=80 width=80 alt='logo' style='margin-left: 20;filter:drop-shadow(2px 2px 5px black);'>
-                                <label style='text-decoration:none;color:black;'>Hi, " . getUser() . " !</label>
-                            </div>
-                            <ul>
-                                <li><a href='../HTML/chart.html' style='text-decoration:none;'>Dashboard</a><br></li>
-                                <li><a href='index.php' style='text-decoration: none;'>Home</a></li>
-                                <li><a style='text-decoration: none;cursor:pointer;' onclick='hidemenu()'>Back</a></li>
-                                <li><a  id='logout' onclick='clearCookies()' style='text-decoration: none;cursor:pointer'>Log Out</a></li>
-                            </ul>
-                            </div>";
+                        <div class='panel-user' >
+                        <img src='../media/logoredq.png' height=80 width=80 alt='logo' style='margin-left: 20;filter:drop-shadow(2px 2px 5px black);'>
+                        <label style='text-decoration:none;color:black;'>Hi, " . getUser() . " !</label>
+                        </div>
+                        <ul>
+                        <li><a href='../HTML/chart.html' style='text-decoration:none;'>Dashboard</a><br></li>
+                        <li><a href='index.php' style='text-decoration: none;'>Home</a></li>
+                        <li><a style='text-decoration: none;cursor:pointer;' onclick='hidemenu()'>Back</a></li>
+                        <li><a  id='logout' onclick='clearCookies()' style='text-decoration: none;cursor:pointer'>Log Out</a></li>
+                        </ul>
+                        </div>";
                     }
                     ?>
                 </div>
             </div>
             <div class="tab">
                 <button class="tbs" onclick="openTab(event, '0')"><img src="../media/notesWidget.png"
-                        id="noteWidgetImage"></button>
+                id="noteWidgetImage"></button>
                 <button class="tbs" onclick="openTab(event, '1')"><img src="../media/taskWidget.png"
-                        id="taskWidgetImage"></button>
+                id="taskWidgetImage"></button>
                 <button class="tbs" onclick="openTab(event, '2')"><img src="../media/todoWidget.png"
-                        id="bbtWidgetImage"></button>
+                id="bbtWidgetImage"></button>
             </div>
             <div class="main" id="0">
                 <div class="scat" id="divi1">
@@ -179,8 +179,8 @@ file_put_contents("../data/Details.json", $details);
             <?php updateNote($alternate) ?>
             <div class="main" id="1">
                 <div class="scat" style="background-image:url('../media/background_1.png');background-size:110%;"
-                    id="divi2">
-                    <?php
+                id="divi2">
+                <?php
                     $alternate = json_encode($alternate);
                     file_put_contents("../data/Data.json", $alternate);
                     $alternate = file_get_contents("../data/Data.json");

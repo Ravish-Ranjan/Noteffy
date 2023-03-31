@@ -244,3 +244,41 @@ async function displayAdminTodo(ele){
         <h1>No tasks currently</h1>`;
     }
 }
+let searchBar = document.getElementById("search");
+let divi1 = document.getElementById("divi1");
+let originalMarkup = divi1.innerHTML;
+searchBar.addEventListener("input", async (ele) => {
+    let markup = '';
+    let loc = window.location.href.split("/main.php");
+    let response = await fetch(loc[0] + "/search.php?" + (new URLSearchParams({ term: ele.target.value })), { method: "GET", mode: "cors" });
+    response = await response.json();
+    response['data'].forEach((ele) => {
+        markup += `<div class="divi" style="background-image:url(../media/newNote1.png);" title='${ele["Title"]}'>
+                                 <div class="topic">
+                                                <img id="pin" src='../media/pin1.png' alt="pin">
+                                             </div>
+                                             <div class="data">
+                                                 <div class="screen">
+                                                     <p id='content${response['index_j']}'>${ele["Content"]}</p>
+                                                 </div>
+                                                 <div class="control">
+                                                     <button onclick="">
+                                                     <a href="../php/main.php?note_no=${response['index_j']}">
+                                                         <img title='edit the note' src="../media/edit.png" alt="">
+                                                    </a>
+                                                     </button>
+                                                     <button onclick="" id='clip'>
+                                                         <img title='copy the note to clipboard' src="../media/share.png" alt="">
+                                                     </button>
+                                                     <button onclick="">
+                                                         <a href='../php/main.php?N_no=${response['index_j']}' style='text-decoration:none;'>
+                                                             <img title='delete the note' src="../media/delete.png" alt="">
+                                                         </a>
+                                                     </button>
+                                                 </div>
+                                             </div>
+                                         </div>`
+    })
+    divi1.innerHTML = markup;
+
+})
