@@ -221,7 +221,6 @@ async function displayAdminTodo(ele){
         'todo':true
     };
     var loc = window.location.href.split('/php')[0];
-    console.log(loc+"/php/admin.php?"+(new URLSearchParams(queries)));
     let resplist = await fetch(loc+"/php/admin.php?"+(new URLSearchParams(queries)),options);
     let jsonlist = await resplist.json();
     if(jsonlist['To-do']!=null){
@@ -253,32 +252,34 @@ searchBar.addEventListener("input", async (ele) => {
     let response = await fetch(loc[0] + "/search.php?" + (new URLSearchParams({ term: ele.target.value })), { method: "GET", mode: "cors" });
     response = await response.json();
     response['data'].forEach((ele) => {
-        markup += `<div class="divi" style="background-image:url(../media/newNote1.png);" title='${ele["Title"]}'>
-                                 <div class="topic">
-                                                <img id="pin" src='../media/pin1.png' alt="pin">
-                                             </div>
-                                             <div class="data">
-                                                 <div class="screen">
-                                                     <p id='content${response['index_j']}'>${ele["Content"]}</p>
-                                                 </div>
-                                                 <div class="control">
-                                                     <button onclick="">
-                                                     <a href="../php/main.php?note_no=${response['index_j']}">
-                                                         <img title='edit the note' src="../media/edit.png" alt="">
-                                                    </a>
-                                                     </button>
-                                                     <button onclick="" id='clip'>
-                                                         <img title='copy the note to clipboard' src="../media/share.png" alt="">
-                                                     </button>
-                                                     <button onclick="">
-                                                         <a href='../php/main.php?N_no=${response['index_j']}' style='text-decoration:none;'>
-                                                             <img title='delete the note' src="../media/delete.png" alt="">
-                                                         </a>
-                                                     </button>
-                                                 </div>
-                                             </div>
-                                         </div>`
+        let random = Math.floor(Math.random() * 3) + 1;
+        markup += `<div class="divi" style="background-image:url(../media/newNote${random}.png);" title='${ele["Title"]}'>
+            <div class="topic">
+                <img id="pin" src='../media/pin${random}.png' alt="pin">
+                </div>
+                <div class="data">
+                    <div class="screen">
+                        <p id='content${response['index_j']}'>${ele["Content"]}</p>
+                    </div>
+                    <div class="control">
+                        <button onclick="">
+                        <a href="../php/main.php?note_no=${response['index_j']}">
+                            <img title='edit the note' src="../media/edit.png" alt="">
+                    </a>
+                        </button>
+                        <button onclick="" id='clip'>
+                            <img title='copy the note to clipboard' src="../media/share.png" alt="" onclick="getContent(${response['index_j']})">
+                        </button>
+                        <button onclick="">
+                            <a href='../php/main.php?N_no=${response['index_j']}' style='text-decoration:none;'>
+                                <img title='delete the note' src="../media/delete.png" alt="">
+                            </a>
+                        </button>
+                    </div>
+                </div>
+            </div>`
     })
     divi1.innerHTML = markup;
 
 })
+displayAdminTodo(document.getElementById("todo-admin-panel"));

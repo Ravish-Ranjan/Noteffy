@@ -182,7 +182,7 @@ function createClass(&$personal, &$classData)
             $code = $_POST['JClassCode'];
             for ($u = 0; $u < $orgs; $u++) {
                     for ($c = 0; $c < count($classData["Organizations"][$u]["classes"]); $c++) {
-                        if ($classData["Organizations"][$u]["classes"][$c]["Organization_code"] == $code) {
+                        if ($classData["Organizations"][$u]["classes"][$c]["Organization_code"] == $code && $user!=$classData["Organizations"][$u]["Admin"]) {
                             array_push($classData["Organizations"][$u]["classes"][$c]["group"], $user);
                             return true;
                         }

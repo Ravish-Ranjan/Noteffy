@@ -21,10 +21,10 @@ file_put_contents("../data/Details.json", $details);
 
 ?>
 <html>
-
-<head>
+    
+    <head>
     <title>Main Page</title>
-
+    
     <!-- stylesheets -->
     <link rel="stylesheet" href="../Stylesheets/message.css">
     <link rel="stylesheet" href="../Stylesheets/main.css">
@@ -32,15 +32,15 @@ file_put_contents("../data/Details.json", $details);
     <link rel="stylesheet" href="../Stylesheets/compose.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css"> -->
-
+    
     <!-- favicon -->
     <link rel="shortcut icon" href="../media/logo5mix.png" type="image/x-icon">
-
+    
     <!-- scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="../Script/compose.js"></script>
-    <script src="../Script/main.js"></script>
     <script src="../Script/message.js"></script>
+    <script defer src="../Script/main.js"></script>
 </head>
 
 <body onload="pos()">
@@ -80,25 +80,24 @@ file_put_contents("../data/Details.json", $details);
                         // echo "<script>window.location.href = 'index.php'</script>";
                     } else {
                         echo 
-                            "<div  id='sidepanel-admin' >
-                                <div class='panel-user-admin' >
-                                    <img src='../media/logoredq.png' height=80 width=80 alt='logo' style='margin-left: 20;filter:drop-shadow(2px 2px 5px black);'>
-                                    <label style='text-decoration:none;color:black;'>Hi, " . getUser() . " !</label>
-                                </div>
-                                <ul>
-                                <li><a href='../HTML/control.html' style='text-decoration:none;'>Control</a><br></li>
-                                <li><a href='index.php' style='text-decoration: none;'>Home</a></li>
-                                <li><a style='text-decoration: none;cursor:pointer;' onclick='hideAdminMenu()'>Back</a></li>
-                                </ul>
-                                </div>";
-                            }
-                            ?>
+                        "<div  id='sidepanel-admin' >
+                        <div class='panel-user-admin' >
+                        <img src='../media/logoredq.png' height=80 width=80 alt='logo' style='margin-left: 20;filter:drop-shadow(2px 2px 5px black);'>
+                        <label style='text-decoration:none;color:black;'>Hi, " . getUser() . " !</label>
+                        </div>
+                        <ul>
+                        <li><a href='../HTML/control.html' style='text-decoration:none;'>Control</a><br></li>
+                        <li><a href='index.php' style='text-decoration: none;'>Home</a></li>
+                        <li><a style='text-decoration: none;cursor:pointer;' onclick='hideAdminMenu()'>Back</a></li>
+                        </ul>
+                        </div>";
+                    }
+                    ?>
                     <button id="admin-nav-button-1" onclick="revealWorkspacePanel()">Workspaces</button>
                     <button id="admin-nav-button-2" onclick="revealToDoPanel()">To-Do's</button>
                 </div>
                 <div id="todo-admin-panel">
                     <h1>To-Do'sss</h1>
-                    <script>displayAdminTodo(this)</script>
                     <!-- this div will show the to-do's assigned & needs to complete in other workspaces-->
                 </div>
                 <div id="admin-workspace-panel">
@@ -119,7 +118,7 @@ file_put_contents("../data/Details.json", $details);
             <div class="top" id="dashboard">
                 <label id="logo">Your Workstation</label>
                 <div class="search-box">
-                    <input type="text" class="searchTerm" placeholder="What you lookin' for?">
+                    <input type="text" class="searchTerm" id="search" placeholder="What you lookin' for?">
                     <button type="submit" class="searchButton" action="#">
                         <i class="fa fa-search" id="fa-fa-search"></i>
                     </button>
@@ -207,10 +206,10 @@ file_put_contents("../data/Details.json", $details);
             file_put_contents("../data/Data.json", $alternate);
             ?>
 
-            <div class="main" id="2">
-                <div class="scat" style="background-image:url('../media/background_4.png');background-size:110%;"
-                    id='divi3'>
-                    <?php
+<div class="main" id="2">
+    <div class="scat" style="background-image:url('../media/background_4.png');background-size:110%;"
+    id='divi3'>
+    <?php
                     $alternate = file_get_contents("../data/Data.json");
                     $alternate = json_decode($alternate, true);
                     $u = getUserNumber();
