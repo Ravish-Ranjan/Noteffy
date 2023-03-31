@@ -73,7 +73,6 @@
             $timeDiffernce = strtotime($item['Time']) - strtotime(date("H:i"));
             $dayDifference = strtotime($item['Date']) - strtotime(date("Y-m-d"));
             $temp = $timeDiffernce + $dayDifference;
-        
         if ($temp >= 0) {
             $j = $i + 1;
             $noteimg = "../media/newNote" . priority_calc($item) . ".png";
@@ -114,7 +113,7 @@
         }
         else{
             array_push($jsonData["User_Data"][$user]["recycle"], $jsonData["User_Data"][$user]["To-do"][$i]);
-            unset($jsonData["User_Data"][$user]["To-do"][$i]);
+            array_splice($jsonData["User_Data"][$user]["To-do"], $i, 1);
         }
         }
     }

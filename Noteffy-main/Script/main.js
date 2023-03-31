@@ -93,7 +93,7 @@ function openTab(evt, tabname) { // this function is used to move arround the ta
             document.getElementById("comp"+String(i+1)).style.display="none" ;
         }
     }
-    chan(parseInt(tabname)+1);
+    chan(parseInt(tabname) + 1);
 }
 function showmenu(){
     document.getElementById("sidepanel").style.display = "block";
@@ -247,13 +247,14 @@ let searchBar = document.getElementById("search");
 let divi1 = document.getElementById("divi1");
 let originalMarkup = divi1.innerHTML;
 searchBar.addEventListener("input", async (ele) => {
-    let markup = '';
-    let loc = window.location.href.split("/main.php");
-    let response = await fetch(loc[0] + "/search.php?" + (new URLSearchParams({ term: ele.target.value })), { method: "GET", mode: "cors" });
-    response = await response.json();
-    response['data'].forEach((ele) => {
-        let random = Math.floor(Math.random() * 3) + 1;
-        markup += `<div class="divi" style="background-image:url(../media/newNote${random}.png);" title='${ele["Title"]}'>
+    if (document.getElementById("0").style.display == "block") {
+        let markup = '';
+        let loc = window.location.href.split("/main.php");
+        let response = await fetch(loc[0] + "/search.php?" + (new URLSearchParams({ term: ele.target.value })), { method: "GET", mode: "cors" });
+        response = await response.json();
+        response['data'].forEach((ele) => {
+            let random = Math.floor(Math.random() * 3) + 1;
+            markup += `<div class="divi" style="background-image:url(../media/newNote${random}.png);" title='${ele["Title"]}'>
             <div class="topic">
                 <img id="pin" src='../media/pin${random}.png' alt="pin">
                 </div>
@@ -278,8 +279,15 @@ searchBar.addEventListener("input", async (ele) => {
                     </div>
                 </div>
             </div>`
-    })
-    divi1.innerHTML = markup;
-
+        })
+        divi1.innerHTML = markup;
+    }
+    else if(document.getElementById("1").style.display=="block"){
+        let markup = '';
+        let loc = window.location.href.split("/main.php");
+        let response = await fetch(loc[0] + "/search.php?" + (new URLSearchParams({ task_term: ele.target.value })), { method: "GET", mode: "cors" });
+        response = await response.json();
+        console.log(response['data'])
+    }
 })
 displayAdminTodo(document.getElementById("todo-admin-panel"));

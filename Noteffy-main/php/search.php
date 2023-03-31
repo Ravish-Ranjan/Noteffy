@@ -4,10 +4,10 @@ include "initial.php";
 
 header("Content-Type:application/json;character=Utf-8");
 $resp = array();
+$data = file_get_contents("../data/Data.json");
+$data = json_decode($data, true);
 $resp['data'] = array();
 if (isset($_GET['term'])) {
-    $data = file_get_contents("../data/Data.json");
-    $data = json_decode($data, true);
     $user = getUserNumber();
     $pattern = $_GET['term'];
     for ($i = 0; $i < count($data["User_Data"]); $i++) {
@@ -22,3 +22,21 @@ if (isset($_GET['term'])) {
     }
     echo json_encode($resp);
 }
+else if(isset($_GET['task_term'])){
+    $user = getUserNumber();
+    $pattern = $_GET['task_term'];
+    for ($i = 0; $i < count($data["User_Data"]); $i++) {
+        if ($data["User_Data"][$i]["identifier"] == $user) {
+            for ($j = 0; $j < count($data["User_Data"][$i]["To-do"]); $j++) {
+                if (preg_match("/$pattern/i", json_encode($data["User_Data"][$i]["To-do"][$j]["Tasks"]))) {
+                    array_push($resp['data'], $data["User_Data"][$i]["To-do"][$j]);
+                    $resp['index_j'] = $j;
+                }
+            }
+        }
+    }
+    echo json_encode($resp);
+}
+
+
+?>
