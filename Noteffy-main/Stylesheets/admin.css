@@ -140,9 +140,11 @@
     display: none;
 }
 #todo-admin-panel{
-    display:none;flex-basis:10%;
+    display:none;
+    flex-basis:10%;
     flex-flow:column;
     align-items:center;
+    z-index: 2;
 }
 #todo-admin-panel .classg{
     padding-left:10%;

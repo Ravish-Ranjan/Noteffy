@@ -8,9 +8,9 @@
     <body>
         <div id="control-header">
             <div class="control-header-links">
-                <button class="tbs" onclick="openTab(event, '0')">Explore</button>
-                <button class="tbs" onclick="openTab(event, '1')">OPT2</button>
-                <button class="tbs" onclick="openTab(event, '2')">OPT3</button>
+                <button class="tbs" onclick="openTab(event, '0')">Insights</button>
+                <button class="tbs" onclick="openTab(event, '1')">Timetable</button>
+                <button class="tbs" onclick="openTab(event, '2')">Explore</button>
             </div>
             <div id="admin-details-card">
                 <center>
@@ -21,13 +21,26 @@
                 </center>
             </div>
             <div class="main" id="0" style="display: none;">
-                <p>explore</p>
+                
             </div>
             <div class="main" id="1" style="display: none;">
-                <p>OPT2</p>
+                
             </div>
             <div class="main" id="2">
-                <p>OPT3</p>    
+                <div id="explore-panel">
+                    <select name="workspace-choice" id="workspace-select">
+                        <option value="Select">Select Workspace</option>
+                        <option value="volvo">Workspace 1</option>
+                        <option value="saab">Workspace 2</option>
+                        <option value="mercedes">Workspace 3</option>
+                        <option value="audi">Workspace 4</option>
+                    </select>
+                    <!-- this is user card-->
+                    <div id="explore-user-card">
+                        <img src="../media/logoorangep.png" id="user-card-avatar">
+                        <p id="user-name-card">!NAME</p>
+                    </div>
+                </div>   
             </div>
         </div>
     </body>
