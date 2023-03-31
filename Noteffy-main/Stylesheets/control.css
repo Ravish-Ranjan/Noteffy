@@ -114,3 +114,8 @@ body{
     text-align: center;
     margin-top: 10;
 }
+#workspace-select{
+    font-family: codec;
+    border: none;
+    font-size: 20;
+}
