@@ -48,7 +48,7 @@ async function task_compose(date, tm, title, tk, task_no,flag = 0,ele = null) { 
     var yyyy = today.getFullYear();
     let classname;
     if(flag==1){
-        classname = ele.parentElement.querySelector("h2").innerHTML;
+        classname = ele.parentElement.parentElement.querySelector("h2").innerHTML;
     }
     let action = "main.php"+((flag==1)?encodeURI(`?admin=true&class=${classname}`):"");
 
