@@ -139,3 +139,19 @@
 #join-workspace-panel{
     display: none;
 }
+#todo-admin-panel{
+    display:none;flex-basis:10%;
+    flex-flow:column;
+    align-items:center;
+}
+#todo-admin-panel .classg{
+    padding-left:10%;
+}
+#todo-admin-panel label{
+    color:white;border:2px solid white;
+    border-radius: 4px;
+    margin-bottom: 12px;justify-content: center;
+    display: flex;max-width: 80%;
+    align-content: center;
+    padding: 8px;
+}
