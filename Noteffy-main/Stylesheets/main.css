@@ -35,6 +35,7 @@ body {
     flex-direction: column;
     background: url("../media/workspaceBGnew.png");
     background-repeat: no-repeat;
+    background-size: auto auto;
 }
 
 .top {

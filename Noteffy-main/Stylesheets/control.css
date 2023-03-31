@@ -40,45 +40,6 @@ body{
     color: #a3a3a3;
     transition: 0.3s;
 }
-#admin-details-card{
-    background-color:#4fd0ff;
-    filter: drop-shadow(0px 0px 5px rgba(0,0,0,.5));
-    border: 3px solid white;
-    border-radius: 80px;
-    float: right;
-    margin-right: 3%;
-    margin-top: -3%;
-    width: 25%;
-    height: 630%;
-}
-#admin-avatar{
-    width: auto;
-    height: 23%;
-    padding-top: 10%;
-}
-#admin-name{
-    font-family: codec-extrabold;
-    color: #141414;
-    font-size: 30;
-    padding-top: 5%;
-}
-#back-bbt:link, #back-bbt:visited {
-    background-color:#4fd0ff;
-    color: #141414;
-    padding: 4px 15px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16;
-    border-radius: 10px;
-    transition: 0.3s;
-    font-family: codec-extrabold;
-}
-#back-bbt:hover{
-    background-color: #141414;
-    transition: 0.3s;
-    color: white;
-}
 #workspace-select{
     margin-top: 20;
     margin-left: 30;
@@ -91,18 +52,34 @@ body{
     height: 500%;
     border-radius: 40px;
 }
+#insight-wrapper{
+    display: inline-block;
+}
+#insight-panel{
+    margin-top: 60;
+    margin-left: 40;
+    border: 2px solid black;
+    width: 45%;
+    height: 500%;
+    border-radius: 40px;
+}
+#chart-panel{
+    border: 2px solid black;
+    width: 25%;
+    height: 500%;
+}
 #explore-user-card{
     background-color: white;
     border: 2px solid black;
-    width: 15%;
-    height: 25%;
+    width: 140;
+    height: 120;
     border-radius: 50px;
     margin-top: 20;
     margin-left: 20;
 }
 #user-card-avatar{
     height: auto;
-    width: 45%;
+    width: 55;
     display: block;
     margin-left: auto;
     margin-right: auto;

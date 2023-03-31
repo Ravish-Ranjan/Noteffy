@@ -12,16 +12,28 @@
                 <button class="tbs" onclick="openTab(event, '1')">Timetable</button>
                 <button class="tbs" onclick="openTab(event, '2')">Explore</button>
             </div>
-            <div id="admin-details-card">
-                <center>
-                    <img src="../media/logoredq.png" id="admin-avatar"><!--admin avatar-->
-                    <p id="admin-name">!NAME</p>
-                    <br>
-                    <a href="../php/main.php" id="back-bbt">Back</a>
-                </center>
-            </div>
+
             <div class="main" id="0" style="display: none;">
-                
+                <div id="insight-wrapper">
+                    <div id="insight-panel">
+                        <select name="workspace-choice" id="workspace-select">
+                            <option value="Select">Select Workspace</option>
+                            <option value="volvo">Workspace 1</option>
+                            <option value="saab">Workspace 2</option>
+                            <option value="mercedes">Workspace 3</option>
+                            <option value="audi">Workspace 4</option>
+                        </select>
+                        <!-- this is user card-->
+                        <div id="explore-user-card">
+                            <img src="../media/logoorangep.png" id="user-card-avatar">
+                            <p id="user-name-card">!NAME</p>
+                        </div>
+                    </div>
+                    <!--space for dynamic chart rendering-->
+                    <div id="chart-panel">
+
+                    </div>
+                </div>
             </div>
             <div class="main" id="1" style="display: none;">
                 
