@@ -1,6 +1,7 @@
 <?php
 include "hash.php";
 include "initial.php";
+include "priority_Calc.php";
 
 header("Content-Type:application/json;character=Utf-8");
 $resp = array();
@@ -31,6 +32,7 @@ else if(isset($_GET['task_term'])){
                 if (preg_match("/$pattern/i", json_encode($data["User_Data"][$i]["To-do"][$j]["Tasks"]))) {
                     array_push($resp['data'], $data["User_Data"][$i]["To-do"][$j]);
                     $resp['index_j'] = $j;
+                    $resp['priority'] = priority_calc($data["User_Data"][$i]["To-do"][$j]);
                 }
             }
         }

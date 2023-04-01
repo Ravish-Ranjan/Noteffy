@@ -319,10 +319,45 @@ searchBar.addEventListener("input", async (ele) => {
     }
     else if(document.getElementById("1").style.display=="block"){
         let markup = '';
+        let divi2 =  document.getElementById("divi2")
+        originalMarkup =divi2.innerHTML;
         let loc = window.location.href.split("/main.php");
         let response = await fetch(loc[0] + "/search.php?" + (new URLSearchParams({ task_term: ele.target.value })), { method: "GET", mode: "cors" });
         response = await response.json();
-        console.log(response['data'])
+        console.log(response['data']);
+        response['data'].forEach((ele) => {
+            let random = response['priority'];
+            markup+= `<div class="divi" style="background-image:url(../media/newNote${random}.png);" title='title:$title'>
+            <div class="topic">
+                <img id="pin" src="../media/pin${random}.png" alt="pin">
+            </div>
+            <div class="data">
+                <div class="screen" id='tasks$i'><ul style="list-style-type:none;">`
+            ele['Tasks'].forEach((tks) => {
+                markup += `<li>${tks}</li>`;
+            })
+            markup += `
+            </ul></div>
+            <div class="control">
+                <button onclick="">
+                <a href='main.php?task_no=${response['index_j']}'>
+                    <img title='edit the task' src="../media/edit.png" alt="">
+                </a>
+                </button>
+                <button onclick="getTasks(${response['index_j']})">
+                    <img title='copy the task to clipboard' src="../media/share.png" alt="">
+                </button>
+                <button onclick="">
+                    <a href='../php/main.php?T_no=${response['index_j']}' style='text-decoration:none;'>
+                        <img title='delete the task' src="../media/delete.png" alt="">
+                    </a>
+                </button>
+            </div>
+        </div>
+    </div>
+            `
+        })
+        divi2.innerHTML = markup;
     }
 })
 displayAdminTodo(document.getElementById("todo-admin-panel"));
