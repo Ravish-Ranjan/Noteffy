@@ -25,7 +25,7 @@ let Username = async () => {
     user = await fetch(window.location.href.split("/HTML/control.html")[0] + "/php/encrypt_cookie.php?" + (new URLSearchParams({ value: user_name })), { method: "GET", mode: "cors" });
     user = await user.json();
     user = user['res'];
-    document.getElementById("user-name-card-explore").innerText = user;
+    // document.getElementById("user-name-card-explore").innerText = user;
 
     let classSelection = document.getElementById("workspace-select-explore");
     let default_option = document.createElement("option");
@@ -45,17 +45,25 @@ let getClasses = async () => {
             classSelection.options.add(option, classSelection.options.length);
         })
     }
+    getClassMember();
 }
 getClasses();
 
 let getClassMember = () => {
     let classSelection = document.getElementById("workspace-select-explore");
+    let card = document.getElementById('explore-panel');
+    let originalMarkup = card.innerHTML;
     classSelection.addEventListener("input", async (e) => {
+        let markup = originalMarkup;
         let loc = window.location.href.split("/HTML/control.html");
-        console.log(loc[0] + "/php/admin.php?" + (new URLSearchParams({ className: e.target.value })));
         let response = await fetch(loc[0] + "/php/admin.php?" + (new URLSearchParams({ className: e.target.value })), { method: "GET", mode: "cors" });
         response = await response.json();
-        console.log(response['name'])
+        response['name'].forEach((name) => {
+            markup += `   <div id="explore-user-card">
+                <img src="../media/logoorangep.png" id="user-card-avatar">
+                 <p class="user-name-card">${name}</p>
+             </div>`
+        })
+        card.innerHTML = markup;
     })
 }
-getClassMember();
