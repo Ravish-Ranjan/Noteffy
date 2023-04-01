@@ -67,7 +67,15 @@
                         $timeDifference = strtotime($todolist[$iter]['Time']) - strtotime(date("H:i"));
                         $diff = $dayDifference + $timeDifference;
                         if(in_array($user,$todolist[$iter]["assignees"]) && $diff>=0){
-                            $cleantasks = $todolist[$iter];unset($cleantasks["assignees"]);
+                            $cleantasks = $todolist[$iter];
+                            for($sn = 0;$sn < count($cleantasks["Tasks"]);$sn++){
+                                for($ui = 0;$ui < count($cleantasks["status"]);$ui++){
+                                    if($cleantasks["status"][$ui]["member"]==$user){
+                                        $cleantasks["completed"] = $cleantasks["status"][$ui]["completed"];
+                                    }
+                                }
+                            }
+                            unset($cleantasks["assignees"]);unset($cleantasks["status"]);
                             array_push($classitem["Tasks"],$cleantasks);
                         }
                         else if($diff<0){
@@ -95,6 +103,63 @@
         die();
     }
     fetchtodo($jdata);
+?>
+<?php 
+     function removeadmintask(){
+        date_default_timezone_set("Asia/Kolkata");
+        // require_once("initial.php");require_once("hash.php");
+        if(!isset($_COOKIE['user_number'])){
+            echo '<script>window.replace("index.php")</script>';return;
+        }
+        if(!isset($_GET["admin"]) || !isset($_GET["remtodo"]) || !isset($_GET["class"]) || !isset($_GET["todon"]) || !isset($_GET["tno"])){
+            return;
+        }
+        //Sanitize requests
+        if($_GET["class"]=='' || $_GET["tno"]=='' || $_GET["todon"]==''){
+            echo json_encode(array('Message'=>'failure'));die();
+        }
+        header("Content-Type: application/json;charset=utf-8");
+        $orgs = file_get_contents("../data/Organizations.json");
+        $orgs = json_decode($orgs,true);
+        // $stats = file_get_contents("../data/Admin Tasks.json");
+        // $stats = json_decode($stats,true);
+
+        $user = getUserNumber();
+        for($j = 0;$j < count($orgs["Organizations"]);$j++){
+            for($k = 0;$k < count($orgs["Organizations"][$j]["classes"]);$k++){
+                if (in_array($user,$orgs["Organizations"][$j]["classes"][$k]["group"])) {
+                       $to_do_count = count($orgs["Organizations"][$j]["classes"][$k]["To-do"]);
+                       for($tn = 0;$tn < $to_do_count;$tn++){
+                           if($orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]['Title']==$_GET["todon"]){
+                            $status_count = count($orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]["status"]);
+                            for($sn = 0;$sn < $status_count;$sn++){
+                                // echo $orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]["status"][$sn]["member"].":".$user;
+                                if($orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]["status"][$sn]["member"]==$user){
+                                    $status = $orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]["status"][$sn];
+                                    $comlen = count($status["completed"]);
+                                    if(!in_array($_GET["tno"],$status["completed"])){
+                                        $orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]["status"][$sn]["completed"][$comlen] = (int) $_GET["tno"];
+
+                                        //Put into admin's statistics chart here
+                                        $findus = array_search($user,$orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]["assignees"]);
+                                        if(count($orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]["Tasks"])==count($orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]["status"][$sn]["completed"])){
+                                            array_splice($orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]["assignees"],$findus,1);
+                                        }
+                                        $orgs1 = json_encode($orgs);
+                                        file_put_contents("../data/Organizations.json",$orgs1);
+                                        $respdata = array("Message"=>"Success");echo json_encode($respdata);
+                                        die();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    }
+                }
+            }
+            echo json_encode(array('Message'=>'failure'));die();
+    }
+    removeadmintask();
 ?>
 <?php
 
