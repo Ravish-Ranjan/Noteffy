@@ -171,3 +171,14 @@
     display: block;position:relative;right:-41%;
     height:30px;width:30px;cursor:pointer;
 }
+.fa-check:before{
+    font-size: 25;
+    position: absolute;
+    margin-left: 410px;
+    margin-top: -5;
+    transition: 0.2s;
+}
+.fa-check:hover{
+    color: #a1a1a1;
+    transition: 0.2s;
+}
