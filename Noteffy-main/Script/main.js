@@ -173,7 +173,6 @@ searchBar.addEventListener("input", async (ele) => {
         let loc = window.location.href.split("/main.php");
         let response = await fetch(loc[0] + "/search.php?" + (new URLSearchParams({ task_term: ele.target.value })), { method: "GET", mode: "cors" });
         response = await response.json();
-        console.log(response['data']);
         response['data'].forEach((ele) => {
             let random = response['priority'];
             markup+= `<div class="divi" style="background-image:url(../media/newNote${random}.png);" title='title:$title'>

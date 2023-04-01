@@ -40,7 +40,7 @@ body{
     color: #a3a3a3;
     transition: 0.3s;
 }
-#workspace-select{
+.workspace-select{
     margin-top: 20;
     margin-left: 30;
 }
@@ -85,14 +85,14 @@ body{
     margin-right: auto;
     margin-top: 25;
 }
-#user-name-card{
+.user-name-card{
     font-family: codec-extrabold;
     color: black;
     text-align: center;
     margin-top: 10;
 }
-#workspace-select{
+.workspace-select{
     font-family: codec;
     border: none;
-    font-size: 20;
+    font-size: 14px;
 }

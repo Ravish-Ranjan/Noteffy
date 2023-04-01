@@ -12,7 +12,7 @@ function openTab(evt, tabname) { // this function is used to move arround the ta
     evt.currentTarget.className += " active";
     divs = document.getElementsByClassName("main")
 }
-let name = async () => {
+let Username = async () => {
     let user_name = "User Name";
     let decodedCookie = decodeURIComponent(document.cookie);
     decodedCookie = decodedCookie.split(";");
@@ -25,6 +25,11 @@ let name = async () => {
     user = await fetch(window.location.href.split("/HTML/control.html")[0] + "/php/encrypt_cookie.php?" + (new URLSearchParams({ value: user_name })), { method: "GET", mode: "cors" });
     user = await user.json();
     user = user['res'];
-    document.getElementById("admin-name").innerText = user;
+    document.getElementById("user-name-card-explore").innerText = user;
+    
+    let classSelection = document.getElementById("workspace-select-explore");
+    let default_option = document.createElement("option");
+    default_option.text = "Your classes";
+    classSelection.options.add(default_option, 0);
 }
-name();
+Username()

@@ -53,7 +53,6 @@
         $orgs = file_get_contents("../data/Organizations.json");
         $orgs = json_decode($orgs,true);
         $respdata = array("To-do"=>array());
-        $respdata['removed'] = array();
         
         $user = getUserNumber();
         for($k = 0;$k < count($orgs["Organizations"]);$k++){
@@ -75,11 +74,9 @@
 
                             if($iter==count($todolist)-1){
                                 $temp1 = array_pop($orgs["Organizations"][$k]["classes"][$l]["To-do"]);
-                                array_push($respdata['removed'], $temp1);
                             }
                             else{
                             $temp = array_splice($orgs["Organizations"][$k]["classes"][$l]["To-do"], $iter, 1);
-                            array_push($respdata['removed'], $temp);
                             }
                         }
                        }
