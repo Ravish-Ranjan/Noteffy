@@ -289,9 +289,7 @@ function displayClass(&$classData)
                         <h2>$title</h2>
                     </div>
                     <div class='options'><button onclick=\"task_compose('', '', '', '', '',1,this)\">Assign Task</button><button>Edit</button></div>
-
-                </div>
-                    ";
+                </div>";
                 }
             }
             //Classes in which user is a member
