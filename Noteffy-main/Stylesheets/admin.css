@@ -150,18 +150,26 @@
     display:none;
     flex-flow:column;
     align-items:center;
-    z-index: 2;gap:0px 0px;
+    z-index: -1;
+    gap:0px 0px;
 }
 #todo-admin-panel .classg{
     padding-left:10%;
 }
 #todo-admin-panel label{
-    color:white;border:2px solid white;
-    border-radius: 4px;cursor:pointer;
-    margin-bottom: 12px;justify-content: center;
-    display: flex;max-width: 80%;gap:0;
+    color:white;
+    border:2px solid white;
+    border-radius: 4px;
+    cursor:pointer;
+    margin-bottom: 12px;
+    justify-content: center;
+    display: flex;
+    max-width: 80%;
+    gap:0;
     align-content: center;
-    padding: 8px;padding-top:30px;padding-bottom:30px;
+    padding: 8px;
+    padding-top:30px;
+    padding-bottom:30px;
 }
 #todo-admin-panel label[for='123']{
     align-content: center;
