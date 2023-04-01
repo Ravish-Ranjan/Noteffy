@@ -41,6 +41,7 @@ file_put_contents("../data/Details.json", $details);
     <script src="../Script/compose.js"></script>
     <script src="../Script/message.js"></script>
     <script defer src="../Script/main.js"></script>
+    <script defer src="../Script/admin.js"></script>
 </head>
 
 <body onload="pos()">
