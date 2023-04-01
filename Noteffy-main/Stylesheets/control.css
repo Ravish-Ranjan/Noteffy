@@ -42,10 +42,14 @@ body{
 }
 .workspace-select{
     position: relative;
-    top:100px;
+    text-align: center;
+    top:120px;
     left:20px;
     margin-top: 20;
     margin-left: 30;
+    outline: none;
+    box-shadow: 2px 2px 4px black;
+    height:3em;
 }
 #explore-panel{
     display: flex;
