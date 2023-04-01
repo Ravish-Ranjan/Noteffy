@@ -83,17 +83,48 @@ function revealToDoPanel() {
         document.getElementById("todo-admin-panel").style.display = "block";
     }
 }
+async function removeadminTask(classn,todon,taskno){
+    let options = {
+        method:'GET',
+        mode:'cors'
+    };
+    let queries = {
+        'admin':true,
+        'remtodo':true,
+        'class':classn,
+        'todon':todon,
+        'tno':taskno
+    };
+    var loc = window.location.href.split('/php')[0];
+    let resplist = await fetch(loc+"/php/admin.php?"+(new URLSearchParams(queries)),options);
+    let jsonlist = await resplist.json();
+            
+    if(jsonlist["Message"]==null){
+        window.location.replace(loc+"/HTML/error.html");
+    }
+    else if(jsonlist["Message"]=="failure"){
+        message("Sorry couldn't delete task");
+    }
+    else{
+            //Add queries strings to open admin todo panel
+            window.location.reload();
+    }
+}
 function collapsetasks(ele){
     let todo = ele.parentElement;
-    let tasks = ele.getAttribute("data-array");
-    tasks = tasks.split(',');
+    let tasks = ele.getAttribute("data-array");let comptasks = ele.getAttribute("data-comp");
+    tasks = tasks.split(',');comptasks = comptasks.split(',');
     tasks = tasks.reverse();
     tasks.forEach((task)=>{
+        //Add skip clauses for completed class
+        if(comptasks.indexOf(tasks.indexOf(task).toString())>=0){
+            return;
+        }
         let domtask = document.createElement("label");
         domtask.style.backgroundColor = ele.style.backgroundColor;
         domtask.style.opacity = '0.6';
         domtask.setAttribute('for','123');
-        domtask.innerHTML = `${task} <i class="fa fa-check" aria-hidden="true"></i>`;
+        domtask.innerHTML = `${task} <i class="fa fa-check" onclick = "removeadminTask('${todo.getAttribute("data-cname")}',${ele.getAttribute("data-name")},${tasks.indexOf(task)})" aria-hidden="true"></i>`;
         if(ele.nextSibling!=null){
             todo.insertBefore(domtask,ele.nextSibling);
         }
@@ -136,12 +167,14 @@ async function displayAdminTodo(ele){
             
             //Classroom name
             let classgroup = document.createElement('div');let cname = ele.Name;
+            classgroup.setAttribute("data-cname",cname);
             classgroup.classList = ['classg'];classgroup.style.opacity = 0.8;
             ele['Tasks'].forEach((task)=>{
                 let tasknode = document.createElement('label');
                 let tasks = task.Tasks;
-                tasknode.setAttribute("data-cname",cname);
+                tasknode.setAttribute("data-name",`'${task.Title}'`);
                 tasknode.setAttribute("data-array",`${tasks})`);
+                tasknode.setAttribute("data-comp",`${task.completed}`);
                 tasknode.setAttribute("onclick","collapsetasks(this)")
                 tasknode.style.backgroundColor = color;
                 tasknode.innerHTML = `${task.Title} Due: ${task.Time} on ${task.Date}`;
