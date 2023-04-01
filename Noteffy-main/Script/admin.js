@@ -93,7 +93,7 @@ function collapsetasks(ele){
         domtask.style.backgroundColor = ele.style.backgroundColor;
         domtask.style.opacity = '0.6';
         domtask.setAttribute('for','123');
-        domtask.innerHTML = `${task} <img src = "../media/delete.png" onclick="completeAdminTask("${todo.children[0].getAttribute('data-cname')}",${task}})">`;
+        domtask.innerHTML = `${task} <i class="fa fa-check" aria-hidden="true"></i>`;
         if(ele.nextSibling!=null){
             todo.insertBefore(domtask,ele.nextSibling);
         }
