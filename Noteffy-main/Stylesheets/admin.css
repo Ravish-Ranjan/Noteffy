@@ -1,3 +1,32 @@
+@font-face {
+    font-family: codec-extrabold;
+    src: url('../media/Codec-Cold-Heavy-trial.ttf');
+}
+@font-face {
+    font-family: codec;
+    src: url('../media/Codec-Cold-Regular-trial.ttf');
+}
+@keyframes shake {
+    00% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(10deg);
+    }
+
+    50% {
+        transform: rotate(-20deg);
+    }
+
+    75% {
+        transform: rotate(10deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
 .workstation,.workspace{
     height: 98%;
     width: 96%;
@@ -47,7 +76,8 @@
     bottom: 2%;
     font-size: 60;
     display: grid;
-    place-items: center;cursor:pointer;
+    place-items: center;
+    cursor:pointer;
     right: 1%;
     z-index: 0;
 }
@@ -92,17 +122,22 @@ h2{
     flex-direction: row;
     background: url('../media/workspaceAsset1.png');
     background-size: 328px 187px;
+    background-repeat: no-repeat;
 }
 .class >.options{
     display: flex;
     flex-direction: column;
 }
 .options > button{
-    display:block;margin:10%;
-    padding:6%;cursor:pointer;
+    display:block;
+    margin:10%;
+    padding:6%;
+    cursor:pointer;
     background-color: rgb(52,52,52,1.8);
-    border-radius:3em;border: 2px solid white;
-    color:white;width:100px;
+    border-radius:3em;
+    border: 2px solid white;
+    color:white;
+    width:100px;
 }
 .work{
     height: 10%;
@@ -170,11 +205,17 @@ h2{
 }
 #todo-admin-panel label[for='123']{
     align-content: center;
-    cursor:auto;;padding-top:10px;padding-bottom:10px;
+    cursor:auto;
+    padding-top:10px;
+    padding-bottom:10px;
 }
 #todo-admin-panel label[for='123'] img{
-    display: block;position:relative;right:-41%;
-    height:30px;width:30px;cursor:pointer;
+    display: block;
+    position:relative;
+    right:-41%;
+    height:30px;
+    width:30px;
+    cursor:pointer;
 }
 .fa-check:before{
     font-size: 25;
@@ -186,4 +227,17 @@ h2{
 .fa-check:hover{
     color: #a1a1a1;
     transition: 0.2s;
+}
+#admin-compose-bbt{
+    background: url('../media/workspaceEye.png');
+    background-size: 60px 60px;
+    background-repeat: no-repeat;
+    background-color: #f2f2f2;
+    border-radius: 100%;
+    width: 90px;
+    height: 90px;
+    background-position: center;
+}
+#admin-compose-bbt:hover{
+    animation: shake 1s infinite ease-out;
 }

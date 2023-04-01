@@ -111,7 +111,7 @@ file_put_contents("../data/Details.json", $details);
                         ?>
                     <!-- this div will show workpaces the user made & joined other -->
                 </div>
-                <div class="compose" id="admin-compose-bbt" onclick="class_compose('','','','')">+</div>
+                <div class="compose" id="admin-compose-bbt" onclick="class_compose('','','','')"></div>
             </div>
         </div>
         <!-- user panel -->

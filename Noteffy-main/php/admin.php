@@ -288,7 +288,10 @@ function displayClass(&$classData)
                     <div class='backg'>
                         <h2>$title</h2>
                     </div>
-                    <div class='options'><button onclick=\"task_compose('', '', '', '', '',1,this)\">Assign Task</button><button>Edit</button></div>
+                    <div class='options'>
+                        <button onclick=\"task_compose('', '', '', '', '',1,this)\">Assign Task</button>
+                        <button>Edit</button>
+                    </div>
                 </div>";
                 }
             }
