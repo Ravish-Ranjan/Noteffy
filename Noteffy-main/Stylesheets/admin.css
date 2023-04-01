@@ -72,8 +72,6 @@
     margin: 1%;
     padding: 1%;
     /* aspect-ratio: 9/16; */
-    outline: 2px solid white;
-    border-radius: 2em;
     text-align: start;
     color: white;
     background-color: rgba(255,255,255,0.2);
@@ -82,12 +80,18 @@
     flex-direction: column;
     justify-content: space-around;
 }
+h2{
+    font-family: codec-extrabold;
+    font-size: 20;
+}
 .tile >h2{
     font-size: 25;
 }
 .class{
     display: flex;
     flex-direction: row;
+    background: url('../media/workspaceAsset1.png');
+    background-size: 328px 187px;
 }
 .class >.options{
     display: flex;
