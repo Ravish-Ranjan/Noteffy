@@ -26,10 +26,36 @@ let Username = async () => {
     user = await user.json();
     user = user['res'];
     document.getElementById("user-name-card-explore").innerText = user;
-    
+
     let classSelection = document.getElementById("workspace-select-explore");
     let default_option = document.createElement("option");
     default_option.text = "Your classes";
     classSelection.options.add(default_option, 0);
 }
 Username()
+let getClasses = async () => {
+    let loc = window.location.href.split("/HTML/control.html");
+    let response = await fetch(loc[0] + "/php/admin.php?" + (new URLSearchParams({ classes: "true" })), { method: "GET", mode: "cors" });
+    response = await response.json();
+    if (response['result'] == "success") {
+        let classSelection = document.getElementById("workspace-select-explore");
+        response['cls'].forEach((ele) => {
+            let option = document.createElement("option");
+            option.text = ele;
+            classSelection.options.add(option, classSelection.options.length);
+        })
+    }
+}
+getClasses();
+
+let getClassMember = () => {
+    let classSelection = document.getElementById("workspace-select-explore");
+    classSelection.addEventListener("input", async (e) => {
+        let loc = window.location.href.split("/HTML/control.html");
+        console.log(loc[0] + "/php/admin.php?" + (new URLSearchParams({ className: e.target.value })));
+        let response = await fetch(loc[0] + "/php/admin.php?" + (new URLSearchParams({ className: e.target.value })), { method: "GET", mode: "cors" });
+        response = await response.json();
+        console.log(response['name'])
+    })
+}
+getClassMember();

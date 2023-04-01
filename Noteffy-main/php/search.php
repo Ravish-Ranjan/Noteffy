@@ -1,7 +1,7 @@
 <?php
-include "hash.php";
-include "initial.php";
-include "priority_Calc.php";
+require_once("hash.php") ;
+require_once("initial.php");
+require_once("priority_Calc.php");
 
 header("Content-Type:application/json;character=Utf-8");
 $resp = array();

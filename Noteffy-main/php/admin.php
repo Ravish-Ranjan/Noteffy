@@ -286,4 +286,59 @@ function createAdminTask(&$users,&$orgs){
         }
     }
 }
+function exploreClasses(){
+    $response = array("result"=>"failure");
+    if(isset($_GET['classes']) && $_GET['classes']=='true'){
+        header("Content-Type:application/json;character=Utf-8");
+        $response["result"] = "success";
+        $response['cls'] = array();
+        $orgs = file_get_contents("../data/Organizations.json");
+        $orgs = json_decode($orgs, true);
+        $user = getUserNumber();
+        for($i=0;$i<count($orgs['Organizations']);$i++){
+            if($orgs['Organizations'][$i]["Admin"] == $user){
+                for($j=0;$j<count($orgs['Organizations'][$i]["classes"]);$j++){
+                    array_push($response['cls'], $orgs['Organizations'][$i]["classes"][$j]["Cname"]);
+                }
+            }
+            else{
+                for($k=0;$k<count($orgs['Organizations'][$i]["classes"]);$k++){
+                    if(in_array($user,$orgs['Organizations'][$i]["classes"][$k]["group"])){
+                        array_push($response['cls'], $orgs['Organizations'][$i]["classes"][$k]["Cname"]);
+                    }
+                }
+            }
+        }
+        echo json_encode($response);
+        die();
+    }
+}
+exploreClasses();
+function classMembers(){
+    if(isset($_GET['className']) ){
+        $resp = array();
+        $resp['name'] = array();
+        $className = $_GET['className'];
+        $orgs = file_get_contents("../data/Organizations.json");
+        $orgs = json_decode($orgs, true);
+        $details = file_get_contents("../data/details.json");
+        $details = json_decode($details,true);
+        $user = getUserNumber();
+
+        for($i=0;$i<count($orgs['Organizations']);$i++){
+            for($j=0;$j<count($orgs['Organizations'][$i]["classes"]);$j++){
+                if($orgs['Organizations'][$i]["classes"][$j]["Cname"] == $className){
+                    $resp['id'] = $orgs['Organizations'][$i]["classes"][$j]["group"];
+                }
+            }
+        }
+        for($iter=0;$iter<count($resp['id']);$iter++){
+            $temp = ($resp['id'][$iter]);
+            array_push($resp['name'], $details["Users"][$temp]["User_Name"]);
+        }
+        echo json_encode($resp);
+        die();
+    }
+}
+classMembers();
 ?>
