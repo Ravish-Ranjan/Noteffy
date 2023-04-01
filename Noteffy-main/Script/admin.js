@@ -93,7 +93,7 @@ function collapsetasks(ele){
         domtask.style.backgroundColor = ele.style.backgroundColor;
         domtask.style.opacity = '0.6';
         domtask.setAttribute('for','123');
-        domtask.innerHTML = `${task}`;
+        domtask.innerHTML = `${task} <img src = "../media/delete.png">`;
         if(ele.nextSibling!=null){
             todo.insertBefore(domtask,ele.nextSibling);
         }
@@ -101,11 +101,13 @@ function collapsetasks(ele){
             todo.appendChild(domtask);
         }
     });
+    ele.style['filter'] = "drop-shadow(0 0 0.6rem white)";
     ele.setAttribute("onclick","uncollapsetasks(this)");
 }
 function uncollapsetasks(ele){
     let todo = ele.parentElement;
     let task = ele.nextSibling;
+    ele.style['filter'] = null;
     ele.setAttribute("onclick","collapsetasks(this)");
     while(task.getAttribute("for")=="123"){
         let curr = task;
@@ -133,11 +135,12 @@ async function displayAdminTodo(ele){
             const color = Math.floor(Math.random()*16777215).toString(16);
             
             //Classroom name
-            let classgroup = document.createElement('div');
+            let classgroup = document.createElement('div');let cname = ele.Name;
             classgroup.classList = ['classg'];classgroup.style.opacity = 0.8;
             ele['Tasks'].forEach((task)=>{
                 let tasknode = document.createElement('label');
                 let tasks = task.Tasks;
+                tasknode.setAttribute("data-cname",cname);
                 tasknode.setAttribute("data-array",`${tasks})`);
                 tasknode.setAttribute("onclick","collapsetasks(this)")
                 tasknode.style.backgroundColor = color;
