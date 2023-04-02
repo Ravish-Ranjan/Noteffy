@@ -166,6 +166,7 @@ file_put_contents("../data/Details.json", $details);
                     Delete_Note($alternate);
                     $user = fetch_store($alternate);
                     display($alternate, $user);
+                    storeEvents();
                     ?>
                 </div>
                 <!-- this div is to let user create more notes -->

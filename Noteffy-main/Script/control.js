@@ -122,8 +122,8 @@ function openTab(evt, tabname) { // this function is used to move arround the ta
     document.getElementById(tabname).style.display = "block";
     evt.currentTarget.className += " active";
     divs = document.getElementsByClassName("main")
-    if(tabname){
-      fillCanv();
+    if (tabname) {
+        fillCanv();
     }
 }
 let Username = async () => {
@@ -153,12 +153,16 @@ let getClasses = async () => {
     response = await response.json();
     if (response['result'] == "success") {
         let workspace_select = document.querySelectorAll(".workspace-select");
-        workspace_select.forEach((selector)=>{
-            response['cls'].forEach((ele) => {
-            let option = document.createElement("option");
-            option.text = ele;
-            selector.options.add(option, selector.options.length);
-        })
+        console.log(workspace_select);
+        workspace_select.forEach((selector) => {
+            if (selector.options.length == 1) {
+                response['cls'].forEach((ele) => {
+                    let option = document.createElement("option");
+                    option.text = ele;
+                    option.value = ele;
+                    selector.options.add(option, selector.options.length);
+                })
+            }
         });
     }
 }
@@ -180,10 +184,11 @@ classSelection.forEach((selector)=>{selector.addEventListener("input",async (ele
     <img src="../media/logoorangep.png" id="user-card-avatar">
     <p class="user-name-card">${name}</p>
     </div>`;
+        });
+        card.innerHTML = markup;
     });
     card.innerHTML = markup;
     data = response['stats'];
-});
 });
 
 function fillCanv(){
@@ -201,7 +206,7 @@ function initializeDate() {
     let days = $("days");
     let month_select = $("month_select");
     let year_select = $("year_select");
-    
+
     let d = new Date();
     month_select.innerText = d.toLocaleDateString("en-US", { month: "long" });
     year_select.innerText = d.getFullYear();
@@ -210,11 +215,11 @@ function nextMonth() {
     let days = $("days");
     let month_select = $("month_select");
     let year_select = $("year_select");
-    
+
     let date = `${year_select.innerText}-${month_select.innerText}-1`;
     let d = new Date(date);
     if (d.getMonth() + 1 != 12) {
-        d.setMonth(d.getMonth()+1);
+        d.setMonth(d.getMonth() + 1);
     }
     else {
         d.setFullYear(d.getFullYear() + 1);
@@ -229,11 +234,11 @@ function previousMonth() {
     let days = $("days");
     let month_select = $("month_select");
     let year_select = $("year_select");
-    
+
     let date = `${year_select.innerText}-${month_select.innerText}-1`;
     let d = new Date(date);
     if (d.getMonth() - 1 != 0) {
-        d.setMonth(d.getMonth()-1);
+        d.setMonth(d.getMonth() - 1);
     }
     else {
         d.setFullYear(d.getFullYear() - 1);
@@ -242,27 +247,26 @@ function previousMonth() {
     month_select.innerText = d.toLocaleDateString("en-US", { month: "long" })
     year_select.innerText = d.getFullYear();
     getDays();
-    
+
 }
 function getDays() {
     let days_select = $("days");
     days_select.innerHTML = ``;
-    
+
     let month_select = $("month_select").innerText;
     let year_select = $("year_select").innerText;
-    
+
     let date = `${year_select}-${month_select}-1`;
     let d = new Date(date);
 
-    let days = (new Date(d.getFullYear(), d.getMonth()+1, 0).getDate())
-    for (let day = 0; day < days; day++){
+    let days = (new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate())
+    for (let day = 0; day < days; day++) {
         let li = document.createElement("li");
         if (day == (new Date().getDate())) {
             let span = document.createElement("span");
             span.setAttribute("class", "active");
-            span.innerText = day+1;
+            span.innerText = day + 1;
             li.appendChild(span);
-            console.log("hello")
         }
         else {
             li.innerText = day + 1;
@@ -270,4 +274,3 @@ function getDays() {
         days_select.appendChild(li);
     }
 }
-getDays();

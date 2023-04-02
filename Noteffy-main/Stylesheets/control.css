@@ -6,9 +6,43 @@
     font-family: codec;
     src: url('../media/Codec-Cold-Regular-trial.ttf');
 }
+@keyframes shake {
+  00% {
+      transform: rotate(0deg);
+  }
+
+  25% {
+      transform: rotate(10deg);
+  }
+
+  50% {
+      transform: rotate(-20deg);
+  }
+
+  75% {
+      transform: rotate(10deg);
+  }
+
+  100% {
+      transform: rotate(0deg);
+  }
+}
 @font-face{
     font-family: cinderella;
     src: url('../media/Cinderela_Personal_Use.ttf');
+}
+@keyframes fade {
+  from {
+      opacity: 0;
+  }
+
+  to {
+      opacity: 1;
+    }
+}
+@font-face{
+  font-family: cinderella;
+  src: url('../media/Cinderela_Personal_Use.ttf');
 }
 *{
     margin: 0;
@@ -166,7 +200,7 @@ body {font-family: Verdana, sans-serif;}
 /* Month header */
 .month {
   padding: 70px 25px;
-  width: 100%;
+  width: 97%;
   background: #1abc9c;
   text-align: center;
 }
@@ -188,12 +222,14 @@ body {font-family: Verdana, sans-serif;}
 .month .prev {
   float: left;
   padding-top: 10px;
+  cursor: pointer;
 }
 
 /* Next button */
 .month .next {
   float: right;
   padding-top: 10px;
+  cursor: pointer;
 }
 
 /* Weekdays (Mon-Sun) */
@@ -225,6 +261,7 @@ body {font-family: Verdana, sans-serif;}
   margin-bottom: 5px;
   font-size:12px;
   color: #777;
+  padding: 20px 0px;
 }
 .days li:hover{
   background: #1abc9c;
@@ -235,4 +272,92 @@ body {font-family: Verdana, sans-serif;}
   padding: 5px;
   background: #1abc9c;
   color: white !important
+}
+/* form */
+#admin-compose-bbt{
+  position: absolute;
+  right:9%;
+  bottom:-15px;
+  background: url('../media/workspaceEye.png');
+  background-size: 60px 60px;
+  background-repeat: no-repeat;
+  background-color: #f2f2f2;
+  border-radius: 100%;
+  width: 90px;
+  height: 90px;
+  background-position: center;
+}
+#admin-compose-bbt:hover{
+  animation: shake 1s infinite ease-out;
+}
+.FORM{
+  animation:fade 0.4s ease-in-out;
+  position:relative;
+  top: -6%;
+  right: -37%;
+  display: grid;
+  width: 28%;
+  z-index:4;
+  background: #ffffff;
+  font-size: 2vw;
+  border-radius:1rem;
+  width: 40%;
+  height: 70%;
+  color:#000000;
+  margin-top: 15vh;
+  padding: 1%;
+  font-family: codec-extrabold;
+}
+#Form_Caption{
+  justify-self: center;
+  font-family: codec-extrabold;
+  font-size: 20;
+}
+#close{
+  top:-7px;
+  left:-5px;
+  height:50px;
+  width:50px;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+input[type="date"],input[type="text"],textarea{
+  font-size: 20;
+  font-family: codec;
+  padding: 1%;
+  border: none;
+  border-bottom: 1px solid #555;
+}
+#Date{
+  font-family: codec;
+  padding: 10px;
+  margin:5px;
+}
+#Time{
+  font-family: codec;
+  padding: 10px;
+  margin:5px;
+}
+#Title{
+  font-family: codec;
+  padding: 10px;
+  margin:5px;
+
+}
+#btn{
+  margin-top: 12;
+  width: 30%;
+  height: 60%;
+  font-size: 18;
+  border-radius: 20rem;
+  color: white;
+  background-color: #ffffff;
+  color: #000000;
+  font-family: codec-extrabold;
+  border: none;
+}
+#btn:hover{
+  background-color: #1abc9c;
+  color: #ffffff;
 }
