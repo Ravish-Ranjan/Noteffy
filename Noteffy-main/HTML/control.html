@@ -2,11 +2,13 @@
     <head>
         <title>Admin Control</title>
         <link rel="stylesheet" href="../Stylesheets/control.css">
+        <!-- <link rel="stylesheet" href="../Stylesheets/compose.css"> -->
         <link rel="shortcut icon" href="../media/logo5mix.png" type="image/x-icon">
         <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script defer src="../Script/control.js"></script>
+        <script defer src="../Script/compose.js"></script>
     </head>
-    <body onload="initializeDate()">
+    <body onload="initializeDate();getDays()">
         <div id="control-header">
             <div class="control-header-links">
                 <button class="tbs" onclick="openTab(event, '0')">Insights</button>
@@ -44,13 +46,13 @@
             <div class="main" id="1" style="display: none;">
                 <div class="month">
                     <ul>
-                      <li class="prev" onclick="previousMonth()">&#10094;</li>
-                      <li class="next" onclick="nextMonth()">&#10095;</li>
-                      <li><span id="month_select"></span><br><span id="year_select" style="font-size:18px"></span></li>
+                        <li class="prev" onclick="previousMonth()">&#10094;</li>
+                        <li class="next" onclick="nextMonth()">&#10095;</li>
+                        <li><span id="month_select"></span><br><span id="year_select" style="font-size:18px"></span></li>
                     </ul>
-                  </div>
-                  
-                  <ul class="weekdays">
+                </div>
+                
+                <ul class="weekdays">
                     <li>Mo</li>
                     <li>Tu</li>
                     <li>We</li>
@@ -58,11 +60,12 @@
                     <li>Fr</li>
                     <li>Sa</li>
                     <li>Su</li>
-                  </ul>
-                  
-                  <ul class="days" id="days">
+                </ul>
+                
+                <ul class="days" id="days">
                     <!-- <li><span class="active">10</span></li> -->
-                  </ul>
+                </ul>
+                <div class="compose" id="admin-compose-bbt" onclick="createSchedule()"></div>
             </div>
             <div class="main" id="2">
                 <select name="workspace-choice" class="workspace-select" id="workspace-select-explore">

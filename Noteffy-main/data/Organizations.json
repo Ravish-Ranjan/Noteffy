@@ -63,7 +63,8 @@
                                 0
                             ]
                         }
-                    ]
+                    ],
+                    "Events" : []
                 },
                 {
                     "Cname": "Gaurang's Class",
@@ -72,7 +73,8 @@
                     "Organization_code": "JbqknlfoC",
                     "group": [],
                     "To-do": [],
-                    "Recycle": []
+                    "Recycle": [],
+                    "Events" : []
                 }
             ]
         },
@@ -90,7 +92,8 @@
                     "Organization_code": "NFfK2ktzf",
                     "group": [],
                     "To-do": [],
-                    "Recycle": []
+                    "Recycle": [],
+                    "Events" : []
                 }
             ]
         }

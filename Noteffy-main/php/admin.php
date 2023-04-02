@@ -297,6 +297,7 @@ function createClass(&$personal, &$classData)
                     $classData["Organizations"][$u]["classes"][$classes]['group'] = array();
                     $classData["Organizations"][$u]["classes"][$classes]['To-do'] = array();
                     $classData["Organizations"][$u]["classes"][$classes]['Recycle'] = array();
+                    $classData["Organizations"][$u]["classes"][$classes]['Events'] = array();
                     return;
                 }
             }

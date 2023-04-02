@@ -218,7 +218,6 @@ function getDays() {
             span.setAttribute("class", "active");
             span.innerText = day+1;
             li.appendChild(span);
-            console.log("hello")
         }
         else {
             li.innerText = day + 1;
@@ -226,4 +225,3 @@ function getDays() {
         days_select.appendChild(li);
     }
 }
-getDays();
