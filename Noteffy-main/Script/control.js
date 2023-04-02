@@ -1,3 +1,6 @@
+let ctx = document.getElementById("rendcont");
+let cont = ctx.getContext("2d");
+
 function openTab(evt, tabname) { // this function is used to move arround the tabs in the main page
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("main");
@@ -11,6 +14,9 @@ function openTab(evt, tabname) { // this function is used to move arround the ta
     document.getElementById(tabname).style.display = "block";
     evt.currentTarget.className += " active";
     divs = document.getElementsByClassName("main")
+    if(tabname){
+      fillCanv();
+    }
 }
 let Username = async () => {
     let user_name = "User Name";
@@ -70,8 +76,28 @@ let getClassMember = () => {
     })
 }
 
-// fetch("../data/task.json").then((res) => res.json()).then((json) => {
-//     let obj = calc_completed_task(json);
+
+function fillCanv(){
+  cont.font = "30px Arial";
+  let rect = ctx.getBoundingClientRect();
+  let img = new Image();
+  img.onload = ()=>{
+  img.src = '../media/noteffyTitle.png';
+  cont.drawImage(img,10,50);
+  }
+}
+
+// fetch("../data/task.php").then((res) => res.json()).then((json) => {
+//     let datx = [1,2,3,4,5,6,7,9];
+//     let daty1 = datx.map((ele)=>{
+//         return Math.pow(ele,2);
+//     });
+//     let daty2 = datx.map((ele)=>{
+//         return Math.pow(ele,3);
+//     });
+//     let daty3 = datx.map((ele)=>{
+//         return Math.pow(ele,4);
+//     });
 //     Chart.defaults.font.size = 20;
 //     Chart.defaults.font.weight = "bold";
 //     Chart.defaults.color = "black";
@@ -79,19 +105,36 @@ let getClassMember = () => {
 //     const cht = new Chart(ctx, {
 //       type: 'line',
 //       data: { 
-//         labels: obj.date,
+//         labels: datx,
 //         datasets: [
-//           { label: 'Number of tasks completed',
-//             data: obj.count,borderWidth: 10,
-//             backgroundColor:"black" ,
+//           { label: 'Priority 1',
+//             data: daty1,
+//             backgroundColor:"red" ,
 //             font:{
 //               size:20,
 //             },
 //             borderColor:"#bdbdbd",
 //           },
+//           { label: 'Priority 2',
+//             data: daty2,
+//             backgroundColor:"blue" ,
+//             font:{
+//               size:20,
+//             },
+//             borderColor:"#bdbdbd",
+//           },
+//           { label: 'Priority 3',
+//             data: daty3,
+//             backgroundColor:"green" ,
+//             font:{
+//               size:20,
+//             },
+//             borderColor:"#bdbdbd",
+//           }
 //         ]
 //       },
 //       options: { 
+//         bezierCurve:true,
 //         scales: { y: { beginAtZero: true },
 //         x: { beginAtZero: false } },
 //         layout: { padding: 10 },

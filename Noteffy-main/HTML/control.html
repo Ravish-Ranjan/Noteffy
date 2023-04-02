@@ -3,6 +3,7 @@
         <title>Admin Control</title>
         <link rel="stylesheet" href="../Stylesheets/control.css">
         <link rel="shortcut icon" href="../media/logo5mix.png" type="image/x-icon">
+        <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script defer src="../Script/control.js"></script>
     </head>
     <body>
@@ -18,13 +19,21 @@
                     <!-- this div is for dynamc chart rendering-->
                     <div id="insight-panel">
                         <!-- this is user card-->
+                        <canvas id = "rendcont" style="display:block"></canvas>
                     </div>
                     <div id="chart-panel">
-                        <canvas id = "rendcont" style="display:block"></canvas>
                         <select name="workspace-choice-2" class="workspace-select" id="workspace-select-insight-2"> 
                             <option value="" disabled>Select Workspace</option> 
                         </select> 
                         <!-- this is user card-->
+                        <div id="explore-user-card"> 
+                            <img src="../media/logoorangep.png" id="user-card-avatar"> 
+                            <p class="user-name-card" id="user-name-card-insight"></p> 
+                        </div> 
+                        <div id="explore-user-card"> 
+                            <img src="../media/logoorangep.png" id="user-card-avatar"> 
+                            <p class="user-name-card" id="user-name-card-insight"></p> 
+                        </div> 
                         <div id="explore-user-card"> 
                             <img src="../media/logoorangep.png" id="user-card-avatar"> 
                             <p class="user-name-card" id="user-name-card-insight"></p> 

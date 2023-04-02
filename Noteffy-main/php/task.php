@@ -1,3 +1,7 @@
+<?php 
+    
+?>
+
 <?php
     
     function Delete_task(&$jsonData){ // this function is to let user delete a task
