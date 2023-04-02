@@ -431,12 +431,17 @@ function exploreClasses(){
 }
 exploreClasses();
 function classMembers(){
+    if(!isset($_COOKIE['user_number'])){
+        return;
+    }
     if(isset($_GET['className']) ){
         $resp = array();
-        $resp['name'] = array();
+        $resp['name'] = array();$resp['stats'] = array();
         $className = $_GET['className'];
         $orgs = file_get_contents("../data/Organizations.json");
         $orgs = json_decode($orgs, true);
+        $adtasks = file_get_contents("../data/admintask.json");
+        $adtasks = json_decode($adtasks, true);
         $details = file_get_contents("../data/details.json");
         $details = json_decode($details,true);
         $user = getUserNumber();
@@ -451,6 +456,15 @@ function classMembers(){
         for($iter=0;$iter<count($resp['id']);$iter++){
             $temp = ($resp['id'][$iter]);
             array_push($resp['name'], $details["Users"][$temp]["User_Name"]);
+        }
+        for($i=0;$i<count($adtasks['Organizations']);$i++){
+            if($adtasks['Organizations'][$i]['Admin']==$user){
+            for($j=0;$j<count($adtasks['Organizations'][$i]["classes"]);$j++){
+                if($adtasks['Organizations'][$i]["classes"][$j]["Cname"] == $className){
+                    $resp['stats'] = $adtasks['Organizations'][$i]["classes"][$j]["Stats"];
+                }
+            }
+        }
         }
         echo json_encode($resp);
         die();

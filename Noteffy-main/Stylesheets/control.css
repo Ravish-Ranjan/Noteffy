@@ -6,6 +6,10 @@
     font-family: codec;
     src: url('../media/Codec-Cold-Regular-trial.ttf');
 }
+@font-face{
+    font-family: cinderella;
+    src: url('../media/Cinderela_Personal_Use.ttf');
+}
 *{
     margin: 0;
     padding: 0;
@@ -84,6 +88,9 @@ body{
     position: absolute;
     border-radius: 40px;
 }
+#rendcont{
+    height:50%;width:100%;
+}
 #explore-user-card{
     background-color: white;
     border: 2px solid black;
@@ -123,6 +130,10 @@ body{
     font-size: 14px;
     position: absolute;
     top: 140px;
+}
+#workspace-select-insight-2{
+    position: absolute;
+    top: 140px;z-index:3;
 }
 .workspace-select{
     font-family: codec;
