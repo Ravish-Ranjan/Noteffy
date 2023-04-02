@@ -2,6 +2,9 @@ let ctx = document.getElementById("rendcont");
 let cont = ctx.getContext("2d");
 let data = {};
 
+function $(id) {
+    return document.getElementById(id);
+}
 function drawstat(id) {
     let d = new Date();
     let dd = d.toLocaleDateString("en-US", { month: "long" });
