@@ -1,8 +1,11 @@
 let ctx = document.getElementById("rendcont");
 let cont = ctx.getContext("2d");
+let data = {};
 
-function $(id) {
-    return document.getElementById(id);
+function drawstat(id) {
+    let d = new Date();
+    let dd = d.toLocaleDateString("en-US", { month: "long" });
+   console.log(dd);
 }
 function openTab(evt, tabname) { // this function is used to move arround the tabs in the main page
     var i, tabcontent, tablinks;
@@ -56,38 +59,39 @@ let getClasses = async () => {
         })
         });
     }
-    getClassMember();
 }
 getClasses();
 
-let getClassMember = () => {
-    let classSelection = document.getElementById("workspace-select-explore");
-    let card = document.getElementById('explore-panel');
+let classSelection = document.querySelectorAll(".workspace-select");
+classSelection.forEach((selector)=>{selector.addEventListener("input",async (elem)=>{
+    console.log(elem);
+    let classSelection = elem.target;
+    let cardn = (elem.target.id=='workspace-select-explore'?'explore-panel':'chart-panel');
+    let card = document.getElementById(cardn);
     let originalMarkup = card.innerHTML;
-    classSelection.addEventListener("input", async (e) => {
-        let markup = originalMarkup;
-        let loc = window.location.href.split("/HTML/control.html");
-        let response = await fetch(loc[0] + "/php/admin.php?" + (new URLSearchParams({ className: e.target.value })), { method: "GET", mode: "cors" });
-        response = await response.json();
-        response['name'].forEach((name) => {
-            markup += `   <div id="explore-user-card">
-                <img src="../media/logoorangep.png" id="user-card-avatar">
-                 <p class="user-name-card">${name}</p>
-             </div>`
-        })
-        card.innerHTML = markup;
-    })
-}
+    let markup = '';
+
+    let loc = window.location.href.split("/HTML/control.html");
+    let response = await fetch(loc[0] + "/php/admin.php?" + (new URLSearchParams({ className: elem.target.value })), { method: "GET", mode: "cors" });
+    response = await response.json();
+    response['name'].forEach((name) => {
+    markup += `   <div id="explore-user-card">
+    <img src="../media/logoorangep.png" onhover="drawstat(${response['id'][response['name'].indexOf(name)]})" id="user-card-avatar">
+    <p class="user-name-card">${name}</p>
+    </div>`;
+    });
+    card.innerHTML = markup;
+});
+});
+
+
 
 
 function fillCanv(){
-  cont.font = "30px Arial";
+  cont.font = "40px codec";
   let rect = ctx.getBoundingClientRect();
   let img = new Image();
-  img.onload = ()=>{
-  img.src = '../media/noteffyTitle.png';
-  cont.drawImage(img,10,50);
-  }
+  cont.fillText("Noteffy",10,rect.height/2.5);
 }
 
 // fetch("../data/task.php").then((res) => res.json()).then((json) => {
