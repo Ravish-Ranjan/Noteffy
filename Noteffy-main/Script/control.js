@@ -38,12 +38,14 @@ let getClasses = async () => {
     let response = await fetch(loc[0] + "/php/admin.php?" + (new URLSearchParams({ classes: "true" })), { method: "GET", mode: "cors" });
     response = await response.json();
     if (response['result'] == "success") {
-        let classSelection = document.getElementById("workspace-select-explore");
-        response['cls'].forEach((ele) => {
+        let workspace_select = document.querySelectorAll(".workspace-select");
+        workspace_select.forEach((selector)=>{
+            response['cls'].forEach((ele) => {
             let option = document.createElement("option");
             option.text = ele;
-            classSelection.options.add(option, classSelection.options.length);
+            selector.options.add(option, selector.options.length);
         })
+        });
     }
     getClassMember();
 }
@@ -67,3 +69,41 @@ let getClassMember = () => {
         card.innerHTML = markup;
     })
 }
+
+fetch("../data/task.json").then((res) => res.json()).then((json) => {
+    let obj = calc_completed_task(json);
+    Chart.defaults.font.size = 20;
+    Chart.defaults.font.weight = "bold";
+    Chart.defaults.color = "black";
+    Chart.defaults.backgroundColor = "gray";
+    const cht = new Chart(ctx, {
+      type: 'line',
+      data: { 
+        labels: obj.date,
+        datasets: [
+          { label: 'Number of tasks completed',
+            data: obj.count,borderWidth: 10,
+            backgroundColor:"black" ,
+            font:{
+              size:20,
+            },
+            borderColor:"#bdbdbd",
+          },
+        ]
+      },
+      options: { 
+        scales: { y: { beginAtZero: true },
+        x: { beginAtZero: false } },
+        layout: { padding: 10 },
+        plugins: {
+          legend: {
+              labels: {
+                  font: {
+                      size: 18,
+                  }
+              }
+          }
+      }
+      }
+    });
+  })

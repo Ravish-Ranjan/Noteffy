@@ -53,6 +53,9 @@
                     // organizations
                     $orgs = file_get_contents("../data/Organizations.json");
                     $orgs = json_decode($orgs, true);
+                    //admin stats
+                    $stats = file_get_contents("../data/admintask.json");
+                    $stats = json_decode($stats, true);
                     $classes = count($orgs["Organizations"]);
                     header('Content-Type: application/json;charset=utf-8');
                     $users_count = count($details['Users']);
@@ -71,11 +74,16 @@
                     $alternate['User_Data'][$users_count]['recycle'] = array();
                     $orgs[$classes]["Admin"] = $users_count;
                     $orgs[$classes]["classes"] = array();
+                    $stats[$classes]["Admin"] = $users_count;
+                    $stats[$classes]["group"] = array();
+                    $stats[$classes]["classes"] = array();
 
                     $details = json_encode($details);
                     $alternate = json_encode($alternate);
+                    $stats1 = json_encode($stats);
                     file_put_contents("../data/Details.json", $details);
                     file_put_contents("../data/Data.json", $alternate);
+                    file_put_contents("../data/admintask.json", $stats1);
                     $respdata = array('Message'=>'success');
                     $data = json_encode($respdata);
                     echo $data;
