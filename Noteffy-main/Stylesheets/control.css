@@ -198,6 +198,7 @@ body {font-family: Verdana, sans-serif;}
   margin-bottom: 5px;
   font-size:12px;
   color: #777;
+  padding: 20px 0px;
 }
 .days li:hover{
   background: #1abc9c;
