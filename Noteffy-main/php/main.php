@@ -1,11 +1,11 @@
 <?php
-include "initial.php";
-include "hash.php";
-include "priority_calc.php";
-include "note.php";
-include "task.php";
-include "todo.php";
-include "admin.php";
+    include "initial.php";
+    include "hash.php";
+    include "priority_calc.php";
+    include "note.php";
+    include "task.php";
+    include "todo.php";
+    include "admin.php";
 ?>
 <?php
 $queries = array();

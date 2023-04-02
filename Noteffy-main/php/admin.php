@@ -102,6 +102,35 @@
     fetchtodo($jdata);
 ?>
 <?php 
+    function insertStat(&$data,$admin,$class,$user,$prior){
+        for($org = 0;$org < count($data['Organizations']);$org++){
+            if($data['Organizations'][$org]['Admin']==$admin){
+                for($clas = 0;$clas < count($data['Organizations'][$org]['classes']);$clas++){
+                    $currclass = $data['Organizations'][$org]['classes'][$clas];
+                    if($currclass['Cname']==$class){
+                        for($st = 0;$st < count($currclass['Stats']);$st++){
+                            if($currclass['Stats'][$st]['user']==$user){
+                                if($prior>0) $list = 'comptasks'.((string) $prior);
+                                else if($prior==0) $list = 'expired';
+                                $daynow = date("Y-m-d");
+                                $dates = $currclass['Stats'][$st][$list]['dates'];$counts = $currclass['Stats'][$st][$list]['count'];
+                                if(in_array($daynow,$dates)){
+                                    $index = array_search($daynow,$dates);
+                                    $data['Organizations'][$org]['classes'][$clas]['Stats'][$st][$list]['count'][$index]+=1;
+                                }
+                                else{
+                                    array_push($data['Organizations'][$org]['classes'][$clas]['Stats'][$st][$list]['dates'],$daynow);
+                                    array_push($data['Organizations'][$org]['classes'][$clas]['Stats'][$st][$list]['count'],1);
+                                }
+                                return 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return -1;
+    }
      function removeadmintask(){
         date_default_timezone_set("Asia/Kolkata");
         // require_once("initial.php");require_once("hash.php");
@@ -118,19 +147,23 @@
         header("Content-Type: application/json;charset=utf-8");
         $orgs = file_get_contents("../data/Organizations.json");
         $orgs = json_decode($orgs,true);
-        // $stats = file_get_contents("../data/Admin Tasks.json");
-        // $stats = json_decode($stats,true);
+        $adminstats = file_get_contents("../data/admintask.json");
+        $adminstats = json_decode($adminstats,true);
 
         $user = getUserNumber();
         for($j = 0;$j < count($orgs["Organizations"]);$j++){
             for($k = 0;$k < count($orgs["Organizations"][$j]["classes"]);$k++){
                 if (in_array($user,$orgs["Organizations"][$j]["classes"][$k]["group"])) {
-                       $to_do_count = count($orgs["Organizations"][$j]["classes"][$k]["To-do"]);
-                       for($tn = 0;$tn < $to_do_count;$tn++){
+                        $class = $orgs["Organizations"][$j]["classes"][$k];
+                        $to_do_count = count($orgs["Organizations"][$j]["classes"][$k]["To-do"]);
+                        for($tn = 0;$tn < $to_do_count;$tn++){
+
                            if($orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]['Title']==$_GET["todon"]){
+
+                            $todolist = $orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn];
                             $status_count = count($orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]["status"]);
                             for($sn = 0;$sn < $status_count;$sn++){
-                                // echo $orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]["status"][$sn]["member"].":".$user;
+
                                 if($orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]["status"][$sn]["member"]==$user){
                                     $status = $orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]["status"][$sn];
                                     $comlen = count($status["completed"]);
@@ -138,12 +171,16 @@
                                         $orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]["status"][$sn]["completed"][$comlen] = (int) $_GET["tno"];
 
                                         //Put into admin's statistics chart here
+                                        $c = insertStat($adminstats,$orgs["Organizations"][$j]["Admin"],$class["Cname"],$user,$todolist['Priority']);
+                                        if($c==-1) die();
                                         $findus = array_search($user,$orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]["assignees"]);
                                         if(count($orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]["Tasks"])==count($orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]["status"][$sn]["completed"])){
                                             array_splice($orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]["assignees"],$findus,1);
                                         }
                                         $orgs1 = json_encode($orgs);
                                         file_put_contents("../data/Organizations.json",$orgs1);
+                                        $adminstats1 = json_encode($adminstats);
+                                        file_put_contents("../data/admintask.json",$adminstats1);
                                         $respdata = array("Message"=>"Success");echo json_encode($respdata);
                                         die();
                                     }
@@ -154,6 +191,8 @@
                     }
                 }
             }
+            $adminstats1 = json_encode($adminstats);
+            file_put_contents("../data/admintask.json",$adminstats1);
             echo json_encode(array('Message'=>'failure'));die();
     }
     removeadmintask();
@@ -220,10 +259,13 @@ function isInOrganization($user,$classData){
 function createClass(&$personal, &$classData)
 {
     $user = getUserNumber();
+    $stats = file_get_contents("../data/admintask.json");
+    $stats = json_decode($stats,true);
 
     $personal = json_decode($personal, true);
     $userc = count($personal["Users"]);
     $orgs = count($classData["Organizations"]);
+    $statorgs = count($stats["Organizations"]);
     $admin = -1;
     if ($user != -1) {
         if (isset($_POST['ClassName']) && ($_POST['ClassName']) != '') {
@@ -255,6 +297,14 @@ function createClass(&$personal, &$classData)
                     $classData["Organizations"][$u]["classes"][$classes]['group'] = array();
                     $classData["Organizations"][$u]["classes"][$classes]['To-do'] = array();
                     $classData["Organizations"][$u]["classes"][$classes]['Recycle'] = array();
+                    return;
+                }
+            }
+            for ($u = 0; $u < $statorgs; $u++) {
+                if ($stats["Organizations"][$u]["Admin"] == $user) {
+                    $classes = count($classData["Organizations"][$u]["classes"]);
+                    $stats["Organizations"][$u]["classes"][$classes]['Cname'] = $className;
+                    $stats["Organizations"][$u]["classes"][$classes]['Stats'] = array();
                     return;
                 }
             }
