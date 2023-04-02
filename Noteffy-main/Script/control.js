@@ -70,40 +70,40 @@ let getClassMember = () => {
     })
 }
 
-fetch("../data/task.json").then((res) => res.json()).then((json) => {
-    let obj = calc_completed_task(json);
-    Chart.defaults.font.size = 20;
-    Chart.defaults.font.weight = "bold";
-    Chart.defaults.color = "black";
-    Chart.defaults.backgroundColor = "gray";
-    const cht = new Chart(ctx, {
-      type: 'line',
-      data: { 
-        labels: obj.date,
-        datasets: [
-          { label: 'Number of tasks completed',
-            data: obj.count,borderWidth: 10,
-            backgroundColor:"black" ,
-            font:{
-              size:20,
-            },
-            borderColor:"#bdbdbd",
-          },
-        ]
-      },
-      options: { 
-        scales: { y: { beginAtZero: true },
-        x: { beginAtZero: false } },
-        layout: { padding: 10 },
-        plugins: {
-          legend: {
-              labels: {
-                  font: {
-                      size: 18,
-                  }
-              }
-          }
-      }
-      }
-    });
-  })
+// fetch("../data/task.json").then((res) => res.json()).then((json) => {
+//     let obj = calc_completed_task(json);
+//     Chart.defaults.font.size = 20;
+//     Chart.defaults.font.weight = "bold";
+//     Chart.defaults.color = "black";
+//     Chart.defaults.backgroundColor = "gray";
+//     const cht = new Chart(ctx, {
+//       type: 'line',
+//       data: { 
+//         labels: obj.date,
+//         datasets: [
+//           { label: 'Number of tasks completed',
+//             data: obj.count,borderWidth: 10,
+//             backgroundColor:"black" ,
+//             font:{
+//               size:20,
+//             },
+//             borderColor:"#bdbdbd",
+//           },
+//         ]
+//       },
+//       options: { 
+//         scales: { y: { beginAtZero: true },
+//         x: { beginAtZero: false } },
+//         layout: { padding: 10 },
+//         plugins: {
+//           legend: {
+//               labels: {
+//                   font: {
+//                       size: 18,
+//                   }
+//               }
+//           }
+//       }
+//       }
+//     });
+//   })
