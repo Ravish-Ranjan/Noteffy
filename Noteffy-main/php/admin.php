@@ -393,6 +393,12 @@ function createAdminTask(&$users,&$orgs){
 
                             }
                             $orgs["Organizations"][$j]["classes"][$k]["To-do"][$to_do_count]["assignees"] = $ids;
+                            $orgs["Organizations"][$j]["classes"][$k]["To-do"][$to_do_count]["status"] = array();
+                            for($tt = 0;$tt < count($ids);$tt++){
+                                //Still have to delete expired tasks
+                                $orgs["Organizations"][$j]["classes"][$k]["To-do"][$to_do_count]["status"][$tt]["member"] =$ids[$tt];
+                                $orgs["Organizations"][$j]["classes"][$k]["To-do"][$to_do_count]["status"][$tt]["completed"]=array();
+                            }
                             echo "<script>location.replace('main.php')</script>";
                         }
                     }

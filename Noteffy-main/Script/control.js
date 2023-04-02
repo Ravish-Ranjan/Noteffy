@@ -1,11 +1,113 @@
 let ctx = document.getElementById("rendcont");
 let cont = ctx.getContext("2d");
+let cht;
+Chart.defaults.font.size = 20;
+Chart.defaults.font.family = "codec";
+Chart.defaults.font.weight = "bold";
+Chart.defaults.color = "white";
+Chart.defaults.backgroundColor = "rgba(255,255,255,0.0)";
 let data = {};
 
-function drawstat(id) {
-    let d = new Date();
-    let dd = d.toLocaleDateString("en-US", { month: "long" });
-   console.log(dd);
+function cleanDate(date){
+    return date.toISOString().split('T')[0];
+}
+function drawstat(id,nm) {
+    ctx.style['background'] = "url('../media/workspaceAsset4.png')";
+    ctx.style['background-size'] = "700px";
+    ctx.style['background-repeat'] = "repeat";
+    document.getElementById("chart-label").innerHTML = `${nm}'s Performance last month`;
+    let ed = new Date();let sd = new Date(ed);sd.setDate(sd.getDay()-30);
+    let dates = [];let counter =new Date(sd);
+    //Initialize x-axis labels
+    while(cleanDate(counter)!=cleanDate(ed)){
+        dates.push(cleanDate(counter));
+        counter.setDate(counter.getDate()+1);
+    }
+    if(cht!=null){
+        cht.destroy();
+    }
+    let ctask1 = [],ctask2 = [],ctask3 = [];
+    
+    data.forEach((ustat)=>{
+    if(ustat.user==0){
+        let comptask1 = ustat.comptasks1;
+        let comptask2 = ustat.comptasks2;
+        let comptask3 = ustat.comptasks3;
+        dates.forEach((date)=>{
+            // console.log(comptask1.count[comptask1.dates.indexOf(date)],comptask2.count[comptask2.dates.indexOf(date)]);
+            if(comptask1.dates.indexOf(date)>=0)
+                ctask1.push(comptask1.count[comptask1.dates.indexOf(date)]);
+            else
+                ctask1.push(0);
+            if(comptask2.dates.indexOf(date)>=0)
+                ctask2.push(comptask2.count[comptask2.dates.indexOf(date)]);
+            else
+                ctask2.push(0);
+            if(comptask3.dates.indexOf(date)>=0)
+                ctask3.push(comptask3.count[comptask3.dates.indexOf(date)]);
+            else
+                ctask3.push(0);
+        });
+        return;
+    }
+});
+    cht = new Chart(cont, {
+              type: 'line',
+              data: {
+                labels: dates,
+                datasets: [
+                  { label: 'Priority 1',
+                    data: ctask1,
+                    backgroundColor:"red" ,
+                    font:{
+                      size:40,
+                    },
+                    borderColor:"red",
+                  },
+                  { label: 'Priority 2',
+                    data: ctask2,
+                    backgroundColor:"blue" ,
+                    font:{
+                      size:30,
+                    },
+                    borderColor:"blue",
+                  },
+                  { label: 'Priority 3',
+                    data: ctask3,
+                    backgroundColor:"green" ,
+                    tension:0.1,
+                    font:{
+                      size:20,
+                    },
+                    borderColor:"green",
+                  }
+                ]
+              },
+              options: {
+                bezierCurve:true,
+                scales: { y: {
+                     beginAtZero: true,
+                     grid:{
+                        color:"white",display:true
+                     }},
+                     x: { beginAtZero: false ,
+                        grid:{
+                           color:"white",display:true
+                        }  }
+                    },
+                layout: { padding: 10 },
+                plugins: {
+                  legend: {
+                      labels: {
+                          font: {
+                              size: 18,
+                          }
+                      }
+                  }
+              }
+              }
+   });
+   fillCanv();
 }
 function openTab(evt, tabname) { // this function is used to move arround the tabs in the main page
     var i, tabcontent, tablinks;
@@ -63,100 +165,38 @@ let getClasses = async () => {
 getClasses();
 
 let classSelection = document.querySelectorAll(".workspace-select");
+
 classSelection.forEach((selector)=>{selector.addEventListener("input",async (elem)=>{
-    console.log(elem);
-    let classSelection = elem.target;
+    
     let cardn = (elem.target.id=='workspace-select-explore'?'explore-panel':'chart-panel');
     let card = document.getElementById(cardn);
-    let originalMarkup = card.innerHTML;
     let markup = '';
 
     let loc = window.location.href.split("/HTML/control.html");
     let response = await fetch(loc[0] + "/php/admin.php?" + (new URLSearchParams({ className: elem.target.value })), { method: "GET", mode: "cors" });
     response = await response.json();
     response['name'].forEach((name) => {
-    markup += `   <div id="explore-user-card">
-    <img src="../media/logoorangep.png" onhover="drawstat(${response['id'][response['name'].indexOf(name)]})" id="user-card-avatar">
+    markup += `   <div id="explore-user-card" onclick="drawstat(${response['id'][response['name'].indexOf(name)]},'${name}')">
+    <img src="../media/logoorangep.png" id="user-card-avatar">
     <p class="user-name-card">${name}</p>
     </div>`;
     });
     card.innerHTML = markup;
+    data = response['stats'];
 });
 });
-
-
-
 
 function fillCanv(){
   cont.font = "40px codec";
   let rect = ctx.getBoundingClientRect();
-  let img = new Image();
-  cont.fillText("Noteffy",10,rect.height/2.5);
+  let url = window.location.href.split('/HTML')[0]+"/media/noteffyTitle.png";
+  console.log(url);
+  var img = new Image();
+  img.src = url;
+  img.onload = ()=>{
+    cont.fill();
+  }
 }
-
-// fetch("../data/task.php").then((res) => res.json()).then((json) => {
-//     let datx = [1,2,3,4,5,6,7,9];
-//     let daty1 = datx.map((ele)=>{
-//         return Math.pow(ele,2);
-//     });
-//     let daty2 = datx.map((ele)=>{
-//         return Math.pow(ele,3);
-//     });
-//     let daty3 = datx.map((ele)=>{
-//         return Math.pow(ele,4);
-//     });
-//     Chart.defaults.font.size = 20;
-//     Chart.defaults.font.weight = "bold";
-//     Chart.defaults.color = "black";
-//     Chart.defaults.backgroundColor = "gray";
-//     const cht = new Chart(ctx, {
-//       type: 'line',
-//       data: {
-//         labels: datx,
-//         datasets: [
-//           { label: 'Priority 1',
-//             data: daty1,
-//             backgroundColor:"red" ,
-//             font:{
-//               size:20,
-//             },
-//             borderColor:"#bdbdbd",
-//           },
-//           { label: 'Priority 2',
-//             data: daty2,
-//             backgroundColor:"blue" ,
-//             font:{
-//               size:20,
-//             },
-//             borderColor:"#bdbdbd",
-//           },
-//           { label: 'Priority 3',
-//             data: daty3,
-//             backgroundColor:"green" ,
-//             font:{
-//               size:20,
-//             },
-//             borderColor:"#bdbdbd",
-//           }
-//         ]
-//       },
-//       options: {
-//         bezierCurve:true,
-//         scales: { y: { beginAtZero: true },
-//         x: { beginAtZero: false } },
-//         layout: { padding: 10 },
-//         plugins: {
-//           legend: {
-//               labels: {
-//                   font: {
-//                       size: 18,
-//                   }
-//               }
-//           }
-//       }
-//       }
-//     });
-//   })
 function initializeDate() {
     let days = $("days");
     let month_select = $("month_select");

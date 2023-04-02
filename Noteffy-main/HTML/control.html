@@ -6,7 +6,9 @@
         <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script defer src="../Script/control.js"></script>
     </head>
-    <body onload="initializeDate()">
+    <!-- <body onload="initializeDate()"> -->
+        <body>
+            <img id = backg src='../media/noteffyTitle.png' hidden></img>
         <div id="control-header">
             <div class="control-header-links">
                 <button class="tbs" onclick="openTab(event, '0')">Insights</button>
@@ -16,29 +18,19 @@
 
             <div class="main" id="0" style="display: none;">
                 <select name="workspace-choice-2" class="workspace-select" id="workspace-select-insight-2"> 
-                    <option value="" disabled>Select Workspace</option> 
+                    <option value="">Select Workspace</option> 
                 </select> 
                 <div id="insight-wrapper">
                     <!-- this div is for dynamc chart rendering-->
                     <div id="insight-panel">
                         <!-- this is user card-->
+                        <label id="chart-label">Assess your students</label>
                         <canvas id = "rendcont" style="display:block"></canvas>
                     </div>
                     <div id="chart-panel">
                         
                         <!-- this is user card-->
-                        <div id="explore-user-card"> 
-                            <img src="../media/logoorangep.png" id="user-card-avatar"> 
-                            <p class="user-name-card" id="user-name-card-insight"></p> 
-                        </div> 
-                        <div id="explore-user-card"> 
-                            <img src="../media/logoorangep.png" id="user-card-avatar"> 
-                            <p class="user-name-card" id="user-name-card-insight"></p> 
-                        </div> 
-                        <div id="explore-user-card"> 
-                            <img src="../media/logoorangep.png" id="user-card-avatar"> 
-                            <p class="user-name-card" id="user-name-card-insight"></p> 
-                        </div> 
+                        
                     </div>
                 </div>
             </div>

@@ -82,7 +82,7 @@ body{
     flex: 0 0 65%;
     border: 2px solid black;
     width: 56%;
-    height: 80%;
+    height: 100%;
     margin-top: 60px;
     margin-left: 20px;
     position: absolute;
@@ -143,6 +143,22 @@ body{
     top: 40px;
     left: 20px;
 }
+#chart-label{
+  font-family:codec-extrabold;font-size:2.1em;
+  color:grey;text-decoration: underline;
+  position:relative;margin-left:8%;margin-right:8%;top:5%;
+}
+#rendcont{
+  /* background:url('../media/background_5.png'); */
+  background:url('../media/noteffy_loader.gif');
+  background-size:100%;background-repeat:no-repeat;
+  background-position: 50% 50%;
+  outline:black;
+  margin-top:10%;
+  overflow:hidden;
+  border-radius:2em;
+}
+
 /* calendar */
 ul {list-style-type: none;}
 body {font-family: Verdana, sans-serif;}
