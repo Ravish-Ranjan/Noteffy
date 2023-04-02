@@ -135,10 +135,10 @@ function class_compose(classname,desc,member_limit) {  //this function helps to 
         let c = Math.floor(Math.random()*chars.length);
         code+=chars[c];
     }
-    let noteform = document.createElement("form");let action = "main.php";
-    noteform.setAttribute("action", action); noteform.setAttribute("method", "POST");
+    let noteform = document.createElement("div");let action = "../php/main.php";
+    // noteform.setAttribute("action", action); noteform.setAttribute("method", "POST");
     noteform.setAttribute("class", "FORM2");
-    noteform.setAttribute("onsubmit", "event.preventDefault();return checkEmpty(this)");
+    // noteform.setAttribute("onsubmit", "event.preventDefault();return checkEmpty(this)");
     noteform.innerHTML = 
     `<span id='Form_Caption'>Workspace Selector</span>\
     <button id = 'close' onclick = \"closeF(2)\"><img src='../media/cancelicon.png' id='cancel-icon-img'></button>\
@@ -146,17 +146,17 @@ function class_compose(classname,desc,member_limit) {  //this function helps to 
         <button id="create-workspace-bbt" onclick='showCreateWorkspace()'>Create Workspace</button>\
         <button id="join-workspace-bbt" onclick='showJoinWorkspace()'>Join Workspace</button>\
     </div>
-    <div id='create-workspace-panel'>
+    <form id='create-workspace-panel' action=${action} method='POST'>
         <input type='text' name='ClassName' id='CName' placeholder='Name'>\
         <textarea name = "ClassDesc" style='resize:none;' placeholder='This is my classroom?' name='' id='Cdesc' rows=4 cols=7 ></textarea>\
         <input type='text' name='ClassLimit' id='CLim' placeholder='ClassLimit'>\
         <input type='text' name='ClassCode' id='CCode' value='${code}' readonly>\
         <center><input type='submit' value='Save' id='btn' onclick='submit() '></center>
-        </div>
-        <div id='join-workspace-panel'>
+        </form>
+        <form id='join-workspace-panel' action=${action} method = 'POST'>
         <input type='text' name='JClassCode' placeholder='Enter Workspace Code' id='CCode' value=''>\
         <center><input type='submit' value='JOIN' id='btn' onclick='submit()'></center>
-        </div>
+        </form>
         `
     document.querySelector("body").appendChild(noteform);
     // document.querySelector("#btn1").toggleAttribute("onclick", "");

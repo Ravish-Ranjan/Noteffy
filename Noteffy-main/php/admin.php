@@ -308,7 +308,7 @@ function createClass(&$personal, &$classData)
                     return;
                 }
             }
-        } else if (isset($_POST['JClassCode']) && $_POST['ClassName'] == '') {
+        } else if (isset($_POST['JClassCode'])) {
             $code = $_POST['JClassCode'];
             for ($u = 0; $u < $orgs; $u++) {
                     for ($c = 0; $c < count($classData["Organizations"][$u]["classes"]); $c++) {
