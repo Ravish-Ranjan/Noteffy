@@ -90,9 +90,8 @@ body{
     width: 140;
     height: 120;
     border-radius: 50px;
-    top: 230;
     margin-left: 20;
-    position: absolute;
+    transform: translateY(103px);
 }
 #explore-user-card-2{
     background-color: white;
