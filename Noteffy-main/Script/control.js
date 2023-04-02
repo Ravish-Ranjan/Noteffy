@@ -1,6 +1,9 @@
 let ctx = document.getElementById("rendcont");
 let cont = ctx.getContext("2d");
 
+function $(id) {
+    return document.getElementById(id);
+}
 function openTab(evt, tabname) { // this function is used to move arround the tabs in the main page
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("main");
@@ -104,7 +107,7 @@ function fillCanv(){
 //     Chart.defaults.backgroundColor = "gray";
 //     const cht = new Chart(ctx, {
 //       type: 'line',
-//       data: { 
+//       data: {
 //         labels: datx,
 //         datasets: [
 //           { label: 'Priority 1',
@@ -133,7 +136,7 @@ function fillCanv(){
 //           }
 //         ]
 //       },
-//       options: { 
+//       options: {
 //         bezierCurve:true,
 //         scales: { y: { beginAtZero: true },
 //         x: { beginAtZero: false } },
@@ -150,3 +153,77 @@ function fillCanv(){
 //       }
 //     });
 //   })
+function initializeDate() {
+    let days = $("days");
+    let month_select = $("month_select");
+    let year_select = $("year_select");
+    
+    let d = new Date();
+    month_select.innerText = d.toLocaleDateString("en-US", { month: "long" });
+    year_select.innerText = d.getFullYear();
+}
+function nextMonth() {
+    let days = $("days");
+    let month_select = $("month_select");
+    let year_select = $("year_select");
+    
+    let date = `${year_select.innerText}-${month_select.innerText}-1`;
+    let d = new Date(date);
+    if (d.getMonth() + 1 != 12) {
+        d.setMonth(d.getMonth()+1);
+    }
+    else {
+        d.setFullYear(d.getFullYear() + 1);
+        d.setMonth(1);
+    }
+    month_select.innerText = d.toLocaleDateString("en-US", { month: "long" })
+    year_select.innerText = d.getFullYear();
+    getDays();
+
+}
+function previousMonth() {
+    let days = $("days");
+    let month_select = $("month_select");
+    let year_select = $("year_select");
+    
+    let date = `${year_select.innerText}-${month_select.innerText}-1`;
+    let d = new Date(date);
+    if (d.getMonth() - 1 != 0) {
+        d.setMonth(d.getMonth()-1);
+    }
+    else {
+        d.setFullYear(d.getFullYear() - 1);
+        d.setMonth(12);
+    }
+    month_select.innerText = d.toLocaleDateString("en-US", { month: "long" })
+    year_select.innerText = d.getFullYear();
+    getDays();
+    
+}
+function getDays() {
+    let days_select = $("days");
+    days_select.innerHTML = ``;
+    
+    let month_select = $("month_select").innerText;
+    let year_select = $("year_select").innerText;
+    
+    let date = `${year_select}-${month_select}-1`;
+    let d = new Date(date);
+
+    let days = (new Date(d.getFullYear(), d.getMonth()+1, 0).getDate())
+    for (let day = 0; day < days; day++){
+        let li = document.createElement("li");
+        if (day == (new Date().getDate())) {
+            let span = document.createElement("span");
+            span.setAttribute("class", "active");
+            span.innerText = day+1;
+            li.appendChild(span);
+            console.log("hello")
+        }
+        else {
+            li.innerText = day + 1;
+        }
+        days_select.appendChild(li);
+    }
+}
+getDays();
