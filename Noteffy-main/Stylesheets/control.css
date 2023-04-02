@@ -53,7 +53,7 @@ body{
 }
 #explore-panel{
     display: flex;
-    margin-top: 60;
+    margin-top: 70px;
     margin-left: 40;
     border: 2px solid black;
     width: 65%;
@@ -61,22 +61,28 @@ body{
     border-radius: 40px;
 }
 #insight-wrapper{
-    display: block;
+    display: flex;
 }
 #insight-panel{
-    position: relative;
-    left:-30px;top:-30px;
+    flex: 1;
+    left: 59%;
+    top: 54px;
     margin-top: 60px;
-    margin-left: 40px;
     border: 2px solid black;
-    width: 45%;
+    width: 40%;
     height: 80%;
     border-radius: 40px;
+    position: absolute;
 }
 #chart-panel{
+    flex: 0 0 65%;
     border: 2px solid black;
-    width: 25%;
-    height: 500%;
+    width: 56%;
+    height: 80%;
+    margin-top: 60px;
+    margin-left: 20px;
+    position: absolute;
+    border-radius: 40px;
 }
 #explore-user-card{
     background-color: white;
@@ -84,8 +90,18 @@ body{
     width: 140;
     height: 120;
     border-radius: 50px;
-    margin-top: 20;
     margin-left: 20;
+    transform: translateY(103px);
+}
+#explore-user-card-2{
+    background-color: white;
+    border: 2px solid black;
+    width: 140;
+    height: 120;
+    border-radius: 50px;
+    margin-left: 20;
+    position: absolute;
+    top: 80px;
 }
 #user-card-avatar{
     height: auto;
@@ -101,8 +117,18 @@ body{
     text-align: center;
     margin-top: 10;
 }
+#workspace-select-explore{
+    font-family: codec;
+    border: none;
+    font-size: 14px;
+    position: absolute;
+    top: 140px;
+}
 .workspace-select{
     font-family: codec;
     border: none;
     font-size: 14px;
+    position: absolute;
+    top: 40px;
+    left: 20px;
 }

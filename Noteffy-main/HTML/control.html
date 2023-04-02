@@ -15,19 +15,20 @@
 
             <div class="main" id="0" style="display: none;">
                 <div id="insight-wrapper">
+                    <!-- this div is for dynamc chart rendering-->
                     <div id="insight-panel">
-                        <select name="workspace-choice" class="workspace-select" id="workspace-select-insight">
-                            <option value="Select" disabled>Your classes</option>
-                        </select>
                         <!-- this is user card-->
-                        <div id="explore-user-card">
-                            <img src="../media/logoorangep.png" id="user-card-avatar">
-                            <p class="user-name-card" id="user-name-card-insight"></p>
-                        </div>
                     </div>
-                    <!--space for dynamic chart rendering-->
                     <div id="chart-panel">
                         <canvas id = "rendcont" style="display:block"></canvas>
+                        <select name="workspace-choice-2" class="workspace-select" id="workspace-select-insight-2"> 
+                            <option value="" disabled>Select Workspace</option> 
+                        </select> 
+                        <!-- this is user card-->
+                        <div id="explore-user-card"> 
+                            <img src="../media/logoorangep.png" id="user-card-avatar"> 
+                            <p class="user-name-card" id="user-name-card-insight"></p> 
+                        </div> 
                     </div>
                 </div>
             </div>
