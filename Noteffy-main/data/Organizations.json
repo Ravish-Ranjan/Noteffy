@@ -64,7 +64,14 @@
                             ]
                         }
                     ],
-                    "Events" : []
+                    "Events": [
+                        {
+                            "Date": "2023-04-05",
+                            "Time": "12:00",
+                            "Title": "Title",
+                            "Description": "asdfa"
+                        }
+                    ]
                 },
                 {
                     "Cname": "Gaurang's Class",
@@ -74,7 +81,14 @@
                     "group": [],
                     "To-do": [],
                     "Recycle": [],
-                    "Events" : []
+                    "Events": [
+                        {
+                            "Date": "2023-04-15",
+                            "Time": "12:00",
+                            "Title": "Aziz khan",
+                            "Description": "asdfla"
+                        }
+                    ]
                 }
             ]
         },
@@ -93,7 +107,7 @@
                     "group": [],
                     "To-do": [],
                     "Recycle": [],
-                    "Events" : []
+                    "Events": []
                 }
             ]
         }

@@ -1,5 +1,6 @@
 <?php
     require_once("initial.php");require_once("hash.php");
+    require_once("jsonpath-0.8.1.php");
     function getmembers(){
     if(!isset($_GET["op"]) || ($_GET["op"] != "getmembers")){
         return;
@@ -472,4 +473,29 @@ function classMembers(){
     }
 }
 classMembers();
+function storeEvents(){
+    $orgs = file_get_contents("../data/Organizations.json");
+    $orgs = json_decode($orgs, true);
+    $user = getUserNumber();
+    $userCheck = jsonPath($orgs, "$..Organizations[*].Admin");
+    $flag = in_array($user, $userCheck) ? true : false;
+    if(isset($_POST['E_Date']) && isset($_POST['E_Time']) && isset($_POST['E_Title']) && isset($_POST['Description']) && $flag){
+        $data = jsonPath($orgs, "$..Organizations[$user].classes[*].Cname");
+        $workspace = null;
+        for ($d = 0; $d < count($data);$d++){
+            if($data[$d] == $_POST['workspace-choice-2']){
+                $workspace = $d;
+            }
+        }
+        $temp_arr = array();
+        $temp_arr["Date"] = $_POST['E_Date'];
+        $temp_arr['Time'] = $_POST['E_Time'];
+        $temp_arr['Title'] = $_POST['E_Title'];
+        $temp_arr['Description'] = $_POST['Description'];
+        array_push($orgs["Organizations"][$user]["classes"][$workspace]["Events"],$temp_arr);
+        $orgs = json_encode($orgs);
+        file_put_contents("../data/Organizations.json", $orgs);
+        echo "<script>window.location.href='../HTML/control.html'</script>";
+    }
+}
 ?>

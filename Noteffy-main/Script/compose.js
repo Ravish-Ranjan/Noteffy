@@ -180,15 +180,19 @@ function checkEmpty(ele){ // this function checks if the user have any note/task
 function createSchedule() {
     let noteform = document.createElement("form");
     noteform.setAttribute("class", "FORM");noteform.setAttribute("enctype","multipart/form-data");
-    noteform.setAttribute("action","#");noteform.setAttribute("method","POST");
+    noteform.setAttribute("action","../php/main.php");noteform.setAttribute("method","POST");
     noteform.setAttribute("onsubmit","return checkEmpty(this)");
     noteform.innerHTML = `<span id='Form_Caption'>Block Calendar</span>\
     <button id = 'close' style=\"font-size:2vw;\" onclick = \"closeF(1)\">x</button>\
-    <input type='date' name='T_Date' id='Date' value="2023-04-31">\
-    <input type='time' name='T_Time' id='Time' value="12:00">
-    <input type='text' name='T_Title' id='Title' placeholder='Title' value=>\
+    <input type='date' name='E_Date' id='Date' value="2023-04-31">\
+    <input type='time' name='E_Time' id='Time' value="12:00">
+    <input type='text' name='E_Title' id='Title' placeholder='Title' value=>\<br>
     <label for='Description'>Description</label>\
     <textarea style='resize:none; margin:0;' placeholder='Description of the event' name='Description' id='Description' contenteditable='true' rows=8 cols=7></textarea>\
+    <select name="workspace-choice-2" id="workspace" class="workspace-select"> 
+        <option value="" disabled>Select Workspace</option> 
+    </select>
     <center><input type='submit' value='save' id='btn'></center>`
-    document.querySelector("body").appendChild(noteform)
+    document.querySelector("body").appendChild(noteform);
+    getClasses();
 }
