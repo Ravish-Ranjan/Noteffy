@@ -1,3 +1,4 @@
+/* *{outline: 2px solid greenyellow;} */
 @font-face {
     font-family: codec-extrabold;
     src: url('../media/Codec-Cold-Heavy-trial.ttf');
@@ -122,8 +123,9 @@ h2{
     flex-direction: row;
     background: url('../media/workspaceAsset1.png');
     background-repeat: no-repeat;
-    background-size: 328px 187px;
-    background-repeat: no-repeat;
+    /* background-size: 328px 187px; */
+    justify-content: space-around;
+    background-size:contain;
 }
 .class >.options{
     display: flex;
@@ -131,7 +133,7 @@ h2{
 }
 .options > button{
     display:block;
-    margin:10%;
+    /* margin:10%; */
     padding:6%;
     cursor:pointer;
     background-color: rgb(52,52,52,1.8);

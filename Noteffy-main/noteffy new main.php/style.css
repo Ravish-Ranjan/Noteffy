@@ -111,7 +111,7 @@ img{
     width: 70%;
     outline: 2px dashed white;
     background-image: url("https://e0.pxfuel.com/wallpapers/430/15/desktop-wallpaper-geometry-shapes-minimalism-artwork-samsung-galaxy-s6-s7-google-pixel-xl-nexus-6-6p-lg-g5-abstract-and-background.jpg");
-    background-repeat: round;
+    /* background-repeat: round; */
 }
 .class >.options{
     display: flex;
