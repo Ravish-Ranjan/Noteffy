@@ -8,20 +8,18 @@
     include "admin.php";
 ?>
 <?php
-$queries = array();
-// Fetching raw POST object body because content-type is causing parsing issues
-// parse_str($_SERVER['QUERY_STRING'], $queries);
-$details = file_get_contents("../data/Details.json");
-$details = json_decode($details, true);
-signUp($queries);
-signIn($details);
-allowAdmin($details);
-$details = json_encode($details);
-file_put_contents("../data/Details.json", $details);
-
+    $queries = array();
+    // Fetching raw POST object body because content-type is causing parsing issues
+    // parse_str($_SERVER['QUERY_STRING'], $queries);
+    $details = file_get_contents("../data/Details.json");
+    $details = json_decode($details, true);
+    signUp($queries);
+    signIn($details);
+    allowAdmin($details);
+    $details = json_encode($details);
+    file_put_contents("../data/Details.json", $details);
 ?>
 <html>
-    
     <head>
     <title>Main Page</title>
     
@@ -43,7 +41,6 @@ file_put_contents("../data/Details.json", $details);
     <script defer src="../Script/main.js"></script>
     <script defer src="../Script/admin.js"></script>
 </head>
-
 <body onload="pos()">
     <div class="main-parent-wrapper">
         <!-- admin panel -->
@@ -54,11 +51,9 @@ file_put_contents("../data/Details.json", $details);
             </div>
             <?php
                 $orgs = file_get_contents("../data/Organizations.json");
-                $orgs = json_decode($orgs, true);
-                
+                $orgs = json_decode($orgs, true);         
                 $flag = createClass($details, $orgs);
                 createAdminTask($details,$orgs);
-                
                 $orgs1 = json_encode($orgs);
                 file_put_contents("../data/Organizations.json", $orgs1);
                 if($flag){
@@ -79,7 +74,8 @@ file_put_contents("../data/Details.json", $details);
                     <?php
                     if (!isset($_COOKIE['user_number'])) {
                         // echo "<script>window.location.href = 'index.php'</script>";
-                    } else {
+                    } 
+                    else{
                         echo 
                         "<div  id='sidepanel-admin' >
                         <div class='panel-user-admin' >
@@ -94,8 +90,8 @@ file_put_contents("../data/Details.json", $details);
                         </div>";
                     }
                     ?>
-                    <button id="admin-nav-button-1" onclick="revealWorkspacePanel()">Workspaces</button>
-                    <button id="admin-nav-button-2" onclick="revealToDoPanel()">To-Do's</button>
+                    <button id="admin-nav-button-1" onclick="revealWorkspacePanel()"><img src="../media/workspaceWidget.png" id="workspaceBBT"></button>
+                    <button id="admin-nav-button-2" onclick="revealToDoPanel()"><img src="../media/todoWidget.png" id="todoBBT"></button>
                 </div>
                 <div id="todo-admin-panel">
                     <h1>To-Do'sss</h1>
@@ -128,7 +124,8 @@ file_put_contents("../data/Details.json", $details);
                     <?php
                     if (!isset($_COOKIE['user_number'])) {
                         // echo "<script>window.location.href = 'index.php'</script>";
-                    } else {
+                    } 
+                    else {
                         echo "<div  id='sidepanel' >
                         <div class='panel-user' >
                         <img src='../media/logoredq.png' height=80 width=80 alt='logo' style='margin-left: 20;filter:drop-shadow(2px 2px 5px black);'>
@@ -146,27 +143,24 @@ file_put_contents("../data/Details.json", $details);
                 </div>
             </div>
             <div class="tab">
-                <button class="tbs" onclick="openTab(event, '0')"><img src="../media/notesWidget.png"
-                id="noteWidgetImage"></button>
-                <button class="tbs" onclick="openTab(event, '1')"><img src="../media/taskWidget.png"
-                id="taskWidgetImage"></button>
-                <button class="tbs" onclick="openTab(event, '2')"><img src="../media/todoWidget.png"
-                id="bbtWidgetImage"></button>
+                <button class="tbs" onclick="openTab(event, '0')"><img src="../media/notesWidget.png" id="noteWidgetImage"></button>
+                <button class="tbs" onclick="openTab(event, '1')"><img src="../media/taskWidget.png" id="taskWidgetImage"></button>
+                <button class="tbs" onclick="openTab(event, '2')"><img src="../media/todoWidget.png" id="bbtWidgetImage"></button>
             </div>
             <div class="main" id="0">
                 <div class="scat" id="divi1">
                     <?php
-                    $details = file_get_contents("../data/Details.json");
-                    $details = json_decode($details, true);
-                    $details = json_encode($details);
-                    file_put_contents("../data/Details.json", $details);
-                    //$user = 0;
-                    $alternate = file_get_contents("../data/Data.json");
-                    $alternate = json_decode($alternate, true);
-                    Delete_Note($alternate);
-                    $user = fetch_store($alternate);
-                    display($alternate, $user);
-                    storeEvents();
+                        $details = file_get_contents("../data/Details.json");
+                        $details = json_decode($details, true);
+                        $details = json_encode($details);
+                        file_put_contents("../data/Details.json", $details);
+                        //$user = 0;
+                        $alternate = file_get_contents("../data/Data.json");
+                        $alternate = json_decode($alternate, true);
+                        Delete_Note($alternate);
+                        $user = fetch_store($alternate);
+                        display($alternate, $user);
+                        storeEvents();
                     ?>
                 </div>
                 <!-- this div is to let user create more notes -->
@@ -200,31 +194,28 @@ file_put_contents("../data/Details.json", $details);
                 </a>
             </div>
             <?php
-            $alternate = file_get_contents("../Data/Data.json");
-            $alternate = json_decode($alternate, true);
-            updateTask($alternate);
-            $alternate = json_encode($alternate);
-            file_put_contents("../data/Data.json", $alternate);
+                $alternate = file_get_contents("../Data/Data.json");
+                $alternate = json_decode($alternate, true);
+                updateTask($alternate);
+                $alternate = json_encode($alternate);
+                file_put_contents("../data/Data.json", $alternate);
             ?>
-
-<div class="main" id="2">
-    <div class="scat" style="background-image:url('../media/background_4.png');background-size:110%;"
-    id='divi3'>
-    <?php
-                    $alternate = file_get_contents("../data/Data.json");
-                    $alternate = json_decode($alternate, true);
-                    $u = getUserNumber();
-                    display_todo($alternate, $u);
-                    complete($alternate);
-                    $alternate = json_encode($alternate);
-                    file_put_contents("../data/Data.json", $alternate);
-                    ?>
-                </div>
+            <div class="main" id="2">
+            <div class="scat" style="background-image:url('../media/background_4.png');background-size:110%;" id='divi3'>
+            <?php
+                $alternate = file_get_contents("../data/Data.json");
+                $alternate = json_decode($alternate, true);
+                $u = getUserNumber();
+                display_todo($alternate, $u);
+                complete($alternate);
+                $alternate = json_encode($alternate);
+                file_put_contents("../data/Data.json", $alternate);
+                ?>
             </div>
         </div>
     </div>
+</div>
 </body>
 <script src="../Script/note.js"></script>
 <script src="../Script/tasks.js"></script>
-
 </html>
