@@ -512,16 +512,36 @@ body {
     top: 30;
     left: 30;
 }
+#workspaceBBT{
+    width: 270;
+    height: auto;
+    position: absolute;
+    top: 17;
+    cursor: pointer;
+    margin-left: -40;
+}
+#todoBBT{
+    width: 250;
+    height: auto;
+    position: absolute;
+    top: 15;
+    margin-left: -210;
+    cursor: pointer;
+}
 #admin-nav-button-1{
     height: 10%;
     width: 10%;
     position: absolute;
+    border: none;
+    background: none;
 }
 #admin-nav-button-2{
     height: 10%;
     width: 10%;
     left: 40%;
     position: absolute;
+    border: none;
+    background: none;
 }
 #admin-workspace-panel{
     outline: 2px solid white;
@@ -549,7 +569,6 @@ body {
     left: 110%;
 }
 #top-container{
-    opacity: 0.9;
     overflow-y: scroll;
 }
 #quill-black{

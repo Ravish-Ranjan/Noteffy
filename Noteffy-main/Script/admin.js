@@ -5,17 +5,18 @@ function revealAdmin(){
     document.getElementById("unlock-images").style.display = "none";
 }
 function revealWorkspacePanel(){
-if(document.getElementById("admin-nav-button-1").click){
-    document.getElementById("admin-workspace-panel").style.display = "flex";
-    document.getElementById("todo-admin-panel").style.display = "none";
+    if(document.getElementById("admin-nav-button-1").click){
+        document.getElementById("admin-workspace-panel").style.display = "flex";
+        document.getElementById("todo-admin-panel").style.display = "none";
+        document.getElementById("todoBBT").style.opacity = "0.5";
+    }
 }
-}
-
 function revealToDoPanel(){
-if(document.getElementById("admin-nav-button-2").click){
-    document.getElementById("admin-workspace-panel").style.display = "none";
-    document.getElementById("todo-admin-panel").style.display = "flex";
-}
+    if(document.getElementById("admin-nav-button-2").click){
+        document.getElementById("admin-workspace-panel").style.display = "none";
+        document.getElementById("todo-admin-panel").style.display = "flex";
+        document.getElementById("workspaceBBT").style.opacity = "0.5";
+    }
 }
 function switchAdmin(){
     let decoded = decodeURIComponent(document.cookie);
