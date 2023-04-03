@@ -171,7 +171,6 @@
                                     if(!in_array($_GET["tno"],$status["completed"])){
                                         $orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]["status"][$sn]["completed"][$comlen] = (int) $_GET["tno"];
 
-                                        //Put into admin's statistics chart here
                                         $c = insertStat($adminstats,$orgs["Organizations"][$j]["Admin"],$class["Cname"],$user,$todolist['Priority']);
                                         if($c==-1) die();
                                         $findus = array_search($user,$orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]["assignees"]);
@@ -373,7 +372,6 @@ function createAdminTask(&$users,&$orgs){
     $user = getUserNumber();
     $orgcount = count($orgs["Organizations"]);
     if ($user != -1) {
-        // echo $_POST['T_Title'];
         if(isset($_POST['T_Title']) && isset($_POST['T_Time']) && isset($_POST['T_Date'])){
             for ($j = 0; $j < $orgcount; $j++) {
                 if ($user == $orgs["Organizations"][$j]["Admin"]) {

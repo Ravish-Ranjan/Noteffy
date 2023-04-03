@@ -67,7 +67,7 @@ file_put_contents("../data/Details.json", $details);
                 else if(!$flag && isset($_POST['ClassCode'])){
                     echo "<script>message('invalid class code','error')</script>";
                 }
-                ?>
+            ?>
             <div id="admin-control-panel">
                 <div id="button-info-container">
                     <button id="unlock-button" onclick="switchAdmin()">Unlock</button>

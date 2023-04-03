@@ -8,106 +8,118 @@ Chart.defaults.color = "white";
 Chart.defaults.backgroundColor = "rgba(255,255,255,0.0)";
 let data = {};
 
-function cleanDate(date){
+
+
+function $(id) {
+    return document.getElementById(id);
+}
+function cleanDate(date) {
     return date.toISOString().split('T')[0];
 }
-function drawstat(id,nm) {
+function drawstat(id, nm) {
     ctx.style['background'] = "url('../media/workspaceAsset4.png')";
     ctx.style['background-size'] = "700px";
     ctx.style['background-repeat'] = "repeat";
     document.getElementById("chart-label").innerHTML = `${nm}'s Performance last month`;
-    let ed = new Date();let sd = new Date(ed);sd.setDate(sd.getDay()-30);
-    let dates = [];let counter =new Date(sd);
+    let ed = new Date(); let sd = new Date(ed); sd.setDate(sd.getDay() - 30);
+    let dates = []; let counter = new Date(sd);
     //Initialize x-axis labels
-    while(cleanDate(counter)!=cleanDate(ed)){
+    while (cleanDate(counter) != cleanDate(ed)) {
         dates.push(cleanDate(counter));
-        counter.setDate(counter.getDate()+1);
+        counter.setDate(counter.getDate() + 1);
     }
-    if(cht!=null){
+    if (cht != null) {
         cht.destroy();
     }
-    let ctask1 = [],ctask2 = [],ctask3 = [];
-    
-    data.forEach((ustat)=>{
-    if(ustat.user==0){
-        let comptask1 = ustat.comptasks1;
-        let comptask2 = ustat.comptasks2;
-        let comptask3 = ustat.comptasks3;
-        dates.forEach((date)=>{
-            // console.log(comptask1.count[comptask1.dates.indexOf(date)],comptask2.count[comptask2.dates.indexOf(date)]);
-            if(comptask1.dates.indexOf(date)>=0)
-                ctask1.push(comptask1.count[comptask1.dates.indexOf(date)]);
-            else
-                ctask1.push(0);
-            if(comptask2.dates.indexOf(date)>=0)
-                ctask2.push(comptask2.count[comptask2.dates.indexOf(date)]);
-            else
-                ctask2.push(0);
-            if(comptask3.dates.indexOf(date)>=0)
-                ctask3.push(comptask3.count[comptask3.dates.indexOf(date)]);
-            else
-                ctask3.push(0);
-        });
-        return;
-    }
-});
+    let ctask1 = [], ctask2 = [], ctask3 = [];
+
+    data.forEach((ustat) => {
+        if (ustat.user == 0) {
+            let comptask1 = ustat.comptasks1;
+            let comptask2 = ustat.comptasks2;
+            let comptask3 = ustat.comptasks3;
+            dates.forEach((date) => {
+                // console.log(comptask1.count[comptask1.dates.indexOf(date)],comptask2.count[comptask2.dates.indexOf(date)]);
+                if (comptask1.dates.indexOf(date) >= 0)
+                    ctask1.push(comptask1.count[comptask1.dates.indexOf(date)]);
+                else
+                    ctask1.push(0);
+                if (comptask2.dates.indexOf(date) >= 0)
+                    ctask2.push(comptask2.count[comptask2.dates.indexOf(date)]);
+                else
+                    ctask2.push(0);
+                if (comptask3.dates.indexOf(date) >= 0)
+                    ctask3.push(comptask3.count[comptask3.dates.indexOf(date)]);
+                else
+                    ctask3.push(0);
+            });
+            return;
+        }
+    });
     cht = new Chart(cont, {
-              type: 'line',
-              data: {
-                labels: dates,
-                datasets: [
-                  { label: 'Priority 1',
+        type: 'line',
+        data: {
+            labels: dates,
+            datasets: [
+                {
+                    label: 'Priority 1',
                     data: ctask1,
-                    backgroundColor:"red" ,
-                    font:{
-                      size:40,
+                    backgroundColor: "red",
+                    font: {
+                        size: 40,
                     },
-                    borderColor:"red",
-                  },
-                  { label: 'Priority 2',
+                    borderColor: "red",
+                },
+                {
+                    label: 'Priority 2',
                     data: ctask2,
-                    backgroundColor:"blue" ,
-                    font:{
-                      size:30,
+                    backgroundColor: "blue",
+                    font: {
+                        size: 30,
                     },
-                    borderColor:"blue",
-                  },
-                  { label: 'Priority 3',
+                    borderColor: "blue",
+                },
+                {
+                    label: 'Priority 3',
                     data: ctask3,
-                    backgroundColor:"green" ,
-                    tension:0.1,
-                    font:{
-                      size:20,
+                    backgroundColor: "green",
+                    tension: 0.1,
+                    font: {
+                        size: 20,
                     },
-                    borderColor:"green",
-                  }
-                ]
-              },
-              options: {
-                bezierCurve:true,
-                scales: { y: {
-                     beginAtZero: true,
-                     grid:{
-                        color:"white",display:true
-                     }},
-                     x: { beginAtZero: false ,
-                        grid:{
-                           color:"white",display:true
-                        }  }
-                    },
-                layout: { padding: 10 },
-                plugins: {
-                  legend: {
-                      labels: {
-                          font: {
-                              size: 18,
-                          }
-                      }
-                  }
-              }
-              }
-   });
-   fillCanv();
+                    borderColor: "green",
+                }
+            ]
+        },
+        options: {
+            bezierCurve: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: "white", display: true
+                    }
+                },
+                x: {
+                    beginAtZero: false,
+                    grid: {
+                        color: "white", display: true
+                    }
+                }
+            },
+            layout: { padding: 10 },
+            plugins: {
+                legend: {
+                    labels: {
+                        font: {
+                            size: 18,
+                        }
+                    }
+                }
+            }
+        }
+    });
+    fillCanv();
 }
 function openTab(evt, tabname) { // this function is used to move arround the tabs in the main page
     var i, tabcontent, tablinks;
@@ -170,107 +182,114 @@ getClasses();
 
 let classSelection = document.querySelectorAll(".workspace-select");
 
-classSelection.forEach((selector)=>{selector.addEventListener("input",async (elem)=>{
-    
-    let cardn = (elem.target.id=='workspace-select-explore'?'explore-panel':'chart-panel');
-    let card = document.getElementById(cardn);
-    let markup = '';
+classSelection.forEach((selector) => {
+    selector.addEventListener("input", async (elem) => {
 
-    let loc = window.location.href.split("/HTML/control.html");
-    let response = await fetch(loc[0] + "/php/admin.php?" + (new URLSearchParams({ className: elem.target.value })), { method: "GET", mode: "cors" });
-    response = await response.json();
-    response['name'].forEach((name) => {
-    markup += `   <div id="explore-user-card" onclick="drawstat(${response['id'][response['name'].indexOf(name)]},'${name}')">
+        let cardn = (elem.target.id == 'workspace-select-explore' ? 'explore-panel' : 'chart-panel');
+        let card = document.getElementById(cardn);
+        let markup = '';
+
+        let loc = window.location.href.split("/HTML/control.html");
+        let response = await fetch(loc[0] + "/php/admin.php?" + (new URLSearchParams({ className: elem.target.value })), { method: "GET", mode: "cors" });
+        response = await response.json();
+        response['name'].forEach((name) => {
+            markup += `   <div id="explore-user-card" onclick="drawstat(${response['id'][response['name'].indexOf(name)]},'${name}')">
     <img src="../media/logoorangep.png" id="user-card-avatar">
     <p class="user-name-card">${name}</p>
     </div>`;
         });
         card.innerHTML = markup;
-    });
-    card.innerHTML = markup;
-    data = response['stats'];
+        card.innerHTML = markup;
+        data = response['stats'];
+    })
 });
 
-function fillCanv(){
-  cont.font = "40px codec";
-  let rect = ctx.getBoundingClientRect();
-  let url = window.location.href.split('/HTML')[0]+"/media/noteffyTitle.png";
-  console.log(url);
-  var img = new Image();
-  img.src = url;
-  img.onload = ()=>{
-    cont.fill();
-  }
-}
-function initializeDate() {
-    let days = $("days");
-    let month_select = $("month_select");
-    let year_select = $("year_select");
-
-    let d = new Date();
-    month_select.innerText = d.toLocaleDateString("en-US", { month: "long" });
-    year_select.innerText = d.getFullYear();
-}
-function nextMonth() {
-    let days = $("days");
-    let month_select = $("month_select");
-    let year_select = $("year_select");
-
-    let date = `${year_select.innerText}-${month_select.innerText}-1`;
-    let d = new Date(date);
-    if (d.getMonth() + 1 != 12) {
-        d.setMonth(d.getMonth() + 1);
-    }
-    else {
-        d.setFullYear(d.getFullYear() + 1);
-        d.setMonth(1);
-    }
-    month_select.innerText = d.toLocaleDateString("en-US", { month: "long" })
-    year_select.innerText = d.getFullYear();
-    getDays();
-
-}
-function previousMonth() {
-    let days = $("days");
-    let month_select = $("month_select");
-    let year_select = $("year_select");
-
-    let date = `${year_select.innerText}-${month_select.innerText}-1`;
-    let d = new Date(date);
-    if (d.getMonth() - 1 != 0) {
-        d.setMonth(d.getMonth() - 1);
-    }
-    else {
-        d.setFullYear(d.getFullYear() - 1);
-        d.setMonth(12);
-    }
-    month_select.innerText = d.toLocaleDateString("en-US", { month: "long" })
-    year_select.innerText = d.getFullYear();
-    getDays();
-
-}
-function getDays() {
-    let days_select = $("days");
-    days_select.innerHTML = ``;
-
-    let month_select = $("month_select").innerText;
-    let year_select = $("year_select").innerText;
-
-    let date = `${year_select}-${month_select}-1`;
-    let d = new Date(date);
-
-    let days = (new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate())
-    for (let day = 0; day < days; day++) {
-        let li = document.createElement("li");
-        if (day == (new Date().getDate())) {
-            let span = document.createElement("span");
-            span.setAttribute("class", "active");
-            span.innerText = day + 1;
-            li.appendChild(span);
+        function fillCanv() {
+            cont.font = "40px codec";
+            let rect = ctx.getBoundingClientRect();
+            let url = window.location.href.split('/HTML')[0] + "/media/noteffyTitle.png";
+            console.log(url);
+            var img = new Image();
+            img.src = url;
+            img.onload = () => {
+                cont.fill();
+            }
         }
-        else {
-            li.innerText = day + 1;
+        function initializeDate() {
+            let days = $("days");
+            let month_select = $("month_select");
+            let year_select = $("year_select");
+
+            let d = new Date();
+            month_select.innerText = d.toLocaleDateString("en-US", { month: "long" });
+            year_select.innerText = d.getFullYear();
         }
-        days_select.appendChild(li);
-    }
+        function nextMonth() {
+            let days = $("days");
+            let month_select = $("month_select");
+            let year_select = $("year_select");
+
+            let date = `${year_select.innerText}-${month_select.innerText}-1`;
+            let d = new Date(date);
+            if (d.getMonth() + 1 != 12) {
+                d.setMonth(d.getMonth() + 1);
+            }
+            else {
+                d.setFullYear(d.getFullYear() + 1);
+                d.setMonth(1);
+            }
+            month_select.innerText = d.toLocaleDateString("en-US", { month: "long" })
+            year_select.innerText = d.getFullYear();
+            getDays();
+
+        }
+        function previousMonth() {
+            let days = $("days");
+            let month_select = $("month_select");
+            let year_select = $("year_select");
+
+            let date = `${year_select.innerText}-${month_select.innerText}-1`;
+            let d = new Date(date);
+            if (d.getMonth() - 1 != 0) {
+                d.setMonth(d.getMonth() - 1);
+            }
+            else {
+                d.setFullYear(d.getFullYear() - 1);
+                d.setMonth(12);
+            }
+            month_select.innerText = d.toLocaleDateString("en-US", { month: "long" })
+            year_select.innerText = d.getFullYear();
+            getDays();
+
+        }
+        function getDays() {
+            let days_select = $("days");
+            days_select.innerHTML = ``;
+
+            let month_select = $("month_select").innerText;
+            let year_select = $("year_select").innerText;
+
+            let date = `${year_select}-${month_select}-1`;
+            let d = new Date(date);
+
+            let firstDay = parseInt(d.getDay());
+            let days = (new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate())
+            for (let day = 0; day < days; day++) {
+                let li = document.createElement("li");
+                if (firstDay > 1) {
+                    firstDay--;
+                    day--;
+                }
+                else if (day == (new Date().getDate())) {
+                    let span = document.createElement("span");
+                    span.setAttribute("class", "active");
+                    span.innerText = day + 1;
+                    li.appendChild(span);
+                }
+                else {
+                    li.innerText = day + 1;
+                }
+                days_select.appendChild(li);
+            }
 }
+        // ul.innerHTML += '<li>13</li>'

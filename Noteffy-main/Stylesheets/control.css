@@ -130,7 +130,7 @@ body{
     border: 2px solid black;
     width: 140;
     height: 120;
-    border-radius: 50px;
+    border-radius: 1rem;
     margin-left: 20;
     transform: translateY(103px);
 }
