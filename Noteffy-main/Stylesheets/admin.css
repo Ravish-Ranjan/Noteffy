@@ -105,7 +105,7 @@
     /* aspect-ratio: 9/16; */
     text-align: start;
     color: white;
-    background-color: rgba(255,255,255,0.2);
+    background-size:round;
     font-family: monospace;
     display: flex;
     flex-direction: column;
@@ -121,7 +121,6 @@ h2{
 .class{
     display: flex;
     flex-direction: row;
-    background: url('../media/workspaceAsset1.png');
     background-repeat: no-repeat;
     /* background-size: 328px 187px; */
     justify-content: space-around;

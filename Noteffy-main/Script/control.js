@@ -165,7 +165,6 @@ let getClasses = async () => {
     response = await response.json();
     if (response['result'] == "success") {
         let workspace_select = document.querySelectorAll(".workspace-select");
-        console.log(workspace_select);
         workspace_select.forEach((selector) => {
             if (selector.options.length == 1) {
                 response['cls'].forEach((ele) => {
@@ -192,6 +191,13 @@ classSelection.forEach((selector) => {
         let loc = window.location.href.split("/HTML/control.html");
         let response = await fetch(loc[0] + "/php/admin.php?" + (new URLSearchParams({ className: elem.target.value })), { method: "GET", mode: "cors" });
         response = await response.json();
+        if(response['name'].length==0){
+            if(cardn=='chart-panel'){
+                ctx.style['background'] = "url('../media/background_6.png')";
+            ctx.style['background-size'] = "700px";
+            ctx.style['background-repeat'] = "repeat";
+            }
+        }
         response['name'].forEach((name) => {
             markup += `   <div id="explore-user-card" onclick="drawstat(${response['id'][response['name'].indexOf(name)]},'${name}')">
     <img src="../media/logoorangep.png" id="user-card-avatar">
@@ -199,7 +205,7 @@ classSelection.forEach((selector) => {
     </div>`;
         });
         card.innerHTML = markup;
-        card.innerHTML = markup;
+        // card.innerHTML = markup;
         data = response['stats'];
     })
 });

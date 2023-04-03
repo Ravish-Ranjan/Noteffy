@@ -24,4 +24,12 @@ function decrypt_data(&$data,$key1 = ""){ // this function decrypts the data so 
         $decoded = openssl_decrypt($data,$type,$key1,$opts,$iv);
     return $decoded;
 }
+function hash_name($word,$lim){
+    $exp = str_split($word);
+    $tot = 0;
+    foreach($exp as $letter){
+        $tot+=ord($letter);
+    }
+    return round(1+($tot%$lim));
+}
 ?>

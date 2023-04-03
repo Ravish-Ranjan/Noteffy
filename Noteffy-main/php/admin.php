@@ -334,8 +334,9 @@ function displayClass(&$classData)
             if ($user == $classData["Organizations"][$j]["Admin"]) {
                 for ($k = 0; $k < count($classData["Organizations"][$user]["classes"]); $k++) {
                     $title = $classData["Organizations"][$user]["classes"][$k]["Cname"];
+                    $rno = hash_name($title,4);
                     echo "
-                    <div class='class'>
+                    <div class='class' style='background-image:url(\"../media/workspaceAsset$rno.png\")'>
                     <div class='backg'>
                         <h2>$title</h2>
                     </div>

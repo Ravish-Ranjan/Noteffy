@@ -62,6 +62,9 @@
                 else if(!$flag && isset($_POST['ClassCode'])){
                     echo "<script>message('invalid class code','error')</script>";
                 }
+                $logon = hash_name(getUser(),3);
+                $colors = array("red","teal","yellow");
+                $logoc = $colors[$logon];
             ?>
             <div id="admin-control-panel">
                 <div id="button-info-container">
@@ -70,7 +73,7 @@
                     <p id="unlock-text-2">Do you wish to activate admin privileges?</p>
                 </div>
                 <div id="top-container">
-                    <img src="../media/logoredq.png" id="user-admin-logo" onclick="showAdminMenu()">
+                    <img src="../media/logo<?php echo $logoc; ?>q.png" id="user-admin-logo" onclick="showAdminMenu()">
                     <?php
                     if (!isset($_COOKIE['user_number'])) {
                         // echo "<script>window.location.href = 'index.php'</script>";
@@ -79,7 +82,7 @@
                         echo 
                         "<div  id='sidepanel-admin' >
                         <div class='panel-user-admin' >
-                        <img src='../media/logoredq.png' height=80 width=80 alt='logo' style='margin-left: 20;filter:drop-shadow(2px 2px 5px black);'>
+                        <img src='../media/logo".$logoc."q.png' height=80 width=80 alt='logo' style='margin-left: 20;filter:drop-shadow(2px 2px 5px black);'>
                         <label style='text-decoration:none;color:black;'>Hi, " . getUser() . " !</label>
                         </div>
                         <ul>
@@ -120,7 +123,7 @@
                     </button>
                 </div>
                 <div id="prof">
-                    <img src="../media/logoredq.png" onclick="showmenu()" style="cursor:pointer;margin-right:30;margin-top:30;" alt="prof" height="75">
+                    <img src="../media/logo<?php echo $logoc; ?>q.png" onclick="showmenu()" style="cursor:pointer;margin-right:30;margin-top:30;" alt="prof" height="75">
                     <?php
                     if (!isset($_COOKIE['user_number'])) {
                         // echo "<script>window.location.href = 'index.php'</script>";
@@ -128,7 +131,7 @@
                     else {
                         echo "<div  id='sidepanel' >
                         <div class='panel-user' >
-                        <img src='../media/logoredq.png' height=80 width=80 alt='logo' style='margin-left: 20;filter:drop-shadow(2px 2px 5px black);'>
+                        <img src='../media/logo".$logoc."q.png' height=80 width=80 alt='logo' style='margin-left: 20;filter:drop-shadow(2px 2px 5px black);'>
                         <label style='text-decoration:none;color:black;'>Hi, " . getUser() . " !</label>
                         </div>
                         <ul>

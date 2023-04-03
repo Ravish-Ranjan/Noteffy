@@ -4,6 +4,14 @@ async function decrypt_data(enc_data) {
   resp = await resp.json();
   return resp['res'];
 }
+function hash_name($word,$lim){
+  $exp = $word.split('');
+  $tot = 0;
+  $exp.forEach(($letter)=>{
+      $tot+=$letter.charCodeAt(0);
+  });
+  return 1+($tot%$lim);
+}
 function generate() {
   var avatarId = getUser();
   var svgCode = multiavatar(avatarId);
@@ -85,7 +93,10 @@ function getrandcolor(){
   return cl;
 }
 let userName = async () => {
-  document.getElementById("user-name").innerText = await decrypt_data(getUser());
+  let name = await decrypt_data(getUser());
+  let colors = ["red","teal","yellow"];
+  document.getElementById("user-name").innerText = name;
+  document.getElementById("user-avatar").setAttribute("src","../media/logo"+colors[hash_name(name,3)]+"q.png");
 }
 userName(); //fetching the username 
 const ctx = document.getElementById('context');
