@@ -9,10 +9,10 @@ function changePassword(){
     $details = file_get_contents("../data/Details.json");
     $details = json_decode($details, true);
     $user = getUserNumber();
-    $user_details = jsonPath($details, "$.Users[$user]");
-    $userName = $user_details[0][$user]["User_Name"];
+    $user_details = $details["Users"][$user];
+    $userName = $user_details["User_Name"];
     if(isset($_GET['pass'])){
-        $pass = $user_details[0][$user]["Password"];
+        $pass = $user_details["Password"];
         $pass = decrypt_data($pass,str_pad($userName,32,"#",STR_PAD_RIGHT));
         if ($pass == $_GET['pass']) {
             $response['status'] = "success";
