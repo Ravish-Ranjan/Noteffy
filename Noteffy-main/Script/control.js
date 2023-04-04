@@ -8,8 +8,26 @@ Chart.defaults.color = "white";
 Chart.defaults.backgroundColor = "rgba(255,255,255,0.0)";
 let data = {};
 
-
-
+ctx.addEventListener('',(e)=>{
+    console.log(e);
+    ctx['animation'] = "fade 1.5s linear";
+});
+document.querySelector("#temp").addEventListener('input',(elem)=>{
+    let val = elem.target.value;
+    if(val<=15){
+        elem.target.value = 0;
+    }
+    else if(val<=50){
+        elem.target.value = 30;
+    }
+    else if(val<=85){
+        elem.target.value = 70;
+    }
+    else{
+        elem.target.value = 100;
+    }
+    drawstat(ctx.getAttribute("datai"));
+});
 function $(id) {
     return document.getElementById(id);
 }
@@ -21,7 +39,9 @@ function drawstat(id, nm) {
     ctx.style['background'] = 'rgb(57,57,57)';
     ctx.style['background-size'] = "fit";
     ctx.style['background-repeat'] = "no-repeat";
-    document.getElementById("chart-label").innerHTML = `${nm}'s Performance last month`;
+    ctx.setAttribute('datai',id);
+    if(nm!=null)
+        document.getElementById("chart-label").innerHTML = `${nm}'s Performance`;
     let ed = new Date(); let sd = new Date(ed); sd.setDate(sd.getDay() - 30);
     let dates = []; let counter = new Date(sd);
     //Initialize x-axis labels
@@ -34,13 +54,20 @@ function drawstat(id, nm) {
     }
     let ctask1 = [], ctask2 = [], ctask3 = [];
 
+    var val = document.querySelector("#temp").value;let start = 0,label='';
+    switch(val){
+        case '0':start = 0;label='Last month';break;
+        case '30':start = 8;label='Last 3 weeks';break;
+        case '70':start = 16;label='Last 2 weeks';break;
+        case '100':start = 24;label='Last week';break;
+    }
+    var dates1 = dates.slice().splice(start);
     data.forEach((ustat) => {
-        if (ustat.user == 0) {
+        if (ustat.user == id) {
             let comptask1 = ustat.comptasks1;
             let comptask2 = ustat.comptasks2;
             let comptask3 = ustat.comptasks3;
-            dates.forEach((date) => {
-                // console.log(comptask1.count[comptask1.dates.indexOf(date)],comptask2.count[comptask2.dates.indexOf(date)]);
+            dates1.forEach((date) => {
                 if (comptask1.dates.indexOf(date) >= 0)
                     ctask1.push(comptask1.count[comptask1.dates.indexOf(date)]);
                 else
@@ -60,7 +87,7 @@ function drawstat(id, nm) {
     cht = new Chart(cont, {
         type: 'line',
         data: {
-            labels: dates,
+            labels: dates1,
             datasets: [
                 {
                     label: 'Priority 1',
@@ -96,6 +123,7 @@ function drawstat(id, nm) {
             bezierCurve: true,
             scales: {
                 y: {
+                    max:30,
                     beginAtZero: true,
                     grid: {
                         color: "white", display: true
@@ -115,7 +143,11 @@ function drawstat(id, nm) {
                         font: {
                             size: 18,
                         }
-                    }
+                    },
+                },
+                title:{
+                    display:true,
+                    text:label
                 }
             }
         }
@@ -190,14 +222,34 @@ classSelection.forEach((selector) => {
         let markup = '';
 
         let loc = window.location.href.split("/HTML/control.html");
-        let response = await fetch(loc[0] + "/php/admin.php?" + (new URLSearchParams({ className: elem.target.value })), { method: "GET", mode: "cors" });
-        response = await response.json();
-        if(response['name'].length==0){
-            if(cardn=='chart-panel'){
-            ctx.style['background'] = "url('../media/background_6.png')";
+        let reponse = null;
+        try{
+            response = await fetch(loc[0] + "/php/admin.php?" + (new URLSearchParams({ className: elem.target.value })), { method: "GET", mode: "cors" });
+            response = await response.json();
+        }
+        catch(e){
+            if(ctx.style['background'] != "url('../media/statsGIF.gif')"){
+                ctx.style['background'] = "url('../media/statsGIF.gif')";
+            }
             ctx.style['background-size'] = "100%";
             ctx.style['background-repeat'] = "no-repeat";
-            cht.destroy();
+            ctx.style['background-position'] = "50% 50%";
+            if(cht!=null){
+                cht.destroy();
+            }
+            return;
+        }
+        if(response['name'].length==0){
+            if(cardn=='chart-panel'){
+                if(ctx.style['background'] != "url('../media/statsGIF.gif')"){
+                    ctx.style['background'] = "url('../media/statsGIF.gif')";
+                }
+                ctx.style['background-size'] = "100%";
+                ctx.style['background-repeat'] = "no-repeat";
+                ctx.style['background-position'] = "50% 50%";
+                if(cht!=null){
+                    cht.destroy();
+                }
             }
         }
         document.getElementById("chart-label").innerHTML = `Assess your students`;
@@ -217,7 +269,6 @@ classSelection.forEach((selector) => {
             cont.font = "40px codec";
             let rect = ctx.getBoundingClientRect();
             let url = window.location.href.split('/HTML')[0] + "/media/noteffyTitle.png";
-            console.log(url);
             var img = new Image();
             img.src = url;
             img.onload = () => {
