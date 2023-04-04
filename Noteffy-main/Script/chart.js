@@ -232,7 +232,8 @@ async function changePassword(form) {
     }
   }
   else {
-    form['newpass2'].style.outline = "red";
+    btn.style.backgroundColor = "orange";
+    form['newpass2'].style.border = "2px solid red";
   }
 }
 function generatePassForm() {
@@ -241,12 +242,59 @@ function generatePassForm() {
   infoContainer.style.display = "none";
   formChange.style.display = "block";
   formChange.innerHTML += `<form onsubmit="event.preventDefault()" id='passChange'>
-    <label>Old Password</label>
-    <input type="password" name="oldpass" required>
-    <label>New Password</label>
-    <input type="password" name="newpass1" required>
-    <label>Confirm New Password</label>
-    <input type="password" name="newpass2" required>
-    <button value="change" name='submit' onclick="changePassword(this.parentNode);" id="btn">Check Password</button>
-    </form>`
+  <label>Old Password</label>
+  <input type="password" name="oldpass" required>
+  <label>New Password</label>
+  <input type="password" name="newpass1" required>
+  <label>Confirm New Password</label>
+  <input type="password" name="newpass2" required>
+  <button value="change" name='submit' onclick="changePassword(this.parentNode);" class="btn">Check Password</button>
+  </form>`
+  }
+  
+  async function changeAvatar(form) {
+    let loc = window.location.href.split("/HTML/chart.html");
+    console.log($("pic").src);
+    let response = await fetch(loc[0] + "/php/chart.php?" + (new URLSearchParams({ img: `${$("pic").src}` })), { method: "GET", mode: "cors" });
+    response = await response.json();
+    console.log(response['status']);
+    let infoContainer = $("info_container");
+    let formChange = $("form_change");
+    infoContainer.style.display = "block";
+    formChange.style.display = "none";
+    formChange.innerHTML = '';
+    window.location.href = "../php/main.php";
+  }
+  function generatePicDiv() {
+    let infoContainer = $("info_container");
+    let formChange = $("form_change");
+    infoContainer.style.display = "none";
+    formChange.style.display = "block";
+    let obj = {
+    iter: 0,
+    pictures : ["red", "teal", "yellow"]
+  }
+  
+  
+  formChange.innerHTML = `<div id="images">
+<div id='prev'>&#10094;</div>
+<img src="../media/logoredq.png" id='pic' name='pic'>
+  <div id='next'>&#10095;</div>
+</div>
+<center><button class="btn" onclick="changeAvatar()">Change</button></center>
+ `
+  $("prev").addEventListener("click", () => {
+    let pic = $("pic");
+    if (obj.iter-1 != -1) {
+      obj.iter = (obj.iter - 1) % obj.pictures.length;
+    }
+    else
+      obj.iter = 2;
+    pic.src = `../media/logo${obj.pictures[obj.iter]}q.png`;
+   })
+  $("next").addEventListener("click", () => {
+    let pic = $("pic");
+      obj.iter = (obj.iter + 1) % obj.pictures.length;
+    pic.src = `../media/logo${obj.pictures[obj.iter]}q.png`;
+   })
 }
