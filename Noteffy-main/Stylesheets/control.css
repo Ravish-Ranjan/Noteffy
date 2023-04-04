@@ -128,6 +128,17 @@ body{
 #rendcont{
     height:50%;width:100%;
 }
+@keyframes fade {
+    0%{
+      opacity:1;
+    }
+    50%{
+      opacity:0;
+    }
+    0%{
+      opacity:1;
+    }
+}
 #explore-user-card{
     background-color: white;
     border: 2px solid black;
@@ -185,10 +196,11 @@ body{
   font-family:codec-extrabold;
   font-size:1.5em;
   color:#141414;
+  width:100%;
   position:relative;
   text-align: center;
   top: 20;
-  margin-left: 100;
+  margin-left: 100;margin-right:100;
 }
 #rendcont{
   /* background:url('../media/background_5.png'); */
@@ -400,4 +412,10 @@ input[type="date"],input[type="text"],textarea{
   border: 0;
   background: url('../media/pin2.png');
   cursor: pointer;
+}
+
+#markers option::before{
+  content:'11234234234';
+  display:block;
+  font-size:50px;
 }

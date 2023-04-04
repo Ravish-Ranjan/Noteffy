@@ -17,7 +17,7 @@
             </div>
             <div class="main" id="0" style="display: none;">
                 <select name="workspace-choice-2" class="workspace-select" id="workspace-select-insight-2"> 
-                    <option value="">Select Workspace</option> 
+                    <option value="blank">Select Workspace</option> 
                 </select> 
                 <div id="insight-wrapper">
                     <!-- this div is for dynamc chart rendering-->
@@ -27,12 +27,12 @@
                         <br>
                         <br>
                         <br>
-                        <input type="range" id="temp" name="temp" list="markers" class="slider">
+                        <input type="range" id="temp" name="temp" list="markers" class="slider" value="100">
                         <datalist id="markers">
-                            <option value="0"></option>
-                            <option value="30"></option>
-                            <option value="70"></option>
-                            <option value="100"></option>
+                            <option value="0">1 week</option>
+                            <option value="30">2 weeks</option>
+                            <option value="70">3 weeks</option>
+                            <option value="100">4 weeks</option>
                         </datalist>
                         <canvas id = "rendcont" style="display:block"></canvas>
                     </div>
