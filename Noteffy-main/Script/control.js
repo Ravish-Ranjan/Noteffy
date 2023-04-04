@@ -17,9 +17,10 @@ function cleanDate(date) {
     return date.toISOString().split('T')[0];
 }
 function drawstat(id, nm) {
-    ctx.style['background'] = "url('../media/workspaceAsset4.png')";
-    ctx.style['background-size'] = "700px";
-    ctx.style['background-repeat'] = "repeat";
+    // ctx.style['background'] = "url('../media/background_5.png')";
+    ctx.style['background'] = 'rgb(57,57,57)';
+    ctx.style['background-size'] = "fit";
+    ctx.style['background-repeat'] = "no-repeat";
     document.getElementById("chart-label").innerHTML = `${nm}'s Performance last month`;
     let ed = new Date(); let sd = new Date(ed); sd.setDate(sd.getDay() - 30);
     let dates = []; let counter = new Date(sd);
@@ -64,11 +65,11 @@ function drawstat(id, nm) {
                 {
                     label: 'Priority 1',
                     data: ctask1,
-                    backgroundColor: "red",
+                    backgroundColor: "#f72839",
                     font: {
                         size: 40,
                     },
-                    borderColor: "red",
+                    borderColor: "#f72839",
                 },
                 {
                     label: 'Priority 2',
@@ -193,11 +194,13 @@ classSelection.forEach((selector) => {
         response = await response.json();
         if(response['name'].length==0){
             if(cardn=='chart-panel'){
-                ctx.style['background'] = "url('../media/background_6.png')";
-            ctx.style['background-size'] = "700px";
-            ctx.style['background-repeat'] = "repeat";
+            ctx.style['background'] = "url('../media/background_6.png')";
+            ctx.style['background-size'] = "100%";
+            ctx.style['background-repeat'] = "no-repeat";
+            cht.destroy();
             }
         }
+        document.getElementById("chart-label").innerHTML = `Assess your students`;
         response['name'].forEach((name) => {
             markup += `   <div id="explore-user-card" onclick="drawstat(${response['id'][response['name'].indexOf(name)]},'${name}')">
     <img src="../media/logoorangep.png" id="user-card-avatar">
