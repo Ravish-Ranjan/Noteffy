@@ -100,7 +100,7 @@
             for ($i = 0; $i < $users_count; $i++) {
                 // echo $i.'<br>';
                 if ($jsonData["Users"][$i]["identifier"] == $i) {
-                    if ($jsonData["Users"][$i]["Password"] === encrypt_data($_POST["Password_"], str_pad($_POST["User_Name_"], 32, '#', STR_PAD_RIGHT))) {
+                    if ($jsonData["Users"][$i]["Password"] === encrypt_data($_POST["Password_"], str_pad($_POST["User_Name_"], 32, '#', STR_PAD_RIGHT)) && $jsonData["Users"][$i]["User_Name"]==$_POST['User_Name_']) {
                         $temp = encrypt_data($jsonData["Users"][$i]["User_Name"], '');
                         $temp1 = encrypt_data($jsonData["Users"][$i]["identifier"], '');
                         setcookie("user", $temp, 0, "/");
