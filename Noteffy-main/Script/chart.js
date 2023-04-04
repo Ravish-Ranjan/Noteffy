@@ -4,6 +4,9 @@ async function decrypt_data(enc_data) {
   resp = await resp.json();
   return resp['res'];
 }
+function $(id) {
+  return document.getElementById(id);
+}
 function hash_name($word,$lim){
   $exp = $word.split('');
   $tot = 0;
@@ -96,6 +99,7 @@ let userName = async () => {
   let name = await decrypt_data(getUser());
   let colors = ["red","teal","yellow"];
   document.getElementById("user-name").innerText = name;
+  $("cur-user").innerText = name;
   document.getElementById("user-avatar").setAttribute("src","../media/logo"+colors[hash_name(name,3)]+"q.png");
 }
 userName(); //fetching the username 
@@ -200,3 +204,49 @@ graveyard = async () => {
 })
 }
 graveyard();
+
+// change password
+async function changePassword(form) {
+  let loc = window.location.href.split("/HTML/chart.html");
+  let oldPass = form['oldpass'].value;
+  let newPass1 = form['newpass1'].value;
+  let newPass = form['newpass2'].value;
+  let btn = form['submit']
+  if (newPass1 == newPass) {
+    let response = await fetch(loc[0] + "/php/chart.php?" + (new URLSearchParams({ pass: oldPass })), { method: "GET", mode: "cors" });
+    response = await response.json();
+    
+    if (response['status'] == "success" && btn.innerText == "Check Password") {
+      btn.innerText = "Change Password";
+      btn.style.backgroundColor = "lime";
+    }
+    else if (btn.innerText != "Check Password") {
+      let changeRes = await fetch(loc[0] + "/php/chart.php?" + (new URLSearchParams({ new_pass: `${newPass}`,change:true })), { method: "GET", mode: "cors" });
+      changeRes = await changeRes.json();
+      console.log(changeRes['pass_change_status']);
+      let infoContainer = $("info_container");
+      let formChange = $("form_change");
+      infoContainer.style.display = "block";
+      formChange.style.display = "none";
+      formChange.innerHTML = '';
+    }
+  }
+  else {
+    form['newpass2'].style.outline = "red";
+  }
+}
+function generatePassForm() {
+  let infoContainer = $("info_container");
+  let formChange = $("form_change");
+  infoContainer.style.display = "none";
+  formChange.style.display = "block";
+  formChange.innerHTML += `<form onsubmit="event.preventDefault()" id='passChange'>
+    <label>Old Password</label>
+    <input type="password" name="oldpass" required>
+    <label>New Password</label>
+    <input type="password" name="newpass1" required>
+    <label>Confirm New Password</label>
+    <input type="password" name="newpass2" required>
+    <button value="change" name='submit' onclick="changePassword(this.parentNode);" id="btn">Check Password</button>
+    </form>`
+}

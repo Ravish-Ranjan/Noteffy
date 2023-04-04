@@ -3,6 +3,8 @@
         <title>Chart</title>
         <link rel="shortcut icon" href="../media/logo5mix.png" type="image/x-icon">
         <link rel="stylesheet" href="../Stylesheets/chart.css">
+        <link rel="stylesheet" href="../Stylesheets/message.css">
+        <script defer src="../Script/message.js"></script>
         <script  src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <style>
            ::-webkit-scrollbar{
@@ -64,7 +66,8 @@
             </div>
         </div>
         <div class="main" id="0" style="display: none;">
-            <p id="set-title">Profile Information</p>
+            <div id="info_container">
+                <p id="set-title">Profile Information</p>
 
             <p id="sets-title">Change Username:</p>
             <button id="change-username">Edit</button>
@@ -72,12 +75,16 @@
             
             <p id="sets-title">Change Password:</p>
             <p id="cur-password" style="color: grey;">******</p>
-            <button id="change-password">Edit</button>
+            <button id="change-password" onclick="generatePassForm()">Edit</button>
 
             <p id="sets-title">Change Avatar:</p>
             <button id="change-avatar">Edit</button>
 
             <button id="delete-acc-bbt">Delete Account</button>
+            </div>
+            <div id="form_change" style="display:none">
+
+            </div>
             
         </div>
         <div class="main" id="1" style="display: none;">
