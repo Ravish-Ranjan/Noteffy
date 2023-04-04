@@ -1,4 +1,4 @@
-/* *{outline:0.2vw solid green;} */
+*{outline:0.2vw solid lime;}
 @font-face {
     font-family: codec-extrabold;
     src: url('../media/Codec-Cold-Heavy-trial.ttf');
@@ -29,10 +29,9 @@
         transform: rotate(0deg);
     }
 }
-
 body {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    place-items: center;
     background: url("../media/workspaceBGnew.png");
     background-repeat: no-repeat;
     background-size: auto auto;
@@ -375,7 +374,17 @@ body {
     font-family: codec;
 }
 
-#sidepanel>ul {
+#sidepanel>ul,#sidepanel-admin>ul {
+    width: 100%;
+    font-size: 25;
+    text-shadow: none;
+    font-family: codec-extrabold;
+    font-weight: bold;
+    text-align: start;
+    padding-left: 10%;
+    padding-top: 10%;
+}
+/* #sidepanel-admin>ul {
     width: 100%;
     font-size: 25;
     text-shadow: none;
@@ -383,36 +392,34 @@ body {
     text-align: start;
     padding-left: 10%;
     padding-top: 10%;
-}
-#sidepanel-admin>ul {
-    width: 100%;
-    font-size: 25;
-    text-shadow: none;
-    font-family: codec-extrabold;
-    text-align: start;
-    padding-left: 10%;
-    padding-top: 10%;
-}
+} */
 
-#sidepanel>ul>li {
+#sidepanel>ul>li,#sidepanel-admin>ul>li {
     padding: 0.5rem 0 0.5rem 1rem;
     font-family: codec;
     transition: linear 0.15s;
 }
 
-#sidepanel>ul>li:hover {
+#sidepanel>ul>li:hover ,#sidepanel-admin>ul>li:hover{
     background-color: rgb(200, 200, 200);
     filter: invert(1);
 }
 
-#sidepanel>ul>li>a {
+#sidepanel>ul>li>a,#sidepanel-admin>ul>li>a {
     color: black;
 }
-#sidepanel-admin>ul>li {
+#sidepanel-admin>ul {
+    text-align: end;
+    /* list-style-type: none; */
+    width: 80%;
+    transform: translateX(0%);
+}
+/* #sidepanel-admin>ul>li {
     padding: 0.5rem 0 0.5rem 1rem;
     font-family: codec;
     transition: linear 0.15s;
-}
+    width: 100%;
+} */
 
 #sidepanel-admin>ul>li:hover {
     background-color: rgb(200, 200, 200);
@@ -446,16 +453,30 @@ body {
     padding: 0;
     margin: 0;
 }
+.main-parent-wrapper{
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    width: 200%;
+}
 .user-panel,.admin-panel {
     height: 98%;
-    width: 96%;
+    width: 97%;
     position: absolute;
     display: flex;
     flex-direction: column;
     text-align: center;
+    top: 0;
+    right: 0;
 }
 .admin-panel{
-    z-index: 2;
+    left: 0;
+    display: flex;
+    height: 100%;
+    /* z-index: 2; */
+}
+#admin-control-panel{
+    overflow-y: hidden;
 }
 #unlock-button{
     font-family: codec-extrabold;
@@ -506,62 +527,48 @@ body {
     position: absolute;
 }
 #user-admin-logo{
-    position: absolute;
-    height: 12%;
-    width: auto;
-    top: 30;
-    left: 30;
+    height: 80%;
+    aspect-ratio: 1/1;
+    margin-left: 5%;
 }
-#workspaceBBT{
-    width: 270;
+#workspaceBBT,#todoBBT{
+    width: 80%;
     height: auto;
-    position: absolute;
-    top: 17;
     cursor: pointer;
-    margin-left: -40;
+    filter: drop-shadow(-20px 10px 10px #444);
+    opacity: 1;
+    transition: opacity ease-in-out 0.1s;
 }
-#todoBBT{
-    width: 250;
-    height: auto;
-    position: absolute;
-    top: 15;
-    margin-left: -210;
-    cursor: pointer;
+#workspaceBBT:active,#todoBBT:active{
+    opacity: 0.7;
 }
 #admin-nav-button-1{
-    height: 10%;
-    width: 10%;
-    position: absolute;
     border: none;
     background: none;
 }
 #admin-nav-button-2{
-    height: 10%;
-    width: 10%;
-    left: 40%;
-    position: absolute;
+
     border: none;
     background: none;
 }
 #admin-workspace-panel{
     outline: 2px solid white;
-    border-radius: 3rem;
+    border-radius: 2rem;
     height: 80%;
-    width: 100%;
-    margin-left: 15px;
+    width: 96%;
+    margin: 0% 2%;
     top: 120;
     z-index: -1;
     position: absolute;
     display: flex;
     opacity: 1;
-    flex-direction: row;
 }
 #todo-admin-panel{
     outline: 2px solid white;
-    border-radius: 3rem;
+    border-radius: 2rem;
     height: 80%;
-    width: 100%;
-    margin-left: 15px;
+    width: 96%;
+    margin: 0% 2%;
     top: 120;
     position: absolute;
     display: none;
@@ -570,7 +577,17 @@ body {
     left: 110%;
 }
 #top-container{
-    overflow-y: scroll;
+    height: 15vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+.admin-ctrls{
+    width: 50%;
+    display: flex;
+    height: 100%;
+    justify-content: space-around;
 }
 #quill-black{
     height: 15%;
