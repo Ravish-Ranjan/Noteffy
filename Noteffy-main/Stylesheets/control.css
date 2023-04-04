@@ -50,14 +50,14 @@
 }
 body{
     /* background-image: url('../media/statsBG.png'); */
-    background-color:#393939;
+    background-color:#F7F8F8;
     background-size: auto 100%;
     background-repeat: no-repeat;
 }
 #control-header{
     width: 100%;
     height: 15%;
-    background-color: #f1f1f1;
+    background-color: #141414;
 }
 .control-header-links{
     display: flex;
@@ -67,7 +67,7 @@ body{
     padding-top: 2.7%;
 }
 .tbs{
-    color: #141414;
+    color: #f1f1f1;
     font-family: codec-extrabold;
     font-size: 25; 
     transition: 0.3s;     
@@ -89,28 +89,27 @@ body{
     outline: none;
     box-shadow: 2px 2px 4px black;
     height:3em;
-    background-color: #141414;
-    color: #f1f1f1;
+    background-color: #f1f1f1;
+    color: #141414;
 }
 #explore-panel{
     display: flex;
     margin-top: 70px;
     margin-left: 40;
-    border: 2px solid #f1f1f1;
+    border: 2px solid #141414;
     width: 65%;
     height: 500%;
     border-radius: 40px;
 }
 #insight-wrapper{
     display: flex;
-    background-color:#393939;
 }
 #insight-panel{
     flex: 1;
     left: 59%;
     top: 54px;
     margin-top: 60px;
-    border: 2px solid #f1f1f1;
+    border: 2px solid #141414;
     width: 40%;
     height: 80%;
     border-radius: 40px;
@@ -118,7 +117,7 @@ body{
 }
 #chart-panel{
     flex: 0 0 65%;
-    border: 2px solid #f1f1f1;
+    border: 2px solid #141414;
     width: 56%;
     height: 75%;
     margin-top: 60px;
@@ -172,7 +171,7 @@ body{
 #workspace-select-insight-2{
     position: absolute;
     top: 140px;z-index:3;
-    color: #f1f1f1;
+    color: #141414;
 }
 .workspace-select{
     font-family: codec;
@@ -184,17 +183,16 @@ body{
 }
 #chart-label{
   font-family:codec-extrabold;
-  font-size:2.1em;
-  color:#f1f1f1;
-  text-decoration: underline;
+  font-size:1.5em;
+  color:#141414;
   position:relative;
-  margin-left:8%;
-  margin-right:8%;
-  top:5%;
+  text-align: center;
+  top: 20;
+  margin-left: 100;
 }
 #rendcont{
   /* background:url('../media/background_5.png'); */
-  background:url('../media/noteffy_loader.gif');
+  background:url('../media/statsGIF.gif');
   background-size:100%;background-repeat:no-repeat;
   background-position: 50% 50%;
   outline:black;
@@ -353,7 +351,6 @@ input[type="date"],input[type="text"],textarea{
   font-family: codec;
   padding: 10px;
   margin:5px;
-
 }
 #btn{
   margin-top: 12;
@@ -370,4 +367,37 @@ input[type="date"],input[type="text"],textarea{
 #btn:hover{
   background-color: #1abc9c;
   color: #ffffff;
+}
+
+.slidecontainer {
+  width: 100%;
+}
+.slider {
+  width: 70%;
+  height: 10px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+.slider:hover {
+  opacity: 1;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 23px;
+  height: 24px;
+  border: 0;
+  background: url('../media/pin2.png');
+  cursor: pointer;
+}
+.slider::-moz-range-thumb {
+  width: 23px;
+  height: 24px;
+  border: 0;
+  background: url('../media/pin2.png');
+  cursor: pointer;
 }

@@ -6,16 +6,18 @@ function revealAdmin(){
 }
 function revealWorkspacePanel(){
     if(document.getElementById("admin-nav-button-1").click){
-        document.getElementById("admin-workspace-panel").style.display = "flex";
+        document.getElementById("admin-workspace-panel").style.display = "block";
         document.getElementById("todo-admin-panel").style.display = "none";
         document.getElementById("todoBBT").style.opacity = "0.5";
+        document.getElementById("workspaceBBT").style.opacity = "1";
     }
 }
 function revealToDoPanel(){
     if(document.getElementById("admin-nav-button-2").click){
         document.getElementById("admin-workspace-panel").style.display = "none";
-        document.getElementById("todo-admin-panel").style.display = "flex";
+        document.getElementById("todo-admin-panel").style.display = "block";
         document.getElementById("workspaceBBT").style.opacity = "0.5";
+        document.getElementById("todoBBT").style.opacity = "1";
     }
 }
 function switchAdmin(){
@@ -76,8 +78,7 @@ function revealWorkspacePanel() {
         document.getElementById("admin-workspace-panel").style.display = "block";
         document.getElementById("todo-admin-panel").style.display = "none";
     }
-}
-
+}   
 function revealToDoPanel() {
     if (document.getElementById("admin-nav-button-2").click) {
         document.getElementById("admin-workspace-panel").style.display = "none";

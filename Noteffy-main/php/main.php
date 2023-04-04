@@ -49,23 +49,23 @@
                 <img src="../media/arrowImg.png" id="arrow-image">
                 <img src="../media/quillPenBlack.png" id="quill-black">
             </div>
-            <?php
-                $orgs = file_get_contents("../data/Organizations.json");
-                $orgs = json_decode($orgs, true);         
-                $flag = createClass($details, $orgs);
-                createAdminTask($details,$orgs);
-                $orgs1 = json_encode($orgs);
-                file_put_contents("../data/Organizations.json", $orgs1);
-                if($flag){
-                    echo "<script>message('invalid class code','message_success')</script>";
-                }
-                else if(!$flag && isset($_POST['ClassCode'])){
-                    echo "<script>message('invalid class code','error')</script>";
-                }
-                $logon = hash_name(getUser(),3);
-                $colors = array("red","teal","yellow");
-                $logoc = $colors[$logon];
-            ?>
+                <?php
+                    $orgs = file_get_contents("../data/Organizations.json");
+                    $orgs = json_decode($orgs, true);         
+                    $flag = createClass($details, $orgs);
+                    createAdminTask($details,$orgs);
+                    $orgs1 = json_encode($orgs);
+                    file_put_contents("../data/Organizations.json", $orgs1);
+                    if($flag){
+                        echo "<script>message('invalid class code','message_success')</script>";
+                    }
+                    else if(!$flag && isset($_POST['ClassCode'])){
+                        echo "<script>message('invalid class code','error')</script>";
+                    }
+                    $logon = hash_name(getUser(),3);
+                    $colors = array("red","teal","yellow");
+                    $logoc = $colors[$logon];
+                ?>
             <div id="admin-control-panel">
                 <div id="button-info-container">
                     <button id="unlock-button" onclick="switchAdmin()">Unlock</button>
@@ -81,20 +81,23 @@
                     else{
                         echo 
                         "<div  id='sidepanel-admin' >
-                        <div class='panel-user-admin' >
-                        <img src='../media/logo".$logoc."q.png' height=80 width=80 alt='logo' style='margin-left: 20;filter:drop-shadow(2px 2px 5px black);'>
-                        <label style='text-decoration:none;color:black;'>Hi, " . getUser() . " !</label>
-                        </div>
-                        <ul>
-                        <li><a href='../HTML/control.html' style='text-decoration:none;'>Control</a><br></li>
-                        <li><a href='index.php' style='text-decoration: none;'>Home</a></li>
-                        <li><a style='text-decoration: none;cursor:pointer;' onclick='hideAdminMenu()'>Back</a></li>
-                        </ul>
+                            <div class='panel-user-admin' >
+                                <img src='../media/logo".$logoc."q.png' height=80 width=80 alt='logo' style='margin-left: 20;filter:drop-shadow(2px 2px 5px black);'>
+                                <label style='text-decoration:none;color:black;'>Hi, " . getUser() . " !</label>
+                            </div>
+                            <ul>
+                                <li><a href='../HTML/control.html' style='text-decoration:none;'>Control</a><br></li>
+                                <li><a href='index.php' style='text-decoration: none;'>Home</a></li>
+                                <li><a style='text-decoration: none; cursor:pointer;' onclick='hideAdminMenu()'>Back</a></li>
+                            </ul>
                         </div>";
                     }
                     ?>
-                    <button id="admin-nav-button-1" onclick="revealWorkspacePanel()"><img src="../media/workspaceWidget.png" id="workspaceBBT"></button>
-                    <button id="admin-nav-button-2" onclick="revealToDoPanel()"><img src="../media/todoWidget.png" id="todoBBT"></button>
+                    <div class="admin-ctrls">
+                        <button id="admin-nav-button-1" onclick="revealWorkspacePanel()"><img src="../media/workspaceWidget.png" id="workspaceBBT"></button>
+                        <button id="admin-nav-button-2" onclick="revealToDoPanel()"><img src="../media/todoWidget.png" id="todoBBT"></button>
+                    </div>
+                    <div class=""></div>
                 </div>
                 <div id="todo-admin-panel">
                     <h1>To-Do'sss</h1>
@@ -175,18 +178,17 @@
             </div>
             <?php updateNote($alternate) ?>
             <div class="main" id="1">
-                <div class="scat" style="background-image:url('../media/background_1.png');background-size:110%;"
-                id="divi2">
-                <?php
-                    $alternate = json_encode($alternate);
-                    file_put_contents("../data/Data.json", $alternate);
-                    $alternate = file_get_contents("../data/Data.json");
-                    $alternate = json_decode($alternate, true);
-                    $u = task_compose($alternate);
-                    Delete_task($alternate);
-                    display_task($alternate, $u);
-                    $alternate = json_encode($alternate);
-                    file_put_contents("../Data/Data.json", $alternate);
+                <div class="scat" style="background-image:url('../media/background_1.png');background-size:110%;" id="divi2">
+                    <?php
+                        $alternate = json_encode($alternate);
+                        file_put_contents("../data/Data.json", $alternate);
+                        $alternate = file_get_contents("../data/Data.json");
+                        $alternate = json_decode($alternate, true);
+                        $u = task_compose($alternate);
+                        Delete_task($alternate);
+                        display_task($alternate, $u);
+                        $alternate = json_encode($alternate);
+                        file_put_contents("../Data/Data.json", $alternate);
                     ?>
                 </div>
             </div>
@@ -196,23 +198,23 @@
                     <img src="../media/goldenperi.png" id="task-compose-button" alt="compose">
                 </a>
             </div>
-            <?php
-                $alternate = file_get_contents("../Data/Data.json");
-                $alternate = json_decode($alternate, true);
-                updateTask($alternate);
-                $alternate = json_encode($alternate);
-                file_put_contents("../data/Data.json", $alternate);
-            ?>
+                <?php
+                    $alternate = file_get_contents("../Data/Data.json");
+                    $alternate = json_decode($alternate, true);
+                    updateTask($alternate);
+                    $alternate = json_encode($alternate);
+                    file_put_contents("../data/Data.json", $alternate);
+                ?>
             <div class="main" id="2">
             <div class="scat" style="background-image:url('../media/background_4.png');background-size:110%;" id='divi3'>
-            <?php
-                $alternate = file_get_contents("../data/Data.json");
-                $alternate = json_decode($alternate, true);
-                $u = getUserNumber();
-                display_todo($alternate, $u);
-                complete($alternate);
-                $alternate = json_encode($alternate);
-                file_put_contents("../data/Data.json", $alternate);
+                <?php
+                    $alternate = file_get_contents("../data/Data.json");
+                    $alternate = json_decode($alternate, true);
+                    $u = getUserNumber();
+                    display_todo($alternate, $u);
+                    complete($alternate);
+                    $alternate = json_encode($alternate);
+                    file_put_contents("../data/Data.json", $alternate);
                 ?>
             </div>
         </div>
