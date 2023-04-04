@@ -53,9 +53,6 @@ function config(){ // this function gives different messages for user to underst
     if(queries.get("mail")){
         document.querySelectorAll(".form2-input")[0].value = queries.get("mail");
     }
-    if(queries.get("name")){
-        document.querySelectorAll(".form1-input")[0].value = queries.get("name");
-    }
     
 }
 // flag is 1 if user is trying to signUp and 0 if user is trying to signIn

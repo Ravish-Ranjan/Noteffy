@@ -15,6 +15,7 @@
     $details = json_decode($details, true);
     signUp($queries);
     signIn($details);
+    $profilePicImg = getAvatar($details);
     allowAdmin($details);
     $details = json_encode($details);
     file_put_contents("../data/Details.json", $details);
@@ -64,7 +65,7 @@
                     }
                     $logon = hash_name(getUser(),3);
                     $colors = array("red","teal","yellow");
-                    $logoc = $colors[$logon];
+                    $logoc = $profilePicImg===false ? $colors[$logon] : $profilePicImg;
                 ?>
             <div id="admin-control-panel">
                 <div id="button-info-container">

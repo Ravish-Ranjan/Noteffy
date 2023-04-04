@@ -1,4 +1,5 @@
 <?php
+require_once("jsonpath-0.8.1.php");
     function seekUserName($uval)
     { // this function fetches the user from the data
         $users = file_get_contents("../data/Details.json");
@@ -66,6 +67,7 @@
                     $details['Users'][$users_count]['Password'] = encrypt_data($jsond['Password'], str_pad($jsond["Username"], 32, '#', STR_PAD_RIGHT));
                     $details['Users'][$users_count]['Email'] = $jsond['Email'];
                     $details['Users'][$users_count]['Type'] = false;
+                    $details['Users'][$users_count]['Profile_Pic'] = false;
                     $details['Users'][$users_count]['Organization_Code'] = array();
                     $alternate['User_Data'][$users_count]['identifier'] = $users_count;
                     $alternate['User_Data'][$users_count]['Date_Joined'] = Date("Y-m-d");
@@ -116,5 +118,14 @@
             echo '<script>window.location.href="../HTML/signUp.html?err=' . $errc . '&name=' . $name . '&activity=' . ($errc == 'uid' ? "signup" : "signin") . '";</script>';
             return;
         }
+    }
+    function getAvatar($details){
+        $pic = false;
+        $user = getUserNumber();
+        $result = jsonPath($details, "$.Users[$user].Profile_Pic");
+        if ($result[0] != false)
+            return $result[0];
+        else
+            return $pic;
     }
 ?>
