@@ -217,15 +217,21 @@ async function changePassword(form) {
   if (newPass1 == newPass) {
     let response = await fetch(loc[0] + "/php/chart.php?" + (new URLSearchParams({ pass: oldPass })), { method: "GET", mode: "cors" });
     response = await response.json();
-    
-    if (response['status'] == "success" && btn.innerText == "Check Password") {
+    let status = await decrypt_data(response['status']);
+    if (status== "success" && btn.innerText == "Check Password") {
       btn.innerText = "Change Password";
       btn.style.backgroundColor = "lime";
     }
     else if (btn.innerText != "Check Password") {
-      let changeRes = await fetch(loc[0] + "/php/chart.php?" + (new URLSearchParams({ new_pass: `${newPass}`,change:true })), { method: "GET", mode: "cors",body:{new_pass: `${newPass}`,change:true} });
+      userName = await decrypt_data(getUser());
+      newPass = await fetch(loc[0] + "/php/encrypt_cookie.php?" + (new URLSearchParams({ encrypt: `${newPass}`, key: userName.padEnd(32, "#") })));
+      newPass = await newPass.json();
+      
+      oldPass = await fetch(loc[0] + "/php/encrypt_cookie.php?" + (new URLSearchParams({ encrypt: `${oldPass}`, key: userName.padEnd(32,"#") })));
+      oldPass = await oldPass.json();
+
+      let changeRes = await fetch(loc[0] + "/php/chart.php?" + (new URLSearchParams({ new_pass: newPass['enc'],old_pass:oldPass['enc'] })), { method: "GET", mode: "cors" });
       changeRes = await changeRes.json();
-      console.log(changeRes['pass_change_status']);
       let infoContainer = $("info_container");
       let formChange = $("form_change");
       infoContainer.style.display = "block";

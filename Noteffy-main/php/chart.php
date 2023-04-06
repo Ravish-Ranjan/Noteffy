@@ -4,7 +4,11 @@ require_once("initial.php");
 require_once("hash.php");
 function changePassword(){
     header("Content-Type:application/json;character=Utf-8");
-    $response = array("status" => "failure","pass_change_status"=>"failure");
+    $status = "failure";
+    $status = encrypt_data($status, "");
+    $pass_change_status = "failure";
+    $pass_change_status = encrypt_data($pass_change_status, "");
+    $response = array("status" => $status,"pass_change_status"=>$pass_change_status);
 
     $details = file_get_contents("../data/Details.json");
     $details = json_decode($details, true);
@@ -13,15 +17,20 @@ function changePassword(){
     $userName = $user_details["User_Name"];
     if(isset($_GET['pass'])){
         $pass = $user_details["Password"];
-        $pass = decrypt_data($pass,str_pad($userName,32,"#",STR_PAD_RIGHT));
-        if ($pass == $_GET['pass']) {
-            $response['status'] = "success";
+        $enteredPass = encrypt_data($_GET['pass'], str_pad($userName, 32, "#", STR_PAD_RIGHT));
+        if ($pass == $enteredPass) {
+            $temp = "success";
+            $response['status'] = encrypt_data($temp, "");
         }
         echo json_encode($response);
     }
-    else if(isset($_GET['change']) && isset($_GET['new_pass']) && $_GET['change']){
-        $details["Users"][$user]["Password"] = encrypt_data($_GET['new_pass'], str_pad($userName, 32, "#", STR_PAD_RIGHT));
-        $response['pass_change_status'] = "success";
+    else if(isset($_GET['old_pass']) && isset($_GET['new_pass'])){
+        if($_GET['old_pass']==$details["Users"][$user]["Password"])
+            $details["Users"][$user]["Password"] = $_GET['new_pass'];
+        else
+            die();
+        $temp = "success";
+        $response['pass_change_status'] = encrypt_data($temp, str_pad($details["Users"][$user]["User_Name"], 32, "#", STR_PAD_RIGHT));
         $details = json_encode($details);
         file_put_contents("../data/Details.json",$details);
         echo json_encode($response);

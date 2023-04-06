@@ -5,6 +5,9 @@
     if(isset($_GET['value'])){
         $data['res'] = decrypt_data($_GET['value'],'');
     }
+    else if(isset($_GET['encrypt']) && isset($_GET['key'])){
+        $data['enc'] = encrypt_data($_GET['encrypt'],$_GET['key']);
+    }
     else{
         $data["message"] = "failure";
     }
