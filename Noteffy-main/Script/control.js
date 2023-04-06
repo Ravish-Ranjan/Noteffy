@@ -340,7 +340,7 @@ classSelection.forEach((selector) => {
                     firstDay--;
                     day--;
                 }
-                else if (day == (new Date().getDate())) {
+                else if (day+1 == (new Date().getDate())) {
                     let span = document.createElement("span");
                     span.setAttribute("class", "active");
                     span.innerText = day + 1;

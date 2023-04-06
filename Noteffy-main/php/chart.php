@@ -20,7 +20,6 @@ function changePassword(){
         echo json_encode($response);
     }
     else if(isset($_GET['change']) && isset($_GET['new_pass']) && $_GET['change']){
-        $temp = "12345678";
         $details["Users"][$user]["Password"] = encrypt_data($_GET['new_pass'], str_pad($userName, 32, "#", STR_PAD_RIGHT));
         $response['pass_change_status'] = "success";
         $details = json_encode($details);

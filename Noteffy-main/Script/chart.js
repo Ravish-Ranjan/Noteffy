@@ -221,7 +221,7 @@ async function changePassword(form) {
       btn.style.backgroundColor = "lime";
     }
     else if (btn.innerText != "Check Password") {
-      let changeRes = await fetch(loc[0] + "/php/chart.php?" + (new URLSearchParams({ new_pass: `${newPass}`,change:true })), { method: "GET", mode: "cors" });
+      let changeRes = await fetch(loc[0] + "/php/chart.php?" + (new URLSearchParams({ new_pass: `${newPass}`,change:true })), { method: "GET", mode: "cors",body:{new_pass: `${newPass}`,change:true} });
       changeRes = await changeRes.json();
       console.log(changeRes['pass_change_status']);
       let infoContainer = $("info_container");

@@ -36,11 +36,13 @@ require_once("jsonpath-0.8.1.php");
         }
     }
     function signUp($queries){
+    // header("Content-Type:application/json;charset=utf-8");
         if(isset($queries['signup'])=='true'){
             $raw = file_get_contents("php://input");
             $jsond = json_decode($raw,true) or die(123);
             if ($jsond['Password'] !== $jsond['Password1']) {
-                    $data = array('Message'=>'failure');echo $data;
+            $data = array('Message' => 'failure');
+            echo json_encode($data);
                 } 
                 else if ($jsond['Password'] === $jsond['Password1']) {
                     // details

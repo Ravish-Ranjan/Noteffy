@@ -44,11 +44,11 @@
     function fetchtodo(&$orgs){
         date_default_timezone_set("Asia/Kolkata");
         // require_once("initial.php");require_once("hash.php");
-        if(!isset($_COOKIE['user_number'])){
-            echo '<script>window.replace("index.php")</script>';return;
-        }
         if(!isset($_GET["admin"]) || !isset($_GET["todo"])){
             return;
+        }
+        if(!isset($_COOKIE['user_number'])){
+            echo '<script>window.replace("index.php")</script>';return;
         }
         header("Content-Type: application/json;charset=utf-8");
         $orgs = file_get_contents("../data/Organizations.json");
@@ -135,11 +135,11 @@
      function removeadmintask(){
         date_default_timezone_set("Asia/Kolkata");
         // require_once("initial.php");require_once("hash.php");
-        if(!isset($_COOKIE['user_number'])){
-            echo '<script>window.replace("index.php")</script>';return;
-        }
         if(!isset($_GET["admin"]) || !isset($_GET["remtodo"]) || !isset($_GET["class"]) || !isset($_GET["todon"]) || !isset($_GET["tno"])){
             return;
+        }
+        if(!isset($_COOKIE['user_number'])){
+            echo '<script>window.replace("index.php")</script>';return;
         }
         //Sanitize requests
         if($_GET["class"]=='' || $_GET["tno"]=='' || $_GET["todon"]==''){
@@ -334,7 +334,7 @@ function displayClass(&$classData)
             if ($user == $classData["Organizations"][$j]["Admin"]) {
                 for ($k = 0; $k < count($classData["Organizations"][$user]["classes"]); $k++) {
                     $title = $classData["Organizations"][$user]["classes"][$k]["Cname"];
-                    $rno = hash_name($title,4);
+                    $rno = hash_name($title,7);
                     echo "
                     <div class='class' style='background-image:url(\"../media/workspaceAsset$rno.png\")'>
                     <div class='backg'>
@@ -352,8 +352,9 @@ function displayClass(&$classData)
                 for ($k = 0; $k < count($classData["Organizations"][$j]["classes"]); $k++) {
                     if (in_array($user, $classData["Organizations"][$j]["classes"][$k]["group"])) {
                         $title = $classData["Organizations"][$j]["classes"][$k]["Cname"];
+                        $rno = hash_name($title,7);
                         echo "
-                    <div class='class'>
+                    <div class='class' style='background-image:url(\"../media/workspaceAsset$rno.png\")'>
                     <div class='backg'>
                         <h2>$title</h2>
                     </div>
