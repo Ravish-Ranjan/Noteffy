@@ -25,6 +25,7 @@ function fetch_store(&$jsonData){
             $Note_count = count($jsonData['User_Data'][$user]['Notes']);
             $jsonData['User_Data'][$user]['Notes'][$Note_count]['Title'] = $_POST['Title'];
             $jsonData['User_Data'][$user]['Notes'][$Note_count]['Date'] = $_POST['Date'];
+            sanitize($_POST['Note']);
             $jsonData['User_Data'][$user]['Notes'][$Note_count]['Content'] = $_POST['Note'];
             $jsonData['User_Data'][$user]['Notes'][$Note_count]['Note_type'] = false;
             echo "<script>location.replace('main.php')</script>";
@@ -42,8 +43,6 @@ function display(&$jsonData, $user)
             $pinimg = "../media/pin" . rand(1, 3) . ".png";
             $title = $item['Title'];
             $content = $item['Content'];
-            sanitize($content);
-            $visible = substr($content, 0, 25); //
             echo "<div class=\"divi\" style=\"background-image:url($noteimg);\" title='Title:$title'>
         <div class=\"topic\">
                         <img id=\"pin\" src=$pinimg alt=\"pin\">

@@ -28,6 +28,9 @@ require_once("jsonpath-0.8.1.php");
     function sanitize(&$data)
     {
         $data = strip_tags($data);
+        $data =preg_replace('/<[A-Za-z0-9-_\/]+>/', "",$data);
+        $data = preg_replace('/"+/', "\\\"", $data);
+        $data = preg_replace("/'+/", "\\\'", $data);
     }
     // removes html from each element of an array
     function sanitize_array(&$arr){
