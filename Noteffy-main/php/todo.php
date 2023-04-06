@@ -181,8 +181,8 @@
         var user = await decrypt_data(getUser());
         var task_no;
         var to = document.getElementById('divi3')
-        let t = getTask();
-        let p = getPercent();
+        let t = await getTask();
+        let p = await getPercent();
         let fm;
             to.addEventListener('click',(e)=>{
                 var id = e.target.id;
@@ -220,7 +220,7 @@
             }
             var d = new Date();
             d.setTime(d.getTime()+24*60*60*1000);
-            var divi = fm.parentElement;
+            var divi = fm.parentNode;
             while(divi.className!='divi'){
                 divi = divi.parentElement;
             }

@@ -39,31 +39,19 @@ function openTab(evt, tabname) { // this function is used to move arround the ta
   evt.currentTarget.className += " active";
   divs = document.getElementsByClassName("main")
 }
-function calc_completed_task(jsonData) {
+function calc_completed_task(jsonData,user) {
   let date = [];
   date[0] = "";
   let count = [1];
-  let user;
-  let decodedCookie = decodeURIComponent(document.cookie);
-  decodedCookie = decodedCookie.split(";");
-  for (j = 0; j < decodedCookie.length; j++){
-    c = decodedCookie[j];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    c = c.split("=");
-    if (c[0].split() == "user_number") {
-      user = c[c.length-1];
-    }
-  }
+  
   for (i = 0; i < jsonData.length; i++){
-    if (!(date.includes(jsonData[i]['Date'])) && user == jsonData[i]["User"]) {
+    if (!(date.includes(jsonData[i]['Date'])) && (user) == jsonData[i]["User"]) {
       date.push(jsonData[i]['Date']);
     }
     count[i] = 0;
   }
   for (i = 0; i < jsonData.length; i++){
-    if (date.includes(jsonData[i]['Date']) && jsonData[i]["User"] == user) {
+    if (date.includes(jsonData[i]['Date']) && jsonData[i]["User"] == (user)) {
       count[date.indexOf(jsonData[i]['Date'])]++;
     }
   }
@@ -106,8 +94,22 @@ userName(); //fetching the username
 const ctx = document.getElementById('context');
 
 // fetching data for chart
-fetch("../data/task.json").then((res) => res.json()).then((json) => {
-  let obj = calc_completed_task(json);
+fetch("../data/task.json").then((res) => res.json()).then(async (json) => {
+  let user = -1;
+  let decodedCookie = decodeURIComponent(document.cookie);
+  decodedCookie = decodedCookie.split(";");
+  for (j = 0; j < decodedCookie.length; j++){
+    c = decodedCookie[j].split("=");
+    if (c[0].trim() == "user_number") {
+      user = c[1];
+    }
+  }
+  if (user != -1) {
+    user = await decrypt_data(user);
+  }
+  else
+    return;
+  let obj = calc_completed_task(json,user);
   Chart.defaults.font.size = 20;
   Chart.defaults.font.weight = "bold";
   Chart.defaults.color = "black";
