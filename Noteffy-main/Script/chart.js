@@ -214,8 +214,12 @@ async function changePassword(form) {
   let newPass1 = form['newpass1'].value;
   let newPass = form['newpass2'].value;
   let btn = form['submit']
+  let userName = await decrypt_data(getUser());
   if (newPass1 == newPass) {
-    let response = await fetch(loc[0] + "/php/chart.php?" + (new URLSearchParams({ pass: oldPass })), { method: "GET", mode: "cors" });
+    oldPass = await fetch(loc[0] + "/php/encrypt_cookie.php?" + (new URLSearchParams({ encrypt: `${oldPass}`, key: userName.padEnd(32, "#") })));
+    oldPass = await oldPass.json();
+
+    let response = await fetch(loc[0] + "/php/chart.php?" + (new URLSearchParams({ pass: oldPass['enc'] })), { method: "GET", mode: "cors" });
     response = await response.json();
     let status = await decrypt_data(response['status']);
     if (status== "success" && btn.innerText == "Check Password") {
@@ -223,12 +227,8 @@ async function changePassword(form) {
       btn.style.backgroundColor = "lime";
     }
     else if (btn.innerText != "Check Password") {
-      userName = await decrypt_data(getUser());
       newPass = await fetch(loc[0] + "/php/encrypt_cookie.php?" + (new URLSearchParams({ encrypt: `${newPass}`, key: userName.padEnd(32, "#") })));
       newPass = await newPass.json();
-      
-      oldPass = await fetch(loc[0] + "/php/encrypt_cookie.php?" + (new URLSearchParams({ encrypt: `${oldPass}`, key: userName.padEnd(32,"#") })));
-      oldPass = await oldPass.json();
 
       let changeRes = await fetch(loc[0] + "/php/chart.php?" + (new URLSearchParams({ new_pass: newPass['enc'],old_pass:oldPass['enc'] })), { method: "GET", mode: "cors" });
       changeRes = await changeRes.json();
@@ -238,8 +238,20 @@ async function changePassword(form) {
       formChange.style.display = "none";
       formChange.innerHTML = '';
     }
+    else {
+      setTimeout(() => {
+        btn.style.backgroundColor = "black";
+        form['oldpass'].style.border = "none";
+      },3000)
+      btn.style.backgroundColor = "orange";
+      form['oldpass'].style.border = "2px solid red";
+    }
   }
   else {
+    setTimeout(() => {
+      btn.style.backgroundColor = "black";
+      form['oldpass'].style.border = "none";
+    },3000)
     btn.style.backgroundColor = "orange";
     form['newpass2'].style.border = "2px solid red";
   }
@@ -297,12 +309,32 @@ function generatePassForm() {
       obj.iter = (obj.iter - 1) % obj.pictures.length;
     }
     else
-      obj.iter = 2;
+    obj.iter = 2;
     pic.src = `../media/logo${obj.pictures[obj.iter]}q.png`;
-   })
+  })
   $("next").addEventListener("click", () => {
     let pic = $("pic");
-      obj.iter = (obj.iter + 1) % obj.pictures.length;
+    obj.iter = (obj.iter + 1) % obj.pictures.length;
     pic.src = `../media/logo${obj.pictures[obj.iter]}q.png`;
-   })
+  })
+}
+function generateUserNameForm() {
+  let infoContainer = $("info_container");
+  let formChange = $("form_change");
+  infoContainer.style.display = "none";
+  formChange.style.display = "block";
+  formChange.innerHTML += `<form onsubmit="event.preventDefault()" id='passChange'>
+  <label>Enter New User Name</label>
+  <input type="text" name="UserName" required>
+  <button value="change" name='submit' onclick="changeUserName(this.parentNode)" class="btn">Change UserName</button>
+  </form>`
+}
+async function changeUserName(form) {
+  let loc = window.location.href.split("/HTML/chart.html");
+
+  let username = await fetch(loc[0] + "/php/encrypt_cookie.php?" +(new URLSearchParams({ encrypt: form['UserName'].value,key:"" })), { method: "GET", mode: "cors" })
+  username = await username.json();
+
+  let response = await fetch(loc[0] + "/php/chart.php?" +(new URLSearchParams({ userName: `${username['enc']}` })), { method: "GET", mode: "cors" });
+  response = await response.json();
 }

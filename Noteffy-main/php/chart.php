@@ -17,7 +17,8 @@ function changePassword(){
     $userName = $user_details["User_Name"];
     if(isset($_GET['pass'])){
         $pass = $user_details["Password"];
-        $enteredPass = encrypt_data($_GET['pass'], str_pad($userName, 32, "#", STR_PAD_RIGHT));
+        // $enteredPass = encrypt_data($_GET['pass'], str_pad($userName, 32, "#", STR_PAD_RIGHT));
+        $enteredPass = $_GET['pass'];
         if ($pass == $enteredPass) {
             $temp = "success";
             $response['status'] = encrypt_data($temp, "");
@@ -38,6 +39,7 @@ function changePassword(){
 }
 changePassword();
 function changePic(){
+    header("Content-Type:application/json;charset=utf-8");
     $details = file_get_contents("../data/Details.json");
     $details = json_decode($details, true);
     $user = getUserNumber();
@@ -54,4 +56,23 @@ function changePic(){
     }
 }
 changePic();
+function changeUserName(){
+    header("Content-Type:application/json;charset=utf-8");
+    $details = file_get_contents("../data/Details.json");
+    $details = json_decode($details, true);
+    $response = array("status" => "failure");
+    if(isset($_GET['userName'])){
+        $userName = decrypt_data($_GET['userName'],"");
+        $user = getUserNumber();
+        $details["Users"][$user]["User_Name"] = $userName;
+        $response['status'] = "success";
+
+        $details = json_encode($details);
+        file_put_contents("../data/Details.json",$details);
+        setcookie("user", $_GET['userName'], 0, "/");
+        echo json_encode($response);
+        die();
+    } 
+}
+changeUserName();
 ?>
