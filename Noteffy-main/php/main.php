@@ -27,7 +27,7 @@
     <!-- stylesheets -->
     <link rel="stylesheet" href="../Stylesheets/message.css">
     <link rel="stylesheet" href="../Stylesheets/main.css">
-    <link rel="stylesheet" href="../Stylesheets/admin.css">
+    <!-- <link rel="stylesheet" href="../Stylesheets/admin.css"> -->
     <link rel="stylesheet" href="../Stylesheets/compose.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="http://fontawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css"> 
@@ -122,30 +122,30 @@
             <div class="top" id="dashboard">
                 <label id="logo">Your Workstation</label>
                 <div class="search-box">
-                    <input type="text" class="searchTerm" id="search" placeholder="What you lookin' for?">
+                    <input type="text" class="searchTerm" id="search" placeholder="What you lookin' for ?">
                         <i class="fa fa-search" id="fa-fa-search"></i>
                     </button>
                 </div>
                 <div id="prof">
                     <img src="../media/logo<?php echo $logoc; ?>q.png" onclick="showmenu()" style="cursor:pointer;margin-right:30;margin-top:30;" alt="prof" height="75">
                     <?php
-                    if (!isset($_COOKIE['user_number'])) {
-                        // echo "<script>window.location.href = 'index.php'</script>";
-                    } 
-                    else {
-                        echo "<div  id='sidepanel' >
-                        <div class='panel-user' >
-                        <img src='../media/logo".$logoc."q.png' height=80 width=80 alt='logo' style='margin-left: 20;filter:drop-shadow(2px 2px 5px black);'>
-                        <label style='text-decoration:none;color:black;'>Hi, " . getUser() . " !</label>
-                        </div>
-                        <ul>
-                        <li><a href='../HTML/chart.html' style='text-decoration:none;'>Dashboard</a><br></li>
-                        <li><a href='index.php' style='text-decoration: none;'>Home</a></li>
-                        <li><a style='text-decoration: none;cursor:pointer;' onclick='hidemenu()'>Back</a></li>
-                        <li><a  id='logout' onclick='clearCookies()' style='text-decoration: none;cursor:pointer'>Log Out</a></li>
-                        </ul>
-                        </div>";
-                    }
+                        if (!isset($_COOKIE['user_number'])) {
+                            // echo "<script>window.location.href = 'index.php'</script>";
+                        } 
+                        else {
+                            echo "<div  id='sidepanel' >
+                            <div class='panel-user' >
+                            <img src='../media/logo".$logoc."q.png' height=80 width=80 alt='logo' style='margin-left: 20;filter:drop-shadow(2px 2px 5px black);'>
+                            <label style='text-decoration:none;color:black;'>Hi, " . getUser() . " !</label>
+                            </div>
+                            <ul>
+                            <li><a href='../HTML/chart.html' style='text-decoration:none;'>Dashboard</a><br></li>
+                            <li><a href='index.php' style='text-decoration: none;'>Home</a></li>
+                            <li><a style='text-decoration: none;cursor:pointer;' onclick='hidemenu()'>Back</a></li>
+                            <li><a  id='logout' onclick='clearCookies()' style='text-decoration: none;cursor:pointer'>Log Out</a></li>
+                            </ul>
+                            </div>";
+                        }
                     ?>
                 </div>
             </div>

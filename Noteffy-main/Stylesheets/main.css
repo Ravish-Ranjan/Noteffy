@@ -1,4 +1,4 @@
-/* *{outline:0.2vw solid lime;} */
+ *{outline:0.2vw solid lime;}
 @font-face {
     font-family: codec-extrabold;
     src: url('../media/Codec-Cold-Heavy-trial.ttf');
@@ -9,48 +9,86 @@
     src: url('../media/Codec-Cold-Regular-trial.ttf');
 }
 @keyframes shake {
-    00% {
-        transform: rotate(0deg);
-    }
-
-    25% {
-        transform: rotate(10deg);
-    }
-
-    50% {
-        transform: rotate(-20deg);
-    }
-
-    75% {
-        transform: rotate(10deg);
-    }
-
-    100% {
-        transform: rotate(0deg);
-    }
-}
+    00% {   transform: rotate(0deg);}
+    25% {   transform: rotate(10deg);}
+    50% {   transform: rotate(-20deg);}
+    75% {   transform: rotate(10deg);}
+    100% {  transform: rotate(0deg);}}
 body {
     display: grid;
     place-items: center;
     background: url("../media/workspaceBGnew.png");
-    background-repeat: no-repeat;
-    background-size: auto auto;
+    background-size: 197% 100%;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
 }
-
-.top {
+.main-parent-wrapper{
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: 15%;
+    height: 100%;
+    width: 197%;
 }
-
+.user-panel,.admin-panel {
+    height: 100%;
+    width: 97%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    /* text-align: center; */
+    top: 0;
+    right: 0;
+}
+.admin-panel{
+    left: 0;
+    display: flex;
+    height: 100%;
+    /* z-index: 2; */
+}
+#top-container,.top{
+    height: 15vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+.top {
+    width: 100%;
+    height: 15vh;
+    display: flex;
+    align-items: center;
+}
 #prof {
     display: flex;
     align-items: center;
     text-align: center;
     justify-content: center;
     margin-right: 20px;
+}
+.tab {
+    width: 90%;
+    height: 8vh;
+    display: flex;
+    justify-content: space-around;
+    outline: 5px solid limegreen;
+}
+
+.tab>button {
+    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* width: 49.5%; */
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.tabcontent {
+    float: left;
+    padding: 0px 12px;
+    border: 1px solid #ccc;
+    width: 70%;
+    border-left: none;
+    height: 300px;
 }
 
 .main {
@@ -63,7 +101,78 @@ body {
     border-radius: 2rem;
     margin-left: -2%;
 }
+.tile,.class{
+    width: 23%;
+    height: 32%;
+    margin: 1%;
+    padding: 1%;
+    /* aspect-ratio: 9/16; */
+    text-align: start;
+    color: white;
+    background-size:round;
+    font-family: monospace;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.class{
+    display: flex;
+    flex-direction: row;
+    background-repeat: no-repeat;
+    /* background-size: 328px 187px; */
+    justify-content: space-around;
+    background-size:contain;
+}
+.class >.options{
+    display: flex;
+    flex-direction: column;
+}
+.options > button{
+    display:block;
+    /* margin:10%; */
+    padding:6%;
+    cursor:pointer;
+    background-color: rgb(52,52,52,1.8);
+    border-radius:3em;
+    border: 2px solid white;
+    color:white;
+    width:100px;
+}
+#todo-admin-panel .classg{
+    padding-left:10%;
+}
+.search-box{
+    width: 30%;
+    display: flex;
+    margin-left: 40%;
+}
+#search {
+    width: 80%;
+    border-right: none;
+    padding: 5%;
+    height: 2vh;
+    border-radius: 2rem;
+    background-color: #444;
+    color: white;
+    font-size: 20;
+    font-family: codec;
+} 
+#logo {
+    font-family: codec-extrabold;
+    color: #ffffff;
+    font-size: 40;
+    text-shadow: 0 0 0.36vw #fff;
+    filter: drop-shadow(20px 10px 10px #444);
+}
+.tbs>img {
+    background-color: transparent;
+    height: 150%;
+    opacity: 0.5;
+}
 
+.tbs {
+    border: none;
+}
 .scat {
     grid-template-columns: repeat(4, 1fr);
     /* overflow-y:scroll; */
@@ -78,51 +187,23 @@ body {
 }
 
 @media screen and (min-width:1024px) {
-    .scat {
-        grid-template-columns: repeat(4, 1fr);
-    }
-
-    .divi {
-        height: 34vh;
-    }
+    .scat { grid-template-columns: repeat(4, 1fr);}
+    .divi { height: 34vh;}
 }
 
 @media screen and (min-width:720px) and (max-width:1023px) {
-    .scat {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .divi {
-        height: 39vh;
-    }
-
-    .divi>p {
-        overflow: none;
-    }
-}
+    .scat {     grid-template-columns: repeat(3, 1fr);}
+    .divi {     height: 39vh;}
+    .divi>p {   overflow: none;}}
 
 @media screen and (max-width:719px) {
-    .scat {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .divi {
-        height: 46vh;
-    }
-
-    .divi>p {
-        overflow: none;
-    }
-}
+    .scat {     grid-template-columns: repeat(2, 1fr);}
+    .divi {     height: 46vh;}
+    .divi>p {   overflow: none;}}
 
 @keyframes fade {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+    from {  opacity: 0;}
+    to {    opacity: 1;}
 }
 
 .divi {
@@ -224,34 +305,6 @@ body {
     text-shadow: 2px 2px #999;
     align-items: center;
 }
-
-.tab {
-    width: 68%;
-    height: 50px;
-    display: flex;
-    justify-content: space-around;
-    margin-left: -4.5%;
-}
-
-.tab>button {
-    display: block;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* width: 49.5%; */
-    cursor: pointer;
-    background-color: transparent;
-}
-
-.tabcontent {
-    float: left;
-    padding: 0px 12px;
-    border: 1px solid #ccc;
-    width: 70%;
-    border-left: none;
-    height: 300px;
-}
-
 .main::-webkit-scrollbar {
     width: 1%;
 }
@@ -301,15 +354,6 @@ body {
     border-radius: 19px;
     border: 1px solid #816846;
 }
-
-#logo {
-    font-family: codec-extrabold;
-    color: #ffffff;
-    margin-left: -2%;
-    font-size: 40;
-    text-shadow: 0 0 0.36vw #fff;
-}
-
 #prof {
     font-family: codec;
     font-size: 30;
@@ -341,7 +385,7 @@ body {
 .panel-user {
     display: flex;
     width: 100%;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     padding-top: 10%;
 }
@@ -359,11 +403,14 @@ body {
 .panel-user-admin {
     display: flex;
     width: 100%;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     padding-top: 10%;
 }
-
+.panel-user-admin >label{
+    font-size: 25;
+    font-family: codec-extrabold;
+}
 .panel-user>img {
     filter: drop-shadow(-5px 5px 2px);
 }
@@ -371,7 +418,7 @@ body {
 .panel-user>label {
     font-size: 25;
     text-shadow: none;
-    font-family: codec;
+    font-family: codec-extrabold;
 }
 
 #sidepanel>ul,#sidepanel-admin>ul {
@@ -433,15 +480,6 @@ body {
 #btn1:hover {
     animation: shake 1s infinite ease-out;
 }
-
-.tbs>img {
-    background-color: transparent;
-    height: 150%;
-}
-
-.tbs {
-    border: none;
-}
 #note-compose-button {
     width: 40;
     padding: 0;
@@ -452,28 +490,6 @@ body {
     height: 40;
     padding: 0;
     margin: 0;
-}
-.main-parent-wrapper{
-    display: flex;
-    justify-content: space-between;
-    height: 100%;
-    width: 200%;
-}
-.user-panel,.admin-panel {
-    height: 98%;
-    width: 97%;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    top: 0;
-    right: 0;
-}
-.admin-panel{
-    left: 0;
-    display: flex;
-    height: 100%;
-    /* z-index: 2; */
 }
 #admin-control-panel{
     overflow-y: hidden;
@@ -576,13 +592,6 @@ body {
 .user-panel {
     left: 110%;
 }
-#top-container{
-    height: 15vh;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-}
 .admin-ctrls{
     width: 50%;
     display: flex;
@@ -599,23 +608,7 @@ body {
 }
 #button-info-container,#unlock-images{
     display: none;
-}
-.search-box{
-    float: right;
-    display: flex;
-    position: relative;
-    margin-left: 40%;
-}
-.searchTerm {
-    width: 80%;
-    border-right: none;
-    padding: 5px;
-    height: 20px;
-    border-radius: 5px 0 0 5px;
-    color: #000000;
-    font-size: 10;
-    font-family: codec;
-}   
+}  
 .searchButton {
     width: 40px;
     height: 20px;
