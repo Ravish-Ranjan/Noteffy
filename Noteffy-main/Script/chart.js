@@ -88,7 +88,26 @@ let userName = async () => {
   let colors = ["red","teal","yellow"];
   document.getElementById("user-name").innerText = name;
   $("cur-user").innerText = name;
-  document.getElementById("user-avatar").setAttribute("src","../media/logo"+colors[hash_name(name,3)]+"q.png");
+  let pic = await fetch("../data/Details.json");
+  pic = await pic.json();
+
+  let user = -1;
+  let decodedCookie = decodeURIComponent(document.cookie);
+  decodedCookie = decodedCookie.split(";");
+  for (j = 0; j < decodedCookie.length; j++){
+    c = decodedCookie[j].split("=");
+    if (c[0].trim() == "user_number") {
+      user = c[1];
+    }
+  }
+  if (user != -1) {
+    user = await decrypt_data(user);
+    if (!pic['Users'][user]["Profile_Pic"])
+      $("user-avatar").setAttribute("src", "../media/logo" + colors[hash_name(name, 3)] + "q.png");
+    else 
+      $("user-avatar").setAttribute("src", "../media/logo" + pic['Users'][user]["Profile_Pic"] + "q.png");
+      
+  }
 }
 userName(); //fetching the username 
 const ctx = document.getElementById('context');

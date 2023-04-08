@@ -64,7 +64,12 @@ function changeUserName(){
     if(isset($_GET['userName'])){
         $userName = decrypt_data($_GET['userName'],"");
         $user = getUserNumber();
+        $old_user_name = $details["Users"][$user]["User_Name"];
+        $old_pass = decrypt_data($details["Users"][$user]["Password"], str_pad($old_user_name, 32, "#", STR_PAD_RIGHT));
+
         $details["Users"][$user]["User_Name"] = $userName;
+        $new_pass = encrypt_data($old_pass, str_pad($userName, 32, "#", STR_PAD_RIGHT));
+        $details["Users"][$user]["Password"] = $new_pass;
         $response['status'] = "success";
 
         $details = json_encode($details);
