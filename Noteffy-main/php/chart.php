@@ -46,9 +46,17 @@ function changePic(){
     $response = array("status"=> true);
     if(isset($_GET['img'])){
         $temp = "";
-        preg_match("/(red|yellow|teal)/",$_GET['img'],$temp);
-        $details["Users"][$user]["Profile_Pic"] = $temp[0];
-        $response['pic'] = $temp[0];
+        $flag = preg_match("/(red|yellow|teal)/",$_GET['img'],$temp);
+        if($flag){
+            $details["Users"][$user]["Profile_Pic"] = $temp[0];
+            $response['pic'] = $temp[0];
+        }
+        else{
+            $temp = str_replace('q.png',"",basename($_GET['img']));
+            $temp = str_replace('logo',"",$temp);
+            $details["Users"][$user]["Profile_Pic"] = $temp;
+            $response['pic'] = $temp;
+        }
         $details = json_encode($details);
         file_put_contents("../data/Details.json",$details);
         echo json_encode($response);
@@ -80,4 +88,31 @@ function changeUserName(){
     } 
 }
 changeUserName();
+function acceptAvatar(){
+    $response = array("status" => false);
+    if(isset($_FILES["avatar"])){
+        $filename = $_FILES['avatar']['name'];
+        $tempname = $_FILES['avatar']['tmp_name'];
+        $targetPath = "../media/uploads/";
+
+        $temp = "logo" . $filename;
+        $ext = preg_replace('/\.png/', "q.png", $temp);
+        $ext = preg_replace('/ +/',"",$ext);
+        $targetFile = $targetPath . basename($ext);
+        $filetype = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+        $filesize = $_FILES['avatar']['size'];
+        if($filetype=="png"){
+            move_uploaded_file($_FILES['avatar']['tmp_name'], $targetFile);
+            $response['status'] = true;
+            $response['size'] = $filesize;
+            $response['name'] = $ext;
+        }
+        echo json_encode($response);
+        die();
+    }
+    else{
+        echo json_encode($response);
+    }
+}
+acceptAvatar();
 ?>

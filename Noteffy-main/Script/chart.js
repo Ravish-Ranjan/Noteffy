@@ -59,7 +59,14 @@ function calc_completed_task(jsonData,user) {
     "date": date,
     "count" :count
   }
-  document.getElementById("score-number").innerText = count[count.length-1];
+  let sum = () => {
+    let s = 0;
+    count.forEach((ele) => {
+      s += ele;
+    })
+    return s;
+  }
+  document.getElementById("score-number").innerText = sum()*100;
   return obj;
 }
 
@@ -105,7 +112,7 @@ let userName = async () => {
     if (!pic['Users'][user]["Profile_Pic"])
       $("user-avatar").setAttribute("src", "../media/logo" + colors[hash_name(name, 3)] + "q.png");
     else 
-      $("user-avatar").setAttribute("src", "../media/logo" + pic['Users'][user]["Profile_Pic"] + "q.png");
+      $("user-avatar").setAttribute("src", "../media/uploads/logo" + pic['Users'][user]["Profile_Pic"] + "q.png");
       
   }
 }
@@ -296,13 +303,15 @@ function generatePassForm() {
     console.log($("pic").src);
     let response = await fetch(loc[0] + "/php/chart.php?" + (new URLSearchParams({ img: `${$("pic").src}` })), { method: "GET", mode: "cors" });
     response = await response.json();
-    console.log(response['status']);
-    let infoContainer = $("info_container");
-    let formChange = $("form_change");
-    infoContainer.style.display = "block";
-    formChange.style.display = "none";
-    formChange.innerHTML = '';
-    window.location.href = "../php/main.php";
+    
+    if (response['status']) {
+      let infoContainer = $("info_container");
+      let formChange = $("form_change");
+      infoContainer.style.display = "block";
+      formChange.style.display = "none";
+      formChange.innerHTML = '';
+      window.location.href = window.location.href;
+    }
   }
   function generatePicDiv() {
     let infoContainer = $("info_container");
@@ -321,6 +330,10 @@ function generatePassForm() {
   <div id='next'>&#10095;</div>
 </div>
 <center><button class="btn" onclick="changeAvatar()">Change</button></center>
+<form action='../php/chart.php' method='post' enctype=multipart/form-data>
+  <input type='file' name='avatar' value='upload'>
+  <button value='upload' onclick='acceptAvatar(this.parentNode)'>upload</button>
+</form>
  `
   $("prev").addEventListener("click", () => {
     let pic = $("pic");
@@ -328,7 +341,7 @@ function generatePassForm() {
       obj.iter = (obj.iter - 1) % obj.pictures.length;
     }
     else
-    obj.iter = 2;
+      obj.iter = 2;
     pic.src = `../media/logo${obj.pictures[obj.iter]}q.png`;
   })
   $("next").addEventListener("click", () => {
@@ -354,6 +367,28 @@ async function changeUserName(form) {
   let username = await fetch(loc[0] + "/php/encrypt_cookie.php?" +(new URLSearchParams({ encrypt: form['UserName'].value,key:"" })), { method: "GET", mode: "cors" })
   username = await username.json();
 
-  let response = await fetch(loc[0] + "/php/chart.php?" +(new URLSearchParams({ userName: `${username['enc']}` })), { method: "GET", mode: "cors" });
+  let response = await fetch(loc[0] + "/php/chart.php?" + (new URLSearchParams({ userName: `${username['enc']}` })), { method: "GET", mode: "cors" });
   response = await response.json();
+  if (response['status'] == "success") {
+    if (response['status'] == "success") {
+      let infoContainer = $("info_container");
+      let formChange = $("form_change");
+      infoContainer.style.display = "block";
+      formChange.style.display = "none";
+      formChange.innerHTML = '';
+      window.location.href = window.location.href;
+    }
+  }
+}
+
+function acceptAvatar(form) {
+  let formdata = new FormData(form);
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    let response = await fetch(form.action, { method: form.method, mode: "cors", body: formdata });
+    response = await response.json();
+    if (response['status']) {
+      $("pic").src = `../media/uploads/${response['name']}`;
+    }
+  })
 }

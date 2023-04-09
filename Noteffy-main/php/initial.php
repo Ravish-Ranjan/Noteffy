@@ -36,6 +36,9 @@ require_once("jsonpath-0.8.1.php");
     function sanitize_array(&$arr){
         for($i=0;$i<count($arr);$i++){
             $arr[$i] = strip_tags($arr[$i]);
+            $arr[$i] = preg_replace('/"+/', "\\\"", $arr[$i]);
+            $arr[$i] = preg_replace("/'+/", "\\\'", $arr[$i]);
+        echo $arr[$i];
         }
     }
     function signUp($queries){

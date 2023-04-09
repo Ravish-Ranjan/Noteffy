@@ -62,6 +62,7 @@
                 $jsonData["User_Data"][$user]["To-do"][$to_do_count]["Date"] = $_POST['T_Date'];
                 $jsonData["User_Data"][$user]["To-do"][$to_do_count]["Priority"] = 1;
                 $jsonData["User_Data"][$user]["To-do"][$to_do_count]["Tasks"]=explode("\n",$_POST['Task']);
+                sanitize_array($jsonData["User_Data"][$user]["To-do"][$to_do_count]["Tasks"]);
                 echo "<script>location.replace('main.php')</script>";
                 return $user;
         }
@@ -83,7 +84,6 @@
             $pinimg = "../media/pin" . priority_calc($item) . ".png";
             $title = $item['Title'];
             $content = $item['Tasks']; //<label class=\"title\" id='title$i'>$j.$title</label>
-            sanitize_array($content);
             // <a href='../php/main.php?T_no=$i&User=$user' style='text-decoration:none;color:black'>
             echo "<div class=\"divi\" style=\"background-image:url($noteimg);\" title='title:$title'>
                     <div class=\"topic\">
