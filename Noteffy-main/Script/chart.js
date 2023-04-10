@@ -7,6 +7,23 @@ async function decrypt_data(enc_data) {
 function $(id) {
   return document.getElementById(id);
 }
+function clearCookies(){ // this function is used to clear the cookies of user to log him out
+  let decodedCookie = decodeURIComponent(document.cookie);
+  decodedCookie = decodedCookie.split(";");
+  for (i = 0; i < decodedCookie.length; i++){
+      let temp = decodedCookie[i].split("=");
+      if (temp[0].trim() == "user") {
+          console.log(temp[1]);
+          document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+          window.location.href = '../php/index.php';
+      }
+      if (temp[0].trim() == "user_number") {
+          console.log(temp[1]);
+          document.cookie = "user_number=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+          window.location.href = '../php/index.php';
+      }
+  }
+}
 function hash_name($word,$lim){
   $exp = $word.split('');
   $tot = 0;
@@ -391,4 +408,13 @@ function acceptAvatar(form) {
       $("pic").src = `../media/uploads/${response['name']}`;
     }
   })
+}
+async function deleteAccount() {
+  let loc = window.location.href.split("/HTML/chart.html");
+  let response = await fetch(loc[0] + "/php/chart.php?" + (new URLSearchParams({ delete: true })), { method: "GET", mode: "cors" });
+  response = await response.json();
+  console.log(response);
+  if (response['data_status'] || response['details_status'] || response['organization_status']) {
+    clearCookies();
+  }
 }

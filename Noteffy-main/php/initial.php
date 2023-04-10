@@ -70,23 +70,23 @@ require_once("jsonpath-0.8.1.php");
                     $users_count = count($details['Users']);
                     str_pad($jsond['Username'], 32, '#', STR_PAD_RIGHT);
 
-                    $details['Users'][$users_count]['identifier'] = $users_count;
+                    // $details['Users'][$users_count]['identifier'] = $users_count;
+                    $identifier = (int)($details['Users'][$users_count-1]['identifier'])+1;
+                    $details['Users'][$users_count]['identifier'] = $identifier;
                     $details['Users'][$users_count]['User_Name'] = $jsond['Username'];
                     $details['Users'][$users_count]['Password'] = encrypt_data($jsond['Password'], str_pad($jsond["Username"], 32, '#', STR_PAD_RIGHT));
                     $details['Users'][$users_count]['Email'] = $jsond['Email'];
                     $details['Users'][$users_count]['Type'] = false;
                     $details['Users'][$users_count]['Profile_Pic'] = false;
                     $details['Users'][$users_count]['Organization_Code'] = array();
-                    $alternate['User_Data'][$users_count]['identifier'] = $users_count;
+                    $alternate['User_Data'][$users_count]['identifier'] = $identifier;
                     $alternate['User_Data'][$users_count]['Date_Joined'] = Date("Y-m-d");
                     $alternate['User_Data'][$users_count]['Notes'] = array();
                     $alternate['User_Data'][$users_count]['To-do'] = array();
                     $alternate['User_Data'][$users_count]['recycle'] = array();
-                    $orgs[$classes]["Admin"] = $users_count;
+                    $orgs[$classes]["Admin"] = $identifier;
                     $orgs[$classes]["classes"] = array();
-                    $stats[$classes]["Admin"] = $users_count;
                     $stats[$classes]["group"] = array();
-                    $stats[$classes]["classes"] = array();
 
                     $details = json_encode($details);
                     $alternate = json_encode($alternate);

@@ -110,9 +110,95 @@ function acceptAvatar(){
         echo json_encode($response);
         die();
     }
-    else{
-        echo json_encode($response);
-    }
+    // else{
+    //     echo json_encode($response);
+    //     die();
+    // }
 }
 acceptAvatar();
+function deleteFromOrganization(&$orgs,$user){
+    // $group = $orgs["Organizations"][0];
+    for ($iter1 = 0; $iter1 < count($orgs["Organizations"]);$iter1++){
+        for($iter2=0;$iter2<count($orgs["Organizations"][$iter1]["classes"]);$iter2++){
+            for($iter3=0;$iter3<count($orgs["Organizations"][$iter1]["classes"][$iter2]["To-do"]);$iter3++){
+                $temp = $orgs["Organizations"][$iter1]["classes"][$iter2]["To-do"][$iter3];
+                if(array_search($user, $temp["assignees"])!==false){
+                    $index = array_search($user, $temp["assignees"]);
+                    array_splice($orgs["Organizations"][$iter1]["classes"][$iter2]["To-do"][$iter3]["assignees"], $index, 1);
+                }
+            }
+        }
+    }
+
+    for ($i = 0; $i < count($orgs["Organizations"]);$i++){
+        if(count($orgs["Organizations"][$i]["classes"])!=0){
+            for($j=0;$j<count($orgs["Organizations"][$i]["classes"]);$j++){
+                if(count($orgs["Organizations"][$i]["classes"][$j]["group"])!=0){
+                    for($k=0;$k<count($orgs["Organizations"][$i]["classes"][$j]["group"]);$k++){
+                        $temp = $orgs["Organizations"][$i]["classes"][$j]["group"][$k];
+                        if ($temp > $user){
+                            $orgs["Organizations"][$i]["classes"][$j]["group"][$k] -= 1;
+                        }
+                        else if($temp == $user){
+                            array_splice($orgs["Organizations"][$i]["classes"][$j]["group"],$k,1);
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+function deleteAccount(){
+    if(isset($_GET['delete'])){
+        $user = getUserNumber();
+        $details = file_get_contents("../data/Details.json");
+        $data = file_get_contents("../data/Data.json");
+        $orgs = file_get_contents("../data/Organizations.json");
+
+        $details = json_decode($details, true);
+        $data = json_decode($data, true);
+        $orgs = json_decode($orgs, true);
+        deleteFromOrganization($orgs, $user);
+        
+        // deleting the account
+        if (array_key_exists($user, $details["Users"])) {
+            array_splice($details["Users"],$user,1);
+            for ($i = $user; $i < count($details["Users"]);$i++){
+                $details["Users"][$i]["identifier"] = $i;
+            }
+            $resp['details_status'] = true;
+        }
+        else
+            $resp['details_status'] = false;
+        if (array_key_exists($user, $data["User_Data"])) {
+            array_splice($data["User_Data"], $user, 1);
+            for ($i = $user; $i < count($data["User_Data"]);$i++){
+                $data["User_Data"][$i]["identifier"] = $i;
+            }
+            $resp['data_status'] = true;
+        }
+        else
+            $resp['data_status'] = false;
+        if (array_key_exists($user, $orgs["Organizations"])){
+            array_splice($orgs["Organizations"],$user,1);
+            for ($i = $user; $i < count($orgs["Organizations"]);$i++){
+                $orgs["Organizations"][$i]["Admin"] = $i;
+            }
+            $resp['organization_status'] = true;
+        }
+        else
+            $resp['organization_status'] = false;
+
+        $details = json_encode($details);
+        $data = json_encode($data);
+        $orgs = json_encode($orgs);
+        file_put_contents("../data/Details.json",$details);
+        file_put_contents("../data/Data.json",$data);
+        file_put_contents("../data/Organizations.json",$orgs);
+        echo json_encode($resp);
+        die();
+    }
+}
+deleteAccount();
 ?>
