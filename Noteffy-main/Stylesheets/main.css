@@ -42,7 +42,7 @@ body {
     left: 0;
     display: flex;
     height: 100%;
-    /* z-index: 2; */
+    z-index: 2;
 }
 #top-container,.top{
     height: 15vh;
