@@ -1,0 +1,11 @@
+{
+    "name": "Noteffy",
+    "version": "1.0.0",
+    "description": "Productivity manager",
+    "manifest_version": 3,
+    "author": "Gaurang Tyagi",
+    "action":{
+        "default_popup": "index.html",
+        "default_title": "Noteffy"
+    }
+}
