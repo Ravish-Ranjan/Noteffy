@@ -1,1 +1,64 @@
-{"Organizations":[{"Admin":0,"group":[0,2],"classes":[{"Cname":"Noteffy","Stats":[{"user":0,"comptasks1":{"dates":["2023-03-12","2023-04-02"],"count":[4,3]},"comptasks2":{"dates":[],"count":[]},"comptasks3":{"dates":[],"count":[]},"expired":[]},{"user":2,"comptasks1":{"dates":["2023-04-01","2023-04-02","2023-04-03"],"count":[1,2,1]},"comptasks2":{"dates":[],"count":[]},"comptasks3":{"dates":[],"count":[]},"expired":[]}]}]}],"3":{"Admin":6,"group":[],"classes":[]}}
+{
+    "Organizations": [
+        {
+            "Admin": 0,
+            "group": [
+                0,
+                1
+            ],
+            "classes": [
+                {
+                    "Cname": "Noteffy",
+                    "Stats": [
+                        {
+                            "user": 0,
+                            "comptasks1": {
+                                "dates": [
+                                    "2023-03-12",
+                                    "2023-04-02"
+                                ],
+                                "count": [
+                                    4,
+                                    3
+                                ]
+                            },
+                            "comptasks2": {
+                                "dates": [],
+                                "count": []
+                            },
+                            "comptasks3": {
+                                "dates": [],
+                                "count": []
+                            },
+                            "expired": []
+                        },
+                        {
+                            "user": 1,
+                            "comptasks1": {
+                                "dates": [
+                                    "2023-04-01",
+                                    "2023-04-02",
+                                    "2023-04-03"
+                                ],
+                                "count": [
+                                    1,
+                                    2,
+                                    1
+                                ]
+                            },
+                            "comptasks2": {
+                                "dates": [],
+                                "count": []
+                            },
+                            "comptasks3": {
+                                "dates": [],
+                                "count": []
+                            },
+                            "expired": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

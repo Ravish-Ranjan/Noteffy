@@ -110,10 +110,6 @@ function acceptAvatar(){
         echo json_encode($response);
         die();
     }
-    // else{
-    //     echo json_encode($response);
-    //     die();
-    // }
 }
 acceptAvatar();
 function deleteFromOrganization(&$orgs,$user){
@@ -149,6 +145,51 @@ function deleteFromOrganization(&$orgs,$user){
         }
     }
 }
+function deleteFromTasks($user){
+    $tasks = file_get_contents("../data/task.json");
+    $adminTasks = file_get_contents("../data/admintask.json");
+    $tasks = json_decode($tasks, true);
+    $adminTasks = json_decode($adminTasks, true);
+
+    // tasks
+    for($i=0;$i<count($tasks);$i++){
+        if($tasks[$i]["User"]==$user){
+            array_splice($tasks, $i, 1);
+        }
+        if ($tasks[$i]["User"] == $user && $i == count($tasks) - 1)
+            array_splice($tasks, $i);        
+    }
+    // admin tasks
+    for($iter1=0;$iter1<count($adminTasks["Organizations"]);$iter1++){
+        if($adminTasks["Organizations"][$iter1]["Admin"]!=$user){
+            for ($iter = 0; $iter < count($adminTasks["Organizations"][$iter1]["group"]);$iter++){
+                if ($adminTasks["Organizations"][$iter1]["group"][$iter] == $user)
+                    array_splice($adminTasks["Organizations"][$iter1]["group"], $iter, 1);
+                else if ($adminTasks["Organizations"][$iter1]["group"][$iter] > $user)
+                    $adminTasks["Organizations"][$iter1]["group"][$iter] -= 1;
+            }
+            for($iter2=0;$iter2<count($adminTasks["Organizations"][$iter1]["classes"]);$iter2++){
+                for($iter3=0;$iter3<count($adminTasks["Organizations"][$iter1]["classes"][$iter2]["Stats"]);$iter3++){
+                    if ($adminTasks["Organizations"][$iter1]["classes"][$iter2]["Stats"][$iter3]["user"] == $user)
+                        array_splice($adminTasks["Organizations"][$iter1]["classes"][$iter2]["Stats"], $iter3, 1);
+                    else if ($adminTasks["Organizations"][$iter1]["classes"][$iter2]["Stats"][$iter3]["user"] > $user)
+                        $adminTasks["Organizations"][$iter1]["classes"][$iter2]["Stats"][$iter3]["user"]-=1;
+                }
+            }
+        }
+    }
+    for($k=0;$k<count($adminTasks["Organizations"]);$k++){
+        if($adminTasks["Organizations"][$k]["Admin"]==$user){
+            array_splice($adminTasks["Organizations"], $i, 1);
+            return;
+        }
+    }
+
+    $tasks = json_encode($tasks);
+    $adminTasks = json_encode($adminTasks);
+    file_put_contents("../data/task.json", $tasks);
+    file_put_contents("../data/admintask.json", $adminTasks);
+}
 function deleteAccount(){
     if(isset($_GET['delete'])){
         $user = getUserNumber();
@@ -160,6 +201,7 @@ function deleteAccount(){
         $data = json_decode($data, true);
         $orgs = json_decode($orgs, true);
         deleteFromOrganization($orgs, $user);
+        deleteFromTasks($user);
         
         // deleting the account
         if (array_key_exists($user, $details["Users"])) {
