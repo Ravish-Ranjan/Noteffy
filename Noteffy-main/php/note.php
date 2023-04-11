@@ -43,6 +43,7 @@ function display(&$jsonData, $user)
             $pinimg = "../media/pin" . rand(1, 3) . ".png";
             $title = $item['Title'];
             $content = $item['Content'];
+            $content = str_replace("\\", "", $content);
             echo "<div class=\"divi\" style=\"background-image:url($noteimg);\" title='Title:$title'>
         <div class=\"topic\">
                         <img id=\"pin\" src=$pinimg alt=\"pin\">

@@ -7,6 +7,20 @@ async function decrypt_data(enc_data) {
 function $(id) {
   return document.getElementById(id);
 }
+function message(msg,type){ // this function gives user the error/success messages
+  let container = document.createElement("div");
+  container.className = type;
+  let content = document.createElement("div");
+  content.id = "content";
+  content.innerText = msg;
+
+  document.body.insertBefore(container,document.body.firstChild);
+  container.appendChild(content);
+  setTimeout(()=>{
+      container.remove();
+  },3000);
+  return;
+}
 function clearCookies(){ // this function is used to clear the cookies of user to log him out
   let decodedCookie = decodeURIComponent(document.cookie);
   decodedCookie = decodedCookie.split(";");
@@ -238,8 +252,10 @@ graveyard = async () => {
           <img id="pin" src="../media/gravePin.png" alt="pin">
         </div>
         <div class="screen"><ul style="list-style-type:none;">`
-        for (i = 0; i < ele["Tasks"].length; i++){
-          markUp += `<li>${ele["Tasks"][i]}</li>`;
+      for (i = 0; i < ele["Tasks"].length; i++){
+        let temp = ele["Tasks"][i];
+        temp = temp.replaceAll("\\", "");
+          markUp += `<li>${temp}</li>`;
         }
         markUp += `</ul></div>
         </div>
@@ -275,6 +291,12 @@ async function changePassword(form) {
 
       let changeRes = await fetch(loc[0] + "/php/chart.php?" + (new URLSearchParams({ new_pass: newPass['enc'],old_pass:oldPass['enc'] })), { method: "GET", mode: "cors" });
       changeRes = await changeRes.json();
+      if (changeRes.status == 200) {
+        message("password updated", "message_success");
+      }
+      else
+        message("password updated", "message_success");
+        
       let infoContainer = $("info_container");
       let formChange = $("form_change");
       infoContainer.style.display = "block";
@@ -328,7 +350,10 @@ function generatePassForm() {
       formChange.style.display = "none";
       formChange.innerHTML = '';
       window.location.href = window.location.href;
+      message("Profile pic changed successfully", "message_success");
     }
+    else
+      message("Error in updating profile picture", "message_failure");
   }
   function generatePicDiv() {
     let infoContainer = $("info_container");
@@ -385,6 +410,9 @@ async function changeUserName(form) {
   username = await username.json();
 
   let response = await fetch(loc[0] + "/php/chart.php?" + (new URLSearchParams({ userName: `${username['enc']}` })), { method: "GET", mode: "cors" });
+  while (response.status != 200) {
+    console.log("hello");
+  }
   response = await response.json();
   if (response['status'] == "success") {
     if (response['status'] == "success") {
@@ -394,7 +422,10 @@ async function changeUserName(form) {
       formChange.style.display = "none";
       formChange.innerHTML = '';
       window.location.href = window.location.href;
+      message("Name changed successfully", "message_success");
     }
+    else
+      message("Could not update the user name", "message_failure");
   }
 }
 
@@ -407,6 +438,8 @@ function acceptAvatar(form) {
     if (response['status']) {
       $("pic").src = `../media/uploads/${response['name']}`;
     }
+    else
+      message("Error uploading the image", "message_failure");
   })
 }
 async function deleteAccount() {

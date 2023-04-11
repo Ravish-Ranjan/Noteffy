@@ -45,7 +45,7 @@
 <body onload="pos()">
     <div class="main-parent-wrapper">
         <!-- admin panel -->
-        <div class="admin-panel">
+        <div class="admin-panel" id="toAdmingo">
             <div id="unlock-images">
                 <img src="../media/arrowImg.png" id="arrow-image">
                 <img src="../media/quillPenBlack.png" id="quill-black">
@@ -57,11 +57,11 @@
                     createAdminTask($details,$orgs);
                     $orgs1 = json_encode($orgs);
                     file_put_contents("../data/Organizations.json", $orgs1);
-                    if($flag){
-                        echo "<script>message('invalid class code','message_success')</script>";
+                    if($flag=="classroom created" || $flag == "classroom joined"){
+                        echo "<script>message('success','message_success')</script>";
                     }
-                    else if(!$flag && isset($_POST['ClassCode'])){
-                        echo "<script>message('invalid class code','error')</script>";
+                    else if(!$flag && (isset($_POST['ClassCode']) || isset($_POST['JClassCode']))){
+                        echo "<script>message('invalid class code or you are already part of the workspace','error')</script>";
                     }
                     $logon = hash_name(getUser(),3);
                     $colors = array("red","teal","yellow");
@@ -116,6 +116,11 @@
                 </div>
                 <div class="compose" id="admin-compose-bbt" onclick="class_compose('','','','')"></div>
             </div>
+        </div>
+        <!-- screen scroll slider  -->
+        <div class="snapper">
+            <a href="#wrapper" id="snapper">></a>
+            <a href="#toAdmingo" id="snapper"><</a>
         </div>
         <!-- user panel -->
         <div class="user-panel" id="wrapper">
