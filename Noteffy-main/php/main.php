@@ -101,7 +101,7 @@
                     <div class=""></div>
                 </div>
                 <div id="todo-admin-panel">
-                    <h1>To-Do'sss</h1>
+                    <h1 id="todo-message">Yay, you got no tasks!</h1>
                     <!-- this div will show the to-do's assigned & needs to complete in other workspaces-->
                 </div>
                 <div id="admin-workspace-panel">
@@ -123,7 +123,6 @@
                 <label id="logo">Your Workstation</label>
                 <div class="search-box">
                     <input type="text" class="searchTerm" id="search" placeholder="What you lookin' for ?">
-                        <i class="fa fa-search" id="fa-fa-search"></i>
                     </button>
                 </div>
                 <div id="prof">

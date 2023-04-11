@@ -142,7 +142,7 @@ body {
     padding-left:10%;
 }
 .search-box{
-    width: 30%;
+    width: 20%;
     display: flex;
     margin-left: 40%;
 }
@@ -167,7 +167,7 @@ body {
 .tbs>img {
     background-color: transparent;
     height: 150%;
-    opacity: 0.5;
+    opacity: 1;
 }
 
 .tbs {
@@ -588,6 +588,12 @@ body {
     top: 120;
     position: absolute;
     display: none;
+    background: url("../media/statsBG.png");
+}
+#todo-message{
+    font-family: codec;
+    margin-top: 20%;
+    font-size: 20;
 }
 .user-panel {
     left: 110%;

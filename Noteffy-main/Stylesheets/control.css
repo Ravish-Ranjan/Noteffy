@@ -200,7 +200,7 @@ body{
   position:relative;
   text-align: center;
   top: 20;
-  margin-left: 100;margin-right:100;
+  margin-left: 150;
 }
 #rendcont{
   /* background:url('../media/background_5.png'); */
@@ -385,8 +385,10 @@ input[type="date"],input[type="text"],textarea{
   width: 100%;
 }
 .slider {
-  width: 70%;
-  height: 10px;
+  width: 55%;
+  position: absolute;
+  height: 5px;
+  right: 120px;
   border-radius: 5px;
   background: #d3d3d3;
   outline: none;
