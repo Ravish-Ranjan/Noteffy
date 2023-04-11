@@ -101,7 +101,7 @@ function acceptAvatar(){
         $targetFile = $targetPath . basename($ext);
         $filetype = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
         $filesize = $_FILES['avatar']['size'];
-        if($filetype=="png"){
+        if($filetype=="png" && $filesize<=150000){
             move_uploaded_file($_FILES['avatar']['tmp_name'], $targetFile);
             $response['status'] = true;
             $response['size'] = $filesize;

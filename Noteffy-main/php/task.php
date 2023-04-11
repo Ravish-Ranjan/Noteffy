@@ -92,6 +92,7 @@
                     <div class=\"data\">
                         <div class=\"screen\" id='tasks$i'><ul style=\"list-style-type:none;\">";
             for ($k = 0; $k < count($content); $k++) {
+                $content[$k] = str_replace("\\", "", $content[$k]);
                 echo "
                                 <li>$content[$k]</li>
                             ";
