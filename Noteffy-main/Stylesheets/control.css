@@ -53,6 +53,7 @@ body{
     background-color:#F7F8F8;
     background-size: auto 100%;
     background-repeat: no-repeat;
+    overflow-x: hidden;
 }
 #control-header{
     width: 100%;
@@ -184,6 +185,7 @@ body{
     top: 140px;z-index:3;
     color: #141414;
 }
+
 .workspace-select{
     font-family: codec;
     border: none;
@@ -310,7 +312,7 @@ body {font-family: Verdana, sans-serif;}
 #admin-compose-bbt:hover{
   animation: shake 1s infinite ease-out;
 }
-.FORM{
+.form-cal-task{
   animation:fade 0.4s ease-in-out;
   position:relative;
   top: -6%;
@@ -332,6 +334,31 @@ body {font-family: Verdana, sans-serif;}
   justify-self: center;
   font-family: codec-extrabold;
   font-size: 20;
+}
+#close-cal-task{
+  position: absolute;
+  top:-7px;
+  left:-5px;
+  height:50px;
+  width:50px;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+#cal-task-desc{
+  font-family: codec-extrabold;
+  margin-left: 38%;
+  margin-top: 5%;
+}
+#cal-task-time{
+  font-family: codec-extrabold;
+  font-size: 20;
+  margin-left: 45%;
+}
+#cal-event-title{
+  font-family: codec-extrabold;
+  font-size: 40;
+  margin-left: 35%;
 }
 #close{
   top:-7px;

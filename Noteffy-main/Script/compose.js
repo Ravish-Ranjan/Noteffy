@@ -197,12 +197,12 @@ function createSchedule(date) {
 }
 function showEvent(event) {
     let eventform= document.createElement("form");
-    eventform.setAttribute("class", "FORM");eventform.setAttribute("enctype","multipart/form-data");
+    eventform.setAttribute("class", "form-cal-task");eventform.setAttribute("enctype","multipart/form-data");
     eventform.innerHTML = `<span id='Form_Caption'>Your tasks for the day</span>\
-    <button id = 'close' style=\"font-size:2vw;\" onclick = \"closeF(1)\">x</button>\
-    <label for='Description'>Your task</label>\
-    <label for='Time'>${event.Time}</label>\
-    <label for='Time'>${event.Title}</label>\
+    <button id = 'close-cal-task' style=\"font-size:2vw;\" onclick = \"closeF(1)\">x</button>\
+    <label id='cal-task-desc' for='Description'>Your task</label>\
+    <label id='cal-task-time' for='Time'>${event.Time}</label>\
+    <label id='cal-event-title' for='Time'>${event.Title}</label>\
     <textarea style='resize:none; margin:0;' placeholder='Description of the event' name='Description' id='Description' contenteditable='false' rows=8 cols=7>${event.Description}</textarea>\
     `
     document.querySelector("body").appendChild(eventform);
