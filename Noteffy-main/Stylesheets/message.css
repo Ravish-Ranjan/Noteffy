@@ -17,6 +17,7 @@
     box-shadow: -2px 1px 4px solid black;
     border-radius: 20px;
     opacity: 70%;
+    z-index:4;
 }
 .message_failure,.error{
 display: grid;

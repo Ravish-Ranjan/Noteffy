@@ -300,7 +300,8 @@ function createClass(&$personal, &$classData)
                     $classData["Organizations"][$u]["classes"][$classes]['To-do'] = array();
                     $classData["Organizations"][$u]["classes"][$classes]['Recycle'] = array();
                     $classData["Organizations"][$u]["classes"][$classes]['Events'] = array();
-                    return;
+                    echo "<script>navigator.clipboard.writeText('$classCode')</script>";
+                    return "classroom created";
                 }
             }
             for ($u = 0; $u < $statorgs; $u++) {
@@ -315,9 +316,9 @@ function createClass(&$personal, &$classData)
             $code = $_POST['JClassCode'];
             for ($u = 0; $u < $orgs; $u++) {
                     for ($c = 0; $c < count($classData["Organizations"][$u]["classes"]); $c++) {
-                        if ($classData["Organizations"][$u]["classes"][$c]["Organization_code"] == $code && $user!=$classData["Organizations"][$u]["Admin"]) {
+                        if ($classData["Organizations"][$u]["classes"][$c]["Organization_code"] == $code && $user!=$classData["Organizations"][$u]["Admin"] && count($classData["Organizations"][$u]["classes"][$c]["group"])<(int)($classData["Organizations"][$u]["classes"][$c]["CLimit"]) && !in_array($user,$classData["Organizations"][$u]["classes"][$c]["group"])) {
                             array_push($classData["Organizations"][$u]["classes"][$c]["group"], $user);
-                            return true;
+                            return "classroom joined";
                         }
                     }
             }
