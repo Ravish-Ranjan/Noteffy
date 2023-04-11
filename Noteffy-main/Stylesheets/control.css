@@ -142,25 +142,25 @@ body{
 #explore-user-card{
     background-color: white;
     border: 2px solid black;
-    width: 140;
-    height: 120;
-    border-radius: 1rem;
+    width: 160;
+    height: 140;
+    border-radius: 2rem;
     margin-left: 20;
     transform: translateY(103px);
 }
 #explore-user-card-2{
     background-color: white;
     border: 2px solid black;
-    width: 140;
-    height: 120;
-    border-radius: 50px;
+    width: 1460;
+    height: 140;
+    border-radius: 2rem;
     margin-left: 20;
     position: absolute;
     top: 80px;
 }
 #user-card-avatar{
     height: auto;
-    width: 55;
+    width: 60;
     display: block;
     margin-left: auto;
     margin-right: auto;
