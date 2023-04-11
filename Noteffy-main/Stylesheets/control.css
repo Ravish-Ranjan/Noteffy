@@ -417,7 +417,38 @@ input[type="date"],input[type="text"],textarea{
 }
 
 #markers option::before{
-  content:'11234234234';
-  display:block;
-  font-size:50px;
+  content: '11234234234';
+  display: block;
+  font-size: 50px;
+}
+#explore-detail-render{
+  height: 500%;
+  width: 29%;
+  margin-right: 20px;
+  margin-top: -500px;
+  position: justify;
+  border: 2px solid black;
+  float: right;
+  border-radius: 30px;
+}
+#explore-avatar-render{
+  width: 30%;
+  height: auto;
+  margin-left: 35%;
+  margin-top: 5%;
+}
+#explore-name-rendered{
+  font-family: codec-extrabold;
+  font-size: 40;
+  margin-left: 33%;
+  margin-top: 5%;
+}
+#explore-gender-rendered,#user-gender,#explore-role-rendered,#user-role{
+  font-family: codec;
+  font-size: 23;
+}
+#explore-kudos-score{
+  height: auto;
+  width: 15%;
+  margin-left: 42%;
 }
