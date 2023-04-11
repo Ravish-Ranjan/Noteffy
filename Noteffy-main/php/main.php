@@ -27,7 +27,7 @@
     <!-- stylesheets -->
     <link rel="stylesheet" href="../Stylesheets/message.css">
     <link rel="stylesheet" href="../Stylesheets/main.css">
-    <!-- <link rel="stylesheet" href="../Stylesheets/admin.css"> -->
+    <link rel="stylesheet" href="../Stylesheets/admin.css">
     <link rel="stylesheet" href="../Stylesheets/compose.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="http://fontawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css"> 

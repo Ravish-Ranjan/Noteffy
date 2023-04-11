@@ -55,6 +55,7 @@
         $orgs = json_decode($orgs,true);
         $respdata = array("To-do"=>array());
         
+        
         $user = getUserNumber();
         for($k = 0;$k < count($orgs["Organizations"]);$k++){
             for($l = 0;$l < count($orgs["Organizations"][$k]["classes"]);$l++){
@@ -150,19 +151,20 @@
         $orgs = json_decode($orgs,true);
         $adminstats = file_get_contents("../data/admintask.json");
         $adminstats = json_decode($adminstats,true);
-
+        
         $user = getUserNumber();
         for($j = 0;$j < count($orgs["Organizations"]);$j++){
             for($k = 0;$k < count($orgs["Organizations"][$j]["classes"]);$k++){
                 if (in_array($user,$orgs["Organizations"][$j]["classes"][$k]["group"])) {
-                        $class = $orgs["Organizations"][$j]["classes"][$k];
-                        $to_do_count = count($orgs["Organizations"][$j]["classes"][$k]["To-do"]);
-                        for($tn = 0;$tn < $to_do_count;$tn++){
-
-                           if($orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]['Title']==$_GET["todon"]){
-
+                    $class = $orgs["Organizations"][$j]["classes"][$k];
+                    $to_do_count = count($orgs["Organizations"][$j]["classes"][$k]["To-do"]);
+                    for($tn = 0;$tn < $to_do_count;$tn++){
+                        
+                        if($orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]['Title']==$_GET["todon"]){
+                            
                             $todolist = $orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn];
                             $status_count = count($orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]["status"]);
+                        //    print_r($todolist);
                             for($sn = 0;$sn < $status_count;$sn++){
 
                                 if($orgs["Organizations"][$j]["classes"][$k]["To-do"][$tn]["status"][$sn]["member"]==$user){
@@ -334,7 +336,7 @@ function displayClass(&$classData)
             if ($user == $classData["Organizations"][$j]["Admin"]) {
                 for ($k = 0; $k < count($classData["Organizations"][$user]["classes"]); $k++) {
                     $title = $classData["Organizations"][$user]["classes"][$k]["Cname"];
-                    $rno = hash_name($title,7);
+                    $rno = hash_name($title,5);
                     echo "
                     <div class='class' style='background-image:url(\"../media/workspaceAsset$rno.png\")'>
                     <div class='backg'>
