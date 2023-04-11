@@ -528,7 +528,7 @@ function fetchEvent(){
             for($l = 0;$l < count($orgs["Organizations"][$k]["classes"]);$l++){
                 $classitem["Name"] = $orgs["Organizations"][$k]["classes"][$l]["Cname"];
                 $classitem["Tasks"] = array();
-                if (in_array($user,$orgs["Organizations"][$k]["classes"][$l]["group"]) || $orgs["Organizations"][$k]["classes"][$l]["Admin"]==$user) {
+                if (in_array($user,$orgs["Organizations"][$k]["classes"][$l]["group"])) {
                        $events = $orgs["Organizations"][$k]["classes"][$l]["Events"];
                        for($iter=0;$iter<count($events);$iter++){
                         $dayDifference = strtotime($events[$iter]['Date']) - strtotime(date("Y-m-d"));

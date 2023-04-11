@@ -292,7 +292,7 @@ function initializeDate() {
     let year_select = $("year_select");
 
     let d = new Date();
-    month_select.innerText = d.toLocaleDateString("en-US", { month: "long" });
+    month_select.innerText = d.toLocaleDateString("en-US", { month: "long" }).toUpperCase();
     year_select.innerText = d.getFullYear();
 }
 function nextMonth() {
@@ -309,7 +309,7 @@ function nextMonth() {
         d.setFullYear(d.getFullYear() + 1);
         d.setMonth(1);
     }
-    month_select.innerText = d.toLocaleDateString("en-US", { month: "long" })
+    month_select.innerText = d.toLocaleDateString("en-US", { month: "long" }).toUpperCase();
     year_select.innerText = d.getFullYear();
     getDays();
 
@@ -329,13 +329,14 @@ function nextMonth() {
                 d.setFullYear(d.getFullYear() - 1);
                 d.setMonth(12);
             }
-            month_select.innerText = d.toLocaleDateString("en-US", { month: "long" })
+            month_select.innerText = d.toLocaleDateString("en-US", { month: "long" }).toUpperCase();
             year_select.innerText = d.getFullYear();
             getDays();
 
         }
         async function getDays() {
             events = await fetchEvents();
+            console.log(events);
             let days_select = $("days");
             days_select.innerHTML = ``;
 
@@ -352,10 +353,11 @@ function nextMonth() {
                 let sdate = [year_select,String(months.indexOf(month_select)+1).padStart(2,'0'),String(day+1).padStart(2,'0')].join("-");
                 let li = document.createElement("li");
                 let ave  = events.filter((ev)=>{
+                    console.log(sdate);console.log(ev.Date);
                     if(ev.Date==sdate)
-                        return true;
+                    return true;
                     else
-                        return false;
+                    return false;
                 });
                 if (firstDay > 1) {
                     firstDay--;
