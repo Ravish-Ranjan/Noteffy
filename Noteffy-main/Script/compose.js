@@ -5,7 +5,7 @@ function closeF(x){
     else if(x==2){    
         document.querySelector('.FORM2').remove();
     }
-        document.querySelector("#btn1").setAttribute("onclick","compose()");
+        document.querySelector("#btn1").onclick = "compose()";
 }
 function note_compose(date, title, note, note_no) {  //this function helps to create more notes for user
     if (document.getElementsByClassName("FORM").length != 0) {
@@ -176,14 +176,14 @@ function checkEmpty(ele){ // this function checks if the user have any note/task
     }
     return flag;
 }
-function createSchedule() {
+function createSchedule(date) {
     let noteform = document.createElement("form");
     noteform.setAttribute("class", "FORM");noteform.setAttribute("enctype","multipart/form-data");
     noteform.setAttribute("action","../php/main.php");noteform.setAttribute("method","POST");
     noteform.setAttribute("onsubmit","return checkEmpty(this)");
     noteform.innerHTML = `<span id='Form_Caption'>Block Calendar</span>\
     <button id = 'close' style=\"font-size:2vw;\" onclick = \"closeF(1)\">x</button>\
-    <input type='date' name='E_Date' id='Date' value="2023-04-31">\
+    <input type='date' name='E_Date' id='Date' value="${date}">\
     <input type='time' name='E_Time' id='Time' value="12:00">
     <input type='text' name='E_Title' id='Title' placeholder='Title' value=>\<br>
     <label for='Description'>Description</label>\
@@ -193,5 +193,18 @@ function createSchedule() {
     </select>
     <center><input type='submit' value='save' id='btn'></center>`
     document.querySelector("body").appendChild(noteform);
+    getClasses();
+}
+function showEvent(event) {
+    let eventform= document.createElement("form");
+    eventform.setAttribute("class", "FORM");eventform.setAttribute("enctype","multipart/form-data");
+    eventform.innerHTML = `<span id='Form_Caption'>Your tasks for the day</span>\
+    <button id = 'close' style=\"font-size:2vw;\" onclick = \"closeF(1)\">x</button>\
+    <label for='Description'>Your task</label>\
+    <label for='Time'>${event.Time}</label>\
+    <label for='Time'>${event.Title}</label>\
+    <textarea style='resize:none; margin:0;' placeholder='Description of the event' name='Description' id='Description' contenteditable='false' rows=8 cols=7>${event.Description}</textarea>\
+    `
+    document.querySelector("body").appendChild(eventform);
     getClasses();
 }
