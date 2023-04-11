@@ -28,6 +28,24 @@ body {
     height: 100%;
     width: 197%;
 }
+.snapper{
+    background-color: #ffffff77;
+    height: 100%;
+    width: 16%;
+    position: absolute;
+    top: 0;
+    left: 95%;
+    z-index: 10;
+    font-family: monospace;
+    font-size: 80;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.snapper>a{
+    text-decoration: none;
+    color: black;
+}
 .user-panel,.admin-panel {
     height: 100%;
     width: 97%;
@@ -66,10 +84,9 @@ body {
 }
 .tab {
     width: 90%;
-    height: 8vh;
+    height: 12%;
     display: flex;
     justify-content: space-around;
-    /* outline: 5px solid limegreen; */
 }
 
 .tab>button {
@@ -99,7 +116,6 @@ body {
     margin: 1%;
     border: 2px solid white;
     border-radius: 2rem;
-    margin-left: -2%;
 }
 .tile,.class{
     width: 23%;
@@ -166,8 +182,9 @@ body {
 }
 .tbs>img {
     background-color: transparent;
-    height: 150%;
+    height: 90%;
     opacity: 1;
+    /* outline: 5px solid limegreen; */
 }
 
 .tbs {
@@ -184,8 +201,25 @@ body {
     /* background-repeat:no-repeat; */
     background-size: round;
     box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.5) inset;
+    /* outline: 5px solid greenyellow; */
 }
 
+@media screen and (max-height:500px) {
+    .tab{
+        height: 60px;
+    }
+}
+@media screen and (orientation:portrait) {
+    .tab{
+        height: 50px;
+        width: 100%;
+        justify-content: center;
+    }
+    .menu{
+        height: 2rem;
+        width: 2rem;
+    }
+}
 @media screen and (min-width:1024px) {
     .scat { grid-template-columns: repeat(4, 1fr);}
     .divi { height: 34vh;}
@@ -287,9 +321,9 @@ body {
     height: 4rem;
     padding: 1rem;
     position: absolute;
-    bottom: 20;
+    bottom: 10;
     border-radius: 50%;
-    right: 20;
+    right: 0;
     display: grid;
     place-items: center;
     width: 4rem;

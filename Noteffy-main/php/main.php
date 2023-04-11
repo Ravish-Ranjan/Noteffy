@@ -45,7 +45,7 @@
 <body onload="pos()">
     <div class="main-parent-wrapper">
         <!-- admin panel -->
-        <div class="admin-panel">
+        <div class="admin-panel" id="toAdmingo">
             <div id="unlock-images">
                 <img src="../media/arrowImg.png" id="arrow-image">
                 <img src="../media/quillPenBlack.png" id="quill-black">
@@ -116,6 +116,11 @@
                 </div>
                 <div class="compose" id="admin-compose-bbt" onclick="class_compose('','','','')"></div>
             </div>
+        </div>
+        <!-- screen scroll slider  -->
+        <div class="snapper">
+            <a href="#wrapper" id="snapper">></a>
+            <a href="#toAdmingo" id="snapper"><</a>
         </div>
         <!-- user panel -->
         <div class="user-panel" id="wrapper">
