@@ -114,7 +114,6 @@ function showCreateWorkspace(){
     if(document.getElementById("create-workspace-bbt")){
         document.getElementById("create-workspace-panel").style.display = 'block';
         document.getElementById("bbt-container").style.display = 'none';
-        console.log(FORM2);
     }
 }
 function showJoinWorkspace(){
@@ -151,7 +150,7 @@ function class_compose(classname,desc,member_limit) {  //this function helps to 
         <textarea name = "ClassDesc" style='resize:none;' placeholder='This is my classroom?' name='' id='Cdesc' rows=4 cols=7 ></textarea>\
         <input type='text' name='ClassLimit' id='CLim' placeholder='ClassLimit'>\
         <input type='text' name='ClassCode' id='CCode' value='${code}' readonly>\
-        <center><input type='submit' value='Save' id='btn' onclick='submit() '></center>
+       <input type='submit' value='Save' id='btn' onclick='submit(); '>
         </form>
         <form id='join-workspace-panel' action=${action} method = 'POST'>
         <input type='text' name='JClassCode' placeholder='Enter Workspace Code' id='CCode' value=''>\

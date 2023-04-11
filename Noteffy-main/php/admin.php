@@ -300,7 +300,8 @@ function createClass(&$personal, &$classData)
                     $classData["Organizations"][$u]["classes"][$classes]['To-do'] = array();
                     $classData["Organizations"][$u]["classes"][$classes]['Recycle'] = array();
                     $classData["Organizations"][$u]["classes"][$classes]['Events'] = array();
-                    return;
+                    echo "<script>navigator.clipboard.writeText('$classCode')</script>";
+                    return "classroom created";
                 }
             }
             for ($u = 0; $u < $statorgs; $u++) {
@@ -315,9 +316,9 @@ function createClass(&$personal, &$classData)
             $code = $_POST['JClassCode'];
             for ($u = 0; $u < $orgs; $u++) {
                     for ($c = 0; $c < count($classData["Organizations"][$u]["classes"]); $c++) {
-                        if ($classData["Organizations"][$u]["classes"][$c]["Organization_code"] == $code && $user!=$classData["Organizations"][$u]["Admin"]) {
+                        if ($classData["Organizations"][$u]["classes"][$c]["Organization_code"] == $code && $user!=$classData["Organizations"][$u]["Admin"] && count($classData["Organizations"][$u]["classes"][$c]["group"])<(int)($classData["Organizations"][$u]["classes"][$c]["CLimit"]) && !in_array($user,$classData["Organizations"][$u]["classes"][$c]["group"])) {
                             array_push($classData["Organizations"][$u]["classes"][$c]["group"], $user);
-                            return true;
+                            return "classroom joined";
                         }
                     }
             }
@@ -415,9 +416,10 @@ function createAdminTask(&$users,&$orgs){
 function exploreClasses(){
     $response = array("result"=>"failure");
     if(isset($_GET['classes']) && $_GET['classes']=='true'){
-        header("Content-Type:application/json;character=Utf-8");
+        header("Content-Type:application/json;charset=Utf-8");
         $response["result"] = "success";
         $response['cls'] = array();
+        $response['member_cls'] = array();
         $orgs = file_get_contents("../data/Organizations.json");
         $orgs = json_decode($orgs, true);
         $user = getUserNumber();
@@ -425,6 +427,7 @@ function exploreClasses(){
             if($orgs['Organizations'][$i]["Admin"] == $user){
                 for($j=0;$j<count($orgs['Organizations'][$i]["classes"]);$j++){
                     array_push($response['cls'], $orgs['Organizations'][$i]["classes"][$j]["Cname"]);
+                    array_push($response['member_cls'], $orgs['Organizations'][$i]["classes"][$j]["Cname"]);
                 }
             }
             else{
