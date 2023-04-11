@@ -123,7 +123,6 @@
                 <label id="logo">Your Workstation</label>
                 <div class="search-box">
                     <input type="text" class="searchTerm" id="search" placeholder="What you lookin' for ?">
-                        <i class="fa fa-search" id="fa-fa-search"></i>
                     </button>
                 </div>
                 <div id="prof">
