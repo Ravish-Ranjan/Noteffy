@@ -8,22 +8,22 @@ Chart.defaults.color = "white";
 Chart.defaults.backgroundColor = "rgba(255,255,255,0.0)";
 let data = {};
 
-ctx.addEventListener('',(e)=>{
+ctx.addEventListener('', (e) => {
     console.log(e);
     ctx['animation'] = "fade 1.5s linear";
 });
-document.querySelector("#temp").addEventListener('input',(elem)=>{
+document.querySelector("#temp").addEventListener('input', (elem) => {
     let val = elem.target.value;
-    if(val<=15){
+    if (val <= 15) {
         elem.target.value = 0;
     }
-    else if(val<=50){
+    else if (val <= 50) {
         elem.target.value = 30;
     }
-    else if(val<=85){
+    else if (val <= 85) {
         elem.target.value = 70;
     }
-    else{
+    else {
         elem.target.value = 100;
     }
     drawstat(ctx.getAttribute("datai"));
@@ -39,8 +39,8 @@ function drawstat(id, nm) {
     ctx.style['background'] = 'rgb(57,57,57)';
     ctx.style['background-size'] = "fit";
     ctx.style['background-repeat'] = "no-repeat";
-    ctx.setAttribute('datai',id);
-    if(nm!=null)
+    ctx.setAttribute('datai', id);
+    if (nm != null)
         document.getElementById("chart-label").innerHTML = `${nm}'s Performance`;
     let ed = new Date(); let sd = new Date(ed); sd.setDate(sd.getDay() - 30);
     let dates = []; let counter = new Date(sd);
@@ -54,12 +54,12 @@ function drawstat(id, nm) {
     }
     let ctask1 = [], ctask2 = [], ctask3 = [];
 
-    var val = document.querySelector("#temp").value;let start = 0,label='';
-    switch(val){
-        case '0':start = 0;label='Last month';break;
-        case '30':start = 8;label='Last 3 weeks';break;
-        case '70':start = 16;label='Last 2 weeks';break;
-        case '100':start = 24;label='Last week';break;
+    var val = document.querySelector("#temp").value; let start = 0, label = '';
+    switch (val) {
+        case '0': start = 0; label = 'Last month'; break;
+        case '30': start = 8; label = 'Last 3 weeks'; break;
+        case '70': start = 16; label = 'Last 2 weeks'; break;
+        case '100': start = 24; label = 'Last week'; break;
     }
     var dates1 = dates.slice().splice(start);
     data.forEach((ustat) => {
@@ -123,7 +123,7 @@ function drawstat(id, nm) {
             bezierCurve: true,
             scales: {
                 y: {
-                    max:30,
+                    max: 30,
                     beginAtZero: true,
                     grid: {
                         color: "white", display: true
@@ -145,9 +145,9 @@ function drawstat(id, nm) {
                         }
                     },
                 },
-                title:{
-                    display:true,
-                    text:label
+                title: {
+                    display: true,
+                    text: label
                 }
             }
         }
@@ -196,16 +196,27 @@ let getClasses = async () => {
     let loc = window.location.href.split("/HTML/control.html");
     let response = await fetch(loc[0] + "/php/admin.php?" + (new URLSearchParams({ classes: "true" })), { method: "GET", mode: "cors" });
     response = await response.json();
+    console.log(response);
     if (response['result'] == "success") {
         let workspace_select = document.querySelectorAll(".workspace-select");
         workspace_select.forEach((selector) => {
             if (selector.options.length == 1) {
-                response['cls'].forEach((ele) => {
-                    let option = document.createElement("option");
-                    option.text = ele;
-                    option.value = ele;
-                    selector.options.add(option, selector.options.length);
-                })
+                if (selector.id == "workspace-select-insight-2") {
+                    response['member_cls'].forEach((ele) => {
+                        let option = document.createElement("option");
+                        option.text = ele;
+                        option.value = ele;
+                        selector.options.add(option, selector.options.length);
+                    })
+                }
+                else {
+                    response['cls'].forEach((ele) => {
+                        let option = document.createElement("option");
+                        option.text = ele;
+                        option.value = ele;
+                        selector.options.add(option, selector.options.length);
+                    })
+                }
             }
         });
     }
@@ -223,31 +234,31 @@ classSelection.forEach((selector) => {
 
         let loc = window.location.href.split("/HTML/control.html");
         let reponse = null;
-        try{
+        try {
             response = await fetch(loc[0] + "/php/admin.php?" + (new URLSearchParams({ className: elem.target.value })), { method: "GET", mode: "cors" });
             response = await response.json();
         }
-        catch(e){
-            if(ctx.style['background'] != "url('../media/statsGIF.gif')"){
+        catch (e) {
+            if (ctx.style['background'] != "url('../media/statsGIF.gif')") {
                 ctx.style['background'] = "url('../media/statsGIF.gif')";
             }
             ctx.style['background-size'] = "100%";
             ctx.style['background-repeat'] = "no-repeat";
             ctx.style['background-position'] = "50% 50%";
-            if(cht!=null){
+            if (cht != null) {
                 cht.destroy();
             }
             return;
         }
-        if(response['name'].length==0){
-            if(cardn=='chart-panel'){
-                if(ctx.style['background'] != "url('../media/statsGIF.gif')"){
+        if (response['name'].length == 0) {
+            if (cardn == 'chart-panel') {
+                if (ctx.style['background'] != "url('../media/statsGIF.gif')") {
                     ctx.style['background'] = "url('../media/statsGIF.gif')";
                 }
                 ctx.style['background-size'] = "100%";
                 ctx.style['background-repeat'] = "no-repeat";
                 ctx.style['background-position'] = "50% 50%";
-                if(cht!=null){
+                if (cht != null) {
                     cht.destroy();
                 }
             }
@@ -265,91 +276,91 @@ classSelection.forEach((selector) => {
     })
 });
 
-        function fillCanv() {
-            cont.font = "40px codec";
-            let rect = ctx.getBoundingClientRect();
-            let url = window.location.href.split('/HTML')[0] + "/media/noteffyTitle.png";
-            var img = new Image();
-            img.src = url;
-            img.onload = () => {
-                cont.fill();
-            }
+function fillCanv() {
+    cont.font = "40px codec";
+    let rect = ctx.getBoundingClientRect();
+    let url = window.location.href.split('/HTML')[0] + "/media/noteffyTitle.png";
+    var img = new Image();
+    img.src = url;
+    img.onload = () => {
+        cont.fill();
+    }
+}
+function initializeDate() {
+    let days = $("days");
+    let month_select = $("month_select");
+    let year_select = $("year_select");
+
+    let d = new Date();
+    month_select.innerText = d.toLocaleDateString("en-US", { month: "long" });
+    year_select.innerText = d.getFullYear();
+}
+function nextMonth() {
+    let days = $("days");
+    let month_select = $("month_select");
+    let year_select = $("year_select");
+
+    let date = `${year_select.innerText}-${month_select.innerText}-1`;
+    let d = new Date(date);
+    if (d.getMonth() + 1 != 12) {
+        d.setMonth(d.getMonth() + 1);
+    }
+    else {
+        d.setFullYear(d.getFullYear() + 1);
+        d.setMonth(1);
+    }
+    month_select.innerText = d.toLocaleDateString("en-US", { month: "long" })
+    year_select.innerText = d.getFullYear();
+    getDays();
+
+}
+function previousMonth() {
+    let days = $("days");
+    let month_select = $("month_select");
+    let year_select = $("year_select");
+
+    let date = `${year_select.innerText}-${month_select.innerText}-1`;
+    let d = new Date(date);
+    if (d.getMonth() - 1 != 0) {
+        d.setMonth(d.getMonth() - 1);
+    }
+    else {
+        d.setFullYear(d.getFullYear() - 1);
+        d.setMonth(12);
+    }
+    month_select.innerText = d.toLocaleDateString("en-US", { month: "long" })
+    year_select.innerText = d.getFullYear();
+    getDays();
+
+}
+function getDays() {
+    let days_select = $("days");
+    days_select.innerHTML = ``;
+
+    let month_select = $("month_select").innerText;
+    let year_select = $("year_select").innerText;
+
+    let date = `${year_select}-${month_select}-1`;
+    let d = new Date(date);
+
+    let firstDay = parseInt(d.getDay());
+    let days = (new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate())
+    for (let day = 0; day < days; day++) {
+        let li = document.createElement("li");
+        if (firstDay > 1) {
+            firstDay--;
+            day--;
         }
-        function initializeDate() {
-            let days = $("days");
-            let month_select = $("month_select");
-            let year_select = $("year_select");
-
-            let d = new Date();
-            month_select.innerText = d.toLocaleDateString("en-US", { month: "long" });
-            year_select.innerText = d.getFullYear();
+        else if (day + 1 == (new Date().getDate())) {
+            let span = document.createElement("span");
+            span.setAttribute("class", "active");
+            span.innerText = day + 1;
+            li.appendChild(span);
         }
-        function nextMonth() {
-            let days = $("days");
-            let month_select = $("month_select");
-            let year_select = $("year_select");
-
-            let date = `${year_select.innerText}-${month_select.innerText}-1`;
-            let d = new Date(date);
-            if (d.getMonth() + 1 != 12) {
-                d.setMonth(d.getMonth() + 1);
-            }
-            else {
-                d.setFullYear(d.getFullYear() + 1);
-                d.setMonth(1);
-            }
-            month_select.innerText = d.toLocaleDateString("en-US", { month: "long" })
-            year_select.innerText = d.getFullYear();
-            getDays();
-
+        else {
+            li.innerText = day + 1;
         }
-        function previousMonth() {
-            let days = $("days");
-            let month_select = $("month_select");
-            let year_select = $("year_select");
-
-            let date = `${year_select.innerText}-${month_select.innerText}-1`;
-            let d = new Date(date);
-            if (d.getMonth() - 1 != 0) {
-                d.setMonth(d.getMonth() - 1);
-            }
-            else {
-                d.setFullYear(d.getFullYear() - 1);
-                d.setMonth(12);
-            }
-            month_select.innerText = d.toLocaleDateString("en-US", { month: "long" })
-            year_select.innerText = d.getFullYear();
-            getDays();
-
-        }
-        function getDays() {
-            let days_select = $("days");
-            days_select.innerHTML = ``;
-
-            let month_select = $("month_select").innerText;
-            let year_select = $("year_select").innerText;
-
-            let date = `${year_select}-${month_select}-1`;
-            let d = new Date(date);
-
-            let firstDay = parseInt(d.getDay());
-            let days = (new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate())
-            for (let day = 0; day < days; day++) {
-                let li = document.createElement("li");
-                if (firstDay > 1) {
-                    firstDay--;
-                    day--;
-                }
-                else if (day+1 == (new Date().getDate())) {
-                    let span = document.createElement("span");
-                    span.setAttribute("class", "active");
-                    span.innerText = day + 1;
-                    li.appendChild(span);
-                }
-                else {
-                    li.innerText = day + 1;
-                }
-                days_select.appendChild(li);
-            }
+        days_select.appendChild(li);
+    }
 }
         // ul.innerHTML += '<li>13</li>'

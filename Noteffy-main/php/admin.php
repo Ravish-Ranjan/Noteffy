@@ -416,9 +416,10 @@ function createAdminTask(&$users,&$orgs){
 function exploreClasses(){
     $response = array("result"=>"failure");
     if(isset($_GET['classes']) && $_GET['classes']=='true'){
-        header("Content-Type:application/json;character=Utf-8");
+        header("Content-Type:application/json;charset=Utf-8");
         $response["result"] = "success";
         $response['cls'] = array();
+        $response['member_cls'] = array();
         $orgs = file_get_contents("../data/Organizations.json");
         $orgs = json_decode($orgs, true);
         $user = getUserNumber();
@@ -426,6 +427,7 @@ function exploreClasses(){
             if($orgs['Organizations'][$i]["Admin"] == $user){
                 for($j=0;$j<count($orgs['Organizations'][$i]["classes"]);$j++){
                     array_push($response['cls'], $orgs['Organizations'][$i]["classes"][$j]["Cname"]);
+                    array_push($response['member_cls'], $orgs['Organizations'][$i]["classes"][$j]["Cname"]);
                 }
             }
             else{
