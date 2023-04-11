@@ -21,6 +21,7 @@ body {
     background-size: 197% 100%;
     background-repeat:no-repeat;
     background-attachment:fixed;
+    overflow-x: hidden;
 }
 .main-parent-wrapper{
     display: flex;
@@ -29,7 +30,6 @@ body {
     width: 197%;
 }
 .snapper{
-    background-color: #ffffff77;
     height: 100%;
     width: 16%;
     position: absolute;
@@ -37,14 +37,19 @@ body {
     left: 95%;
     z-index: 10;
     font-family: monospace;
-    font-size: 80;
+    font-size: 60;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: 0.3s;
+}
+.snapper:hover{
+    font-size: 80;
+    transition: 0.3s;
 }
 .snapper>a{
     text-decoration: none;
-    color: black;
+    color: white;
 }
 .user-panel,.admin-panel {
     height: 100%;
