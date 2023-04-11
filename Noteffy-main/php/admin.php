@@ -449,6 +449,7 @@ function classMembers(){
     }
     if(isset($_GET['className']) ){
         $resp = array();
+        $resp['avatars'] = array();
         $resp['name'] = array();$resp['stats'] = array();
         $className = $_GET['className'];
         $orgs = file_get_contents("../data/Organizations.json");
@@ -469,6 +470,7 @@ function classMembers(){
         for($iter=0;$iter<count($resp['id']);$iter++){
             $temp = ($resp['id'][$iter]);
             array_push($resp['name'], $details["Users"][$temp]["User_Name"]);
+            array_push($resp['avatars'], $details["Users"][$temp]["Profile_Pic"]);
         }
         for($i=0;$i<count($adtasks['Organizations']);$i++){
             if($adtasks['Organizations'][$i]['Admin']==$user){
