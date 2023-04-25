@@ -1,5 +1,5 @@
 # this function sends the mail to given/default email the simple/html based text with/without attachement 
-def sendmail(from_ = "noteffy.email@gmail.com" , passwd = "qlugelfypfizxlzt",to = "",subject = "",body = "",attachment = "",html=False):
+def sendmail(from_ = "noteffy.email@gmail.com" , passwd = "rpjlwemylnixljit",to = "",subject = "",body = "",attachment = "",html=False):
     import smtplib
     from email.mime.multipart import MIMEMultipart
     from email.mime.text import MIMEText
