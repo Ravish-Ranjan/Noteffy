@@ -1,0 +1,86 @@
+@font-face{
+    font-family: codec-extrabold;
+    src: url('../media/Codec-Cold-Heavy-trial.ttf');
+}
+@font-face{
+    font-family: codec;
+    src: url('../media/Codec-Cold-Regular-trial.ttf');
+}
+input[type="date"],input[type="text"],textarea{
+    font-size: 20;
+    font-family: codec;
+    padding: 1%;
+    border: none;
+    border-bottom: 1px solid #555;
+}
+.FORM,.FORM2{
+    animation:fade 0.4s ease-in-out;
+    position: absolute;
+    top: 2%;
+    right: -80%;
+    display: grid;/* height:60%; */
+    width: 28%;
+    z-index:4;
+    background: #ffffff;
+    font-size: 2vw;
+    border-radius:1rem;
+    width: 40%;
+    height: 70%;
+    color:#000000;
+    margin-top: 15vh;
+    padding: 1%;
+    font-family: codec-extrabold;
+}.FORM2,.FORM[ad='true']{
+    outline:green;
+    right:20%;
+}
+#cancel-icon-img{
+    height: 10;
+    width: 10;
+}
+#Date{
+    font-family: codec;
+}
+#Time{
+    font-family: codec;
+}
+#Form_Caption{
+    justify-self: center;
+    font-family: codec-extrabold;
+    font-size: 20;
+}
+#close{
+    position:absolute;
+    top:-7px;
+    left:-5px;
+    height:50px;
+    width:50px;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+span{
+    font-size: 30;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+label{
+    font-family: codec;
+    font-size: 21;
+    margin-top: 30;
+}
+#btn{
+    margin-top: 12;
+    width: 30%;
+    height: 25%;
+    font-size: 14;
+    border-radius: 1.5rem;
+    color: white;
+    background-color: #ffffff;
+    color: #000000;
+    font-family: codec-extrabold;
+    border: none;
+}
+#btn:hover{
+    background-color: #000000;
+    color: #ffffff;
+}
