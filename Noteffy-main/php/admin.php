@@ -1,42 +1,42 @@
 <?php
-    require_once("initial.php");require_once("hash.php");
     require_once("jsonpath-0.8.1.php");
+    require_once("initial.php");
     function getmembers(){
-    if(!isset($_GET["op"]) || ($_GET["op"] != "getmembers")){
-        return;
-    }
-    header("Content-Type: application/json;charset=utf-8");
-    $orgs = file_get_contents("../data/Organizations.json");
-    $orgs = json_decode($orgs,true);
-    $resp = array();
-
-    $user = getUserNumber();$class = $_GET["class"];
-    for($k = 0;$k < count($orgs["Organizations"]);$k++){
-        if($user == $orgs["Organizations"][$k]["Admin"]){
-            for ($j = 0; $j < count($orgs["Organizations"][$k]["classes"]); $j++) {
-                if ($orgs["Organizations"][$k]["classes"][$j]["Cname"]==$class) {
-                   $memlist = $orgs["Organizations"][$k]["classes"][$j]["group"];
-                   $mems = array();
-                   foreach($memlist as $uid){
-                        $mname = seekUserName($uid);
-                        if($mname!=-1)
-                            {array_push($mems,array($uid=>$mname));}
-                        else{
-                            //Splice array here,remove non members
-                        }
-                   }
-                   $resp["Message"] = "success";
-                   $resp["list"] = $mems;$resp = json_encode($resp);
-                   echo $resp;die();
-                }
-            }
-            $resp["Message"] = "success";
-            $resp["list"] = array();$resp = json_encode($resp);
-            echo $resp;die();
+        if(!isset($_GET["op"]) || ($_GET["op"] != "getmembers")){
+            return;
         }
-    }
-    $resp["Message"] = "failure";$resp = json_encode($resp);
-    echo $resp;die();
+        header("Content-Type: application/json;charset=utf-8");
+        $orgs = file_get_contents("../data/Organizations.json");
+        $orgs = json_decode($orgs,true);
+        $resp = array();
+
+        $user = getUserNumber();$class = $_GET["class"];
+        for($k = 0;$k < count($orgs["Organizations"]);$k++){
+            if($user == $orgs["Organizations"][$k]["Admin"]){
+                for ($j = 0; $j < count($orgs["Organizations"][$k]["classes"]); $j++) {
+                    if ($orgs["Organizations"][$k]["classes"][$j]["Cname"]==$class) {
+                    $memlist = $orgs["Organizations"][$k]["classes"][$j]["group"];
+                    $mems = array();
+                    foreach($memlist as $uid){
+                            $mname = seekUserName($uid);
+                            if($mname!=-1)
+                                {array_push($mems,array($uid=>$mname));}
+                            else{
+                                //Splice array here,remove non members
+                            }
+                    }
+                    $resp["Message"] = "success";
+                    $resp["list"] = $mems;$resp = json_encode($resp);
+                    echo $resp;die();
+                    }
+                }
+                $resp["Message"] = "success";
+                $resp["list"] = array();$resp = json_encode($resp);
+                echo $resp;die();
+            }
+        }
+        $resp["Message"] = "failure";$resp = json_encode($resp);
+        echo $resp;die();
 }
     getmembers();
 ?>
@@ -337,7 +337,7 @@ function displayClass(&$classData)
             if ($user == $classData["Organizations"][$j]["Admin"]) {
                 for ($k = 0; $k < count($classData["Organizations"][$user]["classes"]); $k++) {
                     $title = $classData["Organizations"][$user]["classes"][$k]["Cname"];
-                    $rno = hash_name($title,5);
+                    $rno = hash_name($title,AssetType::Classroom);
                     echo "
                     <div class='class' style='background-image:url(\"../media/workspaceAsset$rno.png\")'>
                     <div class='backg'>
@@ -355,7 +355,7 @@ function displayClass(&$classData)
                 for ($k = 0; $k < count($classData["Organizations"][$j]["classes"]); $k++) {
                     if (in_array($user, $classData["Organizations"][$j]["classes"][$k]["group"])) {
                         $title = $classData["Organizations"][$j]["classes"][$k]["Cname"];
-                        $rno = hash_name($title,7);
+                        $rno = hash_name($title,AssetType::Classroom);
                         echo "
                     <div class='class' style='background-image:url(\"../media/workspaceAsset$rno.png\")'>
                     <div class='backg'>

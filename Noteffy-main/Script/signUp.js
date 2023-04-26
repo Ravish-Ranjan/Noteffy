@@ -48,7 +48,6 @@ function config(){ // this function gives different messages for user to underst
         transitionFunction();
     }
     else{}
-
     //For caching correct data
     if(queries.get("mail")){
         document.querySelectorAll(".form2-input")[0].value = queries.get("mail");

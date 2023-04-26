@@ -53,9 +53,8 @@ function validateOTP(usern,email,pwd,pwd2){
         return res.json();
     }).then((data)=>{
         if(data['Message']=='otp matched'){
-            console.log(loc+"php/main.php");
             //Set a GET variable that indicates that main has to recieve JSON like API 
-            fetch(loc+"php/main.php?signup=true",{
+            fetch(loc+"php/initial.php?signup=true",{
                 method:'POST',
                 header:{
                     'Content-Type':'application/json'

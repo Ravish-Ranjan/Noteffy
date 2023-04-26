@@ -1,24 +1,13 @@
 <?php
-    include "initial.php";
-    include "hash.php";
-    include "priority_calc.php";
-    include "note.php";
-    include "task.php";
-    include "todo.php";
-    include "admin.php";
-?>
-<?php
-    $queries = array();
-    // Fetching raw POST object body because content-type is causing parsing issues
-    // parse_str($_SERVER['QUERY_STRING'], $queries);
-    $details = file_get_contents("../data/Details.json");
-    $details = json_decode($details, true);
-    signUp($queries);
-    signIn($details);
-    $profilePicImg = getAvatar($details);
-    allowAdmin($details);
-    $details = json_encode($details);
-    file_put_contents("../data/Details.json", $details);
+    require_once "hash.php";
+    require_once "initial.php";
+    require_once "priority_calc.php";
+    require_once "note.php";
+    require_once "task.php";
+    require_once "todo.php";
+    require_once "admin.php";
+
+    header("Content-Type:text/html;charset=utf-8")
 ?>
 <html>
     <head>
@@ -34,7 +23,7 @@
     
     <!-- favicon -->
     <link rel="shortcut icon" href="../media/logo5mix.png" type="image/x-icon">
-    
+   
     <!-- scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="../Script/compose.js"></script>
@@ -43,6 +32,19 @@
     <script defer src="../Script/admin.js"></script>
 </head>
 <body onload="pos()">
+    <?php
+        $queries = array();
+        // Fetching raw POST object body because content-type is causing parsing issues
+        parse_str($_SERVER['QUERY_STRING'], $queries);
+        $details = file_get_contents("../data/Details.json");
+        $details = json_decode($details, true);
+        // $profilePicImg = getAvatar($details);
+        $profilePicImg = "red";
+        signIn($details);
+        allowAdmin($details);
+        $details = json_encode($details);
+        file_put_contents("../data/Details.json", $details);
+    ?>
     <div class="main-parent-wrapper">
         <!-- admin panel -->
         <div class="admin-panel" id="toAdmingo">
@@ -63,7 +65,7 @@
                     else if(!$flag && (isset($_POST['ClassCode']) || isset($_POST['JClassCode']))){
                         echo "<script>message('invalid class code or you are already part of the workspace','error')</script>";
                     }
-                    $logon = hash_name(getUser(),3);
+                    $logon = hash_name(getUser(),AssetType::Logo);
                     $colors = array("red","teal","yellow");
                     $logoc = $profilePicImg===false ? "logo".$colors[$logon] : "uploads/logo".$profilePicImg;
                 ?>

@@ -1,8 +1,9 @@
 <?php
-require_once("jsonpath-0.8.1.php");
+    require_once("jsonpath-0.8.1.php");
+    require_once("hash.php");
     function seekUserName($uval)
     { // this function fetches the user from the data
-        $users = file_get_contents("../data/Details.json");
+        $users = file_get_constents("../data/Details.json");
         $users = json_decode($users,true);
         for($t = 0;$t < count($users["Users"]);$t++){
             if($users["Users"][$t]["identifier"]==$uval){
@@ -20,10 +21,13 @@ require_once("jsonpath-0.8.1.php");
     }
     // This function gives the index of the user in the json file
     function getUserNumber(){
-        if (isset($_COOKIE['user_number']))
+        if (isset($_COOKIE['user_number'])){
             return (int) (decrypt_data($_COOKIE['user_number'],''));
-        echo "<script>window.location.href='../HTML/error.html'</script>";
         }
+        else{
+            echo "<script>window.location.href='../HTML/error.html'</script>";
+        }
+    }
     // removes html tags from data
     function sanitize(&$data)
     {
@@ -41,14 +45,14 @@ require_once("jsonpath-0.8.1.php");
         echo $arr[$i];
         }
     }
-    function signUp($queries){
-    // header("Content-Type:application/json;charset=utf-8");
-        if(isset($queries['signup'])=='true'){
+    function signUp(){
+        header("Content-Type:application/json;charset=utf-8");
+        if(isset($_GET['signup'])=='true'){
             $raw = file_get_contents("php://input");
             $jsond = json_decode($raw,true) or die(123);
-            if ($jsond['Password'] !== $jsond['Password1']) {
-            $data = array('Message' => 'failure');
-            echo json_encode($data);
+                if ($jsond['Password'] !== $jsond['Password1']) {
+                    $data = array('Message' => 'failure');
+                    echo json_encode($data);
                 } 
                 else if ($jsond['Password'] === $jsond['Password1']) {
                     // details
@@ -66,7 +70,6 @@ require_once("jsonpath-0.8.1.php");
                     $stats = file_get_contents("../data/admintask.json");
                     $stats = json_decode($stats, true);
                     $classes = count($orgs["Organizations"]);
-                    header('Content-Type: application/json;charset=utf-8');
                     $users_count = count($details['Users']);
                     str_pad($jsond['Username'], 32, '#', STR_PAD_RIGHT);
 
@@ -95,14 +98,17 @@ require_once("jsonpath-0.8.1.php");
                     file_put_contents("../data/Data.json", $alternate);
                     file_put_contents("../data/admintask.json", $stats1);
                     $respdata = array('Message'=>'success');
-                    $data = json_encode($respdata);
-                    echo $data;
+                    echo json_encode($respdata);
             }
             die();
         }
+        return;
     }
+    signUp();
     function signIn(&$jsonData)
     { //this function uses the saved data to verify and let the old user sign in
+        if(isset($_COOKIE["user_number"]) && isset($COOKIE["user_number"]))
+            return;
         if (isset($_POST['User_Name_']) && isset($_POST['Password_'])) {
             $users_count = count($jsonData["Users"]);
             $errc = "uid";
