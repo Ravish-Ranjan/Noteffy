@@ -511,4 +511,47 @@ function storeEvents(){
         echo "<script>window.location.href='../HTML/control.html'</script>";
     }
 }
+function fetchEvent(){
+    $orgs = file_get_contents("../data/Organizations.json");
+    $orgs = json_decode($orgs, true);
+    $user = getUserNumber();
+    $evs = array();
+    date_default_timezone_set("Asia/Kolkata");
+        if(!isset($_GET["events"])){
+            return;
+        }
+        if(!isset($_COOKIE['user_number'])){
+            echo '<script>window.replace("index.php")</script>';return;
+        }
+        header("Content-Type: application/json;charset=utf-8");
+        $res = array("Message"=>"failure");
+        $res["events"] = array();
+        for($k = 0;$k < count($orgs["Organizations"]);$k++){
+            for($l = 0;$l < count($orgs["Organizations"][$k]["classes"]);$l++){
+                $classitem["Name"] = $orgs["Organizations"][$k]["classes"][$l]["Cname"];
+                $classitem["Tasks"] = array();
+                if (in_array($user,$orgs["Organizations"][$k]["classes"][$l]["group"])) {
+                       $events = $orgs["Organizations"][$k]["classes"][$l]["Events"];
+                       for($iter=0;$iter<count($events);$iter++){
+                        $dayDifference = strtotime($events[$iter]['Date']) - strtotime(date("Y-m-d"));
+                        $timeDifference = strtotime($events[$iter]['Time']) - strtotime(date("H:i"));
+                        $diff = $dayDifference + $timeDifference;
+                        if($diff>=0)
+                            array_push($evs,$events[$iter]);
+                        else
+                            array_splice($orgs["Organizations"][$k]["classes"][$l]["Events"],$iter);
+                       }
+                    }
+                }
+            }
+        if(count($evs)!=0){
+            $res['Message'] = 'success';
+            $res['events'] = $evs;
+        }
+        $orgs1 = json_encode($orgs,true);
+        file_put_contents("../data/Organizations.json",$orgs1);
+        $res = json_encode($res);echo $res;
+        die();
+}
+    fetchEvent();
 ?>
