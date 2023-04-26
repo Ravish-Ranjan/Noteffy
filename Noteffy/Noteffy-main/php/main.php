@@ -10,7 +10,7 @@
 <?php
     $queries = array();
     // Fetching raw POST object body because content-type is causing parsing issues
-    // parse_str($_SERVER['QUERY_STRING'], $queries);
+    parse_str($_SERVER['QUERY_STRING'], $queries);
     $details = file_get_contents("../data/Details.json");
     $details = json_decode($details, true);
     signUp($queries);
