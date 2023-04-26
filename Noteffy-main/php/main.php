@@ -10,12 +10,13 @@
 <?php
     $queries = array();
     // Fetching raw POST object body because content-type is causing parsing issues
-    // parse_str($_SERVER['QUERY_STRING'], $queries);
+    parse_str($_SERVER['QUERY_STRING'], $queries);
     $details = file_get_contents("../data/Details.json");
     $details = json_decode($details, true);
     signUp($queries);
     signIn($details);
-    $profilePicImg = getAvatar($details);
+    // $profilePicImg = getAvatar($details);
+    $profilePicImg = "red";
     allowAdmin($details);
     $details = json_encode($details);
     file_put_contents("../data/Details.json", $details);

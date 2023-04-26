@@ -36,7 +36,7 @@ function cleanDate(date) {
 }
 function drawstat(id, nm) {
     // ctx.style['background'] = "url('../media/background_5.png')";
-    ctx.style['background'] = 'rgb(57,57,57)';
+    ctx.style['background'] = 'rgb(255,57,57)';
     ctx.style['background-size'] = "fit";
     ctx.style['background-repeat'] = "no-repeat";
     ctx.setAttribute('datai', id);
@@ -265,10 +265,10 @@ classSelection.forEach((selector) => {
         }
         document.getElementById("chart-label").innerHTML = `Assess your students`;
         response['name'].forEach((name) => {
-            markup += `   <div id="explore-user-card" onclick="drawstat(${response['id'][response['name'].indexOf(name)]},'${name}')">
-    <img src="../media/logoorangep.png" id="user-card-avatar">
-    <p class="user-name-card">${name}</p>
-    </div>`;
+            markup += `     <div id="explore-user-card" onclick="drawstat(${response['id'][response['name'].indexOf(name)]},'${name}')">
+                                <img src="../media/logoorangep.png" id="user-card-avatar">
+                                <p class="user-name-card">${name}</p>
+                            </div>`;
         });
         card.innerHTML = markup;
         // card.innerHTML = markup;
