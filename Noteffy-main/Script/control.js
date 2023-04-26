@@ -196,7 +196,6 @@ let getClasses = async () => {
     let loc = window.location.href.split("/HTML/control.html");
     let response = await fetch(loc[0] + "/php/admin.php?" + (new URLSearchParams({ classes: "true" })), { method: "GET", mode: "cors" });
     response = await response.json();
-    console.log(response);
     if (response['result'] == "success") {
         let workspace_select = document.querySelectorAll(".workspace-select");
         workspace_select.forEach((selector) => {
@@ -232,6 +231,7 @@ classSelection.forEach((selector) => {
         let card = document.getElementById(cardn);
         let markup = '';
 
+
         let loc = window.location.href.split("/HTML/control.html");
         let response = null;
         try{
@@ -265,10 +265,16 @@ classSelection.forEach((selector) => {
         }
         document.getElementById("chart-label").innerHTML = `Assess your students`;
         response['name'].forEach((name) => {
-            markup += `   <div id="explore-user-card" onclick="drawstat(${response['id'][response['name'].indexOf(name)]},'${name}')">
-    <img src="../media/logoorangep.png" id="user-card-avatar">
-    <p class="user-name-card">${name}</p>
-    </div>`;
+            markup += `   <div class="card border border-black" style="width: 18rem;height: 21rem;margin-top:80px;" onclick="drawstat(${response['id'][response['name'].indexOf(name)]},'${name}')">
+            <img src="../media/uploads/logo${response['avatars'][response['name'].indexOf(name)]}q.png" class="card-img-top" alt="loading avatar">
+            <div class="card-body">
+              <center><p class="card-text" style='font-family:codec-extrabold'>${name}</p></center>
+            </div>
+          </div>`;
+            // markup+=`<div id="explore-user-card" onclick="drawstat(${response['id'][response['name'].indexOf(name)]},'${name}')">
+            // <img src="../media/logoorangep.png" id="user-card-avatar">
+            // <p class="user-name-card">${name}</p>
+            // </div>`
         });
         card.innerHTML = markup;
         // card.innerHTML = markup;
