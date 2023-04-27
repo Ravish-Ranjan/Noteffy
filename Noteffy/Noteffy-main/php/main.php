@@ -1,4 +1,9 @@
 <?php
+
+abstract class AssetType{
+    const Classroom = 4;
+    const Logo = 3;
+}
     include "initial.php";
     include "hash.php";
     include "priority_calc.php";
@@ -6,6 +11,8 @@
     include "task.php";
     include "todo.php";
     include "admin.php";
+
+    
 ?>
 <?php
     $queries = array();
@@ -64,7 +71,7 @@
                     else if(!$flag && (isset($_POST['ClassCode']) || isset($_POST['JClassCode']))){
                         echo "<script>message('invalid class code or you are already part of the workspace','error')</script>";
                     }
-                    $logon = hash_name(getUser(),3);
+                    $logon = hash_name(getUser(),AssetType::Logo);
                     $colors = array("red","teal","yellow");
                     $logoc = $profilePicImg===false ? "logo".$colors[$logon] : "uploads/logo".$profilePicImg;
                 ?>

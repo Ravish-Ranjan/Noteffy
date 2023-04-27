@@ -337,7 +337,7 @@ function displayClass(&$classData)
             if ($user == $classData["Organizations"][$j]["Admin"]) {
                 for ($k = 0; $k < count($classData["Organizations"][$user]["classes"]); $k++) {
                     $title = $classData["Organizations"][$user]["classes"][$k]["Cname"];
-                    $rno = hash_name($title,5);
+                    $rno = hash_name($title,AssetType::Classroom);
                     echo "
                     <div class='class' style='background-image:url(\"../media/workspaceAsset$rno.png\")'>
                     <div class='backg'>
@@ -355,7 +355,7 @@ function displayClass(&$classData)
                 for ($k = 0; $k < count($classData["Organizations"][$j]["classes"]); $k++) {
                     if (in_array($user, $classData["Organizations"][$j]["classes"][$k]["group"])) {
                         $title = $classData["Organizations"][$j]["classes"][$k]["Cname"];
-                        $rno = hash_name($title,7);
+                        $rno = hash_name($title,AssetType::Classroom);
                         echo "
                     <div class='class' style='background-image:url(\"../media/workspaceAsset$rno.png\")'>
                     <div class='backg'>
