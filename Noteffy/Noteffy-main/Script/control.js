@@ -6,7 +6,7 @@ Chart.defaults.font.family = "codec";
 Chart.defaults.font.weight = "bold";
 Chart.defaults.color = "white";
 Chart.defaults.backgroundColor = "rgba(255,255,255,0.0)";
-let data = {};let events = [];
+let data = {};
 
 ctx.addEventListener('', (e) => {
     console.log(e);
@@ -196,7 +196,6 @@ let getClasses = async () => {
     let loc = window.location.href.split("/HTML/control.html");
     let response = await fetch(loc[0] + "/php/admin.php?" + (new URLSearchParams({ classes: "true" })), { method: "GET", mode: "cors" });
     response = await response.json();
-    console.log(response);
     if (response['result'] == "success") {
         let workspace_select = document.querySelectorAll(".workspace-select");
         workspace_select.forEach((selector) => {
@@ -232,9 +231,10 @@ classSelection.forEach((selector) => {
         let card = document.getElementById(cardn);
         let markup = '';
 
+
         let loc = window.location.href.split("/HTML/control.html");
         let response = null;
-        try{
+        try {
             response = await fetch(loc[0] + "/php/admin.php?" + (new URLSearchParams({ className: elem.target.value })), { method: "GET", mode: "cors" });
             response = await response.json();
         }
@@ -265,10 +265,16 @@ classSelection.forEach((selector) => {
         }
         document.getElementById("chart-label").innerHTML = `Assess your students`;
         response['name'].forEach((name) => {
-            markup += `   <div id="explore-user-card" onclick="drawstat(${response['id'][response['name'].indexOf(name)]},'${name}')">
-    <img src="../media/logoorangep.png" id="user-card-avatar">
-    <p class="user-name-card">${name}</p>
-    </div>`;
+            markup += `   <div class="card border border-black" style="width: 18rem;height: 21rem;margin-top:80px;" onclick="drawstat(${response['id'][response['name'].indexOf(name)]},'${name}')">
+            <img src="../media/uploads/logo${response['avatars'][response['name'].indexOf(name)]}q.png" class="card-img-top" alt="loading avatar">
+            <div class="card-body">
+              <center><p class="card-text" style='font-family:codec-extrabold'>${name}</p></center>
+            </div>
+          </div>`;
+            // markup+=`<div id="explore-user-card" onclick="drawstat(${response['id'][response['name'].indexOf(name)]},'${name}')">
+            // <img src="../media/logoorangep.png" id="user-card-avatar">
+            // <p class="user-name-card">${name}</p>
+            // </div>`
         });
         card.innerHTML = markup;
         // card.innerHTML = markup;
@@ -292,7 +298,7 @@ function initializeDate() {
     let year_select = $("year_select");
 
     let d = new Date();
-    month_select.innerText = d.toLocaleDateString("en-US", { month: "long" }).toUpperCase();
+    month_select.innerText = d.toLocaleDateString("en-US", { month: "long" });
     year_select.innerText = d.getFullYear();
 }
 function nextMonth() {
@@ -309,94 +315,58 @@ function nextMonth() {
         d.setFullYear(d.getFullYear() + 1);
         d.setMonth(1);
     }
-    month_select.innerText = d.toLocaleDateString("en-US", { month: "long" }).toUpperCase();
+    month_select.innerText = d.toLocaleDateString("en-US", { month: "long" })
     year_select.innerText = d.getFullYear();
     getDays();
 
 }
+function previousMonth() {
+    let days = $("days");
+    let month_select = $("month_select");
+    let year_select = $("year_select");
 
-        function previousMonth() {
-            let days = $("days");
-            let month_select = $("month_select");
-            let year_select = $("year_select");
+    let date = `${year_select.innerText}-${month_select.innerText}-1`;
+    let d = new Date(date);
+    if (d.getMonth() - 1 != 0) {
+        d.setMonth(d.getMonth() - 1);
+    }
+    else {
+        d.setFullYear(d.getFullYear() - 1);
+        d.setMonth(12);
+    }
+    month_select.innerText = d.toLocaleDateString("en-US", { month: "long" })
+    year_select.innerText = d.getFullYear();
+    getDays();
 
-            let date = `${year_select.innerText}-${month_select.innerText}-1`;
-            let d = new Date(date);
-            if (d.getMonth() - 1 != 0) {
-                d.setMonth(d.getMonth() - 1);
-            }
-            else {
-                d.setFullYear(d.getFullYear() - 1);
-                d.setMonth(12);
-            }
-            month_select.innerText = d.toLocaleDateString("en-US", { month: "long" }).toUpperCase();
-            year_select.innerText = d.getFullYear();
-            getDays();
+}
+function getDays() {
+    let days_select = $("days");
+    days_select.innerHTML = ``;
 
+    let month_select = $("month_select").innerText;
+    let year_select = $("year_select").innerText;
+
+    let date = `${year_select}-${month_select}-1`;
+    let d = new Date(date);
+
+    let firstDay = parseInt(d.getDay());
+    let days = (new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate())
+    for (let day = 0; day < days; day++) {
+        let li = document.createElement("li");
+        if (firstDay > 1) {
+            firstDay--;
+            day--;
         }
-        async function getDays() {
-            events = await fetchEvents();
-            console.log(events);
-            let days_select = $("days");
-            days_select.innerHTML = ``;
-
-            let month_select = $("month_select").innerText;
-            let year_select = $("year_select").innerText;
-
-            let date = `${year_select}-${month_select}-1`;
-            let d = new Date(date);
-
-            let firstDay = parseInt(d.getDay());
-            let days = (new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate())
-            for (let day = 0; day < days; day++) {
-                let months = ["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"];
-                let sdate = [year_select,String(months.indexOf(month_select)+1).padStart(2,'0'),String(day+1).padStart(2,'0')].join("-");
-                let li = document.createElement("li");
-                let ave  = events.filter((ev)=>{
-                    console.log(sdate);console.log(ev.Date);
-                    if(ev.Date==sdate)
-                    return true;
-                    else
-                    return false;
-                });
-                if (firstDay > 1) {
-                    firstDay--;
-                    day--;
-                }
-                else if (ave.length>0) {
-                    let span = document.createElement("span");
-                    span.setAttribute("class", "active");
-                    li.addEventListener("click",(e)=>{
-                        showEvent(ave[0]);
-                    });
-                    console.log(ave[0]);
-                    span.innerText = day + 1;
-                    li.appendChild(span);
-                }
-                else {
-                    li.innerText = day + 1;
-                    li.addEventListener("click",(e)=>{
-                        createSchedule(sdate);
-                    });
-                }
-                days_select.appendChild(li);
-            }
-}
-async function fetchEvents(){
-    let loc = window.location.href.split("/HTML/control.html");
-    let response = await fetch(loc[0] + "/php/admin.php?" + (new URLSearchParams({ events: "true"})), { method: "GET", mode: "cors" });
-    response = await response.json();
-    if (response['Message'] == "success") {
-        events = response['events'];
+        else if (day + 1 == (new Date().getDate())) {
+            let span = document.createElement("span");
+            span.setAttribute("class", "active");
+            span.innerText = day + 1;
+            li.appendChild(span);
+        }
+        else {
+            li.innerText = day + 1;
+        }
+        days_select.appendChild(li);
     }
-    return events;
 }
-async function fetchEvents(){
-    let loc = window.location.href.split("/HTML/control.html");
-    let response = await fetch(loc[0] + "/php/admin.php?" + (new URLSearchParams({ events: "true"})), { method: "GET", mode: "cors" });
-    response = await response.json();
-    if (response['Message'] == "success") {
-        events = response['events'];
-    }
-    return events;
-}
+        // ul.innerHTML += '<li>13</li>'

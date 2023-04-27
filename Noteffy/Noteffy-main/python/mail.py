@@ -92,5 +92,6 @@ elif int(data[2]) == 2:
              subject="Hey There, Noteffy Here...",
              body=msg2,
              html=True)
+print(otp)
 # calling to send the mail based on command line args
 #html true to enable html styling otherwise false
