@@ -307,6 +307,7 @@ function createClass(&$personal, &$classData)
                         $classData["Organizations"][$u]["classes"][$classes]['Cname'] = $className;
                         $classData["Organizations"][$u]["classes"][$classes]['Cdesc'] = $classDesc;
                         $classData["Organizations"][$u]["classes"][$classes]['CLimit'] = $classLimit;
+                        return true;
                     }
                 }
             }
@@ -379,13 +380,14 @@ function displayClass(&$classData)
                 for ($k = 0; $k < count($classData["Organizations"][$j]["classes"]); $k++) {
                     if (in_array($user, $classData["Organizations"][$j]["classes"][$k]["group"])) {
                         $title = $classData["Organizations"][$j]["classes"][$k]["Cname"];
+                        $code = $classData["Organizations"][$j]["classes"][$k]["Organization_code"];
                         $rno = hash_name($title,AssetType::Classroom);
                         echo "
                     <div class='class' style='background-image:url(\"../media/workspaceAsset$rno.png\")'>
                     <div class='backg'>
                         <h2>$title</h2>
                     </div>
-                    <div class='options'><button>opt1</button><button>opt2</button></div>
+                    <div class='options'><button onclick='copyCode(\"$code\")'>copy code</button><button onclick='unenroll($k,$j)'>unenroll</button></div>
                 </div>
                     ";
                     }
@@ -420,6 +422,37 @@ function editClass(){
     }
 }
 editClass();
+function unenroll(){
+    $response = array("status" => "failure");
+    if(isset($_GET['unenrollClassNumber']) && isset($_GET["unenrollAdmin"])){
+        header("Content-Type:application/json;charset=Utf-8");
+        $class_number = (int)$_GET['unenrollClassNumber'];
+        $admin = (int)$_GET['unenrollAdmin'];
+        $orgs = file_get_contents("../data/Organizations.json");
+        $orgs = json_decode($orgs, true);
+        $user = getUserNumber();
+        for($i=0;$i<count($orgs['Organizations']);$i++){
+            if($orgs["Organizations"][$i]["Admin"]== $admin){
+                $class = $orgs["Organizations"][$i]["classes"][$class_number];
+                $del = array_search($user, $class["group"]);
+                try{
+                    array_splice($orgs["Organizations"][$i]["classes"][$class_number]["group"], $del, 1);
+                }
+                catch(Exception $e){
+                    echo "<script>window.location.href='../HTML/error.html'</script>";
+                }
+                $response["status"] = "success";
+                $orgs = json_encode($orgs);
+                file_put_contents("../data/Organizations.json", $orgs);
+                echo json_encode($response);
+                die();
+            }
+        }
+        echo json_encode($response);
+        die();
+    }
+}
+unenroll();
 function createAdminTask(&$users,&$orgs){
     if(!isset($_GET["admin"]) || !isset($_GET["class"]) || $_GET["admin"]!="true"){
         return;
