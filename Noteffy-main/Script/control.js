@@ -1,7 +1,7 @@
 let ctx = document.getElementById("rendcont");
 let cont = ctx.getContext("2d");
 let cht;
-Chart.defaults.font.size = 20;
+Chart.defaults.font.size = 12;
 Chart.defaults.font.family = "codec";
 Chart.defaults.font.weight = "bold";
 Chart.defaults.color = "white";
@@ -136,12 +136,12 @@ function drawstat(id, nm) {
                     }
                 }
             },
-            layout: { padding: 10 },
+            layout: { padding: 5 },
             plugins: {
                 legend: {
                     labels: {
                         font: {
-                            size: 18,
+                            size: 12,
                         }
                     },
                 },
@@ -315,72 +315,67 @@ function nextMonth() {
 
 }
 
-        function previousMonth() {
-            let days = $("days");
-            let month_select = $("month_select");
-            let year_select = $("year_select");
-
-            let date = `${year_select.innerText}-${month_select.innerText}-1`;
-            let d = new Date(date);
-            if (d.getMonth() - 1 != 0) {
-                d.setMonth(d.getMonth() - 1);
-            }
-            else {
-                d.setFullYear(d.getFullYear() - 1);
-                d.setMonth(12);
-            }
-            month_select.innerText = d.toLocaleDateString("en-US", { month: "long" }).toUpperCase();
-            year_select.innerText = d.getFullYear();
-            getDays();
-
+function previousMonth() {
+    let days = $("days");
+    let month_select = $("month_select");
+    let year_select = $("year_select");
+    let date = `${year_select.innerText}-${month_select.innerText}-1`;
+    let d = new Date(date);
+    if (d.getMonth() - 1 != 0) {
+        d.setMonth(d.getMonth() - 1);
+    }
+    else {
+        d.setFullYear(d.getFullYear() - 1);
+        d.setMonth(12);
+    }
+    month_select.innerText = d.toLocaleDateString("en-US", { month: "long" }).toUpperCase();
+    year_select.innerText = d.getFullYear();
+    getDays();
+}
+async function getDays() {
+    events = await fetchEvents();
+    console.log(events);
+    let days_select = $("days");
+    days_select.innerHTML = ``;
+    let month_select = $("month_select").innerText;
+    let year_select = $("year_select").innerText;
+    let date = `${year_select}-${month_select}-1`;
+    let d = new Date(date);
+    let firstDay = parseInt(d.getDay());
+    let days = (new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate())
+    for (let day = 0; day < days; day++) {
+        let months = ["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"];
+        let sdate = [year_select,String(months.indexOf(month_select)+1).padStart(2,'0'),String(day+1).padStart(2,'0')].join("-");
+        let li = document.createElement("li");
+        let ave  = events.filter((ev)=>{
+            console.log(sdate);console.log(ev.Date);
+            if(ev.Date==sdate)
+            return true;
+            else
+            return false;
+        });
+        if (firstDay > 1) {
+            firstDay--;
+            day--;
         }
-        async function getDays() {
-            events = await fetchEvents();
-            console.log(events);
-            let days_select = $("days");
-            days_select.innerHTML = ``;
-
-            let month_select = $("month_select").innerText;
-            let year_select = $("year_select").innerText;
-
-            let date = `${year_select}-${month_select}-1`;
-            let d = new Date(date);
-
-            let firstDay = parseInt(d.getDay());
-            let days = (new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate())
-            for (let day = 0; day < days; day++) {
-                let months = ["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"];
-                let sdate = [year_select,String(months.indexOf(month_select)+1).padStart(2,'0'),String(day+1).padStart(2,'0')].join("-");
-                let li = document.createElement("li");
-                let ave  = events.filter((ev)=>{
-                    console.log(sdate);console.log(ev.Date);
-                    if(ev.Date==sdate)
-                    return true;
-                    else
-                    return false;
-                });
-                if (firstDay > 1) {
-                    firstDay--;
-                    day--;
-                }
-                else if (ave.length>0) {
-                    let span = document.createElement("span");
-                    span.setAttribute("class", "active");
-                    li.addEventListener("click",(e)=>{
-                        showEvent(ave[0]);
-                    });
-                    console.log(ave[0]);
-                    span.innerText = day + 1;
-                    li.appendChild(span);
-                }
-                else {
-                    li.innerText = day + 1;
-                    li.addEventListener("click",(e)=>{
-                        createSchedule(sdate);
-                    });
-                }
-                days_select.appendChild(li);
-            }
+        else if (ave.length>0) {
+            let span = document.createElement("span");
+            span.setAttribute("class", "active");
+            li.addEventListener("click",(e)=>{
+                showEvent(ave[0]);
+            });
+            console.log(ave[0]);
+            span.innerText = day + 1;
+            li.appendChild(span);
+        }
+        else {
+            li.innerText = day + 1;
+            li.addEventListener("click",(e)=>{
+                createSchedule(sdate);
+            });
+        }
+        days_select.appendChild(li);
+    }
 }
 async function fetchEvents(){
     let loc = window.location.href.split("/HTML/control.html");
