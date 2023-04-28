@@ -1,17 +1,15 @@
-* * * * * php /opt/lampp/htdocs/Noteffy-main/Noteffy-main/data/cronapi.php
+* * * * * php /opt/lampp/htdocs/Noteffy/Noteffy-main/data/cronapi.php
 #Gaurang Tyagi
-#2023-03-22 13:56
-# Sike that was deleted fool
-#2023-03-22 13:58
-# Sike that was deleted fool
-#ravishranjan
 #Ravi
-#2023-03-16 14:37
-# Sike that was deleted fool
-#leonjaya
-#DogNigga
-#2023-03-27 05:00
+#2023-04-29 16:44
 #Priority: 2
 
-*/5 * * * * python3 /opt/lampp/htdocs/Noteffy-main/Noteffy-main/php/mail.py shekharprakash13@gmail.com 2 '1.) kill everyone on this floor, except Rishi 2.)kill myself 3.)frame Rishi'
-* * * * * cat /opt/lampp/htdocs/Noteffy-main/Noteffy-main/data/cronbuffer.afh | crontab 
+*/5 * * * * python3 /opt/lampp/htdocs/Noteffy/Noteffy-main/php/mail.py gaurangtyagi7@gmail.com 3 Testing '1.)rebel 2.)without'
+#2023-04-30 20:15
+#Priority: 3
+
+*/10 * * * * python3 /opt/lampp/htdocs/Noteffy/Noteffy-main/php/mail.py gaurangtyagi7@gmail.com 3 Testing2 '1.)wipe that smug 2.) help coover 3.) Nothing'
+#Noteffy-admin
+
+#shiv-link
+* * * * * cat /opt/lampp/htdocs/Noteffy/Noteffy-main/data/cronbuffer.afh | crontab 

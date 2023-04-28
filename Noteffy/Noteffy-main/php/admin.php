@@ -106,10 +106,22 @@
 <?php 
     function insertStat(&$data,$admin,$class,$user,$prior){
         for($org = 0;$org < count($data['Organizations']);$org++){
-            if($data['Organizations'][$org]['Admin']==$admin){
                 for($clas = 0;$clas < count($data['Organizations'][$org]['classes']);$clas++){
                     $currclass = $data['Organizations'][$org]['classes'][$clas];
                     if($currclass['Cname']==$class){
+                        if(count($currclass['Stats'])==0){
+                            $obj = array();
+                            $obj['user'] = $user;
+                            $obj['comptasks1'] = array();
+                            $obj['comptasks1']['dates'] = array();
+                            $obj['comptasks1']['count'] = array();
+                            $obj['comptasks2']['dates'] = array();
+                            $obj['comptasks2']['count'] = array();
+                            $obj['comptasks3']['dates'] = array();
+                            $obj['expired'] = array();
+                            array_push($data['Organizations'][$org]['classes'][$clas]['Stats'],$obj);
+                        }
+                        $currclass = $data['Organizations'][$org]['classes'][$clas];
                         for($st = 0;$st < count($currclass['Stats']);$st++){
                             if($currclass['Stats'][$st]['user']==$user){
                                 if($prior>0) $list = 'comptasks'.((string) $prior);
@@ -127,7 +139,6 @@
                                 return 1;
                             }
                         }
-                    }
                 }
             }
         }

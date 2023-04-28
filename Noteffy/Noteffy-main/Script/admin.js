@@ -99,6 +99,7 @@ async function removeadminTask(classn,todon,taskno){
     };
     var loc = window.location.href.split('/php')[0];
     let resplist = await fetch(loc+"/php/admin.php?"+(new URLSearchParams(queries)),options);
+    console.log(loc+"/php/admin.php?"+(new URLSearchParams(queries)));
     let jsonlist = await resplist.json();
             
     if(jsonlist["Message"]==null){
