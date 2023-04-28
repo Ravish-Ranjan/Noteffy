@@ -198,3 +198,23 @@ async function editClass(classNumber) {
     response = await response.json();
     class_compose(response["name"], response["desc"], response["limit"], response["code"],true,response["classNumber"]);
 }
+function copyCode(code) {
+    if (code.length != 0) {
+        navigator.clipboard.writeText(code);
+        message("copied successfully", "message_success");
+    }
+    else
+        message("Could not copy the code", "error");
+        
+}
+async function unenroll(classNumber,admin) {
+    if (classNumber != -1) {
+        let loc = window.location.href.split("/main.php");
+        let response = await fetch(loc[0] + "/admin.php?" + (new URLSearchParams({ unenrollClassNumber: classNumber,unenrollAdmin:admin })), { method: "GET", mode: "cors" });
+        response = await response.json();
+        console.log(response)
+        if (response["status"] == "success")
+            window.location.reload();
+
+    }
+}
