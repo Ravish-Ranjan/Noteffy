@@ -81,7 +81,24 @@ msg2 = """<div style='font-family: Helvetica,Arial,sans-serif;min-width:1000px;o
           </div>
         </div>
       </div>
-        """.format(data[3] if len(data)==4 else "")
+        """.format("<br>".join(data[3].split(" ")) if len(data)==4 else "")
+msg3 = """<div style='font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2'>
+        <div style='margin:50px auto;width:70%;padding:20px 0'>
+          <div style='border-bottom:1px solid #eee'>
+            <a href='' style='font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600'>Hey there, you have some unfinished tasks in the class<br><center><font color="#2f3f2f">{}</font></center></a>
+          </div>
+          <p>{}</p>
+          <h2 style='background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;'></h2>
+          <p style='font-size:0.9em;'>Regards,<br />Noteffy</p>
+          <hr style='border:none;border-top:1px solid #eee' />
+          <div style='float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300'>
+            <p>Noteffy</p>
+            <p>Near my <b>ASS</b></p>
+            <p>New Delhi</p>
+          </div>
+        </div>
+      </div>
+        """.format(data[3],"<br>".join(data[4].split(" ")) if len(data)==5 else "")
 if int(data[2]) == 1:
     sendmail(to=data[1],
              subject="Otp for SignUp",
@@ -92,6 +109,11 @@ elif int(data[2]) == 2:
              subject="Hey There, Noteffy Here...",
              body=msg2,
              html=True)
-print(otp)
+elif int(data[2]) == 3:
+    sendmail(to=data[1],
+             subject="Hey There, Noteffy Here...",
+             body=msg3,
+             html=True)         
+
 # calling to send the mail based on command line args
 #html true to enable html styling otherwise false

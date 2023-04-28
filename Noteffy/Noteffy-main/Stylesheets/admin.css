@@ -184,6 +184,10 @@ h2{
 #join-workspace-panel{
     display: none;
 }
+#todo-message{
+    position:absolute;
+    top:-45%;
+}
 #todo-admin-panel{
     display:none;
     flex-flow:column;
@@ -191,11 +195,15 @@ h2{
     z-index: -1;
 }
 #todo-admin-panel .classg{
-    padding-left:10%;
+    position:relative;
+    padding-left:8%;
+    top:10%;
+    width:80%;
 }
 #todo-admin-panel label{
     display: flex;
     color:white;
+    height:50px;
     border:2px solid white;
     border-radius: 4px;
     cursor:pointer;
@@ -220,8 +228,8 @@ h2{
     cursor:pointer;
 }
 .fa-check:before{
-    font-size: 25;
-    position: absolute;
+    font-size: 25px;
+    position: relative;
     margin-left: 410px;
     margin-top: -5;
     transition: 0.2s;
