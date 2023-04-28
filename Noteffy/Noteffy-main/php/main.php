@@ -1,11 +1,6 @@
 <?php
-
-abstract class AssetType{
-    const Classroom = 4;
-    const Logo = 3;
-}
     include "initial.php";
-    include "hash.php";
+    include_once "hash.php";
     include "priority_calc.php";
     include "note.php";
     include "task.php";
