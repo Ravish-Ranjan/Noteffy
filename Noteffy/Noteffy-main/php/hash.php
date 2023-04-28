@@ -34,6 +34,9 @@ function hash_name($word,$type){
     foreach($exp as $letter){
         $tot+=ord($letter);
     }
+    if($type==AssetType::Logo){
+        return $tot%$type;
+    }
     return 1+($tot%$type);
 }
 ?>
