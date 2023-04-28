@@ -289,28 +289,41 @@ function createClass(&$personal, &$classData)
             if ($flag == 0) {
                 echo "<script>window.location.href = '../HTML/error.html'</script>";
             }
-            for ($u = 0; $u < $orgs; $u++) {
-                if ($classData["Organizations"][$u]["Admin"] == $user) {
-                    $classes = count($classData["Organizations"][$u]["classes"]);
-                    $classData["Organizations"][$u]["classes"][$classes]['Cname'] = $className;
-                    $classData["Organizations"][$u]["classes"][$classes]['Cdesc'] = $classDesc;
-                    $classData["Organizations"][$u]["classes"][$classes]['CLimit'] = $classLimit;
-                    $classData["Organizations"][$u]["classes"][$classes]['Organization_code'] = $classCode;
-                    $classData["Organizations"][$u]["classes"][$classes]['group'] = array();
-                    $classData["Organizations"][$u]["classes"][$classes]['To-do'] = array();
-                    $classData["Organizations"][$u]["classes"][$classes]['Recycle'] = array();
-                    $classData["Organizations"][$u]["classes"][$classes]['Events'] = array();
-                    echo "<script>navigator.clipboard.writeText('$classCode')</script>";
-                    return "classroom created";
+            if(isset($_POST['flag']) && $_POST['flag']!=-1){
+                for ($u = 0; $u < $orgs; $u++) {
+                    if ($classData["Organizations"][$u]["Admin"] == $user) {
+                        $classes = (int) $_POST['flag'];
+                        $classData["Organizations"][$u]["classes"][$classes]['Cname'] = $className;
+                        $classData["Organizations"][$u]["classes"][$classes]['Cdesc'] = $classDesc;
+                        $classData["Organizations"][$u]["classes"][$classes]['CLimit'] = $classLimit;
+                    }
                 }
             }
-            for ($u = 0; $u < $statorgs; $u++) {
-                if ($stats["Organizations"][$u]["Admin"] == $user) {
-                    $classes = count($classData["Organizations"][$u]["classes"]);
-                    $stats["Organizations"][$u]["classes"][$classes]['Cname'] = $className;
-                    $stats["Organizations"][$u]["classes"][$classes]['Stats'] = array();
-                    return;
+            else{
+                for ($u = 0; $u < $orgs; $u++) {
+                    if ($classData["Organizations"][$u]["Admin"] == $user) {
+                        $classes = count($classData["Organizations"][$u]["classes"]);
+                        $classData["Organizations"][$u]["classes"][$classes]['Cname'] = $className;
+                        $classData["Organizations"][$u]["classes"][$classes]['Cdesc'] = $classDesc;
+                        $classData["Organizations"][$u]["classes"][$classes]['CLimit'] = $classLimit;
+                        $classData["Organizations"][$u]["classes"][$classes]['Organization_code'] = $classCode;
+                        $classData["Organizations"][$u]["classes"][$classes]['group'] = array();
+                        $classData["Organizations"][$u]["classes"][$classes]['To-do'] = array();
+                        $classData["Organizations"][$u]["classes"][$classes]['Recycle'] = array();
+                        $classData["Organizations"][$u]["classes"][$classes]['Events'] = array();
+                        echo "<script>navigator.clipboard.writeText('$classCode')</script>";
+                        return "classroom created";
+                    }
                 }
+                for ($u = 0; $u < $statorgs; $u++) {
+                    if ($stats["Organizations"][$u]["Admin"] == $user) {
+                        $classes = count($classData["Organizations"][$u]["classes"]);
+                        $stats["Organizations"][$u]["classes"][$classes]['Cname'] = $className;
+                        $stats["Organizations"][$u]["classes"][$classes]['Stats'] = array();
+                        return;
+                    }
+                }
+
             }
         } else if (isset($_POST['JClassCode'])) {
             $code = $_POST['JClassCode'];
@@ -345,7 +358,7 @@ function displayClass(&$classData)
                     </div>
                     <div class='options'>
                         <button onclick=\"task_compose('', '', '', '', '',1,this)\">Assign Task</button>
-                        <button>Edit</button>
+                        <button onclick='editClass($k)'>Edit</button>
                     </div>
                 </div>";
                 }
@@ -370,6 +383,32 @@ function displayClass(&$classData)
         }
     }
     }
+function editClass(){
+    try{
+        $response = array("status" => "failure");
+        if(isset($_GET["class_number"])){
+            $classNumber = $_GET['class_number'];
+            $response["classNumber"] = $classNumber;
+
+            $orgs = file_get_contents("../data/Organizations.json");
+            $orgs = json_decode($orgs, true);
+            $user = getUserNumber();
+
+            $classDetails = $orgs["Organizations"][$user]["classes"][$classNumber];
+            $response["limit"] = $classDetails["CLimit"];
+            $response["desc"] = $classDetails["Cdesc"];
+            $response["name"] = $classDetails["Cname"];
+            $response["code"] = $classDetails["Organization_code"];
+            $response["status"] = "success";
+            echo json_encode($response);
+            die();
+        }
+    }
+    catch(Exception $e){
+        echo "There is an error" . $e;
+    }
+}
+editClass();
 function createAdminTask(&$users,&$orgs){
     if(!isset($_GET["admin"]) || !isset($_GET["class"]) || $_GET["admin"]!="true"){
         return;

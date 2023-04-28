@@ -191,3 +191,9 @@ async function displayAdminTodo(ele){
 }
 displayAdminTodo(document.getElementById("todo-admin-panel"));
 
+async function editClass(classNumber) {
+    let loc = window.location.href.split("/main.php");
+    let response = await fetch(loc[0] + "/admin.php?" + (new URLSearchParams({ class_number: classNumber })), { method: "GET", mode: "cors" });
+    response = await response.json();
+    class_compose(response["name"], response["desc"], response["limit"], response["code"],true,response["classNumber"]);
+}

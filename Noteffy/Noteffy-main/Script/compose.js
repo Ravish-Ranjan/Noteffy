@@ -7,6 +7,9 @@ function closeF(x){
     }
         document.querySelector("#btn1").setAttribute("onclick","compose()");
 }
+function $(id) {
+    return document.getElementById(id);
+}
 function note_compose(date, title, note, note_no) {  //this function helps to create more notes for user
     if (document.getElementsByClassName("FORM").length != 0) {
         document.getElementsByClassName("FORM")[0].remove();
@@ -122,7 +125,7 @@ function showJoinWorkspace(){
         document.getElementById("bbt-container").style.display = 'none';
     }
 }
-function class_compose(classname,desc,member_limit) {  //this function helps to create more workspaces for user
+function class_compose(classname,desc,member_limit,classCode,flag=false,classNumber=-1) {  //this function helps to create more workspaces for user
     if (document.getElementsByClassName("FORM2").length != 0) {
         document.getElementsByClassName("FORM2")[0].remove();
         return;
@@ -130,35 +133,42 @@ function class_compose(classname,desc,member_limit) {  //this function helps to 
     //Change this to fetch a code from API
     let chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let code = '';
-    for(var u = 0;u < 9;u++){
-        let c = Math.floor(Math.random()*chars.length);
-        code+=chars[c];
+    if (classCode.length == 0) {
+        for (var u = 0; u < 9; u++) {
+            let c = Math.floor(Math.random() * chars.length);
+            code += chars[c];
+        }
     }
+    else
+        code = classCode;
     let noteform = document.createElement("div");let action = "../php/main.php";
-    // noteform.setAttribute("action", action); noteform.setAttribute("method", "POST");
     noteform.setAttribute("class", "FORM2");
-    // noteform.setAttribute("onsubmit", "event.preventDefault();return checkEmpty(this)");
     noteform.innerHTML = 
     `<span id='Form_Caption'>Workspace Selector</span>\
     <button id = 'close' onclick = \"closeF(2)\"><img src='../media/cancelicon.png' id='cancel-icon-img'></button>\
     <div id='bbt-container'>
-        <button id="create-workspace-bbt" onclick='showCreateWorkspace()'>Create Workspace</button>\
-        <button id="join-workspace-bbt" onclick='showJoinWorkspace()'>Join Workspace</button>\
+    <button id="create-workspace-bbt" onclick='showCreateWorkspace()'>Create Workspace</button>\
+    <button id="join-workspace-bbt" onclick='showJoinWorkspace()'>Join Workspace</button>\
     </div>
     <form id='create-workspace-panel' action=${action} method='POST'>
-        <input type='text' name='ClassName' id='CName' placeholder='Name'>\
-        <textarea name = "ClassDesc" style='resize:none;' placeholder='This is my classroom?' name='' id='Cdesc' rows=4 cols=7 ></textarea>\
-        <input type='text' name='ClassLimit' id='CLim' placeholder='ClassLimit'>\
-        <input type='text' name='ClassCode' id='CCode' value='${code}' readonly>\
-       <input type='submit' value='Save' id='btn' onclick='submit(); '>
-        </form>
-        <form id='join-workspace-panel' action=${action} method = 'POST'>
-        <input type='text' name='JClassCode' placeholder='Enter Workspace Code' id='CCode' value=''>\
-        <center><input type='submit' value='JOIN' id='btn' onclick='submit()'></center>
-        </form>
-        `
+    <input type='text' name='ClassName' id='CName' placeholder='Name' value=${classname}>\
+    <textarea name = "ClassDesc" style='resize:none;' placeholder='This is my classroom?' name='' id='Cdesc' rows=4 cols=7>${desc}</textarea>\
+    <input type='text' name='ClassLimit' id='CLim' placeholder='ClassLimit' value=${member_limit}>\
+    <input type='text' name='ClassCode' id='CCode' value='${code}' readonly>\
+    <input type='hidden' value='${classNumber}' name='flag'>
+    <input type='submit' value='Save' id='btn' onclick='submit();return checkEmpty(this) '>
+    </form>
+    <form id='join-workspace-panel' action=${action} method = 'POST'>
+    <input type='text' name='JClassCode' placeholder='Enter Workspace Code' id='CCode' value=''>\
+    <center><input type='submit' value='JOIN' id='btn' onclick='submit();return checkEmpty(this)'></center>
+    </form>
+    `
     document.querySelector("body").appendChild(noteform);
-    // document.querySelector("#btn1").toggleAttribute("onclick", "");
+    if (flag) {
+        $("bbt-container").style.display = "none";
+        showCreateWorkspace();
+    }
+        // document.querySelector("#btn1").toggleAttribute("onclick", "");
 }
 function checkEmpty(ele){ // this function checks if the user have any note/tasks or not
     let childs = ele.children,flag = true;
