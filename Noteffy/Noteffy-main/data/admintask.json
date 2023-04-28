@@ -1,1 +1,129 @@
-{"Organizations":[{"Admin":0,"classes":[{"Cname":"Noteffy","Stats":[{"user":0,"comptasks1":{"dates":["2023-03-12","2023-04-02"],"count":[4,3]},"comptasks2":{"dates":[],"count":[]},"comptasks3":{"dates":[],"count":[]},"expired":[]},{"user":1,"comptasks1":{"dates":["2023-04-01","2023-04-02","2023-04-03"],"count":[1,2,1]},"comptasks2":{"dates":[],"count":[]},"comptasks3":{"dates":[],"count":[]},"expired":[]}]}]},{"Admin":1,"classes":[{"Cname":"Gaurang's Class","Stats":[]},{"Cname":"Testing","Stats":[{"user":1,"comptasks1":{"dates":["2023-04-28"],"count":[3]},"comptasks2":{"dates":[],"count":[]},"comptasks3":{"dates":[]},"expired":[]}]}]},{"Admin":2,"classes":[{"Cname":"Ravi's Class","Stats":[]},{"Cname":"Testing2","Stats":[{"user":1,"comptasks1":{"dates":["2023-04-28"],"count":[1]},"comptasks2":{"dates":[],"count":[]},"comptasks3":{"dates":[]},"expired":[]}]}]}],"2":{"group":[]}}
+{
+    "Organizations": [
+        {
+            "Admin": 0,
+            "classes": [
+                {
+                    "Cname": "Noteffy",
+                    "Stats": [
+                        {
+                            "user": 0,
+                            "comptasks1": {
+                                "dates": [
+                                    "2023-03-12",
+                                    "2023-04-02"
+                                ],
+                                "count": [
+                                    4,
+                                    3
+                                ]
+                            },
+                            "comptasks2": {
+                                "dates": [],
+                                "count": []
+                            },
+                            "comptasks3": {
+                                "dates": [],
+                                "count": []
+                            },
+                            "expired": []
+                        },
+                        {
+                            "user": 1,
+                            "comptasks1": {
+                                "dates": [
+                                    "2023-04-01",
+                                    "2023-04-02",
+                                    "2023-04-03"
+                                ],
+                                "count": [
+                                    1,
+                                    2,
+                                    1
+                                ]
+                            },
+                            "comptasks2": {
+                                "dates": [],
+                                "count": []
+                            },
+                            "comptasks3": {
+                                "dates": [],
+                                "count": []
+                            },
+                            "expired": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Admin": 1,
+            "classes": [
+                {
+                    "Cname": "Gaurang's Class",
+                    "Stats": []
+                },
+                {
+                    "Cname": "Testing",
+                    "Stats": [
+                        {
+                            "user": 1,
+                            "comptasks1": {
+                                "dates": [
+                                    "2023-04-28"
+                                ],
+                                "count": [
+                                    3
+                                ]
+                            },
+                            "comptasks2": {
+                                "dates": [],
+                                "count": []
+                            },
+                            "comptasks3": {
+                                "dates": []
+                            },
+                            "expired": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Admin": 2,
+            "classes": [
+                {
+                    "Cname": "Ravi's Class",
+                    "Stats": []
+                },
+                {
+                    "Cname": "Testing2",
+                    "Stats": [
+                        {
+                            "user": 1,
+                            "comptasks1": {
+                                "dates": [
+                                    "2023-04-28"
+                                ],
+                                "count": [
+                                    1
+                                ]
+                            },
+                            "comptasks2": {
+                                "dates": [],
+                                "count": []
+                            },
+                            "comptasks3": {
+                                "dates": []
+                            },
+                            "expired": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "2": {
+        "group": []
+    }
+}
