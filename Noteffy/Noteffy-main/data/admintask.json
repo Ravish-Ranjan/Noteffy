@@ -61,7 +61,24 @@
             "classes": [
                 {
                     "Cname": "Gaurang's Class",
-                    "Stats": []
+                    "Stats": [
+                        {
+                            "user": 3,
+                            "comptasks1": {
+                                "dates": [],
+                                "count": []
+                            },
+                            "comptasks2": {
+                                "dates": [],
+                                "count": []
+                            },
+                            "comptasks3": {
+                                "dates": [],
+                                "count": []
+                            },
+                            "expired": []
+                        }
+                    ]
                 },
                 {
                     "Cname": "Testing",
@@ -121,9 +138,10 @@
                     ]
                 }
             ]
+        },
+        {
+            "Admin": 4,
+            "classes": []
         }
-    ],
-    "2": {
-        "group": []
-    }
+    ]
 }

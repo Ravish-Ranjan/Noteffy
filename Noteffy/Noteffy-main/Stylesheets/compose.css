@@ -14,24 +14,24 @@ input[type="date"],input[type="text"],textarea{
     border-bottom: 1px solid #555;
 }
 .FORM,.FORM2{
-    animation:fade 0.4s ease-in-out;
     position: absolute;
     top: 2%;
     right: -80%;
-    display: grid;/* height:60%; */
-    width: 28%;
+    display: grid;
     z-index:4;
-    background: #ffffff;
-    font-size: 2vw;
+    background-color: #ffffff;
+    font-size: 20;
     border-radius:1rem;
-    width: 40%;
-    height: 70%;
+    width: 40vw;
+    height: 70vh;
     color:#000000;
     margin-top: 15vh;
     padding: 1%;
     font-family: codec-extrabold;
-}.FORM2,.FORM[ad='true']{
-    outline:green;
+    outline: 5px solid purple;
+}
+.FORM2,.FORM[ad='true']{
+    outline:5px solid green;
     right:20%;
 }
 #cancel-icon-img{
