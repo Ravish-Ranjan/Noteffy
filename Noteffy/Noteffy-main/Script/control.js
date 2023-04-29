@@ -196,7 +196,6 @@ let getClasses = async () => {
     let loc = window.location.href.split("/HTML/control.html");
     let response = await fetch(loc[0] + "/php/admin.php?" + (new URLSearchParams({ classes: "true" })), { method: "GET", mode: "cors" });
     response = await response.json();
-    console.log(response);
     if (response['result'] == "success") {
         let workspace_select = document.querySelectorAll(".workspace-select");
         workspace_select.forEach((selector) => {
@@ -333,8 +332,7 @@ function previousMonth() {
     getDays();
 }
 async function getDays() {
-    events = await fetchEvents();
-    console.log(events);
+    // events = await fetchEvents();
     let days_select = $("days");
     days_select.innerHTML = ``;
     let month_select = $("month_select").innerText;
@@ -376,15 +374,6 @@ async function getDays() {
         }
         days_select.appendChild(li);
     }
-}
-async function fetchEvents(){
-    let loc = window.location.href.split("/HTML/control.html");
-    let response = await fetch(loc[0] + "/php/admin.php?" + (new URLSearchParams({ events: "true"})), { method: "GET", mode: "cors" });
-    response = await response.json();
-    if (response['Message'] == "success") {
-        events = response['events'];
-    }
-    return events;
 }
 async function fetchEvents(){
     let loc = window.location.href.split("/HTML/control.html");
