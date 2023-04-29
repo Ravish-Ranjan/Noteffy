@@ -39,8 +39,8 @@ function display(&$jsonData, $user)
         if (!$jsonData['User_Data'][$user]['Notes'][$i]["Note_type"]) {
             $item = $jsonData['User_Data'][$user]['Notes'][$i];
             $j = $i + 1;
-            $noteimg = "../media/newNote" . rand(1, 3) . ".png";
-            $pinimg = "../media/pin" . rand(1, 3) . ".png";
+            $noteimg = "../media/newNote.png";
+            $pinimg = "";
             $title = $item['Title'];
             $content = $item['Content'];
             $content = str_replace("\\", "", $content);

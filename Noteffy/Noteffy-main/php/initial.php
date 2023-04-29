@@ -22,7 +22,9 @@ require_once("jsonpath-0.8.1.php");
     function getUserNumber(){
         if (isset($_COOKIE['user_number']))
             return (int) (decrypt_data($_COOKIE['user_number'],''));
-        echo "<script>window.location.href='../HTML/error.html'</script>";
+        else{
+            echo "<script>window.location.href='../HTML/error.html'</script>";
+        }
         }
     // removes html tags from data
     function sanitize(&$data)
