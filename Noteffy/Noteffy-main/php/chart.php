@@ -156,18 +156,14 @@ function deleteFromTasks($user){
         if($tasks[$i]["User"]==$user){
             array_splice($tasks, $i, 1);
         }
-        if ($tasks[$i]["User"] == $user && $i == count($tasks) - 1)
-            array_splice($tasks, $i);        
     }
+    $tasks = json_encode($tasks);
+    file_put_contents("../data/task.json", $tasks);
+    
     // admin tasks
     for($iter1=0;$iter1<count($adminTasks["Organizations"]);$iter1++){
         if($adminTasks["Organizations"][$iter1]["Admin"]!=$user){
-            for ($iter = 0; $iter < count($adminTasks["Organizations"][$iter1]["group"]);$iter++){
-                if ($adminTasks["Organizations"][$iter1]["group"][$iter] == $user)
-                    array_splice($adminTasks["Organizations"][$iter1]["group"], $iter, 1);
-                else if ($adminTasks["Organizations"][$iter1]["group"][$iter] > $user)
-                    $adminTasks["Organizations"][$iter1]["group"][$iter] -= 1;
-            }
+            
             for($iter2=0;$iter2<count($adminTasks["Organizations"][$iter1]["classes"]);$iter2++){
                 for($iter3=0;$iter3<count($adminTasks["Organizations"][$iter1]["classes"][$iter2]["Stats"]);$iter3++){
                     if ($adminTasks["Organizations"][$iter1]["classes"][$iter2]["Stats"][$iter3]["user"] == $user)
@@ -185,9 +181,7 @@ function deleteFromTasks($user){
         }
     }
 
-    $tasks = json_encode($tasks);
     $adminTasks = json_encode($adminTasks);
-    file_put_contents("../data/task.json", $tasks);
     file_put_contents("../data/admintask.json", $adminTasks);
 }
 function deleteAccount(){
