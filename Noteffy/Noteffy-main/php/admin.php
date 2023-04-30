@@ -2,9 +2,9 @@
     require_once("initial.php");require_once("hash.php");
     require_once("jsonpath-0.8.1.php");
     function getmembers(){
-    if(!isset($_GET["op"]) || ($_GET["op"] != "getmembers")){
-        return;
-    }
+        if(!isset($_GET["op"]) || ($_GET["op"] != "getmembers")){
+            return;
+        }
     header("Content-Type: application/json;charset=utf-8");
     $orgs = file_get_contents("../data/Organizations.json");
     $orgs = json_decode($orgs,true);
@@ -288,9 +288,10 @@ function createClass(&$personal, &$classData)
     
     $personal = json_decode($personal, true);
     $userc = count($personal["Users"]);
-   $orgss = count($classData["Organizations"]);
+    $orgss = count($classData["Organizations"]);
     $statorgs = count($stats["Organizations"]);
     $admin = -1;
+
     if ($user != -1) {
         if (isset($_POST['ClassName']) && ($_POST['ClassName']) != '') {
             $className = $_POST['ClassName'];
@@ -339,23 +340,23 @@ function createClass(&$personal, &$classData)
                         
                     }
                 }
+                }
                 for ($u = 0; $u < $statorgs; $u++) {
                     if ($stats["Organizations"][$u]["Admin"] == $user) {
-                        $classes = count($classData["Organizations"][$u]["classes"]);
-                        $stats["Organizations"][$u]["classes"][$classes]['Cname'] = $className;
-                        $stats["Organizations"][$u]["classes"][$classes]['Stats'] = array();
+                        $classes = count($stats["Organizations"][$u]["classes"]);
+                        $nobj["Cname"] = $className;$nobj["Stats"] = array();
+                        array_push($stats["Organizations"][$u]["classes"],$nobj);
                         file_put_contents("../data/admintask.json",json_encode($stats));
                         return "classroom created";
                     }
                 }
                 
-            }
+                $code = $_POST['JClassCode'];
         } else if (isset($_POST['JClassCode'])) {
             $ccname = "";
-            $code = $_POST['JClassCode'];
             for ($u = 0; $u <$orgss; $u++) {
                 for ($c = 0; $c < count($classData["Organizations"][$u]["classes"]); $c++) {
-                    if ($classData["Organizations"][$u]["classes"][$c]["Organization_code"] == $code && !in_array($user,$classData["Organizations"][$u]["classes"][$c]["group"]) && $user!=$classData["Organizations"][$u]["Admin"] && count($classData["Organizations"][$u]["classes"][$c]["group"])<(int)($classData["Organizations"][$u]["classes"][$c]["CLimit"]) && !in_array($user,$classData["Organizations"][$u]["classes"][$c]["group"])) {
+                    if ($classData["Organizations"][$u]["classes"][$c]["Organization_code"] == $_POST['JClassCode'] && !in_array($user,$classData["Organizations"][$u]["classes"][$c]["group"]) && $user!=$classData["Organizations"][$u]["Admin"] && count($classData["Organizations"][$u]["classes"][$c]["group"])<(int)($classData["Organizations"][$u]["classes"][$c]["CLimit"])) {
                         array_push($classData["Organizations"][$u]["classes"][$c]["group"], $user);
                         $ccname = $classData["Organizations"][$u]["classes"][$c]["Cname"];
                         file_put_contents("../data/Organizations.json",json_encode($classData));
@@ -368,15 +369,17 @@ function createClass(&$personal, &$classData)
                     continue;
                 }
                 if ($stats["Organizations"][$u]["classes"][$v]["Cname"] == $ccname) {
+                    echo 123;
                     $ssc = count($stats["Organizations"][$u]["classes"][$v]["Stats"]);
-                    $stats["Organizations"][$u]["classes"][$v]["Stats"][$ssc]["user"] = $user;
+                    $nobj["user"] = $user;
                     for($k = 1;$k < 4;$k++){
-                        $stats["Organizations"][$u]["classes"][$v]["Stats"][$ssc]["comptasks$k"]["dates"] = array();
-                        $stats["Organizations"][$u]["classes"][$v]["Stats"][$ssc]["comptasks$k"]["count"] = array();
+                        $nobj["comptasks$k"]["dates"] = array();
+                        $nobj["comptasks$k"]["count"] = array();
                     }
-                    $stats["Organizations"][$u]["classes"][$v]["Stats"][$ssc]["expired"] = array();
+                    $nobj["expired"] = array();
+                    array_push($stats["Organizations"][$u]["classes"][$v]["Stats"],$nobj);
                     file_put_contents("../data/admintask.json",json_encode($stats));
-                    return "Classroom joined";
+                    return "classroom joined";
                 }
             }
         }
@@ -396,8 +399,7 @@ function displayClass(&$classData)
             //Classes created by user
             if ($user == $classData["Organizations"][$j]["Admin"]) {
                 for ($k = 0; $k < count($classData["Organizations"][$j]["classes"]); $k++) {
-                    $title = $classData["Organizations"][$user]["classes"][$k]["Cname"];
-                    $code = $classData["Organizations"][$j]["classes"][$k]["Organization_code"];
+                    $title = $classData["Organizations"][$j]["classes"][$k]["Cname"];
                     $rno = hash_name($title,AssetType::Classroom);
                     echo "
                     <div class='class' style='background-image:url(\"../media/workspaceAsset$rno.png\")'>
@@ -405,7 +407,6 @@ function displayClass(&$classData)
                         <h2>$title</h2>
                     </div>
                     <div class='options'>
-                        <button onclick='copyCode(\"$code\")'>copy code</button>
                         <button onclick=\"task_compose('', '', '', '', '',1,this)\">Assign Task</button>
                         <button onclick='editClass($k)'>Edit</button>
                     </div>
@@ -424,9 +425,7 @@ function displayClass(&$classData)
                     <div class='backg'>
                         <h2>$title</h2>
                     </div>
-                    <div class='options'>
-                    <button onclick='copyCode(\"$code\")'>copy code</button>
-                    <button onclick='unenroll($k,$j)'>unenroll</button></div>
+                    <div class='options'><button onclick='copyCode(\"$code\")'>copy code</button><button onclick='unenroll($k,$j)'>unenroll</button></div>
                 </div>
                     ";
                     }
@@ -446,7 +445,13 @@ function editClass(){
             $orgs = json_decode($orgs, true);
             $user = getUserNumber();
 
-            $classDetails = $orgs["Organizations"][$user]["classes"][$classNumber];
+            for($ii = 0;$ii < count($orgs["Organizations"]);$ii++){
+                if($orgs["Organizations"][$ii]["Admin"]==$user){
+                    $k = $ii;
+                    break;
+                }
+            }
+            $classDetails = $orgs["Organizations"][$k]["classes"][$classNumber];
             $response["limit"] = $classDetails["CLimit"];
             $response["desc"] = $classDetails["Cdesc"];
             $response["name"] = $classDetails["Cname"];
@@ -465,14 +470,17 @@ function unenroll(){
     $response = array("status" => "failure");
     if(isset($_GET['unenrollClassNumber']) && isset($_GET["unenrollAdmin"])){
         header("Content-Type:application/json;charset=Utf-8");
-        $class_number = (int)$_GET['unenrollClassNumber'];
-        $admin = (int)$_GET['unenrollAdmin'];
+        $class_number = (int) $_GET['unenrollClassNumber'];
+        $admin = (int) $_GET['unenrollAdmin'];
         $orgs = file_get_contents("../data/Organizations.json");
         $orgs = json_decode($orgs, true);
+        $stats = file_get_contents("../data/admintask.json");
+        $stats = json_decode($stats, true);
         $user = getUserNumber();
         for($i=0;$i<count($orgs['Organizations']);$i++){
-            if($orgs["Organizations"][$i]["Admin"]== $admin){
+            if($i== $admin){
                 $class = $orgs["Organizations"][$i]["classes"][$class_number];
+                $admno = $orgs["Organizations"][$i]["Admin"];
                 $del = array_search($user, $class["group"]);
                 try{
                     array_splice($orgs["Organizations"][$i]["classes"][$class_number]["group"], $del, 1);
@@ -480,13 +488,25 @@ function unenroll(){
                 catch(Exception $e){
                     echo "<script>window.location.href='../HTML/error.html'</script>";
                 }
+                for($j=0;$j<count($stats['Organizations']);$j++){
+                    if($stats['Organizations'][$j]["Admin"]== $admno){
+                        try{
+                            array_splice($stats["Organizations"][$j]["classes"][$class_number]["Stats"], $del, 1);
+                        }
+                        catch(Exception $e){
+                            echo "<script>window.location.href='../HTML/error.html'</script>";
+                        }
+                    }
+                }
                 $response["status"] = "success";
                 $orgs = json_encode($orgs);
                 file_put_contents("../data/Organizations.json", $orgs);
+                file_put_contents("../data/admintask.json", json_encode($stats));
                 echo json_encode($response);
                 die();
             }
         }
+        
         echo json_encode($response);
         die();
     }
@@ -578,7 +598,7 @@ function classMembers(){
         $orgs = json_decode($orgs, true);
         $adtasks = file_get_contents("../data/admintask.json");
         $adtasks = json_decode($adtasks, true);
-        $details = file_get_contents("../data/details.json");
+        $details = file_get_contents("../data/Details.json");
         $details = json_decode($details,true);
         $user = getUserNumber();
 

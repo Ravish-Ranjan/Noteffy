@@ -196,6 +196,7 @@ async function editClass(classNumber) {
     let loc = window.location.href.split("/main.php");
     let response = await fetch(loc[0] + "/admin.php?" + (new URLSearchParams({ class_number: classNumber })), { method: "GET", mode: "cors" });
     response = await response.json();
+    console.log(response);
     class_compose(response["name"], response["desc"], response["limit"], response["code"],true,response["classNumber"]);
 }
 function copyCode(code) {
@@ -208,6 +209,7 @@ function copyCode(code) {
         
 }
 async function unenroll(classNumber,admin) {
+    console.log(classNumber,admin);
     if (classNumber != -1) {
         let loc = window.location.href.split("/main.php");
         let response = await fetch(loc[0] + "/admin.php?" + (new URLSearchParams({ unenrollClassNumber: classNumber,unenrollAdmin:admin })), { method: "GET", mode: "cors" });

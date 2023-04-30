@@ -17,7 +17,8 @@
             $size = count($otplist['OTPs']);
             $otplist['OTPs'][$size]['Usern'] = $uname;$otplist['OTPs'][$size]['Email'] = $email;
             $otplist['OTPs'][$size]['OTP'] = $otp;
-            exec("py ".realpath("..\python\mail.py")." $email 1 $otp");
+            //Standardized for OS
+            exec("py ".realpath("..\python\mail.py")." $email 1 $otp") or exec("python ".realpath("../python/mail.py")." $email 1 $otp");
             $respjson['Message'] = 'success';
             break;
         case 'validate':

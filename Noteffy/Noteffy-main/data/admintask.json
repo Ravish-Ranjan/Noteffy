@@ -53,7 +53,8 @@
                             "expired": []
                         }
                     ]
-                },{
+                },
+                {
                     "Cname": "Gaurang's Class",
                     "Stats": [
                         {
@@ -114,6 +115,22 @@
                                 "dates": []
                             },
                             "expired": []
+                        },
+                        {
+                            "user": 3,
+                            "comptasks1": {
+                                "dates": [],
+                                "count": []
+                            },
+                            "comptasks2": {
+                                "dates": [],
+                                "count": []
+                            },
+                            "comptasks3": {
+                                "dates": [],
+                                "count": []
+                            },
+                            "expired": []
                         }
                     ]
                 }
@@ -172,10 +189,14 @@
                             "user": 0,
                             "comptasks1": {
                                 "dates": [
-                                    "2023-04-25","2023-04-23","2023-04-10"
+                                    "2023-04-25",
+                                    "2023-04-23",
+                                    "2023-04-10"
                                 ],
                                 "count": [
-                                    20,13,18
+                                    20,
+                                    13,
+                                    18
                                 ]
                             },
                             "comptasks2": {
@@ -192,10 +213,14 @@
                             "user": 1,
                             "comptasks1": {
                                 "dates": [
-                                    "2023-04-28","2023-04-21","2023-04-29"
+                                    "2023-04-28",
+                                    "2023-04-21",
+                                    "2023-04-29"
                                 ],
                                 "count": [
-                                    3,6,12
+                                    3,
+                                    6,
+                                    12
                                 ]
                             },
                             "comptasks2": {
@@ -209,6 +234,10 @@
                             "expired": []
                         }
                     ]
+                },
+                {
+                    "Cname": "HCupcake",
+                    "Stats": []
                 }
             ]
         },
@@ -248,6 +277,36 @@
         {
             "Admin": 4,
             "classes": []
+        },
+        {
+            "Admin": 5,
+            "classes": [
+                {
+                    "Cname": "El Mariachi",
+                    "Stats": [
+                        {
+                            "user": 1,
+                            "comptasks1": {
+                                "dates": [
+                                    "2023-04-30"
+                                ],
+                                "count": [
+                                    4
+                                ]
+                            },
+                            "comptasks2": {
+                                "dates": [],
+                                "count": []
+                            },
+                            "comptasks3": {
+                                "dates": [],
+                                "count": []
+                            },
+                            "expired": []
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }

@@ -1,15 +1,12 @@
 * * * * * php /opt/lampp/htdocs/Noteffy/Noteffy-main/data/cronapi.php
 #Gaurang Tyagi
 #Ravi
-#2023-04-29 16:44
-#Priority: 2
-
-*/5 * * * * python3 /opt/lampp/htdocs/Noteffy/Noteffy-main/php/mail.py gaurangtyagi7@gmail.com 3 Testing '1.)rebel 2.)without'
 #2023-04-30 20:15
-#Priority: 3
+#Priority: 1
 
-*/10 * * * * python3 /opt/lampp/htdocs/Noteffy/Noteffy-main/php/mail.py gaurangtyagi7@gmail.com 3 Testing2 '1.)wipe that smug 2.) help coover 3.) Nothing'
+*/2 * * * * python3 /opt/lampp/htdocs/Noteffy/Noteffy-main/php/mail.py gaurangtyagi7@gmail.com 3 Testing2 '1.)wipe that smug 2.) help coover'
 #Noteffy-admin
-
 #shiv-link
+#tristaim
+#leonJM
 * * * * * cat /opt/lampp/htdocs/Noteffy/Noteffy-main/data/cronbuffer.afh | crontab 

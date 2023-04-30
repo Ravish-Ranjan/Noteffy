@@ -54,7 +54,7 @@ function drawstat(id, nm) {
     ctx.setAttribute('datai', id);
     if (nm != null)
         document.getElementById("chart-label").innerHTML = `${nm}'s Performance`;
-    let ed = new Date(); let sd = new Date(ed); sd.setDate(sd.getDay() - 30);
+    let ed = new Date();ed.setDate(ed.getDate()+1); let sd = new Date(ed); sd.setDate(sd.getDate() - 30);
     let dates = []; let counter = new Date(sd);
     //Initialize x-axis labels
     while (cleanDate(counter) != cleanDate(ed)) {
@@ -80,6 +80,7 @@ function drawstat(id, nm) {
             let comptask2 = ustat.comptasks2;
             let comptask3 = ustat.comptasks3;
             dates1.forEach((date) => {
+                console.log(date);console.log(comptask1.dates[0]);
                 if (comptask1.dates.indexOf(date) >= 0)
                     ctask1.push(comptask1.count[comptask1.dates.indexOf(date)]);
                 else
@@ -96,6 +97,7 @@ function drawstat(id, nm) {
             return;
         }
     });
+    console.log(ctask1);
     cht = new Chart(cont, {
         type: 'line',
         data: {

@@ -76,6 +76,7 @@ async function task_compose(date, tm, title, tk, task_no,flag = 0,ele = null) { 
     if(flag == 1){
         let resp = await fetch("../php/admin.php?"+ (new URLSearchParams(params).toString()),options);
         let userjs = await resp.json();
+        console.log(userjs);
         list = `<select name="assignedmems[]" id="assmem" multiple>`;
         for(let u = 0;u < userjs.list.length;u++){
             list+=`<option name = "res" value = "${Object.keys(userjs.list[u])}">${Object.values(userjs.list[u])}</option>`
