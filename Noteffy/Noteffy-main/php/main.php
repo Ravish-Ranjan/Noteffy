@@ -197,7 +197,7 @@
                         Delete_task($alternate);
                         display_task($alternate, $u);
                         $alternate = json_encode($alternate);
-                        file_put_contents("../Data/Data.json", $alternate);
+                        file_put_contents("../data/Data.json", $alternate);
                     ?>
                 </div>
             </div>
@@ -208,7 +208,7 @@
                 </a>
             </div>
                 <?php
-                    $alternate = file_get_contents("../Data/Data.json");
+                    $alternate = file_get_contents("../data/Data.json");
                     $alternate = json_decode($alternate, true);
                     updateTask($alternate);
                     $alternate = json_encode($alternate);
