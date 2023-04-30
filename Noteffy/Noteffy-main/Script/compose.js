@@ -186,14 +186,14 @@ function checkEmpty(ele){ // this function checks if the user have any note/task
     }
     return flag;
 }
-function createSchedule() {
+function createSchedule(sdat) {
     let noteform = document.createElement("form");
     noteform.setAttribute("class", "FORM");noteform.setAttribute("enctype","multipart/form-data");
     noteform.setAttribute("action","../php/main.php");noteform.setAttribute("method","POST");
     noteform.setAttribute("onsubmit","return checkEmpty(this)");
     noteform.innerHTML = `<span id='Form_Caption'>Block Calendar</span>\
     <button id = 'close' style=\"font-size:2vw;\" onclick = \"closeF(1)\">x</button>\
-    <input type='date' name='E_Date' id='Date' value="2023-04-31">\
+    <input type='date' name='E_Date' id='Date' value=${sdat}>\
     <input type='time' name='E_Time' id='Time' value="12:00">
     <input type='text' name='E_Title' id='Title' placeholder='Title' value=>\<br>
     <label for='Description'>Description</label>\
