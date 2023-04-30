@@ -71,19 +71,18 @@ function openTab(evt, tabname) { // this function is used to move arround the ta
   divs = document.getElementsByClassName("main")
 }
 function calc_completed_task(jsonData,user) {
-  let date = [];
-  date[0] = "";
-  let count = [1];
+  let date = ["0"];
+  let count = [0];
   
-  for (i = 0; i < jsonData.length; i++){
-    if (!(date.includes(jsonData[i]['Date'])) && (user) == jsonData[i]["User"]) {
-      date.push(jsonData[i]['Date']);
+  for (i = 1; i <= jsonData.length; i++){
+    if (!(date.includes(jsonData[i-1]['Date'])) && (user) == jsonData[i-1]["User"]) {
+      date.push(jsonData[i-1]['Date']);
     }
     count[i] = 0;
   }
-  for (i = 0; i < jsonData.length; i++){
-    if (date.includes(jsonData[i]['Date']) && jsonData[i]["User"] == (user)) {
-      count[date.indexOf(jsonData[i]['Date'])]++;
+  for (i = 1; i <= jsonData.length; i++){
+    if (date.includes(jsonData[i-1]['Date']) && jsonData[i-1]["User"] == (user)) {
+      count[date.indexOf(jsonData[i-1]['Date'])]++;
     }
   }
   var obj = {
