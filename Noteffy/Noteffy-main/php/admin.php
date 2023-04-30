@@ -585,6 +585,10 @@ function classMembers(){
                 }
             }
         }
+        if(!isset($resp['id'])){
+            echo json_encode(array("Message"=>"failure"));
+            die();
+        } 
         for($iter=0;$iter<count($resp['id']);$iter++){
             $temp = ($resp['id'][$iter]);
             array_push($resp['name'], $details["Users"][$temp]["User_Name"]);
@@ -592,8 +596,10 @@ function classMembers(){
         }
         for($i=0;$i<count($adtasks['Organizations']);$i++){
             if($adtasks['Organizations'][$i]['Admin']==$user){
-            for($j=0;$j<count($adtasks['Organizations'][$i]["classes"]);$j++){
-                if($adtasks['Organizations'][$i]["classes"][$j]["Cname"] == $className){
+                // print_r($adtasks['Organizations'][$i]["classes"]);echo "\n";
+                for($j=0;$j<count($adtasks['Organizations'][$i]["classes"]);$j++){
+                    // print_r($adtasks['Organizations'][$i]["classes"][$j]["Cname"].$className);
+                    if($adtasks['Organizations'][$i]["classes"][$j]["Cname"] == $className){
                     $resp['stats'] = $adtasks['Organizations'][$i]["classes"][$j]["Stats"];
                 }
             }

@@ -53,13 +53,7 @@
                             "expired": []
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "Admin": 1,
-            "classes": [
-                {
+                },{
                     "Cname": "Gaurang's Class",
                     "Stats": [
                         {
@@ -99,6 +93,118 @@
                             },
                             "comptasks3": {
                                 "dates": []
+                            },
+                            "expired": []
+                        },
+                        {
+                            "user": 3,
+                            "comptasks1": {
+                                "dates": [
+                                    "2023-04-28"
+                                ],
+                                "count": [
+                                    3
+                                ]
+                            },
+                            "comptasks2": {
+                                "dates": [],
+                                "count": []
+                            },
+                            "comptasks3": {
+                                "dates": []
+                            },
+                            "expired": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Admin": 1,
+            "classes": [
+                {
+                    "Cname": "Ravi's Class",
+                    "Stats": [
+                        {
+                            "user": 3,
+                            "comptasks1": {
+                                "dates": [
+                                    "2023-04-28"
+                                ],
+                                "count": [
+                                    3
+                                ]
+                            },
+                            "comptasks2": {
+                                "dates": [],
+                                "count": []
+                            },
+                            "comptasks3": {
+                                "dates": []
+                            },
+                            "expired": []
+                        },
+                        {
+                            "user": 4,
+                            "comptasks1": {
+                                "dates": [
+                                    "2023-04-28"
+                                ],
+                                "count": [
+                                    3
+                                ]
+                            },
+                            "comptasks2": {
+                                "dates": [],
+                                "count": []
+                            },
+                            "comptasks3": {
+                                "dates": []
+                            },
+                            "expired": []
+                        }
+                    ]
+                },
+                {
+                    "Cname": "Testing2",
+                    "Stats": [
+                        {
+                            "user": 0,
+                            "comptasks1": {
+                                "dates": [
+                                    "2023-04-25","2023-04-23","2023-04-10"
+                                ],
+                                "count": [
+                                    20,13,18
+                                ]
+                            },
+                            "comptasks2": {
+                                "dates": [],
+                                "count": []
+                            },
+                            "comptasks3": {
+                                "dates": [],
+                                "count": []
+                            },
+                            "expired": []
+                        },
+                        {
+                            "user": 1,
+                            "comptasks1": {
+                                "dates": [
+                                    "2023-04-28","2023-04-21","2023-04-29"
+                                ],
+                                "count": [
+                                    3,6,12
+                                ]
+                            },
+                            "comptasks2": {
+                                "dates": [],
+                                "count": []
+                            },
+                            "comptasks3": {
+                                "dates": [],
+                                "count": []
                             },
                             "expired": []
                         }

@@ -35,8 +35,20 @@ function cleanDate(date) {
     return date.toISOString().split('T')[0];
 }
 function drawstat(id, nm) {
+    data.forEach((ustat) => { 
+        if (ustat.user == id) {
+             let comptask1 = ustat.comptasks1; 
+             let comptask2 = ustat.comptasks2; 
+             let comptask3 = ustat.comptasks3; 
+             if(comptask1.length==0 && comptask2.length==0 && comptask3.length==0){
+                ctx.style['background'] = "url('../media/statsGIF.gif')";
+                 ctx.style['background-size'] = "fit"; 
+                 ctx.style['background-repeat'] = "no-repeat"; 
+                } 
+            } 
+        });
     // ctx.style['background'] = "url('../media/background_5.png')";
-    ctx.style['background'] = 'rgb(255,57,57)';
+    ctx.style['background'] = '#272727';
     ctx.style['background-size'] = "fit";
     ctx.style['background-repeat'] = "no-repeat";
     ctx.setAttribute('datai', id);
