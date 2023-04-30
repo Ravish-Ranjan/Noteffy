@@ -243,6 +243,15 @@ graveyard = async () => {
   }
   userNumber = await decrypt_data(userNumber, '');
   display = document.getElementById("graveyard-space");
+  display.innerHTML = "";
+  var styles = {
+    "display": "flex",
+    "justify-content": "center",
+    "align-items": "center",
+    "font-size": 40,
+    "text-align": "center",
+    "font-family": "codec-extrabold"
+  };
   fetch("../data/Data.json").then((res) => res.json()).then((recycle) => {
     Array.from(recycle["User_Data"][userNumber]["recycle"]).map((ele) => {
       let markUp =  
