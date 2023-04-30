@@ -397,6 +397,7 @@ function displayClass(&$classData)
             if ($user == $classData["Organizations"][$j]["Admin"]) {
                 for ($k = 0; $k < count($classData["Organizations"][$j]["classes"]); $k++) {
                     $title = $classData["Organizations"][$user]["classes"][$k]["Cname"];
+                    $code = $classData["Organizations"][$j]["classes"][$k]["Organization_code"];
                     $rno = hash_name($title,AssetType::Classroom);
                     echo "
                     <div class='class' style='background-image:url(\"../media/workspaceAsset$rno.png\")'>
@@ -404,6 +405,7 @@ function displayClass(&$classData)
                         <h2>$title</h2>
                     </div>
                     <div class='options'>
+                        <button onclick='copyCode(\"$code\")'>copy code</button>
                         <button onclick=\"task_compose('', '', '', '', '',1,this)\">Assign Task</button>
                         <button onclick='editClass($k)'>Edit</button>
                     </div>
@@ -422,7 +424,9 @@ function displayClass(&$classData)
                     <div class='backg'>
                         <h2>$title</h2>
                     </div>
-                    <div class='options'><button onclick='copyCode(\"$code\")'>copy code</button><button onclick='unenroll($k,$j)'>unenroll</button></div>
+                    <div class='options'>
+                    <button onclick='copyCode(\"$code\")'>copy code</button>
+                    <button onclick='unenroll($k,$j)'>unenroll</button></div>
                 </div>
                     ";
                     }
