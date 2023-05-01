@@ -245,6 +245,9 @@ body{
 }
 #graveyard-space{
     display: flex;
+    justify-content: space-around;
+    align-items: start;
+    flex-wrap: wrap;
 }
 #set-title{
     font-family: codec-extrabold;
