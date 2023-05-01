@@ -57,7 +57,7 @@ msg1 = """<div style='font-family: Helvetica,Arial,sans-serif;min-width:1000px;o
           <hr style='border:none;border-top:1px solid #eee' />
           <div style='float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300'>
             <p>Noteffy</p>
-            <p>Near my <b>ASS</b></p>
+            <p>Near my <b>DU</b></p>
             <p>New Delhi</p>
           </div>
         </div>
@@ -76,7 +76,7 @@ msg2 = """<div style='font-family: Helvetica,Arial,sans-serif;min-width:1000px;o
           <hr style='border:none;border-top:1px solid #eee' />
           <div style='float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300'>
             <p>Noteffy</p>
-            <p>Near my <b>ASS</b></p>
+            <p>Near my <b>DU</b></p>
             <p>New Delhi</p>
           </div>
         </div>
@@ -93,7 +93,7 @@ msg3 = """<div style='font-family: Helvetica,Arial,sans-serif;min-width:1000px;o
           <hr style='border:none;border-top:1px solid #eee' />
           <div style='float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300'>
             <p>Noteffy</p>
-            <p>Near my <b>ASS</b></p>
+            <p>Near my <b>DU</b></p>
             <p>New Delhi</p>
           </div>
         </div>

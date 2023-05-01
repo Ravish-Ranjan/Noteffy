@@ -200,7 +200,7 @@ body {
 }
 .scat {
     grid-template-columns: repeat(4, 1fr);
-    /* overflow-y:scroll; */
+    overflow-y:scroll;
     display: grid;
     background-image: url("../media/background_2.png");
     height: 100%;
@@ -600,6 +600,7 @@ body {
     z-index: -1;
     position: absolute;
     display: flex;
+    flex-wrap: wrap;
     opacity: 1;
 }
 #todo-admin-panel{
